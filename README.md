@@ -7,5 +7,6 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 ## Medlemmer
 
 - Miranda Eriksen Larsen
-- Navn ikke oppgitt (medlem 1)
-- Navn ikke oppgitt (medlem 2)
+- Helle Hoggen Nybø
+- Elisabeth Kirkeland Orlien
+- Tove O. Pihl
