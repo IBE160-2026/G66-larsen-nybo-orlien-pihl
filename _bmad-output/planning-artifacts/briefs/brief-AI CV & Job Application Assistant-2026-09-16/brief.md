@@ -1,15 +1,15 @@
 ---
-title: "Produktbrief: AI CV & Job Application Assistant"
+title: "Produktbrief: Supersøker - AI CV & Job Application Assistant"
 status: complete
 created: 2026-09-16
 updated: 2026-09-16
 ---
 
-# AI CV & Job Application Assistant
+# Supersøker - AI CV & Job Application Assistant
 
 ## Executive Summary
 
-AI CV & Job Application Assistant skal hjelpe studenter og unge jobbsøkere med å tilpasse CV og søknadsbrev til en konkret stillingsannonse. Ved å se brukerens dokumenter i sammenheng med arbeidsgiverens behov skal assistenten gjøre det enklere å fremheve relevant erfaring, forstå kvalifikasjonsgap og utforme en målrettet søknad.
+Verktøyet "Supersøker" skal hjelpe studenter og unge jobbsøkere med å tilpasse CV og søknadsbrev til en konkret stillingsannonse. Ved å se brukerens dokumenter i sammenheng med arbeidsgiverens behov skal assistenten gjøre det enklere å fremheve relevant erfaring, forstå kvalifikasjonsgap og utforme en målrettet søknad.
 
 Løsningen utvikles som en nettapplikasjon i semesterprosjektet i IBE160 Programmering med KI ved Høgskolen i Molde. Første versjon skal demonstrere en sammenhengende flyt fra innlogging og dokumentinnlasting til søknadsbrev, CV-forbedringsforslag, gap-analyse og ATS-optimalisering. Brukeren skal kunne styre graden av omskriving, språk og stil.
 
@@ -21,7 +21,7 @@ Dette gjør at hver søknad kan ta mye tid, samtidig som resultatet blir generel
 
 ## The Solution
 
-Brukeren logger inn i nettapplikasjonen, laster opp en CV i PDF-, DOC- eller TXT-format og legger inn en stillingsannonse. Nøkkelord, ønsket tone og stil samt eventuelle tidligere søknader gir ytterligere grunnlag for tilpasningen.
+Brukeren logger inn i nettapplikasjonen, får valget mellom å fylle inn informasjon manuelt i definert CV mal eller laste opp en CV i PDF-, DOC- eller TXT-format. Brukeren legger så inn stillingsannonsen. Nøkkelord, ønsket tone og stil samt eventuelle tidligere søknader gir ytterligere grunnlag for tilpasningen.
 
 Assistenten skal:
 
