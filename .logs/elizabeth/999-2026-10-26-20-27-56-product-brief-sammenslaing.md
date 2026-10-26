@@ -17,7 +17,7 @@ Finne ut hva som hadde skjedd i repoet siden sist. Deretter hente ny `main` loka
   - `brief.md` er samlet. Det svarfeltet som hører til Elisabeths forslag gjelder nå bare den aktuelle søknaden (variant A), og lagring på profilen er flyttet til trinn 3, fordi Mirandas forslag ikke har permanent lagring i v1. Tone og språk står som eget avkrysningspunkt.
   - `addendum.md` har fått seksjonen «Sammenslåing av to forslag» med en tabell over hva som er hentet fra hvem, og hvorfor.
   - `.memlog.md` har fått nye beslutningslinjer.
-- Ikke pushet. PR #3 er ennå ikke oppdatert på GitHub.
+- Pushet til `origin/oppdater-product-brief`. PR #3 har fått ny tittel og beskrivelse, og en kommentar til Miranda (@mirerilar-wq) som forklarer sammenslåingen.
 
 ### Åpne punkter
 - Gruppa må gå gjennom avkrysningslisten i `brief.md`, særlig svarfelt (variant A eller B) og tone/språk i v1, før PRD.
