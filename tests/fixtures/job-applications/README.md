@@ -19,6 +19,7 @@ I `fasit.json` er `kilde` en tekstbit som står ordrett i `cv.txt`, og som viser
 | Par | Tester |
 |---|---|
 | `01-mangler-sertifikat` | Ett manglende sertifikat (førerkort B); resten dekket |
+| `02-mangler-verktoy` | Manglende verktøykompetanse (TIG-sveising), og et krav som er dekket med andre ord («Office-pakken» / «Word og Excel») |
 
 ## Ideer til flere par
 
