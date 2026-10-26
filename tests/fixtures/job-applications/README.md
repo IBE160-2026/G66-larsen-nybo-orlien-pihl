@@ -21,6 +21,7 @@ I `fasit.json` er `kilde` en tekstbit som står ordrett i `cv.txt`, og som viser
 | `01-mangler-sertifikat` | Ett manglende sertifikat (førerkort B); resten dekket |
 | `02-mangler-verktoy` | Manglende verktøykompetanse (TIG-sveising), og et krav som er dekket med andre ord («Office-pakken» / «Word og Excel») |
 | `03-studieprosjekt-dekker-krav` | Et krav (planlegge arrangementer) som bare er dokumentert i et studieprosjekt, og et manglende språkkrav (tysk) |
+| `04-alle-krav-dekket` | Alle krav dokumentert: appen skal melde null gap og ikke finne på krav. Førstehjelpskurset dekker her et ekte krav (i par 1 var det en felle) |
 
 ## Ideer til flere par
 
