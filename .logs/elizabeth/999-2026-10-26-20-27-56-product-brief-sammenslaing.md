@@ -18,6 +18,7 @@ Finne ut hva som hadde skjedd i repoet siden sist. Deretter hente ny `main` loka
   - `addendum.md` har fått seksjonen «Sammenslåing av to forslag» med en tabell over hva som er hentet fra hvem, og hvorfor.
   - `.memlog.md` har fått nye beslutningslinjer.
 - Pushet til `origin/oppdater-product-brief`. PR #3 har fått ny tittel og beskrivelse, og en kommentar til Miranda (@mirerilar-wq) som forklarer sammenslåingen.
+- Skrev i etterkant en logg for økta 18. oktober ([998-2026-10-18-19-32-00-product-brief-oppdatering.md](998-2026-10-18-19-32-00-product-brief-oppdatering.md)). Lukket punktet om refleksjonsmalen: Elisabeth har lagt den i et eget Word-dokument utenfor repoet.
 
 ### Åpne punkter
 - Gruppa må gå gjennom avkrysningslisten i `brief.md`, særlig svarfelt (variant A eller B) og tone/språk i v1, før PRD.
