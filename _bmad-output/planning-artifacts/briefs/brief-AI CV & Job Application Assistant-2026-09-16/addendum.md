@@ -2,12 +2,31 @@
 title: "Tillegg til produktbrief: Supersøker"
 status: draft
 created: 2026-10-18
-updated: 2026-10-18
+updated: 2026-10-26
 ---
 
-# Tillegg: begrunnelser for oppdateringen 2026-10-18
+# Tillegg: begrunnelser for oppdateringene etter faglærers tilbakemelding
 
 Dette tillegget forklarer hvorfor briefen ble endret etter faglærers tilbakemelding, og hvilke alternativer som ble vurdert. Det er ment som underlag for PRD, arkitektur og refleksjonsrapporten. Gruppa trenger ikke lese det for å godkjenne briefen.
+
+## Sammenslåing av to forslag (2026-10-26)
+
+Elisabeth (PR #3, 2026-10-18) og Miranda (branch `miranda-utvikling`, 2026-10-26) laget hvert sitt forslag til oppdatering etter samme tilbakemelding, uten å vite om hverandres arbeid. Begge fulgte faglærers trinnplan, men de skilte seg på flere punkter. Elisabeth sammenlignet forslagene med Claude Code, og de ble slått sammen etter en fremgangsmåte Claude foreslo og Elisabeth godtok: Mirandas forslag er grunnlaget for modell, testmodus, sikkerhet og kjørbarhet, og Elisabeths forslag bidrar med kilde for dekkede krav, svarfelt og begrunnelsene i dette tillegget.
+
+| Tema | Elisabeth | Miranda | Samlet forslag | Begrunnelse |
+|---|---|---|---|---|
+| Modell, testmodus, nøkkel, budsjett | Åpent spørsmål | `gpt-5-mini`, mock som standard, `.env.example`, én modul, 100 kr | Mirandas | Faglærer vurderte kjørbarhet for sensor som stor risiko. Mirandas forslag gjør det konkret nok til arkitekturen. |
+| Sikkerhet og lagring | Åpent spørsmål | Passordhasher, eierskapskontroll, ingen permanent dokumentlagring i v1 | Mirandas | Tilsvarer faglærers anbefaling og gir et mindre v1. |
+| Primærbruker | Åpent spørsmål | Student som søker første jobb eller sommerjobb, med eksempel | Mirandas | Svarer direkte på faglærers punkt. |
+| Svar på manglende krav | Svarfelt; svar lagres på profilen (variant B) | Ikke med | Svarfelt i v1, men svarene gjelder bare den aktuelle søknaden (variant A). Lagring på profilen flyttes til trinn 3. | Variant B krever permanent lagring, som strider mot Mirandas lagringsforslag. Svarfeltet beholdes fordi det hindrer at brevet bygger på et ufullstendig bilde av studenten. |
+| Kilde for dekkede krav | Med | Ikke med | Med (kriterium 3) | Hindrer den verste feilen i gap-analysen (se tabellen nederst). |
+| Tone og språk | Tre toner og to språk i v1 | Bokmål og profesjonell tone i v1; valg i trinn 3 | Mirandas, men lagt fram som eget avkrysningspunkt | Faglærer ba om mindre omfang. Elisabeths begrunnelse (tonen påvirker inntrykket hos arbeidsgiver) står fortsatt under «Tone og språk i v1» nedenfor, så gruppa kan velge. |
+| Navn på omskrivingsvalg | «Skriv for meg» / «Gi meg forslag» | «Helt søknadsutkast» / «Forslag til formuleringer» | Mirandas | Beskriver tydeligere hva brukeren får. |
+| Suksesskriterier | Per funksjon, tone sjekkes manuelt | Tittel og arbeidsgiver i brevet, A/B-tilgang, mock-kjøring, fire navngitte testpar | Mirandas som grunnlag, med Elisabeths kriterier for CV inn, kilde og svar | Mirandas dekker faglærers eksempel og kjørbarhet. Elisabeths dekker flyten med svarfelt. |
+| Mappenavn med «&» | Åpent spørsmål | Ikke med | Avkrysningspunkt | Faglærer tok det opp. |
+| Beslutningsform | Liste med åpne spørsmål | Avkrysningsliste | Avkrysningsliste | Gjør det synlig hva gruppa har bekreftet. |
+
+Seksjonene under beskriver Elisabeths forslag fra 2026-10-18. Der det samlede forslaget avviker, gjelder tabellen over.
 
 Endringene ble utarbeidet av Elisabeth i en coaching-økt med Claude Code (BMAD `bmad-product-brief`, oppdateringsmodus). Der et forslag kom fra Claude og ble godtatt eller endret av Elisabeth, er det angitt.
 

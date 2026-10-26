@@ -2,18 +2,34 @@
 title: "Produktbrief: Supersøker - AI CV & Job Application Assistant"
 status: draft
 created: 2026-09-16
-updated: 2026-10-18
+updated: 2026-10-26
 ---
 
 # Supersøker - AI CV & Job Application Assistant
 
-> **Forslag til oppdatering (2026-10-18):** Denne versjonen innarbeider faglærers tilbakemelding (`tilbakemelding-product-brief.md`). Endringene er et forslag fra Elisabeth og venter på gruppas gjennomgang og godkjenning. Begrunnelser og forkastede alternativer står i `addendum.md`. Spørsmål gruppa må avgjøre står under «Åpne spørsmål til gruppa».
+> **Samlet forslag (2026-10-26):** Denne versjonen slår sammen to forslag til oppdatering etter faglærers tilbakemelding (`tilbakemelding-product-brief.md`): Elisabeths (PR #3, 2026-10-18) og Mirandas (branch `miranda-utvikling`, 2026-10-26). Hva som er hentet fra hvem, og hvorfor, står i `addendum.md`. Forslaget venter på gruppas gjennomgang og godkjenning.
 
 ## Executive Summary
 
 Verktøyet "Supersøker" skal hjelpe studenter og unge jobbsøkere med å skrive søknadsbrev som er tilpasset en konkret stillingsannonse, uten at brevet påstår noe som ikke stemmer. Assistenten sammenligner CV-en med annonsen, viser hvilke krav som er dekket og hvilke som mangler, og lar studenten fylle inn erfaring CV-en ikke viser, før søknadsbrevet skrives.
 
-Løsningen utvikles som en nettapplikasjon i semesterprosjektet i IBE160 Programmering med KI ved Høgskolen i Molde. Første versjon (v1) skal demonstrere en sammenhengende og stabil flyt fra innlogging og CV til gap-analyse og søknadsbrev. Flere funksjoner kommer i senere trinn når v1 er testet og stabil.
+Løsningen utvikles som en nettapplikasjon i semesterprosjektet i IBE160 Programmering med KI ved Høgskolen i Molde. Første versjon (v1) prioriterer en stabil flyt fra innlogging, CV og stillingsannonse til gap-analyse og søknadsbrev. Brukeren skal styre graden av omskriving. Flere funksjoner kommer i senere trinn når v1 er testet og stabil.
+
+**Dette må gruppen bli enig om før briefen ferdigstilles**
+
+Punktene nedenfor er forslag i dette utkastet, ikke registrerte gruppebeslutninger. Kryss av først når gruppen har diskutert og bekreftet valget. Ved andre valg oppdateres de berørte avsnittene.
+
+- [ ] **Omfang:** Er vi enige om gap-analyse og søknadsbrev i v1, og at CV-forbedringer, ATS, CV-mal, DOC, tidligere søknader og eksport utsettes? Se «Scope».
+- [ ] **Primærbruker:** Skal vi prioritere studenter med lite relevant erfaring som søker første jobb eller sommerjobb? Se «Who This Serves».
+- [ ] **Svar på manglende krav:** Skal brukeren kunne svare på manglende krav i v1, med svar som bare gjelder den aktuelle søknaden? Å lagre svarene på profilen for senere søknader krever permanent lagring og er foreslått flyttet til trinn 3. Se «The Solution».
+- [ ] **Tone og språk:** Skal v1 bare bruke norsk bokmål og profesjonell tone, eller skal brukeren velge tone (formell, nøytral, personlig) og språk (norsk, engelsk) allerede i v1? Forslaget her er det første; begrunnelsen for det andre står i `addendum.md`. Se «The Solution».
+- [ ] **Lagring:** Skal CV-er, annonser, svar og resultater bare behandles midlertidig, uten permanent dokumentlagring i v1? Se «Scope – Sikkerhet i v1».
+- [ ] **Språkmodell:** Skal vi prøve den foreslåtte modellen `gpt-5-mini`, og bekrefte valget etter testing av kvalitet, tilgjengelighet og pris? Se «Scope – Modell og kostnad».
+- [ ] **Budsjett:** Er 100 kroner en passende samlet grense for betalte API-kall i utviklingstestingen, og hvem følger opp forbruket? Beløpet er et forslag, ikke en beregnet kostnad.
+- [ ] **Mappenavn:** Mellomrom og «&» i navnet på brief-mappen kan gi problemer i kommandolinjen. Skal den få et enklere navn før PRD?
+- [ ] **Godkjenning av resultatene:** Er vi enige om suksesskriteriene og de fire fiktive testparene som grunnlag for å vurdere om v1 fungerer? Se «Success Criteria».
+
+Eksportformat og feltene i CV-malen trenger ikke avgjøres nå dersom disse funksjonene holdes utenfor v1. Å lage testdata, mock-modus og README er videre arbeid etter at planen er avklart.
 
 ## The Problem
 
@@ -21,18 +37,17 @@ Mange studenter og unge jobbsøkere synes det er vanskelig å forstå hvilke kva
 
 Dette gjør at hver søknad kan ta mye tid, samtidig som resultatet blir generelt og lite tilpasset. Behovet er både hjelp til å skrive og hjelp til å forstå sammenhengen mellom egen bakgrunn og stillingens krav. Problembeskrivelsen er gruppens utgangspunkt; den er foreløpig ikke dokumentert gjennom brukerundersøkelser i prosjektet.
 
+Et illustrerende eksempel er en student som søker sin første relevante sommerjobb. Studenten har erfaring fra butikk og studieprosjekter, men trenger hjelp til å se hva som er relevant for annonsen, og hvilke etterspurte kvalifikasjoner CV-en ikke dokumenterer.
+
 ## The Solution
 
-Kjerneflyten i v1:
+Kjerneflyten i v1 har tre steg:
 
-1. Brukeren logger inn.
-2. Brukeren limer inn CV-teksten eller laster opp CV-en som PDF eller TXT. Appen viser teksten den leste, og brukeren kan rette den før hen går videre.
-3. Brukeren limer inn stillingsannonsen.
-4. Assistenten gjør en gap-analyse: den finner kravene i annonsen og viser hvilke som er dekket (med hvor i CV-en de ble funnet) og hvilke som mangler.
-5. For hvert manglende krav kan brukeren svare i et valgfritt felt, for eksempel «Jeg har førerkort klasse B». Svarene lagres som tilleggsopplysninger på profilen og gjenbrukes i senere søknader.
-6. Brukeren velger grad av omskriving («Skriv for meg» eller «Gi meg forslag»), tone (formell, nøytral eller personlig) og språk (norsk eller engelsk), og får et søknadsbrev som kan kopieres.
+1. **CV og annonse.** Brukeren logger inn, limer inn CV-teksten eller laster opp en TXT-fil eller tekstbasert PDF, og limer inn stillingsannonsen. Appen viser teksten den leste, og brukeren kan rette den før analysen. Skannede PDF-er og OCR inngår ikke; hvis teksten ikke kan leses, får brukeren beskjed og kan lime den inn manuelt.
+2. **Gap-analyse.** Assistenten finner kravene i annonsen og viser hvilke som er dekket, med hvor i CV-en de ble funnet, og hvilke som mangler dokumentasjon. For hvert manglende krav kan brukeren svare i et valgfritt felt, for eksempel «Jeg har førerkort klasse B». Svarene brukes i denne søknaden.
+3. **Søknadsbrev.** Brukeren velger mellom «Forslag til formuleringer» og «Helt søknadsutkast». Resultatet vises i to tydelig merkede felt, «Gap-analyse» og «Søknadsbrev/forslag», som kan leses uten å starte en ny analyse. Teksten kan redigeres og kopieres. V1 bruker norsk bokmål og en nøktern, profesjonell tone.
 
-Søknadsbrevet bygger bare på CV-en, annonsen og brukerens egne svar. Det legger ikke til erfaring brukeren ikke har oppgitt, og det påstår aldri at et krav er oppfylt når det ikke er dokumentert. At en kvalifikasjon ikke står i CV-en, betyr ikke nødvendigvis at brukeren mangler den. Derfor får brukeren mulighet til å svare før brevet skrives.
+Søknadsbrevet bygger bare på CV-en, annonsen og brukerens egne svar. Det legger ikke til erfaring brukeren ikke har oppgitt, og det påstår aldri at et krav er oppfylt når det ikke er dokumentert. At en kvalifikasjon ikke står i CV-en, betyr ikke nødvendigvis at brukeren mangler den. Derfor får brukeren mulighet til å svare før brevet skrives, og resultatene omtaler manglende dokumentasjon, ikke manglende kompetanse. Brukeren redigerer teksten før bruk. Senere ATS-hjelp skal være veiledning uten garanti for å passere et system eller få intervju.
 
 ## What Makes This Different
 
@@ -42,68 +57,45 @@ Funksjonskombinasjonen er ikke dokumentert som unik. [Teal](https://www.tealhq.c
 
 ## Who This Serves
 
-Primærmålgruppen er studenter og unge jobbsøkere som trenger støtte til å presentere egen bakgrunn i møte med en konkret jobbmulighet. De skal få hjelp til å identifisere relevant erfaring og skrive et brev i ønsket språk og tone. En mer konkret primærbruker er et åpent spørsmål til gruppa (se under).
+Foreslått primærbruker er en student med begrenset relevant arbeidserfaring som søker sin første relevante jobb eller sommerjobb. Brukeren trenger hjelp til å knytte deltidsarbeid, utdanning og studieprosjekter til annonsen, uten å overdrive kompetansen. Andre unge jobbsøkere er en sekundærmålgruppe.
 
 ## Success Criteria
 
-Kriteriene testes med 3–4 faste testpar: fiktive CV-er og stillingsannonser der gruppa kjenner fasiten (hvilke krav som er dekket og hvilke som mangler) på forhånd. Ekte CV-er brukes ikke som testdata.
+V1 skal kunne demonstreres og kontrolleres mot følgende kriterier:
 
-**Hele flyten**
+1. **Kjerneflyt:** En testbruker kan logge inn, legge inn CV via innliming, TXT og tekstbasert PDF, legge inn annonse og få begge resultattypene med hvert av testparene, uten at appen stopper eller krasjer.
+2. **CV inn:** Innlest tekst fra PDF eller TXT vises, inneholder CV-ens innhold (for eksempel utdanning, erfaring og ferdigheter) og kan rettes før analysen. Tomme inndata, feil filformat og filer uten lesbar tekst gir en forståelig melding med forslag til hva brukeren kan gjøre, og appen går ikke videre med en tom CV.
+3. **Gap-analyse:** For hvert fast testpar finnes alle forhåndsdefinerte gap i resultatet, og ingen forhåndsdefinerte dokumenterte kvalifikasjoner merkes som manglende. Hvert gap knyttes til et konkret krav i annonsen og omtales som manglende dokumentasjon. Hvert krav som vises som dekket, vises med hvor i CV-en det ble funnet.
+4. **Svar på manglende krav:** Når brukeren svarer på et manglende krav, bruker søknadsbrevet det brukeren skrev, og legger ikke til detaljer som ikke står i svaret.
+5. **Søknadsbrev:** I modusen «Helt søknadsutkast» nevnes riktig stillingstittel og arbeidsgiver, og minst ett relevant eksempel fra CV-en. Tittel og arbeidsgiver oppgis i testannonsene; manglende opplysninger i andre annonser skal etterspørres, ikke gjettes. Ingen erfaring, utdanning eller sertifisering uten grunnlag i CV-en eller brukerens svar skal tilføyes.
+6. **Omskrivingsgrad:** «Forslag til formuleringer» gir en liste med forslag, mens «Helt søknadsutkast» gir et sammenhengende brev. Begge valg prøves med samme testpar og beholder faktagrunnlaget.
+7. **Sikkerhet og feil:** Bruker A får ikke tilgang til bruker Bs data, heller ikke gjennom direkte forespørsler. Manglende API-nøkkel, API-feil og ugyldige modellsvar gir en forståelig feilmelding. Hemmeligheter vises ikke, og inndata beholdes i skjemaet.
+8. **Kjørbarhet:** Sensor kan følge README, starte lokalt i mock-modus og prøve hele kjerneflyten med testbruker og fiktive data uten API-nøkkel, betaling eller gruppens infrastruktur. Mock-modus merkes tydelig.
 
-0. En ny bruker kan gå gjennom hele flyten fra innlogging til ferdig søknadsbrev med hvert av testparene, uten at appen stopper eller krasjer. Resultatet oppfyller kriteriene 1–5.
+Gruppen skal lage fire faste, fiktive CV/annonse-par i `tests/fixtures/job-applications/`, med forventede gap og dokumenterte kvalifikasjoner: (1) manglende sertifikat, (2) manglende verktøykompetanse, (3) relevant studieprosjekt som dokumenterer et krav, og (4) alle angitte krav dokumentert. Mock-svar brukes til stabile flyttester. De samme parene vurderes separat mot ekte modell, med registrerte resultater; mock-tester dokumenterer ikke modellens kvalitet. Ekte CV-er brukes ikke som testdata. Testdata og tester er planlagt, ikke laget gjennom denne briefoppdateringen.
 
-**CV inn**
-
-1. (a) Når brukeren laster opp en PDF eller TXT, vises teksten appen leste. Den inneholder innholdet fra CV-en (for eksempel utdanning, erfaring og ferdigheter), er lesbar og kan rettes før brukeren går videre. (b) Hvis appen ikke finner tekst i fila, eller fila har feil format, får brukeren en forståelig melding med forslag til hva hen kan gjøre, for eksempel å lime inn teksten. Appen går ikke videre med en tom CV.
-
-**Gap-analyse**
-
-2. (a) For hvert testpar vises alle de kjente manglende kravene som manglende, og ingen av dem som dekket. (b) For hvert krav som vises som dekket, viser appen hvor i CV-en eller tilleggsopplysningene det ble funnet.
-
-**Svar og tilleggsopplysninger**
-
-3. (a) Når brukeren svarer på et manglende krav, bruker søknadsbrevet det brukeren skrev, og legger ikke til detaljer som ikke står i svaret. (b) Svaret lagres som en tilleggsopplysning. Ved en senere søknad med samme krav vises kravet som dekket med tilleggsopplysningen som kilde, og brukeren kan se, endre og slette den.
-
-**Grad av omskriving**
-
-4. Med «Skriv for meg» får brukeren et sammenhengende søknadsbrev. Med «Gi meg forslag» får brukeren forslag til innhold og formuleringer, ikke et ferdig brev. Begge følger regelen om at ingenting skal finnes på.
-
-**Tone og språk**
-
-5. (a) Valgt språk (norsk eller engelsk) gjelder hele brevet. (b) Formell, nøytral og personlig tone gir synlig forskjellige brev for samme testpar. Dette sjekkes manuelt med en sjekkliste.
-
-Den ønskede brukernytten er mindre tid brukt på tilpasning, mer relevante søknader og bedre forståelse av hvilke kvalifikasjoner som bør fremheves eller avklares. Dette er ambisjoner; kriteriene over er det som avgjør om v1 er ferdig.
+Mindre tidsbruk og bedre søknader er ønsket brukernytte, men hevdes ikke som dokumentert effekt i semesterprosjektet.
 
 ## Scope
 
-Funksjonene bygges i trinn. Neste trinn påbegynnes først når det forrige er testet og stabilt. Forslagslista i oppgaven er et utgangspunkt, ikke et krav, og gruppa har avgrenset v1 selv.
+Forslagslisten i oppgaven er et utgangspunkt, ikke et krav om alle fire KI-funksjoner i v1. Neste trinn påbegynnes først når det forrige er testet og stabilt.
 
-**v1 – kjerneflyten:** Alt som er beskrevet under «The Solution». I tillegg kan brukeren se, endre og slette tilleggsopplysningene sine.
+| Trinn | Omfang |
+|---|---|
+| **Innenfor v1** | Én brukerrolle, sikker innlogging, CV som innlimt tekst/TXT/tekstbasert PDF, innlimt annonse, gap-analyse med kilde for dekkede krav og svarfelt for manglende krav, søknadsbrev med to omskrivingsvalg, redigerbar resultattekst og mock-modus. Tekst kan kopieres manuelt. |
+| **Trinn 2, utenfor v1** | Egne CV-forbedringsforslag og ATS-forslag, etter at kjerneflyten er stabil. |
+| **Trinn 3, utenfor v1** | Strukturert CV-mal, DOC-støtte, tidligere søknader, lagring av svar som tilleggsopplysninger på profilen, språk- og stilvalg og fileksport. CV-malens felter og eksportformat bestemmes først dersom dette trinnet prioriteres. |
+| **Utenfor prosjektets kjerne** | Komplett rekrutteringssystem, OCR og garanti for intervju eller ATS-godkjenning. |
 
-**Trinn 2**
+**Sikkerhet i v1:** Passord skal lagres som sikre passordhasher, ikke klartekst. Alle lagrede brukerdata skal ha eierskapskontroll på serversiden. Foreslått avgrensning er å ikke lagre CV-er, annonser, svar og resultater permanent i v1; originalfiler slettes etter tekstuttrekk. Arkitekturen skal konkretisere midlertidig lagring, sletting og beskyttelse ved overføring. Full kryptering av permanent lagrede dokumenter vurderes hvis dokumentlagring senere innføres. Ekte CV-er skal ikke ligge i repo, testdata eller logger. Før ekte modell brukes, skal brukeren få beskjed om at CV og annonse sendes til en ekstern leverandør; demonstrasjon og testing bruker fiktive dokumenter.
 
-- CV-forbedringsforslag
-- ATS-forslag (veiledning om ordvalg og format, uten garanti for å passere et bestemt system)
+**Modell og kostnad:** Foreslått modellvalg er OpenAI `gpt-5-mini`, som må bekreftes gjennom testparene og en kostnadsvurdering før integrasjon. Foreslått samlet API-budsjett er 100 kroner for utviklingstesting; beløpet må avklares og håndheving beskrives i arkitekturen før betalte kall aktiveres. Modellen skal kunne konfigureres, og alle modellkall samles i én modul med utskiftbar mock- og API-implementasjon.
 
-**Trinn 3 – hvis tiden strekker til**
+**Nøkkel og konfigurasjon:** API-nøkkel brukes bare på serveren via lokal miljøkonfigurasjon; lokal `.env` holdes utenfor Git, mens `.env.example` skal inneholde tomme plassholdere og valg av mock/API-modus.
 
-- CV-mal (skjema), og å skrive tilleggsopplysninger inn i en oppdatert CV-fil
-- DOCX-støtte
-- Bruk av tidligere søknader
-- Eksport av søknadsbrev til fil (format avklares da)
+**Mock og lokal kjøring:** Mock er standard og sender ingen data ut. README skal beskrive lokal oppstart, testbruker og testdata. API-modus skal kreve et aktivt valg, begrenset inn- og utdatalengde og ingen automatiske gjentatte kall.
 
-**Utenfor prosjektet:** Et komplett rekrutteringssystem.
-
-Sikker innlogging og forsvarlig håndtering av CV-er og andre personopplysninger inngår i rammene. Hvor langt sikkerheten skal gå i v1, er et åpent spørsmål (se under). Appen må kunne kjøres av sensor uten gruppas egne API-nøkler. Briefen fastsetter ikke teknisk implementasjon; dette avklares i arkitekturen.
-
-## Åpne spørsmål til gruppa
-
-Disse må avgjøres av gruppa før eller under arbeidet med PRD og arkitektur. Faglærers anbefaling står i parentes.
-
-1. **Sikkerhet i v1:** Hvor langt skal sikkerheten gå? (Faglærer: trygg passordlagring og at CV-er bare er synlige for eieren i v1; full kryptering av lagrede dokumenter kan være et senere trinn.)
-2. **Språkmodell og testmodus:** Hvilken språkmodell skal brukes, og hvordan håndteres API-nøkkelen? (Faglærer: planlegg en testmodus med mock-svar, `.env.example` og testbruker, så sensor kan kjøre appen uten gruppas nøkkel. Dette er vurdert som stor risiko.)
-3. **Primærbruker:** Skal målgruppen snevres inn? (Faglærer: for eksempel en student uten mye arbeidserfaring som søker sin første relevante jobb.)
-4. **Mappenavn:** Mellomrom og «&» i navnet på brief-mappen kan gi problemer i kommandolinjen. Skal den få et enklere navn?
+Modellforslaget bygger på [OpenAIs modelloversikt](https://platform.openai.com/docs/models); tilgjengelighet og pris må kontrolleres ved integrasjon. Dette er en plan for videre arbeid, ikke en bekreftelse på ferdig funksjonalitet.
 
 ## Vision
 
