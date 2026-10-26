@@ -1,0 +1,33 @@
+{
+  "beskrivelse": "Økonomistudent søker sommerjobb i hotellresepsjon. Kravet om å planlegge arrangementer er bare dokumentert gjennom et studieprosjekt. Tysk mangler.",
+  "tester": "Gap-analysen godtar et studieprosjekt som dokumentasjon for et krav, og finner et manglende språkkrav.",
+  "stilling": {
+    "tittel": "Sommervikar i resepsjonen",
+    "arbeidsgiver": "Hotell Testvik"
+  },
+  "krav": [
+    {
+      "id": "kundeservice",
+      "krav": "Erfaring med kundeservice",
+      "status": "dekket",
+      "kilde": "Kundeservice ved disk"
+    },
+    {
+      "id": "planlegge-arrangementer",
+      "krav": "Erfaring med å planlegge møter eller arrangementer",
+      "status": "dekket",
+      "kilde": "Planla en næringslivsdag for 80 deltakere"
+    },
+    {
+      "id": "engelsk",
+      "krav": "Gode engelskkunnskaper",
+      "status": "dekket",
+      "kilde": "Engelsk – flytende"
+    },
+    {
+      "id": "tysk",
+      "krav": "Kunnskaper i tysk",
+      "status": "mangler"
+    }
+  ]
+}

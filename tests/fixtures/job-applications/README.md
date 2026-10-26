@@ -20,7 +20,9 @@ I `fasit.json` er `kilde` en tekstbit som står ordrett i `cv.txt`, og som viser
 |---|---|
 | `01-mangler-sertifikat` | Ett manglende sertifikat (førerkort B); resten dekket |
 | `02-mangler-verktoy` | Manglende verktøykompetanse (TIG-sveising), og et krav som er dekket med andre ord («Office-pakken» / «Word og Excel») |
+| `03-studieprosjekt-dekker-krav` | Et krav (planlegge arrangementer) som bare er dokumentert i et studieprosjekt, og et manglende språkkrav (tysk) |
 
 ## Ideer til flere par
 
 - **Krav som ikke kan dokumenteres i en CV**, for eksempel politiattest, som leveres etter ansettelse. Appen bør trolig ikke melde slike krav som gap. Det krever en egen kategori («vilkår ved ansettelse») som product brief ikke har ennå, så det må avklares med gruppa først.
+- **Gråsoner med svake kunnskaper**, for eksempel «Tysk – grunnleggende fra ungdomsskolen» mot kravet «kunnskaper i tysk». Holdt utenfor par 3 fordi testpar bør ha en entydig fasit; gruppa må først bestemme hvordan appen skal håndtere slike tilfeller.
