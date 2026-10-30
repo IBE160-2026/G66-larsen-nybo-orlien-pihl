@@ -25,5 +25,7 @@ I `fasit.json` er `kilde` en tekstbit som står ordrett i `cv.txt`, og som viser
 
 ## Ideer til flere par
 
-- **Krav som ikke kan dokumenteres i en CV**, for eksempel politiattest, som leveres etter ansettelse. Appen bør trolig ikke melde slike krav som gap. Det krever en egen kategori («vilkår ved ansettelse») som product brief ikke har ennå, så det må avklares med gruppa først.
-- **Gråsoner med svake kunnskaper**, for eksempel «Tysk – grunnleggende fra ungdomsskolen» mot kravet «kunnskaper i tysk». Holdt utenfor par 3 fordi testpar bør ha en entydig fasit; gruppa må først bestemme hvordan appen skal håndtere slike tilfeller.
+Begge ideene avhenger av hvordan gap-analysen skal oppføre seg, og er derfor flyttet til «Innspill til PRD» i product briefens `addendum.md`. Par lages først når PRD har bestemt fasiten.
+
+- **Krav som ikke kan dokumenteres i en CV**, for eksempel politiattest, som leveres etter ansettelse. Appen bør trolig ikke melde slike krav som gap. Det krever en egen kategori («vilkår ved ansettelse») som product brief ikke har.
+- **Gråsoner med svake kunnskaper**, for eksempel «Tysk – grunnleggende fra ungdomsskolen» mot kravet «kunnskaper i tysk». Holdt utenfor par 3 fordi testpar bør ha en entydig fasit.
