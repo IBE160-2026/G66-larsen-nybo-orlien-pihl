@@ -1,13 +1,31 @@
 ---
 title: "Tillegg til produktbrief: Supersøker"
-status: draft
+status: final
 created: 2026-10-18
-updated: 2026-10-26
+updated: 2026-10-30
 ---
 
 # Tillegg: begrunnelser for oppdateringene etter faglærers tilbakemelding
 
 Dette tillegget forklarer hvorfor briefen ble endret etter faglærers tilbakemelding, og hvilke alternativer som ble vurdert. Det er ment som underlag for PRD, arkitektur og refleksjonsrapporten. Gruppa trenger ikke lese det for å godkjenne briefen.
+
+## Gruppas beslutninger (2026-10-30)
+
+Gruppa gikk gjennom avkrysningslisten i briefen og bekreftet alle punktene. Elisabeth tok først stilling til svarfelt, tone/språk og mappenavn, og ba Claude Code om anbefalinger for resten med et mål om at oppgaven verken skulle bli for vanskelig eller for lett. Gruppa tok den endelige avgjørelsen.
+
+| Punkt | Beslutning | Begrunnelse |
+|---|---|---|
+| Svar på manglende krav | Variant A: svarene gjelder bare den aktuelle søknaden | Variant B krever permanent lagring, som ikke er med i v1. Variant B ligger i trinn 3. |
+| Tone og språk | Bokmål og profesjonell tone i v1 | Én kombinasjon er enklere å teste mot testparene. Elisabeths begrunnelse for valg i v1 (se «Tone og språk i v1» nedenfor) er tatt vare på til trinn 3. |
+| Lagring | Bare brukerkontoer lagres permanent | Lagring av dokumenter krever kryptering og en plan for sletting og personvern. *Vurdert og avvist:* Claude foreslo et mellomalternativ der resultatene (gap-analyse og brev) lagres per bruker, for å gi mer datalagring og en mer meningsfull test av eierskap. Gruppa valgte den enkleste løsningen. |
+| Omfang | V1 som foreslått; trinn 2 er målet ved tid | *Forslag fra Claude, godtatt av gruppa:* I stedet for å utvide v1 er trinn 2 et uttalt mål, fordi det gjenbruker samme flyt (CV + annonse → KI → resultat). Det sikrer en realistisk v1 og gir en plan hvis det blir tid. |
+| Primærbruker | Student som søker første jobb eller sommerjobb | En smal målgruppe gjør design og testpar enklere. |
+| Språkmodell | `gpt-5-mini`, foreløpig | Modellen kan konfigureres, så valget kan endres etter testing. |
+| Budsjett | 100 kr; Elisabeth følger opp | Mock er standard, så de fleste testene koster ingenting. Én ansvarlig person og en grense i leverandørens konto er viktigere enn selve beløpet. |
+| Mappenavn | `brief-supersoker-2026-09-16` | Mellomrom og «&» skaper problemer i kommandolinjen. Mappen er flyttet med `git mv`, så historikken beholdes. |
+| Suksesskriterier og testpar | Godkjent | Kriteriene kan testes konkret og kobler planen til testene. |
+
+Seksjonene under beskriver arbeidet før beslutningene. Der de avviker, gjelder tabellen over.
 
 ## Sammenslåing av to forslag (2026-10-26)
 

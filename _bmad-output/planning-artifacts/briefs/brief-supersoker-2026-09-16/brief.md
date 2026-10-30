@@ -1,13 +1,13 @@
 ---
 title: "Produktbrief: Supersøker - AI CV & Job Application Assistant"
-status: draft
+status: final
 created: 2026-09-16
-updated: 2026-10-26
+updated: 2026-10-30
 ---
 
 # Supersøker - AI CV & Job Application Assistant
 
-> **Samlet forslag (2026-10-26):** Denne versjonen slår sammen to forslag til oppdatering etter faglærers tilbakemelding (`tilbakemelding-product-brief.md`): Elisabeths (PR #3, 2026-10-18) og Mirandas (branch `miranda-utvikling`, 2026-10-26). Hva som er hentet fra hvem, og hvorfor, står i `addendum.md`. Forslaget venter på gruppas gjennomgang og godkjenning.
+> **Godkjent av gruppa (2026-10-30):** Denne versjonen slår sammen to forslag til oppdatering etter faglærers tilbakemelding (`tilbakemelding-product-brief.md`): Elisabeths (PR #3, 2026-10-18) og Mirandas (branch `miranda-utvikling`, 2026-10-26). Hva som er hentet fra hvem, og hvorfor, står i `addendum.md`. Gruppa gikk gjennom de åpne punktene 2026-10-30; beslutningene står nedenfor.
 
 ## Executive Summary
 
@@ -15,21 +15,19 @@ Verktøyet "Supersøker" skal hjelpe studenter og unge jobbsøkere med å skrive
 
 Løsningen utvikles som en nettapplikasjon i semesterprosjektet i IBE160 Programmering med KI ved Høgskolen i Molde. Første versjon (v1) prioriterer en stabil flyt fra innlogging, CV og stillingsannonse til gap-analyse og søknadsbrev. Brukeren skal styre graden av omskriving. Flere funksjoner kommer i senere trinn når v1 er testet og stabil.
 
-**Dette må gruppen bli enig om før briefen ferdigstilles**
+**Gruppas beslutninger (2026-10-30)**
 
-Punktene nedenfor er forslag i dette utkastet, ikke registrerte gruppebeslutninger. Kryss av først når gruppen har diskutert og bekreftet valget. Ved andre valg oppdateres de berørte avsnittene.
+- [x] **Omfang:** Gap-analyse og søknadsbrev i v1. CV-forbedringer og ATS (trinn 2) er målet dersom v1 er testet og stabil i tide; CV-mal, DOC, tidligere søknader og eksport (trinn 3) utsettes. Se «Scope».
+- [x] **Primærbruker:** Studenter med lite relevant erfaring som søker første jobb eller sommerjobb. Se «Who This Serves».
+- [x] **Svar på manglende krav:** Brukeren kan svare på manglende krav i v1, og svarene gjelder bare den aktuelle søknaden. Lagring på profilen er flyttet til trinn 3. Se «The Solution».
+- [x] **Tone og språk:** V1 bruker norsk bokmål og profesjonell tone. Valg av tone og språk er flyttet til trinn 3. Se «The Solution».
+- [x] **Lagring:** Bare brukerkontoer lagres permanent. CV-er, annonser, svar og resultater behandles midlertidig. Se «Scope – Sikkerhet i v1».
+- [x] **Språkmodell:** `gpt-5-mini` er foreløpig valg og bekreftes etter testing av kvalitet, tilgjengelighet og pris. Se «Scope – Modell og kostnad».
+- [x] **Budsjett:** 100 kroner samlet for betalte API-kall i utviklingstestingen. Elisabeth følger opp forbruket.
+- [x] **Mappenavn:** Brief-mappen heter `brief-supersoker-2026-09-16`, uten mellomrom og «&».
+- [x] **Godkjenning av resultatene:** Suksesskriteriene og de fire fiktive testparene er grunnlaget for å vurdere om v1 fungerer. Se «Success Criteria».
 
-- [ ] **Omfang:** Er vi enige om gap-analyse og søknadsbrev i v1, og at CV-forbedringer, ATS, CV-mal, DOC, tidligere søknader og eksport utsettes? Se «Scope».
-- [ ] **Primærbruker:** Skal vi prioritere studenter med lite relevant erfaring som søker første jobb eller sommerjobb? Se «Who This Serves».
-- [ ] **Svar på manglende krav:** Skal brukeren kunne svare på manglende krav i v1, med svar som bare gjelder den aktuelle søknaden? Å lagre svarene på profilen for senere søknader krever permanent lagring og er foreslått flyttet til trinn 3. Se «The Solution».
-- [ ] **Tone og språk:** Skal v1 bare bruke norsk bokmål og profesjonell tone, eller skal brukeren velge tone (formell, nøytral, personlig) og språk (norsk, engelsk) allerede i v1? Forslaget her er det første; begrunnelsen for det andre står i `addendum.md`. Se «The Solution».
-- [ ] **Lagring:** Skal CV-er, annonser, svar og resultater bare behandles midlertidig, uten permanent dokumentlagring i v1? Se «Scope – Sikkerhet i v1».
-- [ ] **Språkmodell:** Skal vi prøve den foreslåtte modellen `gpt-5-mini`, og bekrefte valget etter testing av kvalitet, tilgjengelighet og pris? Se «Scope – Modell og kostnad».
-- [ ] **Budsjett:** Er 100 kroner en passende samlet grense for betalte API-kall i utviklingstestingen, og hvem følger opp forbruket? Beløpet er et forslag, ikke en beregnet kostnad.
-- [ ] **Mappenavn:** Mellomrom og «&» i navnet på brief-mappen kan gi problemer i kommandolinjen. Skal den få et enklere navn før PRD?
-- [ ] **Godkjenning av resultatene:** Er vi enige om suksesskriteriene og de fire fiktive testparene som grunnlag for å vurdere om v1 fungerer? Se «Success Criteria».
-
-Eksportformat og feltene i CV-malen trenger ikke avgjøres nå dersom disse funksjonene holdes utenfor v1. Å lage testdata, mock-modus og README er videre arbeid etter at planen er avklart.
+Eksportformat og feltene i CV-malen avgjøres først dersom trinn 3 prioriteres.
 
 ## The Problem
 
@@ -57,7 +55,7 @@ Funksjonskombinasjonen er ikke dokumentert som unik. [Teal](https://www.tealhq.c
 
 ## Who This Serves
 
-Foreslått primærbruker er en student med begrenset relevant arbeidserfaring som søker sin første relevante jobb eller sommerjobb. Brukeren trenger hjelp til å knytte deltidsarbeid, utdanning og studieprosjekter til annonsen, uten å overdrive kompetansen. Andre unge jobbsøkere er en sekundærmålgruppe.
+Primærbrukeren er en student med begrenset relevant arbeidserfaring som søker sin første relevante jobb eller sommerjobb. Brukeren trenger hjelp til å knytte deltidsarbeid, utdanning og studieprosjekter til annonsen, uten å overdrive kompetansen. Andre unge jobbsøkere er en sekundærmålgruppe.
 
 ## Success Criteria
 
@@ -72,7 +70,7 @@ V1 skal kunne demonstreres og kontrolleres mot følgende kriterier:
 7. **Sikkerhet og feil:** Bruker A får ikke tilgang til bruker Bs data, heller ikke gjennom direkte forespørsler. Manglende API-nøkkel, API-feil og ugyldige modellsvar gir en forståelig feilmelding. Hemmeligheter vises ikke, og inndata beholdes i skjemaet.
 8. **Kjørbarhet:** Sensor kan følge README, starte lokalt i mock-modus og prøve hele kjerneflyten med testbruker og fiktive data uten API-nøkkel, betaling eller gruppens infrastruktur. Mock-modus merkes tydelig.
 
-Gruppen skal lage fire faste, fiktive CV/annonse-par i `tests/fixtures/job-applications/`, med forventede gap og dokumenterte kvalifikasjoner: (1) manglende sertifikat, (2) manglende verktøykompetanse, (3) relevant studieprosjekt som dokumenterer et krav, og (4) alle angitte krav dokumentert. Mock-svar brukes til stabile flyttester. De samme parene vurderes separat mot ekte modell, med registrerte resultater; mock-tester dokumenterer ikke modellens kvalitet. Ekte CV-er brukes ikke som testdata. Testdata og tester er planlagt, ikke laget gjennom denne briefoppdateringen.
+Gruppen skal lage fire faste, fiktive CV/annonse-par i `tests/fixtures/job-applications/`, med forventede gap og dokumenterte kvalifikasjoner: (1) manglende sertifikat, (2) manglende verktøykompetanse, (3) relevant studieprosjekt som dokumenterer et krav, og (4) alle angitte krav dokumentert. Mock-svar brukes til stabile flyttester. De samme parene vurderes separat mot ekte modell, med registrerte resultater; mock-tester dokumenterer ikke modellens kvalitet. Ekte CV-er brukes ikke som testdata. Testparene er lagt fram i PR #4; testene er planlagt, ikke laget gjennom denne briefoppdateringen.
 
 Mindre tidsbruk og bedre søknader er ønsket brukernytte, men hevdes ikke som dokumentert effekt i semesterprosjektet.
 
@@ -83,13 +81,13 @@ Forslagslisten i oppgaven er et utgangspunkt, ikke et krav om alle fire KI-funks
 | Trinn | Omfang |
 |---|---|
 | **Innenfor v1** | Én brukerrolle, sikker innlogging, CV som innlimt tekst/TXT/tekstbasert PDF, innlimt annonse, gap-analyse med kilde for dekkede krav og svarfelt for manglende krav, søknadsbrev med to omskrivingsvalg, redigerbar resultattekst og mock-modus. Tekst kan kopieres manuelt. |
-| **Trinn 2, utenfor v1** | Egne CV-forbedringsforslag og ATS-forslag, etter at kjerneflyten er stabil. |
+| **Trinn 2, utenfor v1** | Egne CV-forbedringsforslag og ATS-forslag, etter at kjerneflyten er stabil. Dette er målet dersom v1 er testet og stabil i tide. |
 | **Trinn 3, utenfor v1** | Strukturert CV-mal, DOC-støtte, tidligere søknader, lagring av svar som tilleggsopplysninger på profilen, språk- og stilvalg og fileksport. CV-malens felter og eksportformat bestemmes først dersom dette trinnet prioriteres. |
 | **Utenfor prosjektets kjerne** | Komplett rekrutteringssystem, OCR og garanti for intervju eller ATS-godkjenning. |
 
-**Sikkerhet i v1:** Passord skal lagres som sikre passordhasher, ikke klartekst. Alle lagrede brukerdata skal ha eierskapskontroll på serversiden. Foreslått avgrensning er å ikke lagre CV-er, annonser, svar og resultater permanent i v1; originalfiler slettes etter tekstuttrekk. Arkitekturen skal konkretisere midlertidig lagring, sletting og beskyttelse ved overføring. Full kryptering av permanent lagrede dokumenter vurderes hvis dokumentlagring senere innføres. Ekte CV-er skal ikke ligge i repo, testdata eller logger. Før ekte modell brukes, skal brukeren få beskjed om at CV og annonse sendes til en ekstern leverandør; demonstrasjon og testing bruker fiktive dokumenter.
+**Sikkerhet i v1:** Passord skal lagres som sikre passordhasher, ikke klartekst. Alle lagrede brukerdata skal ha eierskapskontroll på serversiden. V1 lagrer ikke CV-er, annonser, svar og resultater permanent; originalfiler slettes etter tekstuttrekk. Arkitekturen skal konkretisere midlertidig lagring, sletting og beskyttelse ved overføring. Full kryptering av permanent lagrede dokumenter vurderes hvis dokumentlagring senere innføres. Ekte CV-er skal ikke ligge i repo, testdata eller logger. Før ekte modell brukes, skal brukeren få beskjed om at CV og annonse sendes til en ekstern leverandør; demonstrasjon og testing bruker fiktive dokumenter.
 
-**Modell og kostnad:** Foreslått modellvalg er OpenAI `gpt-5-mini`, som må bekreftes gjennom testparene og en kostnadsvurdering før integrasjon. Foreslått samlet API-budsjett er 100 kroner for utviklingstesting; beløpet må avklares og håndheving beskrives i arkitekturen før betalte kall aktiveres. Modellen skal kunne konfigureres, og alle modellkall samles i én modul med utskiftbar mock- og API-implementasjon.
+**Modell og kostnad:** Foreløpig modellvalg er OpenAI `gpt-5-mini`, som må bekreftes gjennom testparene og en kostnadsvurdering før integrasjon. Samlet API-budsjett er 100 kroner for utviklingstesting, og Elisabeth følger opp forbruket. Hvordan grensen håndheves, beskrives i arkitekturen før betalte kall aktiveres. Modellen skal kunne konfigureres, og alle modellkall samles i én modul med utskiftbar mock- og API-implementasjon.
 
 **Nøkkel og konfigurasjon:** API-nøkkel brukes bare på serveren via lokal miljøkonfigurasjon; lokal `.env` holdes utenfor Git, mens `.env.example` skal inneholde tomme plassholdere og valg av mock/API-modus.
 
