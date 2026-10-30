@@ -1,0 +1,34 @@
+{
+  "beskrivelse": "Barnehagelærerstudent på 3. år søker sommerjobb som barnehageassistent. Alle krav i annonsen er dokumentert i CV-en.",
+  "tester": "Gap-analysen melder ingen gap og finner ikke på krav som ikke står i annonsen. Førstehjelpskurset dekker her et ekte krav (i par 1 var det en felle).",
+  "stilling": {
+    "tittel": "Sommervikar – barnehageassistent",
+    "arbeidsgiver": "Testvik barnehage"
+  },
+  "krav": [
+    {
+      "id": "arbeid-med-barn",
+      "krav": "Erfaring med arbeid med barn",
+      "status": "dekket",
+      "kilde": "Tilkallingsvikar, Testvik barnehage"
+    },
+    {
+      "id": "utdanning-pedagogikk",
+      "krav": "Utdanning innen pedagogikk, gjerne påbegynt",
+      "status": "dekket",
+      "kilde": "Bachelor i barnehagelærerutdanning"
+    },
+    {
+      "id": "forstehjelpskurs",
+      "krav": "Gjennomført førstehjelpskurs",
+      "status": "dekket",
+      "kilde": "Førstehjelpskurs for barn og unge"
+    },
+    {
+      "id": "friluftsliv",
+      "krav": "Interesse for friluftsliv",
+      "status": "dekket",
+      "kilde": "helgeturer i skog og fjell"
+    }
+  ]
+}

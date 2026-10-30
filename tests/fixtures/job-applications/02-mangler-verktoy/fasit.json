@@ -1,0 +1,33 @@
+{
+  "beskrivelse": "Student i flyteknikk søker sommerjobb som mekanikerassistent der TIG-sveising er krav. CV-en viser verkstedarbeid med håndverktøy, men ingen sveising.",
+  "tester": "Gap-analysen finner manglende verktøykompetanse, og forstår at «Word og Excel» dekker kravet om Office-pakken selv om ordet «Office» ikke står i CV-en.",
+  "stilling": {
+    "tittel": "Sommervikar – mekanikerassistent i hangar",
+    "arbeidsgiver": "Testvik Flyteknikk AS"
+  },
+  "krav": [
+    {
+      "id": "tig-sveising",
+      "krav": "Erfaring med TIG-sveising",
+      "status": "mangler"
+    },
+    {
+      "id": "office-pakken",
+      "krav": "Grunnleggende kjennskap til Office-pakken",
+      "status": "dekket",
+      "kilde": "Word og Excel"
+    },
+    {
+      "id": "interesse-flyteknikk",
+      "krav": "Interesse for flyteknikk",
+      "status": "dekket",
+      "kilde": "Bachelor i flyteknikk"
+    },
+    {
+      "id": "noyaktig-sikkerhetsbevisst",
+      "krav": "Nøyaktig og sikkerhetsbevisst",
+      "status": "dekket",
+      "kilde": "Fulgte verkstedets sjekklister"
+    }
+  ]
+}
