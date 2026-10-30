@@ -22,3 +22,25 @@ Finne ut hva som hadde skjedd i repoet siden sist. Deretter hente ny `main` loka
 
 ### Åpne punkter
 - Gruppa må gå gjennom avkrysningslisten i `brief.md`, særlig svarfelt (variant A eller B) og tone/språk i v1, før PRD.
+
+## 2026-10-30 kl. 19:27 — elizabeth
+
+### Oppgave
+Ferdigstille product brief etter at gruppa hadde gått gjennom avkrysningslisten. Elisabeth ba først om anbefalinger med et mål om at oppgaven verken skulle bli for vanskelig eller for lett, og la så fram gruppas svar.
+
+### Plan
+- Gi anbefalinger per punkt (Claude foreslo bl.a. trinn 2 som mål ved tid og et mellomalternativ for lagring av resultater).
+- Registrere gruppas svar i `brief.md`, `addendum.md` og `.memlog.md`.
+- Flytte brief-mappen med `git mv`.
+
+### Resultat
+- Commit `03ef13d` på `oppdater-product-brief`, pushet (PR #3).
+- `brief.md`: status `final`; avkrysningslisten erstattet av «Gruppas beslutninger (2026-10-30)» med alle ni punkter krysset av: svarfelt variant A, bokmål og profesjonell tone, bare brukerkontoer lagres permanent, `gpt-5-mini` foreløpig, 100 kr med Elisabeth som ansvarlig, trinn 2 som mål ved tid, suksesskriterier og testpar godkjent. «Foreslått»-formuleringer i Scope og Who This Serves er gjort om til beslutninger.
+- `addendum.md`: ny beslutningstabell med begrunnelser, inkludert at Claudes forslag om å lagre resultater ble vurdert og avvist av gruppa, og at forslaget om trinn 2 som mål ble godtatt.
+- Mappen heter nå `_bmad-output/planning-artifacts/briefs/brief-supersoker-2026-09-16/`. Den gamle stien står bare igjen i faglærers tilbakemelding, som er beholdt uendret som historisk dokument.
+- `book`-CLI-en som sesjonslogg-skillen nå viser til, er ikke installert; åpne punkter er derfor ført i `issues.md` slik CLAUDE.md sier.
+
+### Åpne punkter
+- Elisabeth setter en budsjettgrense på 100 kr i OpenAI-kontoen før betalte kall aktiveres.
+- Neste steg er PRD, basert på den ferdige briefen.
+- Testpar-punktet (politiattest og gråsoner) står fortsatt åpent.
