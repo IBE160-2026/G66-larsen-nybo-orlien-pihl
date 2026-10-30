@@ -55,6 +55,10 @@ Disse punktene kom fram i en gjennomgang av briefen mot faglærers tilbakemeldin
 - Den kan brukes som kontroll av modellsvaret, for eksempel ved å varsle når modellen merker et krav som dekket uten at noe i CV-en matcher. Det er den feilen tabellen «Mulige feil i gap-analysen» kaller verst.
 - Ren nøkkelordmatching kjenner ikke igjen synonymer («regneark» og «Excel»), så den bør være en kontroll ved siden av modellen, ikke en erstatning.
 
+**Krav som ikke kan dokumenteres i en CV** (fra arbeidet med testparene, PR #4). Noen krav, som politiattest, leveres etter ansettelse og kan ikke stå i en CV. PRD bør avgjøre om gap-analysen skal ha en egen kategori for slike vilkår, eller om de skal behandles som vanlige krav som brukeren kan svare på i svarfeltet. Testpar for dette lages først når fasiten er bestemt.
+
+**Gråsoner med svake kunnskaper** (fra arbeidet med testparene, PR #4). Et eksempel er «Tysk – grunnleggende fra ungdomsskolen» mot kravet «kunnskaper i tysk». PRD bør avgjøre om slike tilfeller regnes som dekket, som manglende eller som en egen status, for eksempel «delvis dokumentert». En egen status gir mer nyanserte resultater, men flere tilfeller å teste.
+
 **Lagring av resultater som kandidat til trinn 2.** Hvis det blir tid, er lagring av gap-analyse og brev per bruker den enkleste utvidelsen som gir mer datalagring og en mer meningsfull test av eierskap.
 
 ## Teststrategi for KI-delen
