@@ -39,8 +39,9 @@ Ferdigstille product brief etter at gruppa hadde gått gjennom avkrysningslisten
 - `addendum.md`: ny beslutningstabell med begrunnelser, inkludert at Claudes forslag om å lagre resultater ble vurdert og avvist av gruppa, og at forslaget om trinn 2 som mål ble godtatt.
 - Mappen heter nå `_bmad-output/planning-artifacts/briefs/brief-supersoker-2026-09-16/`. Den gamle stien står bare igjen i faglærers tilbakemelding, som er beholdt uendret som historisk dokument.
 - `book`-CLI-en som sesjonslogg-skillen nå viser til, er ikke installert; åpne punkter er derfor ført i `issues.md` slik CLAUDE.md sier.
+- Etterpå: briefen ble dobbeltsjekket mot faglærers tilbakemelding og den opprinnelige oppgaven. Alle hovedpunkter er løst; skisser av visningen hører til UX-steget. Commit `e2a6865` (pushet): kriterium 7 presisert til kontoopplysninger og midlertidige data i aktiv økt; `addendum.md` omstrukturert med gjeldende beslutninger og oppdatert sporingstabell først, «Innspill til PRD (ikke besluttet)» (regelbasert kontroll i gap-analysen, lagring av resultater som kandidat til trinn 2) og eldre forslag under «Historikk».
 
 ### Åpne punkter
 - Elisabeth setter en budsjettgrense på 100 kr i OpenAI-kontoen før betalte kall aktiveres.
-- Neste steg er PRD, basert på den ferdige briefen.
+- Neste steg er PRD, basert på den ferdige briefen. Et annet gruppemedlem starter på den; innspillene står i `addendum.md`.
 - Testpar-punktet (politiattest og gråsoner) står fortsatt åpent.
