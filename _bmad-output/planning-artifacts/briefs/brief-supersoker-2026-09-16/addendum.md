@@ -2,7 +2,7 @@
 title: "Tillegg til produktbrief: Supersøker"
 status: final
 created: 2026-10-18
-updated: 2026-10-30
+updated: 2026-11-01
 ---
 
 # Tillegg: begrunnelser for oppdateringene etter faglærers tilbakemelding
@@ -58,6 +58,16 @@ Disse punktene kom fram i en gjennomgang av briefen mot faglærers tilbakemeldin
 **Krav som ikke kan dokumenteres i en CV** (fra arbeidet med testparene, PR #4). Noen krav, som politiattest, leveres etter ansettelse og kan ikke stå i en CV. PRD bør avgjøre om gap-analysen skal ha en egen kategori for slike vilkår, eller om de skal behandles som vanlige krav som brukeren kan svare på i svarfeltet. Testpar for dette lages først når fasiten er bestemt.
 
 **Gråsoner med svake kunnskaper** (fra arbeidet med testparene, PR #4). Et eksempel er «Tysk – grunnleggende fra ungdomsskolen» mot kravet «kunnskaper i tysk». PRD bør avgjøre om slike tilfeller regnes som dekket, som manglende eller som en egen status, for eksempel «delvis dokumentert». En egen status gir mer nyanserte resultater, men flere tilfeller å teste.
+
+Punktene nedenfor kom fram i en walkthrough av PR #3 2026-11-01 (risikopunkter foreslått av Claude, valgt ut av Elisabeth).
+
+**Hva mock-modus svarer på ukjent input.** Sensor ser trolig bare mock-modus og vil teste «feil input og uventet bruk», for eksempel med en egen CV og annonse. Hvis mock da gir et fast svar laget for et av testparene, ser appen ødelagt ut. PRD bør avgjøre hvordan mock oppfører seg på input som ikke er et testpar, for eksempel et tydelig merket eksempelsvar som sier at teksten ikke er analysert, eller en enkel regelbasert analyse.
+
+**Hva som regnes som bestått med ekte modell.** Kriterium 3 krever at alle forhåndsdefinerte gap blir funnet, men modellen kan svare ulikt fra kjøring til kjøring, og noen fasiter er tolkninger (for eksempel at «samarbeidsevner» er dekket av et gruppeprosjekt). PRD bør si om kriteriet gjelder én kjøring, flere kjøringer eller en andel, og hvordan avvik registreres.
+
+**Hva som skjer med resultatet uten permanent lagring.** Briefen sier at resultatene kan leses uten ny analyse, og at teksten kan redigeres, men ingenting lagres permanent. PRD bør avgjøre hva brukeren skal oppleve hvis siden lastes på nytt eller økten utløper, slik at et redigert brev ikke forsvinner uten varsel. Arkitekturen må deretter velge hvor midlertidige data ligger.
+
+**Ingen CV-innhold i logger** (til arkitekturen). Briefen sier at ekte CV-er ikke skal ligge i logger, men det er lett å bryte under feilsøking, for eksempel ved å logge prompter eller modellsvar. Det bør bli en regel i arkitekturen og et punkt i kodereview, sammen med at API-nøkler aldri committes.
 
 **Lagring av resultater som kandidat til trinn 2.** Hvis det blir tid, er lagring av gap-analyse og brev per bruker den enkleste utvidelsen som gir mer datalagring og en mer meningsfull test av eierskap.
 
