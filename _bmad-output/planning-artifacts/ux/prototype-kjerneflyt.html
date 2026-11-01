@@ -1,0 +1,545 @@
+<title>Supersøker-prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+<style>
+/* Layout: smal arbeidsflate med stegliste øverst; to kolonner på steg 1 som stables på mobil. Gul markering = «her står det i CV-en». */
+:root {
+  --paper: #F4F6FA;
+  --surface: #FFFFFF;
+  --ink: #16213A;
+  --muted: #536079;
+  --line: #D4DAE5;
+  --accent: #2747B8;
+  --accent-ink: #FFFFFF;
+  --mark: #FFE27A;
+  --mark-ink: #16213A;
+  --ok: #1D7149;
+  --ok-bg: #E4F2EA;
+  --gap: #8F4410;
+  --gap-bg: #FBEDE0;
+  --err: #A8231C;
+  --err-bg: #FCE7E5;
+  --mock: #553A9E;
+  --mock-bg: #EEE9FA;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0F1522; --surface: #182136; --ink: #E6EBF4; --muted: #A4AFC5; --line: #2D3954;
+    --accent: #93AAFF; --accent-ink: #0F1522; --mark: #6E5C10; --mark-ink: #FFF5C8;
+    --ok: #82D3A6; --ok-bg: #163329; --gap: #F2B27C; --gap-bg: #3A2617;
+    --err: #FF9F97; --err-bg: #3E1B19; --mock: #C7B6FF; --mock-bg: #2A2348;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0F1522; --surface: #182136; --ink: #E6EBF4; --muted: #A4AFC5; --line: #2D3954;
+  --accent: #93AAFF; --accent-ink: #0F1522; --mark: #6E5C10; --mark-ink: #FFF5C8;
+  --ok: #82D3A6; --ok-bg: #163329; --gap: #F2B27C; --gap-bg: #3A2617;
+  --err: #FF9F97; --err-bg: #3E1B19; --mock: #C7B6FF; --mock-bg: #2A2348;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 980px; margin-inline: auto; display: grid; gap: 20px; }
+
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; }
+p { margin: 0; }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* Topp */
+.proto-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 14px; border-bottom: 1px solid var(--line);
+}
+.proto-bar label { font-size: .85rem; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.proto-bar select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; max-width: 100%; }
+.tag { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+
+header.app { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand .sub { color: var(--muted); font-size: .95rem; }
+.user { font-size: .9rem; color: var(--muted); }
+
+.mock-banner {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--mock-bg); color: var(--mock); border: 1px solid currentColor;
+  border-radius: 8px; padding: 10px 14px; font-size: .95rem;
+}
+.mock-banner strong { white-space: nowrap; }
+
+/* Stegliste */
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+ol.steps li { border-top: 4px solid var(--line); padding-top: 8px; font-size: .9rem; color: var(--muted); min-width: 0; }
+ol.steps li[aria-current="step"] { border-color: var(--accent); color: var(--ink); font-weight: 700; }
+ol.steps li.done { border-color: var(--ok); color: var(--ink); }
+ol.steps .n { font-variant-numeric: tabular-nums; }
+
+/* Flater */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .cols, ol.steps { grid-template-columns: minmax(0, 1fr); } ol.steps li:not([aria-current="step"]) { display: none; } }
+.lead { color: var(--muted); max-width: 65ch; }
+
+.field { display: grid; gap: 6px; }
+.field label, .legend { font-weight: 700; }
+.hint { font-size: .88rem; color: var(--muted); }
+textarea, input[type="file"] { font: inherit; color: var(--ink); width: 100%; }
+textarea {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; resize: vertical; min-height: 9rem;
+}
+textarea.mono { font-family: var(--font-mono); font-size: .85rem; line-height: 1.5; min-height: 16rem; }
+textarea[aria-invalid="true"] { border-color: var(--err); border-width: 2px; }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-wrap: wrap; }
+.seg button { font: inherit; border: 0; background: var(--surface); color: var(--ink); padding: 8px 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: inherit; font-weight: 700; border-radius: 8px; padding: 10px 18px; cursor: pointer; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.secondary { background: transparent; color: var(--accent); }
+
+.msg { border-radius: 8px; padding: 10px 14px; display: grid; gap: 4px; }
+.msg.err { background: var(--err-bg); color: var(--err); border: 1px solid currentColor; }
+.msg.info { background: var(--mock-bg); color: var(--mock); border: 1px solid currentColor; }
+.msg.warn { background: var(--gap-bg); color: var(--gap); border: 1px solid currentColor; }
+.msg p { color: var(--ink); }
+
+/* Gap-analyse */
+.summary { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 1.05rem; }
+.summary b { font-family: var(--font-display); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.req-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.req { border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 8px; border-left-width: 6px; }
+.req.gap { border-left-color: var(--gap); }
+.req.ok { border-left-color: var(--ok); }
+.status { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.req.gap .status { background: var(--gap-bg); color: var(--gap); }
+.req.ok .status { background: var(--ok-bg); color: var(--ok); }
+.req-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; justify-content: space-between; }
+.kilde { font-size: .95rem; }
+mark { background: var(--mark); color: var(--mark-ink); padding: 0 3px; border-radius: 3px; }
+.empty { border: 2px dashed var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 6px; }
+
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.choice { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: start; border: 1px solid var(--line); border-radius: 8px; padding: 12px; cursor: pointer; }
+.choice input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--accent); }
+.choice .hint { grid-column: 2; }
+.choice:has(input:checked) { border-color: var(--accent); border-width: 2px; }
+
+/* Resultat */
+.result-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.basis { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .92rem; }
+.basis li::before { content: "▸ "; color: var(--muted); }
+.mini-gap { font-size: .95rem; display: grid; gap: 4px; }
+
+/* Designnotater */
+details.notes { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 20px; }
+details.notes summary { cursor: pointer; font-weight: 700; font-family: var(--font-display); }
+details.notes .grid { display: grid; gap: 12px; margin-top: 12px; max-width: 70ch; }
+details.notes ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+
+<div class="wrap">
+  <div class="proto-bar">
+    <span class="tag">Prototype · ikke ekte app · fiktive data (testpar 1)</span>
+    <label for="state">Vis tilstand
+      <select id="state">
+        <option value="normal">Vanlig flyt</option>
+        <option value="tom-cv">Tom CV</option>
+        <option value="pdf-uten-tekst">PDF uten lesbar tekst</option>
+        <option value="ingen-gap">Ingen manglende krav</option>
+        <option value="ukjent-input">Mock med egen tekst</option>
+        <option value="modellfeil">Feil fra språkmodellen</option>
+      </select>
+    </label>
+  </div>
+
+  <header class="app">
+    <div class="brand"><h1>Supersøker</h1><span class="sub">Søknadsbrev som stemmer med CV-en din</span></div>
+    <span class="user">Innlogget som <strong>Ida Testesen</strong> (testbruker)</span>
+  </header>
+
+  <div class="mock-banner" role="note">
+    <strong>Mock-modus</strong>
+    <span>Svarene er ferdiglagde eksempler. Ingen tekst sendes til en språkmodell.</span>
+  </div>
+
+  <nav aria-label="Steg i søknaden">
+    <ol class="steps">
+      <li data-step="1"><span class="n">1</span> · CV og annonse</li>
+      <li data-step="2"><span class="n">2</span> · Gap-analyse</li>
+      <li data-step="3"><span class="n">3</span> · Søknadsbrev</li>
+    </ol>
+  </nav>
+
+  <!-- Steg 1 -->
+  <section class="panel" id="step-1" aria-labelledby="h-1">
+    <h2 id="h-1" tabindex="-1">Legg inn CV og stillingsannonse</h2>
+    <p class="lead">Lim inn teksten eller last opp CV-en som TXT eller PDF. Du ser teksten vi leste, og kan rette den før analysen.</p>
+    <div class="cols">
+      <div class="field">
+        <span class="legend" id="cv-legend">CV</span>
+        <div class="seg" role="group" aria-labelledby="cv-legend">
+          <button type="button" id="cv-mode-paste" aria-pressed="true">Lim inn tekst</button>
+          <button type="button" id="cv-mode-file" aria-pressed="false">Last opp fil</button>
+        </div>
+        <div class="field" id="file-field" hidden>
+          <label for="cv-file">Velg fil (TXT eller tekstbasert PDF)</label>
+          <input type="file" id="cv-file" accept=".txt,.pdf,text/plain,application/pdf">
+          <span class="hint">Skannede PDF-er kan ikke leses. Lim da inn teksten i stedet.</span>
+        </div>
+        <div id="file-msg" aria-live="polite"></div>
+        <label for="cv-text" id="cv-text-label">CV-tekst</label>
+        <textarea id="cv-text" class="mono" aria-describedby="cv-hint cv-err"></textarea>
+        <span class="hint" id="cv-hint">Sjekk at utdanning, erfaring og ferdigheter kom med. Du kan rette teksten her.</span>
+        <div id="cv-err" aria-live="polite"></div>
+      </div>
+      <div class="field">
+        <label for="ad-text">Stillingsannonse</label>
+        <textarea id="ad-text" class="mono" aria-describedby="ad-err"></textarea>
+        <span class="hint">Ta med stillingstittel og arbeidsgiver, så kan brevet nevne dem.</span>
+        <div id="ad-err" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn primary" id="analyse">Analyser kravene</button>
+    </div>
+  </section>
+
+  <!-- Steg 2 -->
+  <section class="panel" id="step-2" aria-labelledby="h-2" hidden>
+    <h2 id="h-2" tabindex="-1">Gap-analyse: Sommervikar i hjemmetjenesten, Testvik kommune</h2>
+    <div id="unknown-msg"></div>
+    <div class="summary" id="summary"></div>
+    <p class="lead">At noe ikke står i CV-en, betyr ikke at du mangler det. Svar gjerne på kravene som mangler dokumentasjon. Svarene brukes bare i denne søknaden.</p>
+
+    <h3 id="h-gap">Mangler dokumentasjon i CV-en</h3>
+    <ul class="req-list" id="gap-list" aria-labelledby="h-gap"></ul>
+
+    <h3 id="h-ok">Dokumentert i CV-en</h3>
+    <ul class="req-list" id="ok-list" aria-labelledby="h-ok"></ul>
+
+    <fieldset>
+      <legend class="legend">Hvor mye skal Supersøker skrive?</legend>
+      <label class="choice"><input type="radio" name="mode" id="mode-full" value="full" checked>
+        <span><strong>Helt søknadsutkast</strong></span>
+        <span class="hint">Et sammenhengende brev du redigerer selv.</span></label>
+      <label class="choice"><input type="radio" name="mode" id="mode-tips" value="tips">
+        <span><strong>Forslag til formuleringer</strong></span>
+        <span class="hint">Setninger du kan bruke i ditt eget brev.</span></label>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" class="btn secondary" id="back-1">Tilbake til CV og annonse</button>
+      <button type="button" class="btn primary" id="write">Lag søknadsbrev</button>
+    </div>
+  </section>
+
+  <!-- Steg 3 -->
+  <section class="panel" id="step-3" aria-labelledby="h-3" hidden>
+    <h2 id="h-3" tabindex="-1">Søknadsbrev</h2>
+    <div id="model-err" aria-live="assertive"></div>
+    <div id="result" class="cols">
+      <div class="field">
+        <span class="legend">Gap-analyse</span>
+        <div class="mini-gap" id="mini-gap"></div>
+      </div>
+      <div class="field">
+        <div class="result-label">
+          <label for="letter" id="letter-label">Søknadsbrev</label>
+          <button type="button" class="btn secondary" id="copy">Kopier tekst</button>
+        </div>
+        <textarea id="letter" style="min-height: 22rem"></textarea>
+        <span class="hint" id="copy-msg" aria-live="polite"></span>
+        <div class="msg warn" role="note"><strong>Teksten lagres ikke</strong><p>Kopier brevet før du lukker siden eller logger ut.</p></div>
+        <span class="legend">Brevet bygger på</span>
+        <ul class="basis" id="basis"></ul>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn secondary" id="back-2">Endre svar eller modus</button>
+    </div>
+  </section>
+
+  <details class="notes">
+    <summary>Designnotater og åpne spørsmål til PRD</summary>
+    <div class="grid">
+      <p>Prototypen viser kjerneflyten i v1 fra product brief (PR #3). Den har ingen ekte logikk. Bruk «Vis tilstand» øverst for å se feil- og tomtilstander.</p>
+      <h3>Valg i skissen</h3>
+      <ul>
+        <li>Steglisten viser hvor brukeren er. På mobil vises bare steget brukeren står på.</li>
+        <li>Gap står før dekkede krav, fordi det er der brukeren skal gjøre noe. Fargen for gap er oransje, ikke rød: det er manglende dokumentasjon, ikke en feil.</li>
+        <li>Hvert dekket krav viser sitatet fra CV-en med gul markering (kriterium 3).</li>
+        <li>Svarfeltet ligger rett under kravet det gjelder, og er valgfritt.</li>
+        <li>«Brevet bygger på» viser hva teksten er laget av, i tråd med profilen «viser hva den har bygget på».</li>
+        <li>Mock-modus er merket øverst på hver side (kriterium 8).</li>
+      </ul>
+      <h3>Åpne spørsmål</h3>
+      <ul>
+        <li>Hva viser mock når teksten ikke er et testpar? Skissen viser et eksempelsvar med tydelig beskjed (se tilstanden «Mock med egen tekst»).</li>
+        <li>Skal ønskelige kvalifikasjoner vises annerledes enn krav?</li>
+        <li>Innlogging er ikke skissert. Den er en vanlig innloggingsside med feilmeldinger.</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<script>
+const CV = `Ida Testesen
+Testveien 1, 0000 Testvik
+E-post: ida.testesen@example.com
+
+PROFIL
+Sykepleierstudent på 2. år som trives med å jobbe med mennesker. Pålitelig, blid og vant til å samarbeide i team.
+
+UTDANNING
+2025–nå   Bachelor i sykepleie, Høgskolen i Testvik (2. år)
+2022–2025 Studiespesialisering, Testvik videregående skole
+
+ARBEIDSERFARING
+2023–nå   Butikkmedarbeider (deltid), Testvik Mat
+          Kundeservice, kassearbeid og varepåfylling.
+
+FRIVILLIG ARBEID
+2024–nå   Besøksvenn, Røde Kors besøkstjeneste
+          Besøker en eldre dame hver uke for samtale og turer.
+
+STUDIEPROSJEKTER
+2025      Gruppeprosjekt i helsefremmende arbeid
+          Planla og holdt et kurs om fallforebygging for eldre.
+
+SPRÅK
+Norsk – morsmål
+Engelsk – godt, muntlig og skriftlig
+
+ANNET
+Førstehjelpskurs, Røde Kors (2024)`;
+
+const AD = `Sommervikar i hjemmetjenesten – Testvik kommune
+
+Vi ser etter deg som:
+- har førerkort klasse B (krav, du kjører kommunens biler)
+- har gode norskkunnskaper, muntlig og skriftlig
+- har erfaring med eller interesse for å jobbe med mennesker
+- har gode samarbeidsevner`;
+
+const GAPS = [{ id: "forerkort", krav: "Førerkort klasse B", note: "Annonsen sier at dette er et krav." }];
+const OKS = [
+  { krav: "Gode norskkunnskaper, muntlig og skriftlig", kilde: "Norsk – morsmål" },
+  { krav: "Erfaring med eller interesse for å jobbe med mennesker", kilde: "Besøksvenn, Røde Kors besøkstjeneste" },
+  { krav: "Gode samarbeidsevner", kilde: "Gruppeprosjekt i helsefremmende arbeid" }
+];
+
+const $ = (id) => document.getElementById(id);
+const answers = {};
+let step = 1;
+
+function msg(kind, title, text) {
+  return `<div class="msg ${kind}"><strong>${title}</strong><p>${text}</p></div>`;
+}
+function state() { return $("state").value; }
+
+function go(n) {
+  step = n;
+  [1, 2, 3].forEach((i) => { $("step-" + i).hidden = i !== n; });
+  document.querySelectorAll("ol.steps li").forEach((li) => {
+    const s = Number(li.dataset.step);
+    if (s === n) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+    li.classList.toggle("done", s < n);
+  });
+  $("h-" + n).focus();
+}
+
+function resetStep1() {
+  const s = state();
+  $("cv-text").value = s === "tom-cv" ? "" : CV;
+  $("ad-text").value = s === "ukjent-input"
+    ? "Butikkmedarbeider – Eksempel AS\n\nVi søker deg som er serviceinnstilt og har erfaring fra kasse."
+    : AD;
+  ["cv-err", "ad-err", "file-msg", "model-err"].forEach((id) => { $(id).innerHTML = ""; });
+  $("cv-text").removeAttribute("aria-invalid");
+  $("ad-text").removeAttribute("aria-invalid");
+  if (s === "pdf-uten-tekst") {
+    setCvMode("file");
+    $("cv-text").value = "";
+    $("file-msg").innerHTML = msg("err", "Vi fant ingen tekst i «cv-skannet.pdf»",
+      "PDF-en ser ut til å være skannet som bilde. Åpne CV-en, kopier teksten og lim den inn i feltet under.");
+  } else {
+    setCvMode("paste");
+  }
+}
+
+function setCvMode(mode) {
+  const file = mode === "file";
+  $("cv-mode-paste").setAttribute("aria-pressed", String(!file));
+  $("cv-mode-file").setAttribute("aria-pressed", String(file));
+  $("file-field").hidden = !file;
+  $("cv-text-label").textContent = file ? "Teksten vi leste fra fila (kan rettes)" : "CV-tekst";
+}
+
+function validate() {
+  let ok = true;
+  if (!$("cv-text").value.trim()) {
+    $("cv-err").innerHTML = msg("err", "CV-en er tom", "Lim inn CV-teksten, eller last opp en TXT- eller PDF-fil.");
+    $("cv-text").setAttribute("aria-invalid", "true");
+    ok = false;
+  } else { $("cv-err").innerHTML = ""; $("cv-text").removeAttribute("aria-invalid"); }
+  if (!$("ad-text").value.trim()) {
+    $("ad-err").innerHTML = msg("err", "Annonsen er tom", "Lim inn hele stillingsannonsen, med tittel og arbeidsgiver.");
+    $("ad-text").setAttribute("aria-invalid", "true");
+    ok = false;
+  } else { $("ad-err").innerHTML = ""; $("ad-text").removeAttribute("aria-invalid"); }
+  if (!ok) (($("cv-text").getAttribute("aria-invalid") ? $("cv-text") : $("ad-text"))).focus();
+  return ok;
+}
+
+function gaps() { return state() === "ingen-gap" ? [] : GAPS; }
+
+function renderAnalysis() {
+  const g = gaps();
+  $("unknown-msg").innerHTML = state() === "ukjent-input"
+    ? msg("info", "Eksempelsvar fra mock-modus", "Teksten din er ikke analysert. Svaret under er et fast eksempel. Slå på API-modus for å analysere egen tekst.")
+    : "";
+  $("summary").innerHTML =
+    `<span><b>${OKS.length}</b> av ${OKS.length + g.length} krav dokumentert</span>` +
+    `<span><b>${g.length}</b> mangler dokumentasjon</span>`;
+
+  $("gap-list").innerHTML = g.length ? g.map((r) => `
+    <li class="req gap">
+      <div class="req-head"><strong>${r.krav}</strong><span class="status">Mangler dokumentasjon</span></div>
+      <p class="hint">${r.note} Det står ikke i CV-en.</p>
+      <div class="field">
+        <label for="ans-${r.id}">Har du dette? Skriv kort hva du har (valgfritt)</label>
+        <textarea id="ans-${r.id}" data-id="${r.id}" style="min-height:4.5rem" placeholder="For eksempel: Jeg har førerkort klasse B.">${answers[r.id] || ""}</textarea>
+      </div>
+    </li>`).join("")
+    : `<li class="empty"><strong>Alle krav i annonsen er dokumentert i CV-en.</strong><span class="hint">Du kan gå rett videre til søknadsbrevet.</span></li>`;
+
+  $("ok-list").innerHTML = OKS.map((r) => `
+    <li class="req ok">
+      <div class="req-head"><strong>${r.krav}</strong><span class="status">Dokumentert</span></div>
+      <p class="kilde">Fra CV-en: <mark>${r.kilde}</mark></p>
+    </li>`).join("");
+
+  document.querySelectorAll("#gap-list textarea").forEach((t) => {
+    t.addEventListener("input", () => { answers[t.dataset.id] = t.value; });
+  });
+}
+
+function sentence(s) {
+  const t = s.trim();
+  return /[.!?]$/.test(t) ? t : t + ".";
+}
+
+function renderLetter() {
+  $("model-err").innerHTML = "";
+  $("result").hidden = false;
+  if (state() === "modellfeil") {
+    $("result").hidden = true;
+    $("model-err").innerHTML = msg("err", "Vi fikk ikke svar fra språkmodellen",
+      "Prøv igjen om litt. CV-en, annonsen og svarene dine er tatt vare på, så du trenger ikke skrive dem på nytt.") +
+      `<div class="actions" style="margin-top:10px"><button type="button" class="btn primary" id="retry">Prøv igjen</button></div>`;
+    $("retry").addEventListener("click", () => { $("state").value = "normal"; renderLetter(); $("h-3").focus(); });
+    return;
+  }
+  const ans = gaps().length && answers.forerkort && answers.forerkort.trim() ? sentence(answers.forerkort) : "";
+  const tips = document.querySelector('input[name="mode"]:checked').value === "tips";
+  $("letter-label").textContent = tips ? "Forslag til formuleringer" : "Søknadsbrev";
+
+  $("letter").value = tips ? [
+    "• Trekk fram besøkstjenesten: «Som besøksvenn i Røde Kors besøker jeg en eldre dame hver uke.»",
+    "• Vis samarbeid: «I et gruppeprosjekt om fallforebygging planla vi og holdt et kurs for eldre.»",
+    "• Nevn kundekontakt: «Som butikkmedarbeider hos Testvik Mat hjelper jeg kunder hver dag.»",
+    ans ? `• Ta med svaret ditt om førerkort: «${ans}»`
+        : "• Førerkort klasse B er et krav i annonsen og står ikke i CV-en. Forslagene nevner det ikke."
+  ].join("\n\n") : [
+    "Søknad på stilling som sommervikar i hjemmetjenesten",
+    "Hei,",
+    "Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på 2. år og trives med å jobbe med mennesker.",
+    "Som besøksvenn i Røde Kors besøker jeg en eldre dame hver uke for samtale og turer. Som butikkmedarbeider hos Testvik Mat er jeg vant til å hjelpe folk med det de trenger.",
+    "I et gruppeprosjekt i helsefremmende arbeid planla vi og holdt et kurs om fallforebygging for eldre. Jeg er vant til å samarbeide i team." + (ans ? " " + ans : ""),
+    "Jeg ser fram til å høre fra dere.",
+    "Vennlig hilsen\nIda Testesen"
+  ].join("\n\n");
+
+  $("basis").innerHTML = [
+    "CV: Besøksvenn, Røde Kors besøkstjeneste",
+    "CV: Butikkmedarbeider (deltid), Testvik Mat",
+    "CV: Gruppeprosjekt i helsefremmende arbeid",
+    "Annonse: stillingstittel og arbeidsgiver"
+  ].concat(ans ? [`Svaret ditt: «${ans}»`] : []).map((t) => `<li>${t}</li>`).join("");
+
+  const g = gaps();
+  $("mini-gap").innerHTML =
+    `<p>${OKS.length} av ${OKS.length + g.length} krav dokumentert.</p>` +
+    (g.length ? `<p><strong>Mangler dokumentasjon:</strong> ${g.map((r) => r.krav).join(", ")}${ans ? " (du har svart)" : " (ikke besvart, nevnes ikke i brevet)"}</p>` : "") +
+    `<p class="hint">Gå tilbake for å se hele analysen eller endre svar.</p>`;
+  $("copy-msg").textContent = "";
+}
+
+$("cv-mode-paste").addEventListener("click", () => setCvMode("paste"));
+$("cv-mode-file").addEventListener("click", () => setCvMode("file"));
+$("cv-file").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const isTxt = /\.txt$/i.test(f.name), isPdf = /\.pdf$/i.test(f.name);
+  if (!isTxt && !isPdf) {
+    $("file-msg").innerHTML = msg("err", `«${f.name}» kan ikke leses`, "Velg en TXT- eller PDF-fil, eller lim inn teksten.");
+    return;
+  }
+  if (isTxt) {
+    const r = new FileReader();
+    r.onload = () => { $("cv-text").value = String(r.result); };
+    r.readAsText(f);
+    $("file-msg").innerHTML = msg("info", `Leste «${f.name}»`, "Sjekk teksten under og rett det som ble feil.");
+  } else {
+    $("cv-text").value = CV;
+    $("file-msg").innerHTML = msg("info", `Leste «${f.name}»`, "I prototypen vises eksempel-CV-en i stedet for innholdet i PDF-en. Sjekk at kolonner og overskrifter kom i riktig rekkefølge.");
+  }
+});
+$("analyse").addEventListener("click", () => { if (validate()) { renderAnalysis(); go(2); } });
+$("back-1").addEventListener("click", () => go(1));
+$("write").addEventListener("click", () => { renderLetter(); go(3); });
+$("back-2").addEventListener("click", () => { renderAnalysis(); go(2); });
+$("copy").addEventListener("click", () => {
+  const t = $("letter").value;
+  const done = () => { $("copy-msg").textContent = "Kopiert. Lim inn teksten der du skriver søknaden."; };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done, () => { $("letter").select(); $("copy-msg").textContent = "Teksten er markert. Trykk Ctrl+C for å kopiere."; });
+  } else { $("letter").select(); $("copy-msg").textContent = "Teksten er markert. Trykk Ctrl+C for å kopiere."; }
+});
+$("state").addEventListener("change", () => {
+  Object.keys(answers).forEach((k) => delete answers[k]);
+  resetStep1();
+  if (step === 1) { $("h-1").focus(); return; }
+  if (state() === "tom-cv" || state() === "pdf-uten-tekst") { go(1); validate(); return; }
+  renderAnalysis();
+  if (step === 3) renderLetter();
+  $("h-" + step).focus();
+});
+
+resetStep1();
+go(1);
+window.scrollTo(0, 0);
+</script>
