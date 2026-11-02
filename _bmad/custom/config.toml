@@ -7,6 +7,7 @@
 # description = "Prefers short, bulleted PRDs over narrative drafts."
 
 [core]
+document_output_language = "Norwegian"
 output_folder = "{project-root}/_bmad-output"
 
 [modules.bmm]
