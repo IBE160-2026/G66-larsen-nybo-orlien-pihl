@@ -224,7 +224,9 @@ details.notes ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
     </div>
     <div class="actions">
       <button type="button" class="btn primary" id="analyse">Analyser kravene</button>
+      <button type="button" class="btn secondary" id="load-pair">Last inn eksempel (testpar 1)</button>
     </div>
+    <div id="load-msg" aria-live="polite"></div>
   </section>
 
   <!-- Steg 2 -->
@@ -272,7 +274,7 @@ details.notes ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
         </div>
         <textarea id="letter" style="min-height: 22rem"></textarea>
         <span class="hint" id="copy-msg" aria-live="polite"></span>
-        <div class="msg warn" role="note"><strong>Teksten lagres ikke</strong><p>Kopier brevet før du lukker siden eller logger ut.</p></div>
+        <div class="msg info" role="note"><strong>Teksten tas vare på mens du er innlogget</strong><p>Den slettes når du logger ut. Kopier brevet før det.</p></div>
         <span class="legend">Brevet bygger på</span>
         <ul class="basis" id="basis"></ul>
       </div>
@@ -295,11 +297,17 @@ details.notes ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
         <li>«Brevet bygger på» viser hva teksten er laget av, i tråd med profilen «viser hva den har bygget på».</li>
         <li>Mock-modus er merket øverst på hver side (kriterium 8).</li>
       </ul>
-      <h3>Åpne spørsmål</h3>
+      <h3>Tilbakemelding fra gruppa (PR #6, 2026-11-02)</h3>
       <ul>
-        <li>Hva viser mock når teksten ikke er et testpar? Skissen viser et eksempelsvar med tydelig beskjed (se tilstanden «Mock med egen tekst»).</li>
-        <li>Skal ønskelige kvalifikasjoner vises annerledes enn krav?</li>
-        <li>Innlogging er ikke skissert. Den er en vanlig innloggingsside med feilmeldinger.</li>
+        <li>Rekkefølge, farger, modusvalg, «Brevet bygger på» og mobilvisning: enig.</li>
+        <li>Resultatet tas vare på mens økten varer, og slettes ved utlogging.</li>
+        <li>Mock med egen tekst viser et eksempelsvar med tydelig beskjed. Knappen «Last inn eksempel» fyller inn et testpar.</li>
+        <li>Krav og ønsker i annonsen vises likt.</li>
+      </ul>
+      <h3>Åpent spørsmål til PRD</h3>
+      <ul>
+        <li>Skal svaret på et manglende krav brukes i søknadsbrevet, eller heller gi et forslag om å legge det inn i CV-en? Helle påpekte at for eksempel førerkort hører hjemme i CV-en. Skissen viser fortsatt løsningen fra briefen.</li>
+        <li>Innlogging er ikke skissert. Den blir en vanlig innloggingsside med feilmeldinger.</li>
       </ul>
     </div>
   </details>
@@ -377,7 +385,7 @@ function resetStep1() {
   $("ad-text").value = s === "ukjent-input"
     ? "Butikkmedarbeider – Eksempel AS\n\nVi søker deg som er serviceinnstilt og har erfaring fra kasse."
     : AD;
-  ["cv-err", "ad-err", "file-msg", "model-err"].forEach((id) => { $(id).innerHTML = ""; });
+  ["cv-err", "ad-err", "file-msg", "model-err", "load-msg"].forEach((id) => { $(id).innerHTML = ""; });
   $("cv-text").removeAttribute("aria-invalid");
   $("ad-text").removeAttribute("aria-invalid");
   if (s === "pdf-uten-tekst") {
@@ -419,7 +427,7 @@ function gaps() { return state() === "ingen-gap" ? [] : GAPS; }
 function renderAnalysis() {
   const g = gaps();
   $("unknown-msg").innerHTML = state() === "ukjent-input"
-    ? msg("info", "Eksempelsvar fra mock-modus", "Teksten din er ikke analysert. Svaret under er et fast eksempel. Slå på API-modus for å analysere egen tekst.")
+    ? msg("info", "Eksempelsvar fra mock-modus", "Teksten din er ikke analysert. Svaret under er et fast eksempel. Last inn et testpar for å se svar som passer til teksten, eller slå på API-modus for å analysere egen tekst.")
     : "";
   $("summary").innerHTML =
     `<span><b>${OKS.length}</b> av ${OKS.length + g.length} krav dokumentert</span>` +
@@ -498,6 +506,11 @@ function renderLetter() {
   $("copy-msg").textContent = "";
 }
 
+$("load-pair").addEventListener("click", () => {
+  $("state").value = "normal";
+  resetStep1();
+  $("load-msg").innerHTML = msg("info", "Eksempel lastet inn", "CV og annonse fra testpar 1 er fylt inn. Trykk «Analyser kravene».");
+});
 $("cv-mode-paste").addEventListener("click", () => setCvMode("paste"));
 $("cv-mode-file").addEventListener("click", () => setCvMode("file"));
 $("cv-file").addEventListener("change", (e) => {
