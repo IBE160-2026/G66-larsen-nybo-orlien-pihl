@@ -1,0 +1,33 @@
+{
+  "beskrivelse": "Student uten førerkort søker sommerjobb i hjemmetjenesten der førerkort klasse B er krav. Alle andre krav er dekket.",
+  "tester": "Gap-analysen finner ett manglende sertifikat og melder ikke dekkede krav som manglende.",
+  "stilling": {
+    "tittel": "Sommervikar i hjemmetjenesten",
+    "arbeidsgiver": "Testvik kommune"
+  },
+  "krav": [
+    {
+      "id": "forerkort-b",
+      "krav": "Førerkort klasse B",
+      "status": "mangler"
+    },
+    {
+      "id": "norskkunnskaper",
+      "krav": "Gode norskkunnskaper, muntlig og skriftlig",
+      "status": "dekket",
+      "kilde": "Norsk – morsmål"
+    },
+    {
+      "id": "jobbe-med-mennesker",
+      "krav": "Erfaring med eller interesse for å jobbe med mennesker",
+      "status": "dekket",
+      "kilde": "Besøksvenn, Røde Kors besøkstjeneste"
+    },
+    {
+      "id": "samarbeidsevner",
+      "krav": "Gode samarbeidsevner",
+      "status": "dekket",
+      "kilde": "Gruppeprosjekt i helsefremmende arbeid"
+    }
+  ]
+}
