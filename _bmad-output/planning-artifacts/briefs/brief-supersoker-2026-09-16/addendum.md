@@ -2,7 +2,7 @@
 title: "Tillegg til produktbrief: Supersøker"
 status: final
 created: 2026-10-18
-updated: 2026-11-01
+updated: 2026-11-02
 ---
 
 # Tillegg: begrunnelser for oppdateringene etter faglærers tilbakemelding
@@ -68,6 +68,13 @@ Punktene nedenfor kom fram i en walkthrough av PR #3 2026-11-01 (risikopunkter f
 **Hva som skjer med resultatet uten permanent lagring.** Briefen sier at resultatene kan leses uten ny analyse, og at teksten kan redigeres, men ingenting lagres permanent. PRD bør avgjøre hva brukeren skal oppleve hvis siden lastes på nytt eller økten utløper, slik at et redigert brev ikke forsvinner uten varsel. Arkitekturen må deretter velge hvor midlertidige data ligger.
 
 **Ingen CV-innhold i logger** (til arkitekturen). Briefen sier at ekte CV-er ikke skal ligge i logger, men det er lett å bryte under feilsøking, for eksempel ved å logge prompter eller modellsvar. Det bør bli en regel i arkitekturen og et punkt i kodereview, sammen med at API-nøkler aldri committes.
+
+**Svar fra UX-prototypen (PR #6, 2026-11-02).** Helle svarte på innspillene i prototypen. Disse svarene berører punktene over:
+- *Resultat uten permanent lagring:* resultatet tas vare på mens økten varer, og slettes ved utlogging.
+- *Mock på ukjent input:* et eksempelsvar med tydelig beskjed holder; ingen regelbasert analyse i mock. En knapp som laster inn et testpar gjør det enkelt for sensor å se en meningsfull gjennomgang.
+- *Krav og ønsker:* annonsens krav, ønsker og «vi ser etter» vises likt.
+
+**Svar i søknaden eller i CV-en?** (Helle, PR #6.) Briefen sier at brukerens svar på et manglende krav brukes i søknadsbrevet. Helle påpekte at noe, som førerkort, heller hører hjemme i CV-en enn i søknaden. PRD bør avgjøre om svarfeltet skal føre til tekst i brevet, et forslag om å legge opplysningen inn i CV-en, eller begge deler. Å skrive svaret inn i en ny CV-fil er i trinn 3 (variant C), men et forslag i tekst kan være med i v1 uten CV-mal.
 
 **Lagring av resultater som kandidat til trinn 2.** Hvis det blir tid, er lagring av gap-analyse og brev per bruker den enkleste utvidelsen som gir mer datalagring og en mer meningsfull test av eierskap.
 
