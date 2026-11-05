@@ -7,3 +7,5 @@
 - [x] 2026-10-30 [product-brief-sammenslaing](999-2026-10-26-20-27-56-product-brief-sammenslaing.md) — lage PRD basert på den ferdige briefen (et annet gruppemedlem starter; se «Innspill til PRD» i addendum.md) (løst 2026-11-05: samlet PRD-utkast merget til main via PR #9, commit 0e289e2)
 - [ ] 2026-11-01 [walkthrough-pr3](995-2026-11-01-21-08-25-walkthrough-pr3.md) — legge ukeplanen i repoet når gruppa har godtatt den og PR #5 er merget
 - [ ] 2026-11-03 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa må behandle Mirandas forslag i PRD §9 (punkt 1–9) før stories låses
+- [ ] 2026-11-05 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa velger bestått-kriterium mot ekte modell (PRD §9 punkt 4: A = 4/4 i tre runder, B = null oppdiktede påstander + terskel for gap-status)
+- [ ] 2026-11-05 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — oppdatere tests/fixtures/job-applications/README.md om politiattest når PRD §9 punkt 1 er vedtatt
