@@ -2,7 +2,7 @@
 title: "PRD: Supersøker - AI CV & Job Application Assistant"
 status: draft
 created: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-07
 ---
 
 # PRD: Supersøker - AI CV & Job Application Assistant
@@ -16,9 +16,9 @@ Denne PRD-en beskriver hva første versjon (v1) av Supersøker skal gjøre. Den 
 - [Elisabeths UX-prototype](../../ux/prototype-kjerneflyt.html) og [de fire fiktive testparene](../../../../tests/fixtures/job-applications/README.md).
 - Helles [uttrekk av innspill](extract-inputs.md), [tekniske tillegg](addendum.md), [research](research-landscape.md) og [beslutningslogg](.memlog.md), hentet fra `origin/prd-utkast` ved commit `4bdab526d79a9e6866e43773a7586032df67274e`. Researchen er historisk bakgrunn, ikke verifiserte nåværende pris- eller lovopplysninger og ikke grunnlag for å utvide v1.
 
-**Status for revisjonen (Miranda, 2026-11-03):** Briefens godkjente omfang ligger fast. Presiseringer i funksjonskravene er forslag i dette reviderte utkastet, ikke nye gruppevedtak. §9 skiller Mirandas forslag fra fortsatt uavklarte gruppebeslutninger og mulige utvidelser. Utvidelsene er ikke obligatoriske for v1. Dokumentet forblir `draft` til gjennomgangen er godkjent.
+**Status (gruppevedtak dokumentert 2026-11-07):** Gruppa har godkjent Mirandas ni forslag i §9 med faseplasseringen bevart: punkt 2 og 6 er utsatt fra V1, og punkt 9 tilhører trinn 2. V1-presiseringene er vedtatt. Antakelsene i §10 er fortsatt uavklarte; dokumentet beholdes derfor som `draft`. Godkjenning av krav og testplan betyr ikke at tester er gjennomført.
 
-Funksjonene i §4 er bygget rundt én brukerreise (UJ-1). Kravene er nummerert FR-1 til FR-30 og tverrgående krav NFR-1 til NFR-8, slik at stories og tester kan vise til dem. Begrepene i §3 brukes likt i hele dokumentet. Gjetninger er merket `[ASSUMPTION]` og samlet i §10. Spørsmål gruppa ikke har avgjort, står i §9. Beslutninger tatt underveis, med begrunnelse, står i `.memlog.md` i samme mappe. Teknisk bakgrunn og research står i `addendum.md`.
+Funksjonene i §4 er bygget rundt én brukerreise (UJ-1). Kravene er nummerert FR-1 til FR-30 og tverrgående krav NFR-1 til NFR-8, slik at stories og tester kan vise til dem. Begrepene i §3 brukes likt i hele dokumentet. Gjetninger er merket `[ASSUMPTION]` og samlet i §10. Gruppas ni vedtak og deres faseplassering står i §9; gjenværende uavklarte antakelser står i §10. Beslutninger tatt underveis, med begrunnelse, står i `.memlog.md` i samme mappe. Teknisk bakgrunn og research står i `addendum.md`.
 
 **Ambisjonsnivå:** Supersøker er et studentprosjekt som skal demonstreres ved semesterslutt. Det skal ikke lanseres offentlig eller kommersielt. Demo og testing skjer med fiktive dokumenter, appen kjøres lokalt etter README, og mock-modus er standard. Gruppa vurderte underveis å la medstudenter teste appen på en felles server med egne CV-er, men gikk tilbake til briefens rammer (2026-11-03).
 
@@ -69,18 +69,19 @@ Primærbrukeren er en student med lite relevant arbeidserfaring som søker sin f
 - **Brukerkonto** — E-postadresse og passord-hash. Det eneste Supersøker lagrer permanent. Én per bruker.
 - **Testbruker** — Ferdig brukerkonto beskrevet i README, for sensor og gruppa.
 - **CV-tekst** — Teksten fra brukerens CV, enten limt inn eller lest ut fra en TXT-fil eller tekstbasert PDF, og eventuelt rettet av brukeren.
-- **Stillingsannonse (annonse)** — Teksten brukeren limer inn fra annonsen hun vil søke på. Inneholder stillingstittel, arbeidsgiver og krav.
-- **Krav** — Noe annonsen sier at arbeidsgiveren krever, ønsker eller «ser etter». Alle tre behandles likt.
-- **Gap-analyse** — Sammenligningen av kravene i annonsen med CV-teksten. Gir hvert krav status «Dokumentert» eller «Mangler dokumentasjon».
-- **Dokumentert** — Status for et krav som CV-teksten dokumenterer. Vises alltid med et sitat.
-- **Mangler dokumentasjon** — Status for et krav CV-teksten ikke dokumenterer. Betyr ikke at brukeren mangler kompetansen.
+- **Stillingsannonse (annonse)** — Teksten brukeren limer inn fra annonsen hun vil søke på. Kan inneholde stillingstittel, arbeidsgiver, kompetansekrav og ansettelsesvilkår. Manglende tittel/arbeidsgiver etterspørres; ingen tydelige krav håndteres som egen tomtilstand.
+- **Krav** — Noe annonsen sier at arbeidsgiveren krever, ønsker eller «ser etter». Alle tre behandles likt innenfor kompetansekrav. Ansettelsesvilkår skilles ut og telles ikke som kompetansegap.
+- **Ansettelsesvilkår** — Vilkår som politiattest, som ikke vurderes som CV-dokumentert kompetanse. Vises separat uten kompetansestatus og utenfor antallet dokumenterte/manglende kompetansekrav. Ingen attest lastes opp eller kontrolleres.
+- **Gap-analyse** — Sammenligningen av kravene i annonsen med CV-teksten. Gir hvert kompetansekrav status «Dokumentert» eller «Mangler dokumentasjon».
+- **Dokumentert** — Status for et kompetansekrav som CV-teksten dokumenterer. Vises alltid med et sitat.
+- **Mangler dokumentasjon** — Status for et kompetansekrav CV-teksten ikke dokumenterer. Betyr ikke at brukeren mangler kompetansen.
 - **Sitat** — Utdrag fra CV-teksten, gjengitt ordrett, som viser hvor et krav er dokumentert.
 - **Svar** — Det brukeren skriver om et krav som mangler dokumentasjon. Valgfritt, og gjelder bare den aktuelle søknaden.
 - **Omskrivingsvalg** — Brukerens valg av hvor mye Supersøker skal skrive: «Helt søknadsutkast» eller «Forslag til formuleringer».
 - **Søknadsbrev** — Resultatet av omskrivingsvalget «Helt søknadsutkast»: et sammenhengende brev.
 - **Forslag til formuleringer** — Resultatet av omskrivingsvalget med samme navn: en liste med forslag brukeren kan bruke i sitt eget brev.
 - **Teksten** — Fellesbetegnelse på søknadsbrevet eller forslagene, avhengig av omskrivingsvalg.
-- **Økt** — Tiden fra brukeren logger inn til hun logger ut.
+- **Økt** — Tiden fra innlogging til manuell utlogging eller automatisk utløp etter 30 minutter uten brukeraktivitet. Sideoppdatering oppretter ikke en ny økt eller nullstiller i seg selv inaktivitetstiden.
 - **Midlertidige data** — CV-tekst, annonse, stillingstittel, arbeidsgiver, svar, gap-analyse og teksten. Finnes bare i økten.
 - **Språkmodell** — Den eksterne KI-tjenesten Supersøker bruker i API-modus.
 - **Mock-modus** — Standardmodus. Supersøker bruker ferdiglagde svar og sender ingen data til språkmodellen.
@@ -186,30 +187,33 @@ Når Supersøker ikke finner stillingstittel eller arbeidsgiver i annonsen, ber 
 
 ### 4.3 Gap-analyse
 
-**Beskrivelse:** Supersøker trekker ut kravene i annonsen og sjekker hvert krav mot CV-teksten. Hvert krav får status «Dokumentert» eller «Mangler dokumentasjon». Dokumenterte krav vises med sitatet fra CV-en som dokumenterer dem. Krav som mangler dokumentasjon, vises først, fordi det er der brukeren skal handle. Hun kan svare kort på hvert av dem. Resultatet omtaler manglende *dokumentasjon*, ikke manglende kompetanse. Den verste feilen gap-analysen kan gjøre, er å merke et krav som dokumentert uten grunnlag i CV-en. Realiserer UJ-1 (steg 3–4).
+**Beskrivelse:** Supersøker trekker ut kravene i annonsen og sjekker hvert krav mot CV-teksten. Hvert kompetansekrav får status «Dokumentert» eller «Mangler dokumentasjon». Dokumenterte krav vises med sitatet fra CV-en som dokumenterer dem. Krav som mangler dokumentasjon, vises først, fordi det er der brukeren skal handle. Hun kan svare kort på hvert av dem. Resultatet omtaler manglende *dokumentasjon*, ikke manglende kompetanse. Den verste feilen gap-analysen kan gjøre, er å merke et krav som dokumentert uten grunnlag i CV-en. Realiserer UJ-1 (steg 3–4).
 
 #### FR-10: Trekke ut krav fra annonsen
 
-Supersøker trekker ut kravene i stillingsannonsen. Krav, ønsker og «vi ser etter» behandles og vises likt. Realiserer UJ-1.
+Supersøker trekker ut kravene i stillingsannonsen. Kompetansekrav, ønsker og «vi ser etter» behandles og vises likt. Ansettelsesvilkår vises separat etter §3. Realiserer UJ-1.
 
 **Konsekvenser (testbare):**
 - For hvert testpar finner gap-analysen alle kravene i fasiten.
 - Gap-analysen viser ingen krav som ikke står i annonsen.
+- Ansettelsesvilkår som politiattest vises separat, uten status «Dokumentert»/«Mangler dokumentasjon», uten svarfelt for kompetansegap og utenfor kompetanseopptellingen. Ingen attest lastes opp eller kontrolleres.
+- Når ingen tydelige krav eller vilkår finnes, vises «Vi fant ingen tydelige krav i annonsen. Du kan rette annonsen eller lage tekst basert på CV-en og opplysningene du har gitt.» Brukeren kan generere begge resultattyper etter FR-9 og FR-18, uten oppdiktede krav eller påstand om at alle krav er dokumentert.
+- Finnes bare ansettelsesvilkår, vises disse og meldingen «Vi fant ingen tydelige kompetansekrav i annonsen.» Brukeren kan rette annonsen eller generere tekst etter samme regler; dette er ikke tomtilstanden uten krav/vilkår.
 
 #### FR-11: Vise dokumenterte krav med kilde
 
-Hvert krav som er dokumentert, vises med status «Dokumentert» og et sitat fra CV-teksten som viser hvor det er dokumentert. Realiserer UJ-1.
+Hvert kompetansekrav som er dokumentert, vises med status «Dokumentert» og et sitat fra CV-teksten som viser hvor det er dokumentert. Realiserer UJ-1.
 
 **Konsekvenser (testbare):**
 - Sitatet finnes ordrett i CV-teksten som ble analysert.
 - Systemet kontrollerer dette regelbasert mot den rettede CV-teksten før analysen vises. Hvis bare ét dokumenterende CV-sitat mangler eller ikke finnes ordrett, avvises hele analysen etter FR-30. Ingen kravstatuser, gap eller andre delresultater fra dette svaret vises som gyldige, og analysen kan ikke brukes til generering.
 - At sitatet finnes ordrett, beviser ikke alene at det dokumenterer kravet. Relevans og betydning vurderes mot fasiten ved testing av ekte modell. Et ekte, men irrelevant sitat er en feil, ikke bestått dokumentasjon. Kontrollen er ingen garanti for semantisk riktighet.
 - For hvert testpar merkes ingen av fasitens dokumenterte krav som manglende.
-- Ingen krav merkes som dokumentert uten et sitat.
+- Ingen kompetansekrav merkes som dokumentert uten et sitat.
 
 #### FR-12: Vise krav som mangler dokumentasjon
 
-Hvert krav som ikke er dokumentert i CV-en, vises med status «Mangler dokumentasjon». Disse vises før de dokumenterte kravene, sammen med en oppsummering av hvor mange krav som er dokumentert. Realiserer UJ-1.
+Hvert kompetansekrav som ikke er dokumentert i CV-en, vises med status «Mangler dokumentasjon». Disse vises før de dokumenterte kompetansekravene, sammen med en oppsummering av hvor mange kompetansekrav som er dokumentert. Realiserer UJ-1.
 
 **Konsekvenser (testbare):**
 - For hvert testpar finner gap-analysen alle manglende krav i fasiten.
@@ -230,13 +234,13 @@ Under hvert krav som mangler dokumentasjon, kan brukeren skrive et kort, valgfri
 
 #### FR-14: Når alle krav er dokumentert
 
-Når alle kravene i annonsen er dokumentert, sier Supersøker det og lar brukeren gå rett til søknadsbrevet.
+Når alle kompetansekravene i annonsen er dokumentert, sier Supersøker det og lar brukeren gå rett til søknadsbrevet.
 
 **Konsekvenser (testbare):**
-- Testpar 4 gir meldingen «Alle krav i annonsen er dokumentert i CV-en.» og ingen svarfelt.
-- Meldingen krever at minst ett krav er identifisert. Ingen gjenkjennelige krav er en egen tomtilstand; Mirandas forslag til videre flyt står i §9 punkt 5 og er ikke et gruppevedtak.
+- Testpar 4 gir meldingen «Alle kompetansekrav i annonsen er dokumentert i CV-en.» og ingen svarfelt.
+- Meldingen krever minst ett kompetansekrav og at alle kompetansekrav er dokumentert. Ansettelsesvilkår omfattes ikke av meldingen. Ingen kompetansekrav håndteres etter FR-10.
 
-**Notater:** Fem spørsmål om gap-analysen er åpne (se §9): egen kategori for vilkår som politiattest, en eventuell tredje status «delvis dokumentert», regelbasert kontroll av modellens svar, hva som regnes som bestått mot ekte modell, og hva brukeren ser når annonsen ikke har gjenkjennelige krav.
+**Vedtak:** Se §9 punkt 1–5. V1 har to kompetansestatuser; «Delvis dokumentert» er utsatt. Utilstrekkelig eller uklart grunnlag gir ikke «Dokumentert».
 
 ### 4.4 Søknadsbrev
 
@@ -276,7 +280,7 @@ Søknadsbrevet og forslagene bygger bare på CV-teksten, annonsen og brukerens s
 
 **Konsekvenser (testbare):**
 - Teksten påstår aldri at et krav er oppfylt når kravet mangler dokumentasjon og brukeren ikke har svart.
-- Teksten legger ikke til erfaring, utdanning eller sertifiseringer som ikke står i CV-en eller i svarene.
+- Teksten legger ikke til erfaring, utdanning eller sertifiseringer som ikke står i CV-en eller i svarene. Ansettelsesvilkår i annonsen er ikke bevis på at søkeren oppfyller dem; teksten påstår ikke eksempelvis at søkeren har politiattest uten grunnlag.
 - Når brukeren har svart, bruker teksten det hun skrev og legger ikke til detaljer som ikke står i svaret.
 - Negasjoner, forbehold og kvalifikasjonsnivå bevares i begge omskrivingsvalg. «Jeg har ikke førerkort» må aldri bli «Jeg har førerkort», og «jeg holder på å lære Python» må ikke bli «Jeg behersker Python».
 - Ved usikkert eller motstridende grunnlag skal teksten ikke påstå at kravet er oppfylt. Usikkerheten kan forklares i veiledning utenfor søknadsteksten; ingen ny oppfølgingschat kreves.
@@ -314,7 +318,7 @@ Fra søknadsbrevet kan brukeren gå tilbake til gap-analysen og endre svarene si
 - Før ny analyse av endret CV/annonse startes, varsles brukeren om at gamle svar og egenredigert tekst forkastes. Først når brukeren bekrefter å starte den nye analysen, fjernes gamle tilleggssvar og tidligere resultater. Avbrytes bekreftelsen, beholdes de som utdaterte uten modellkall. Feiler den bekreftede analysen, beholdes ny CV/annonse for nytt forsøk; de fjernede svarene gjenopprettes ikke på nye krav.
 - Ved ny generering varsles brukeren før egenredigert tekst erstattes. Navigasjon alene starter ingen kall og overskriver ingen tekst.
 
-**Notater:** Om brukeren kan lage en ny versjon av teksten med samme inndata, er et åpent spørsmål for gruppa (se §9). Det påvirker kostnaden i API-modus.
+**Avgrensning:** Ny brevversjon med uendret inndata er utsatt fra V1 (§9 punkt 6). Generering etter endrede svar/omskrivingsvalg og manuell retry etter feil beholdes.
 
 ### 4.5 Økt og personvern
 
@@ -328,20 +332,20 @@ Mens brukeren er innlogget, tar Supersøker vare på CV-teksten, annonsen, still
 - Brukeren kan gå mellom stegene uten å miste inndata eller resultater.
 - Å gå tilbake til et resultat sender ingen nye kall til språkmodellen.
 - Bevaring av resultater betyr ikke at de fortsatt er gyldige etter endrede inndata. Utdaterte resultater merkes og brukes ikke som grunnlag for ny generering (FR-21).
-- Bevaring av egenredigert tekst ved sideoppdatering er Mirandas forslag i §9 punkt 8. Det er ikke et vedtak om permanent lagring.
+- Ved sideoppdatering i aktiv økt beholdes egenredigert tekst, øvrige midlertidige data og markering av utdaterte resultater, uten modellkall. Dette innfører ikke permanent dokumentlagring. Etter utløp kreves ny innlogging, og data gjenopprettes ikke.
 
-**Uavklart gruppeforslag fra Miranda (ikke obligatorisk v1-krav før vedtak):** Etter 25 minutter uten brukeraktivitet vises et tilgjengelig varsel om utlogging om fem minutter, med «Fortsett økten». Et klikk før utløp teller som aktivitet, nullstiller inaktivitetstiden og beholder midlertidige data uten modellkall. Varselet og bakgrunnskall skal ikke i seg selv forlenge økten. Arkitekturen konkretiserer øvrig brukeraktivitet. Se FR-23 og §9 punkt 7.
+**Vedtatt øktregel:** Etter 25 minutter uten brukeraktivitet vises et tilgjengelig varsel om utlogging om fem minutter, med «Fortsett økten». Et klikk før utløp teller som aktivitet, nullstiller inaktivitetstiden og beholder midlertidige data uten modellkall. Varselet og bakgrunnskall skal ikke i seg selv forlenge økten. Arkitekturen konkretiserer øvrig brukeraktivitet. Se FR-23 og §9 punkt 7.
 
 #### FR-23: Slette midlertidige data ved utlogging
 
 Når brukeren logger ut, slettes alle midlertidige data.
 
 **Konsekvenser (testbare):**
-- Etter utlogging og ny innlogging er CV, annonse, svar og resultater borte.
+- Etter manuell utlogging eller automatisk øktutløp og ny innlogging er CV, annonse, svar og resultater borte.
 - Brukerkontoen er det eneste som finnes igjen.
-- Svar fra modellkall som fullføres etter utlogging, skal ignoreres og må ikke gjenopprette slettede data. Forslag om automatisk øktutløp står i §9 punkt 7.
+- Svar fra modellkall som fullføres etter utlogging, skal ignoreres og må ikke gjenopprette slettede data. Samme regel gjelder etter automatisk øktutløp (§9 punkt 7).
 
-**Uavklart gruppeforslag fra Miranda:** Etter 30 minutter uten brukeraktivitet logges brukeren automatisk ut, og alle midlertidige data slettes, også hvis fanen er lukket eller et modellkall pågår. «Fortsett økten» etter utløp gjenoppretter ikke økten eller data; ny innlogging kreves. Kontrollen av utløp og sletting skjer på serveren. Varsel etter 25 minutter følger FR-22. Dette er en konkretisering til gruppebehandling, ikke vedtatt ny V1-funksjonalitet.
+**Vedtatt øktregel:** Etter 30 minutter uten brukeraktivitet logges brukeren automatisk ut, og alle midlertidige data slettes, også hvis fanen er lukket eller et modellkall pågår. «Fortsett økten» etter utløp gjenoppretter ikke økten eller data; ny innlogging kreves. Kontrollen av utløp og sletting skjer på serveren. Varsel etter 25 minutter følger FR-22. Dette er et vedtatt V1-krav.
 
 #### FR-24: Bare eieren får tilgang
 
@@ -359,7 +363,7 @@ I API-modus får brukeren vite at CV-teksten, annonsen og svarene sendes til en 
 - Ingen data sendes før brukeren har bekreftet varselet. [ASSUMPTION: brukeren må bekrefte, og varselet vises én gang per økt]
 - Varselet vises ikke i mock-modus.
 
-**Notater:** To spørsmål om økten er åpne for gruppa (se §9): hva som skjer når brukeren er inaktiv eller lukker fanen uten å logge ut, og om redigert tekst beholdes når siden lastes på nytt.
+**Vedtak:** Inaktivitet, lukket fane og sideoppdatering følger FR-22–FR-23 og §9 punkt 7–8. Arkitekturen konkretiserer øvrig brukeraktivitet uten å endre tidsgrensene.
 
 ### 4.6 Mock-modus og API-modus
 
@@ -412,10 +416,10 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 - Ved tidsavbrudd eller midlertidig API-feil vises for eksempel «Vi fikk ikke svar. Inndataene dine er beholdt. Du kan prøve igjen.» «Prøv igjen» krever et nytt klikk og starter høyst ett nytt kall; ingen automatiske gjentakelser.
 - Manglende nøkkel, ugyldig konfigurasjon eller nådd kostnadsgrense gir beskjed om hva den som kjører appen må rette. «Prøv igjen» skal ikke foreslå at en uendret konfigurasjonsfeil løses av et nytt klikk. Appen bytter ikke stilltiende til mock.
 - Ugyldig svarformat, manglende obligatoriske felt eller et manglende/ikke ordrett dokumenterende CV-sitat avviser hele analysen. Vis for eksempel «Analysen kunne ikke brukes fordi dokumentasjonen ikke kunne bekreftes i CV-teksten. CV og annonse er beholdt. Prøv analysen på nytt.» Ingen kravstatuser, gap eller andre delresultater fra det avviste svaret vises som gyldige eller brukes til generering. At enkelte sitater er gyldige, redder ikke resten av analysen (FR-11).
-- CV-teksten, annonsen og svarene beholdes, slik at brukeren ikke må skrive dem på nytt.
+- CV-teksten, annonsen og aktuelle svar beholdes ved feil, unntatt gamle svar/resultater som allerede er forkastet ved bekreftet ny analyse etter FR-21. Sletting ved utlogging/øktutløp har forrang; feil eller sene svar gjenoppretter ikke slettede data.
 - Meldingen viser aldri API-nøkkelen eller andre hemmeligheter.
 - Halvferdige resultater vises ikke.
-- Sene svar etter tidsavbrudd, utlogging eller endret inndata ignoreres, slik at de ikke overskriver nyere data eller brukerens redigeringer. Feiltesten skal også kontrollere dette.
+- Sene svar etter tidsavbrudd, utlogging, øktutløp eller endret inndata ignoreres, slik at de ikke overskriver nyere data eller brukerens redigeringer. Feiltesten skal også kontrollere dette.
 
 ## 5. Tverrgående krav
 
@@ -438,7 +442,7 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 
 - **NFR-7: Kjørbar etter README.** En person som ikke kjenner prosjektet, kan installere og starte Supersøker på en ren maskin i mock-modus ved å følge README, og prøve hele kjerneflyten med testbrukeren og testparene.
 - **Akseptansetest for NFR-7:** En annen person gjennomfører installasjon på en annen PC uten utviklerens lokale oppsett, API-nøkkel eller udokumentert hjelp. Registrer dato, testansvarlig, operativsystem, nødvendige versjoner, appens commit, kommandoer, tidsbruk, avvik og resultat i en testrapport. Rett README og gjenta berørte steg ved avvik. Testen er planlagt; den er ikke utført gjennom denne PRD-revisjonen.
-- **NFR-8: Testbar uten språkmodell.** Kjerneflyten kan testes automatisk i mock-modus. Testparene kan også kjøres mot den ekte språkmodellen, og resultatene registreres. Testparene kjøres på nytt hver gang instruksjonene til språkmodellen endres.
+- **NFR-8: Testbar uten språkmodell.** Kjerneflyten kan testes automatisk i mock-modus. Testparene kan også kjøres mot den ekte språkmodellen, og resultatene registreres. Etter hver endring i instruksjonene til språkmodellen kreves en ny serie med fire av fire beståtte testpar i tre påfølgende runder, med begge omskrivingsvalg, etter §8. Tidligere forsøk og avvik beholdes.
 
 ## 6. Ikke-mål
 
@@ -457,7 +461,8 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 - CV som innlimt tekst, TXT eller tekstbasert PDF, med visning og retting av innlest tekst. Stillingsannonse som innlimt tekst (4.2).
 - Gap-analyse med sitat for dokumenterte krav og valgfritt svar på krav som mangler dokumentasjon (4.3).
 - Søknadsbrev eller forslag til formuleringer, med ærlighetsregel, «Brevet bygger på», redigering og «Kopier tekst» (4.4).
-- Midlertidige data i økten, sletting ved utlogging og eierskapskontroll (4.5).
+- Separat visning av ansettelsesvilkår og tomtilstand uten tydelige krav (4.3).
+- Midlertidige data som bevares ved sideoppdatering i aktiv økt, varsel ved 25 minutter, utlogging/sletting ved 30 minutter uten aktivitet og eierskapskontroll (4.5).
 - Mock-modus som standard, eksempel fra testpar 1, og API-modus som må slås på (4.6).
 
 ### 7.2 Utenfor v1
@@ -465,6 +470,10 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 **Trinn 2** (målet hvis v1 er testet og stabil i tide):
 - Egne forslag til forbedring av CV-en.
 - ATS-veiledning, uten garanti.
+
+**Andre utsatte utvidelser uten fast trinn:**
+- Tredje kompetansestatus «Delvis dokumentert» (§9 punkt 2).
+- Ny brevversjon med uendret inndata (§9 punkt 6); forsøksgrense, telleregler og kostnadskontroll må bestemmes før eventuell innføring.
 
 **Trinn 3** (utsatt):
 - Strukturert CV-mal og DOC-støtte.
@@ -478,15 +487,15 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 
 ### 7.3 Ferdigkriterier før trinn 2
 
-Dette er foreslåtte operative ferdigkriterier i revisjonen, basert på briefens godkjente suksesskriterier. Før ekstra funksjoner prioriteres:
+Dette er vedtatte operative ferdigkriterier, basert på briefens godkjente suksesskriterier. Listen beskriver hva som må være oppfylt senere, ikke utførte tester. Før ekstra funksjoner prioriteres:
 
 - SM-1 til SM-8 er kontrollert med registrerte resultater. «Sekundære» i §8 betyr ikke valgfrie krav.
 - Alle fire testpar fungerer i mock med begge omskrivingsvalg og alle tre CV-innleggingsmåter. Relevante automatiske tester kjøres etter README uten feil. Mock dokumenterer ikke ekte modellkvalitet.
-- Ekte modell er vurdert mot fasit, ærlighetsregelen og brevsjekklisten i §8. Testopplegg og kostnad er avklart etter §9 punkt 4, innenfor 100 kr.
+- Ekte modell er vurdert mot fasit, ærlighetsregelen og brevsjekklisten i §8. Vedtatt testopplegg følger §9 punkt 4; konkret kostnadsplan må foreligge før betalte serier, innenfor totalbudsjettet på 100 kr.
 - Feiltilfeller, kildekontroll, endrede inndata, øktdata og A/B-tilgang er testet. Ingen kjente feil som gir falske kvalifikasjonspåstander, uvedkommende tilgang eller stopper kjerneflyten står åpne.
 - Kjerneflyten er kontrollert med tastatur og på dokumenterte mobil-/PC-størrelser, med feilmeldinger, tomtilstander og kopiering kontrollert mot NFR-1 til NFR-3.
 - Installasjonstesten på annen PC er dokumentert (NFR-7). README beskriver faktisk oppstart, testbruker, testscenarioer og testkommandoer.
-- V1-avklaringer er vedtatt av gruppa og ført i PRD/beslutningsloggen; valgfrie utvidelser er utsatt eller uttrykkelig prioritert. Mindre restfeil har dokumentert konsekvens. Krav, stories, tester og rettinger av KI-generert kode kan spores i repoet.
+- Vedtakene i §9 er ført i PRD/beslutningsloggen; antakelsene i §10 må fortsatt avklares før berørte implementeringsvalg låses. Utsatte utvidelser er ikke V1-ferdigkriterier. Mindre restfeil har dokumentert konsekvens. Krav, stories, tester og rettinger av KI-generert kode kan spores i repoet.
 
 ## 8. Suksessmål
 
@@ -499,21 +508,24 @@ Alle tester nedenfor er planlagt kvalitetssikring, ikke påstander om utførte t
 | Test-ID | Kontroll og forventning | Krav og briefkriterium |
 |---|---|---|
 | T-1 | Fire testpar × innliming/TXT/tekstbasert PDF × begge omskrivingsvalg i mock. Riktig scenario/fasit, navigasjon, redigering og kopiering. PDF-varianter må lages; dagens testmappe har TXT og JSON. | FR-4–FR-8, FR-14–FR-17, FR-20, FR-26–FR-28; SM-1, SM-2, SM-6, SM-8 |
-| T-2 | Ekte modell: alle krav/status mot fasit, ingen oppdiktede krav. Sitater finnes ordrett og er relevante. Fasitens `dekket` tilsvarer «Dokumentert», `mangler` tilsvarer «Mangler dokumentasjon». Semantisk like krav godtas. | FR-10–FR-12; SM-3 |
+| T-2 | Ekte modell: alle krav/status mot fasit, ingen oppdiktede krav. Sitater finnes ordrett og er relevante. Ansettelsesvilkår kontrolleres separat og holdes utenfor kompetanseopptellingen. Fasitens `dekket` tilsvarer «Dokumentert», `mangler` tilsvarer «Mangler dokumentasjon». Semantisk like krav godtas. | FR-10–FR-12; SM-3 |
 | T-3 | Begge resultattyper uten svar, med bekreftelse, «jeg har ikke førerkort» og «jeg holder på å lære». Mock kontrollerer flyten; betydningsvariantene vurderes også mot ekte modell. Ingen nye kvalifikasjoner eller styrking av begrenset erfaring. Veiledning kopieres ikke med søknadsteksten. | FR-13, FR-17–FR-20; SM-4–SM-6 |
 | T-4 | Endre CV, annonse, svar og omskrivingsvalg hver for seg. Navigasjon og redigering alene beholder svar, uten kall. Endret CV/annonse ugyldiggjør gammel analyse/tekst. Avbryt ny analyse: svar beholdes som utdaterte. Bekreft ny analyse: gamle svar/resultater fjernes, også hvis kallet feiler. Endret tilleggssvar krever kun ny generering. | FR-13, FR-21–FR-22; SM-1, SM-4 |
 | T-5 | Tom/blank tekst, feilformat, korrupt/passordbeskyttet PDF, PDF uten tekst og verdier ved/over arkitekturens grenser. Ingen analyse med tom CV eller tap av tidligere gyldig tekst ved filfeil. | FR-4–FR-9, FR-29; SM-2, SM-7 |
 | T-6 | Konto/innlogging, A/B-tilgang via direkte forespørsler, utlogging, leverandørvarsel, manglende nøkkel, ugyldig svar/sitat, API-feil, tidsavbrudd og dobbeltklikk. Ingen datalekkasje, sene overskrivinger eller dupliserte aktive kall. | FR-1–FR-3, FR-11, FR-23–FR-25, FR-29–FR-30, NFR-4–NFR-6; SM-7 |
 | T-7 | Manuell tilgjengelighetskontroll og installasjonstest på annen PC; registrer miljø og faktiske resultater. | NFR-1–NFR-3, NFR-7; SM-8 |
+| T-8 | Annonse med både kompetansekrav og politiattest, og annonse med bare ansettelsesvilkår. Vilkår vises separat uten kompetansestatus/svarfelt og utenfor opptelling. Ingen attestopplasting/kontroll, udokumentert påstand i brevet om oppfylt vilkår eller uriktig «alle kompetansekrav dokumentert». Nye supplerende fasiter planlegges; eksisterende fasiter endres bare ved faktisk behov. | FR-10–FR-14; SM-3 |
+| T-9 | Annonse uten tydelige krav/vilkår gir tomtilstand og tilbyr retting eller begge resultattyper. Ingen oppdiktede krav eller «alle krav dokumentert». Manglende/tvetydig tittel og arbeidsgiver etterspørres, blanke svar avvises, rettede opplysninger brukes. Separat scenario; de fire eksisterende fasitene beholdes. | FR-9–FR-10, FR-14, FR-18; SM-3, SM-5 |
+| T-10 | Sideoppdatering i aktiv økt beholder egenredigert tekst, øvrige øktdata og utdateringsmarkering uten modellkall og uten å nullstille tiden i seg selv. Etter utløp/utlogging og ny innlogging er data borte; sent svar gjenoppretter dem ikke. | FR-20–FR-23, FR-30; SM-1, SM-7 |
 
-T-6 skal ha et blandet analysesvar med gyldige sitater og ett ugyldig/manglende sitat: hele analysen avvises uten gyldige delresultater. Dette testes deterministisk med simulerte svar, separat fra ekte KI-vurdering av sitaters relevans (T-2). Hvis gruppa vedtar øktforslaget, utvides T-6 med simulert tid ved 25/30 minutter, «Fortsett økten» før/etter utløp, lukket fane og sent modellsvar; ingen reell venting i 30 minutter kreves.
+T-6 skal ha et blandet analysesvar med gyldige sitater og ett ugyldig/manglende sitat: hele analysen avvises uten gyldige delresultater. Dette testes deterministisk med simulerte svar, separat fra ekte KI-vurdering av sitaters relevans (T-2). T-6 utvides med simulert tid ved 25/30 minutter, «Fortsett økten» før/etter utløp, lukket fane og sent modellsvar; ingen reell venting i 30 minutter kreves.
 
 **Manuell brevsjekkliste (T-2/T-3):** Riktig stillingstittel og arbeidsgiver; bokmål og nøktern profesjonell tone; minst ett relevant, sporbart CV-eksempel i helt utkast; riktig resultatformat; ingen nye kvalifikasjoner; negasjoner og forbehold bevart; samme faktagrunnlag i begge omskrivingsvalg.
 
-**Forslag fra Miranda – ikke gruppevedtak:** Ekte modell bør bestå fire av fire testpar i tre påfølgende runder, med begge omskrivingsvalg per par. Hver runde kontrollerer gap-analysen og brevsjekklisten; ordlyden kan variere. Ingen feilaktige kvalifikasjonspåstander aksepteres. Registrer alle forsøk og avvik, ikke bare beståtte, med dato, modell-ID, prompt-/appversjon og testparversjon. Promptretting starter en ny serie; tidligere avvik beholdes. Dette er avgrenset testbevis, ingen garanti for fremtidige svar. Kjøringer og oppfølging må planlegges innenfor 100 kr før start. Hvis tid eller budsjett ikke tillater målet, må gruppa vedta og begrunne et alternativ; mock erstatter ikke ekte modelltesting.
+**Vedtatt akseptansekrav:** Ekte modell skal bestå fire av fire testpar i tre påfølgende runder, med begge omskrivingsvalg per par. Hver runde kontrollerer gap-analysen og brevsjekklisten; ordlyden kan variere. Ingen feilaktige kvalifikasjonspåstander aksepteres. Registrer alle forsøk og avvik, ikke bare beståtte, med dato, modell-ID, prompt-/appversjon og testparversjon. Promptretting starter en ny serie; tidligere avvik beholdes. Dette er avgrenset testbevis, ingen garanti for fremtidige svar. Kjøringer og oppfølging må planlegges innenfor 100 kr før start. Hvis tid eller budsjett ikke tillater målet, må gruppa vedta og begrunne et alternativ; mock erstatter ikke ekte modelltesting.
 
 **Primære**
-- **SM-3: Gap-analysen er riktig.** For hvert testpar finnes alle manglende krav i fasiten, og ingen dokumenterte krav i fasiten merkes som manglende. Hvert dokumentert krav vises med sitat. Validerer FR-10, FR-11, FR-12.
+- **SM-3: Gap-analysen er riktig.** For hvert testpar finnes alle manglende krav i fasiten, og ingen dokumenterte krav i fasiten merkes som manglende. Hvert dokumentert kompetansekrav vises med sitat. Ansettelsesvilkår vises separat og inngår ikke i kompetanseopptellingen. Validerer FR-10, FR-11, FR-12.
 - **SM-5: Teksten er ærlig og treffende.** «Helt søknadsutkast» nevner riktig stillingstittel og arbeidsgiver og minst ett relevant eksempel fra CV-en. Manglende opplysninger etterspørres, ikke gjettes. Teksten inneholder ingen erfaring, utdanning eller sertifisering uten grunnlag. Validerer FR-9, FR-16, FR-18.
 - **SM-1: Kjerneflyten virker.** Testbrukeren kan logge inn, legge inn CV ved innliming, TXT og tekstbasert PDF, legge inn annonse og få begge omskrivingsvalgene med hvert testpar, uten stopp eller krasj. Validerer 4.1–4.4.
 
@@ -528,21 +540,23 @@ T-6 skal ha et blandet analysesvar med gyldige sitater og ett ugyldig/manglende 
 - **SM-C1: Høyere match- eller ATS-score.** En høyere score er ikke et mål i seg selv. Å jage den fører til at teksten fylles med nøkkelord og påstander CV-en ikke støtter. Motvekt til SM-5.
 - **SM-C2: Færre spørsmål til brukeren.** Færre spørsmål er ikke automatisk bedre. Supersøker skal spørre heller enn å gjette. Motvekt til SM-1 og SM-5.
 
-## 9. Åpne spørsmål
+## 9. Gruppevedtak om Mirandas ni forslag
 
-Alle ni punkter beholder sine numre. **Forslagene kommer fra Miranda og er ikke godkjent av gruppa.** Gruppa eier avklaringene; vedtak føres i PRD-en og [.memlog.md](.memlog.md). Fram til vedtak er §3–§4 utkastets grunnmodell med to gapstatuser. Nye forslag skal ikke implementeres som vedtatte krav.
+Gruppas godkjenning er opplyst av Miranda og dokumentert 2026-11-07. Datoen er dokumentasjonsdato, ikke en påstått møtedato. Numrene beholdes for sporbarhet; vedtakene erstatter tidligere åpen status i beslutningsloggen. Antakelsene i §10 er ikke godkjent gjennom disse vedtakene.
 
-1. **Vilkår som ikke kan stå i en CV (FR-10–FR-14).** Miranda foreslår «Ansettelsesvilkår» for politiattest, utenfor kompetansegapene og antallet dokumenterte/manglende kompetansekrav. Ingen opplasting eller kontroll av politiattest. **Krever gruppeavklaring:** Briefen har ingen egen kategori; dette endrer uttrekk, visning og fasit. Gruppen må godkjenne skillet før implementering av slike tilfeller. Ordliste, FR-10 og fasit oppdateres sammen ved godkjenning.
-2. **Gråsoner (FR-11–FR-13).** Miranda foreslår «Delvis dokumentert» som **mulig utvidelse**, ikke obligatorisk v1. Den krever gruppas godkjenning og nye fasiter, prompts og visning. Inntil videre gjelder to statuser; uklart eller utilstrekkelig grunnlag må ikke gi «Dokumentert». Begrenset erfaring kan beskrives nøkternt uten å påstå full oppfyllelse (FR-18).
-3. **Regelbasert kontroll (FR-11/FR-30).** Miranda foreslår ordrett-kontroll av dokumenterende CV-sitater. Forslaget er konkretisert i revidert FR-11 for godkjenning av utkastet. Kontrollen beviser ikke relevans og innebærer ingen egen regelbasert gap-analysemotor. Gruppen må bekrefte presiseringen før implementering.
-4. **Bestått mot ekte modell (NFR-8/§8).** Miranda foreslår fire av fire korrekte testpar i tre påfølgende runder etter §8, uten feilaktige kvalifikasjonspåstander. Dette konkretiserer, men skjerper testomfanget utover briefens ikke-tallfestede antall kjøringer. Gruppen må godkjenne opplegget og kostnadsplanen før betalte testserier.
-5. **Annonse uten krav (FR-10/FR-14/FR-18).** Miranda foreslår «Vi fant ingen tydelige krav i annonsen. Du kan rette annonsen eller lage tekst basert på CV-en og opplysningene du har gitt.» Videre generering tillates uten oppdiktede krav eller påstand om at alle krav er dokumentert. Tittel og arbeidsgiver etterspørres fortsatt etter FR-9. Gruppen må bekrefte flyten før implementering. Et eget testtilfelle legges til uten å endre de fire eksisterende fasitene.
-6. **Ny versjon med uendret inndata (FR-21/FR-29).** **Mulig utvidelse:** Miranda foreslår en manuell knapp med begrenset antall forsøk. Antall, hva som teller som forsøk, og kostnadskontroll må vedtas før knappen tas inn. Den er ikke et ferdigkriterium for v1. Generering etter endrede svar/omskrivingsvalg og manuell retry etter feil følger fortsatt FR-21/FR-30.
-7. **Inaktivitet (FR-22–FR-23).** **Uavklart gruppeforslag fra Miranda:** Varsel etter 25 minutter uten aktivitet, med «Fortsett økten» som nullstiller inaktivitetstiden før utløp; automatisk utlogging og sletting etter 30 minutter uten aktivitet. Ny innlogging kreves etter utløp, og data gjenopprettes ikke. Serveren håndhever utløp/sletting selv om fanen lukkes; varsel og bakgrunnskall er ikke brukeraktivitet. Gruppen må godkjenne opplegget og arkitekturen definere øvrig aktivitet før implementering. Testforslaget står ved T-6 og er betinget av vedtak.
-8. **Sideoppdatering (FR-20/FR-22).** Miranda foreslår å beholde egenredigert tekst ved oppdatering i aktiv økt, uten permanent dokumentlagring. Gruppen må bekrefte dette før arkitekturen velger midlertidig lagring. Utlogging/øktutløp sletter fortsatt data. Testen må skille aktiv økt fra ny innlogging.
-9. **Forslag til CV-en (FR-13/FR-19).** **Mulig forbedring i trinn 2:** Miranda foreslår en enkel anbefaling utenfor søknadsteksten om å oppdatere CV-en når svaret bekrefter manglende opplysninger. Negativt/usikkert svar må ikke tolkes som bekreftet kompetanse. Ingen automatisk CV-redigering. Inkludering i v1 ville avvike fra briefens plassering av CV-forbedringer i trinn 2 og krever uttrykkelig gruppevedtak.
+1. **Ansettelsesvilkår – V1 (FR-10–FR-14).** Politiattest og lignende vises som «Ansettelsesvilkår», separat fra kompetansegap og kompetanseopptelling. Ingen opplasting eller kontroll av attest. Ordliste, krav og testforventninger følger dette skillet.
+2. **Gråsoner – utsatt fra V1 (FR-11–FR-13).** «Delvis dokumentert» er en mulig senere utvidelse. V1 beholder to kompetansestatuser; utilstrekkelig/uklart grunnlag gir ikke «Dokumentert». Nye fasiter, prompts og visning må defineres før eventuell utvidelse.
+3. **Regelbasert kontroll – V1 (FR-11/FR-30).** Ordrett-kontroll av dokumenterende CV-sitater er vedtatt. Ett ugyldig/manglende sitat avviser hele analysen. Kontrollen beviser ikke relevans og innfører ingen egen regelbasert gap-analysemotor.
+4. **Bestått mot ekte modell – V1 (NFR-8/§8).** Fire av fire testpar skal bestås i tre påfølgende runder med begge omskrivingsvalg, uten feilaktige kvalifikasjonspåstander. Konkret kostnadsplan skal foreligge før betalte serier; totalbudsjettet er fortsatt 100 kr. Et eventuelt alternativ krever nytt begrunnet gruppevedtak.
+5. **Annonse uten krav – V1 (FR-10/FR-14/FR-18).** Vedtatt tomtilstand lar brukeren rette annonsen eller generere tekst fra CV og oppgitte opplysninger. Ingen oppdiktede krav eller påstand om at alle krav er dokumentert. FR-9 gjelder fortsatt. Eget testscenario endrer ikke de fire eksisterende fasitene.
+6. **Ny versjon med uendret inndata – utsatt fra V1 (FR-21/FR-29).** Manuell regenereringsknapp er ikke et V1-ferdigkriterium. Antall forsøk, telleregler og kostnadskontroll bestemmes før eventuell innføring. Endrede svar/omskrivingsvalg og manuell retry etter feil følger fortsatt FR-21/FR-30.
+7. **Inaktivitet – V1 (FR-22–FR-23).** Tilgjengelig varsel etter 25 minutter uten aktivitet og «Fortsett økten» før utløp nullstiller tiden. Serverhåndhevet utlogging/sletting etter 30 minutter gjelder også ved lukket fane og pågående modellkall. Etter utløp kreves ny innlogging uten gjenoppretting. Varsel og bakgrunnskall er ikke brukeraktivitet; arkitekturen definerer øvrig aktivitet.
+8. **Sideoppdatering – V1 (FR-20/FR-22).** Egenredigert tekst beholdes ved oppdatering i aktiv økt uten permanent dokumentlagring. Utlogging/utløp sletter fortsatt data. Tester skiller aktiv økt fra utløpt økt og ny innlogging.
+9. **Forslag til CV-en – trinn 2 (FR-13/FR-19).** En enkel anbefaling om CV-oppdatering kan vises utenfor søknadsteksten når et svar bekrefter manglende opplysninger. Negativt/usikkert svar er ikke bekreftet kompetanse. Ingen automatisk CV-redigering. Funksjonen er ikke del av V1.
 
 ## 10. Antakelser
+
+Disse fire antakelsene er fortsatt uavklarte og er ikke omfattet av gruppas godkjenning av §9. De berørte kravene beholdes som antakelser til egen avklaring.
 
 - **4.2, FR-9:** Etterspørselen gjelder både stillingstittel og arbeidsgiver, slik suksesskriterium 5 i briefen sier.
 - **4.2, FR-9:** Feltene for stillingstittel og arbeidsgiver er obligatoriske. Brukeren kan ikke hoppe over dem.

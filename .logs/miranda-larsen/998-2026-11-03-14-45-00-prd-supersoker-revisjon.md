@@ -27,3 +27,31 @@ Addendum, endringsoversikt, memlog (via skript) og full diff oppdatert. Struktur
 ### Åpne punkter
 - Gruppen må behandle forslagene i PRD §9 og antakelsene i §10 før relevante implementeringsvalg låses; ingen forslag er automatisk godkjent.
 - Planlagt kvalitetssikring i PRD §8 gjenstår: PDF-testvarianter, automatiske/manuelle tester, ekte modelltest innenfor budsjettet og installasjon på annen PC etter README. Ingen resultater foreligger fra denne revisjonen.
+
+## 2026-11-07 kl. 10:23 — Miranda Larsen
+
+### Oppgave
+Dokumentere gruppas godkjenning av Mirandas ni forslag i PRD §9 på branchen miranda-prd-ferdigstilling, etter godkjent skrivebeskyttet gjennomgang og endringsplan. Beholde antakelsene i §10 uavklarte og alle app-/modelltester som planlagte; ingen push eller merge.
+
+### Plan
+- Følge den godkjente endringsplanen i samtalen: samordne PRD, ordliste, krav, testplan, addendum, endringsoversikt og beslutningslogg.
+- Beholde punkt 2 og 6 utenfor V1 og punkt 9 i trinn 2; kontrollere kravkonflikter og manglende testforventninger.
+- Kontrollere dokumentene og føre sesjonen her med oppdatert issues.md; lage separat path-begrenset lokal loggcommit.
+
+### Resultat
+Bekreftet at aktiv branch allerede var miranda-prd-ferdigstilling. Oppdatert PRD §0 og §9 til dokumenterte gruppevedtak, opplyst av Miranda. Datoen er dokumentasjonsdato, ikke en påstått møtedato. Antakelsene i §10 og de fire ASSUMPTION-markørene er beholdt uavklart; status er fortsatt draft.
+
+Gruppa har godtatt Mirandas forslag med faseplasseringen bevart: ansettelsesvilkår, ordrett sitatkontroll, modelltestkriterier, tomtilstand, inaktivitet og sideoppdatering inngår i V1. Tredje kompetansestatus og regenerering med samme inndata er utsatt fra V1; CV-råd beholdes i trinn 2. Ingen andre nye produktvedtak er lagt til. Vurdering av KI-forslag: endringsplanen fra forrige gjennomgang ble uttrykkelig godkjent av Miranda; de godkjente samordningene er utført.
+
+Ordlisten, FR-10–FR-14/FR-18/FR-21–FR-23/FR-30, NFR-8, SM-3 og omfang/testplan er samordnet. Ansettelsesvilkår holdes utenfor kompetanseopptelling og kompetansestatuser. Bare ansettelsesvilkår skilles fra ingen krav; meldingen om alle dokumenterte kompetansekrav krever minst ett kompetansekrav. Feilbevaring i FR-30 gjenoppretter ikke svar som allerede er forkastet etter FR-21 eller data slettet ved utlogging/utløp. Dette løser motstrid om bevaring/sletting. Midlertidige data og egenredigert tekst beholdes ved reload i aktiv økt uten permanent dokumentlagring; 25/30-minuttersreglene er bindende.
+
+T-6 er gjort ubetinget for vedtatte øktregler. Nye planlagte T-8–T-10 dekker vilkår/opptelling, ingen krav, tittel/arbeidsgiver og reload/utløp. Addendum og endringsoversikt er oppdatert. Historisk memlog er bevart og supplert via memlog.py med vedtak og gjennomførte dokumentendringer. Ingen testdata eller testkode er endret. Ingen app-, API-, PDF- eller installasjonstest er utført; testene er fortsatt planlagt. Ingen priser eller historiske researchpåstander er revalidert.
+
+Gjennomført dokumentkontroll: FR-1–FR-30, NFR-1–NFR-8, T-1–T-10, fire ASSUMPTION-markører og lokale Markdown-lenker besto. git diff --check besto. Dokumentdiff er gjennomlest. Uregistrerte filer (inkludert prd-miranda.diff) og andres logger er urørt. Bare denne loggen og Mirandas issues.md inngår i separat lokal loggcommit; PRD-dokumentene inngår ikke. Ingen push eller merge.
+
+Tidligere åpent punkt om §9/§10 er presisert i issues.md: §9 er vedtatt, men §10 gjenstår. Testpunktet er videreført og oppdatert med nye scenarioer. Arkitekturdetaljer og konkret kostnadsplan er synliggjort som gjenstående arbeid.
+
+### Åpne punkter
+- Avklare de fire antakelsene i PRD §10 før berørte implementeringsvalg låses; PRD beholdes draft.
+- Implementere supplerende testscenarioer/fasiter og PDF-varianter, og gjennomføre planlagt kvalitetssikring T-1–T-10, ekte modellserie innenfor 100 kr og installasjon på annen PC med registrerte resultater.
+- Arkitekturen må definere øvrig brukeraktivitet, midlertidig lagring og tallfestede grenser/tidsavbrudd; konkret kostnadsplan må foreligge før betalte modellserier.
