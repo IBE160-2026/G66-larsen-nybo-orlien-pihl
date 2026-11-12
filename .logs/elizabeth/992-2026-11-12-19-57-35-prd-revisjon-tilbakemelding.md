@@ -25,6 +25,7 @@ Finne faglærers tilbakemelding på PRD-en og lage en forbedret PRD etter den, p
 - FR-21: ny analyse krever faktisk endret CV eller annonse. Skjermbredder og navn på resultatfelt er overlatt til UX.
 - Innstrammet til ca. 6160 ord (−13 %), uten at krav er fjernet. Målet på 20 % ble ikke nådd.
 - Status er `final`, og gjelder når gruppa har godkjent vedtak 10, 12 og 13 i PR-en.
+- Branchen er pushet, og [PR #12](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/pull/12) er opprettet med avkrysningsliste for vedtak 10, 12 og 13.
 - Bevisst ikke gjort: kort brukerreise for sensor i mock-modus. UJ-1 er eneste reise etter tidligere vedtak.
 
 ### Åpne punkter
