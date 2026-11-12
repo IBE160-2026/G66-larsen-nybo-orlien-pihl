@@ -576,5 +576,5 @@ Startverdiene under er satt for at stories og tester skal ha konkrete tall. Arki
 
 - **FR-4, FR-7:** Filer er høyst 2 MB. CV-tekst og annonse er høyst 10 000 tegn hver.
 - **FR-13:** Hvert svar er høyst 1 000 tegn.
-- **FR-30:** Tidsavbrudd for modellkall er 30 sekunder.
+- **FR-30:** Tidsavbrudd for modellkall er 30 sekunder. Arkitekturen måler svartiden med testparene og fastsetter endelig grense. Den kan sette en egen, lengre grense for tekstgenerering enn for analyse.
 - **§8:** Kostnadsoverslaget bygger på listepris for `gpt-5-mini`, anslått tokenbruk per kall og ca. 11 kr per USD. Pris og modell kontrolleres ved integrasjon.
