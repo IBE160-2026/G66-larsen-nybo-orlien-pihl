@@ -18,10 +18,11 @@ Finne faglærers tilbakemelding på PRD-en og lage en forbedret PRD etter den, p
 - **4.4:** §0 er renset, og §9 er nå en tabell med vedtak 1–14 og berørte krav.
 - **4.5:** «Teksten», «Lag tekst» og «Teksten bygger på» er de faste begrepene.
 - De gamle antakelsene i §10 er bekreftet (vedtak 13). §10 inneholder nå startverdiene.
+- Oppfølging: Elisabeth besluttet at arkitekturen fastsetter endelig tidsavbrudd etter måling (§10 og .memlog.md oppdatert).
 - Kontroll: 30 FR-er med prioritet, lokale lenker fungerer og `git diff --check` er ok. Status er fortsatt `draft`.
 - Bevisst ikke gjort: kort brukerreise for sensor i mock-modus. UJ-1 er eneste reise etter tidligere vedtak.
 
 ### Åpne punkter
 - Gruppa må godkjenne vedtak 10–14 i PR-en. Vedtak 10 overstyrer deler av gruppevedtak 7. Sett deretter PRD-status til `final`.
 - UX-prototypen må oppdateres til «Lag tekst» og «Teksten bygger på», og vise flyten for «Endre CV eller annonse».
-- Arkitekturen må bekrefte eller justere startverdiene i PRD §10 og kontrollere pris for gpt-5-mini.
+- Arkitekturen må bekrefte eller justere startverdiene i PRD §10 og kontrollere pris for gpt-5-mini. Tidsavbruddet fastsettes etter måling av svartid med testparene, eventuelt med egen lengre grense for tekstgenerering.
