@@ -1,0 +1,2 @@
+# PDF bytes must not undergo line-ending conversion or text whitespace checks.
+pdf/*.pdf binary

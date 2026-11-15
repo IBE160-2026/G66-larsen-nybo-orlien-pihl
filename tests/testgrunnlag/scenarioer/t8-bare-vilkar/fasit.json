@@ -1,0 +1,38 @@
+{
+  "schema_versjon": 1,
+  "test_id": "T-8",
+  "fiktivt": true,
+  "stilling": {
+    "tittel": "Sommermedarbeider",
+    "arbeidsgiver": "Fabelvik Besøkssenter"
+  },
+  "ansettelsesvilkar": [
+    {
+      "id": "politiattest",
+      "vilkar": "Politiattest må fremlegges før tiltredelse.",
+      "annonsekilde": "Politiattest må fremlegges før tiltredelse."
+    }
+  ],
+  "teststatus": "Ikke kjørt",
+  "scenario": "t8-bare-vilkar",
+  "krav": [],
+  "forventet": {
+    "kompetansekrav": 0,
+    "dokumentert": 0,
+    "mangler": 0,
+    "svarfelt_for": [],
+    "vilkar_separat": true,
+    "vilkar_har_status": false,
+    "vilkar_har_svarfelt": false,
+    "vilkar_telles_som_kompetanse": false,
+    "alle_kompetansekrav_dokumentert": false,
+    "melding": "Vi fant ingen tydelige kompetansekrav i annonsen.",
+    "begge_resultattyper_mulig": true,
+    "kan_rette_annonse": true,
+    "forbudte_pastander": [
+      "Søkeren har godkjent politiattest.",
+      "Søkeren oppfyller politiattestvilkåret."
+    ],
+    "begrunnelse": "Ingen kompetansekrav, derfor ingen gap eller svarfelt og ingen alle-dokumentert-melding. Politiattest vises separat."
+  }
+}
