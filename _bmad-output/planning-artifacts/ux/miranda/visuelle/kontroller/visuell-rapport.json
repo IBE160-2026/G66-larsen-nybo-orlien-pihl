@@ -1,0 +1,777 @@
+{
+  "date": "2026-11-15T10:12:18.181Z",
+  "browser": "Chrome headless/CDP on Windows",
+  "checks": [
+    {
+      "name": "Referanse konsept 1 har ett gap og tre dokumenterte krav",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 analyse har felles stilling og dokumentasjon",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 samme CV-sitater som konsept 1",
+      "passed": true,
+      "details": "[\"«Norsk – morsmål»\",\"«Besøksvenn, Røde Kors besøkstjeneste»\",\"«Gruppeprosjekt i helsefremmende arbeid»\"]"
+    },
+    {
+      "name": "k2 identisk CV og annonse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 identisk søknadstekst med negativt svar",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 tydelig statisk mockup",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 tekstkontrast .intro",
+      "passed": true,
+      "details": "{\"selector\":\".intro\",\"color\":\"rgb(115, 104, 92)\",\"background\":\"rgb(245, 240, 231)\",\"ratio\":4.79}"
+    },
+    {
+      "name": "k2 tekstkontrast .gap-card > p",
+      "passed": true,
+      "details": "{\"selector\":\".gap-card > p\",\"color\":\"rgb(52, 46, 39)\",\"background\":\"rgb(237, 224, 206)\",\"ratio\":10.32}"
+    },
+    {
+      "name": "k2 tekstkontrast .status.missing",
+      "passed": true,
+      "details": "{\"selector\":\".status.missing\",\"color\":\"rgb(112, 72, 41)\",\"background\":\"rgb(248, 238, 224)\",\"ratio\":6.91}"
+    },
+    {
+      "name": "k2 tekstkontrast .status.documented",
+      "passed": true,
+      "details": "{\"selector\":\".status.documented\",\"color\":\"rgb(76, 89, 53)\",\"background\":\"rgb(232, 237, 223)\",\"ratio\":6.32}"
+    },
+    {
+      "name": "k2 tekstkontrast .bottom-actions .action:not(.secondary)",
+      "passed": true,
+      "details": "{\"selector\":\".bottom-actions .action:not(.secondary)\",\"color\":\"rgb(255, 253, 245)\",\"background\":\"rgb(75, 87, 56)\",\"ratio\":7.58}"
+    },
+    {
+      "name": "k2 navigasjon viser bare cv",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 felter har etiketter cv",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt cv 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt cv 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt cv 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt cv 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 navigasjon viser bare analyse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 felter har etiketter analyse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt analyse 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt analyse 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt analyse 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt analyse 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 navigasjon viser bare tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 felter har etiketter tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt tekst 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt tekst 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt tekst 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k2 ingen overflyt tekst 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 analyse har felles stilling og dokumentasjon",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 samme CV-sitater som konsept 1",
+      "passed": true,
+      "details": "[\"«Norsk – morsmål»\",\"«Besøksvenn, Røde Kors besøkstjeneste»\",\"«Gruppeprosjekt i helsefremmende arbeid»\"]"
+    },
+    {
+      "name": "k3 identisk CV og annonse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 identisk søknadstekst med negativt svar",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 tydelig statisk mockup",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 tekstkontrast .intro",
+      "passed": true,
+      "details": "{\"selector\":\".intro\",\"color\":\"rgb(86, 86, 95)\",\"background\":\"rgb(239, 239, 233)\",\"ratio\":6.29}"
+    },
+    {
+      "name": "k3 tekstkontrast .gap-card > p",
+      "passed": true,
+      "details": "{\"selector\":\".gap-card > p\",\"color\":\"rgb(24, 24, 27)\",\"background\":\"rgb(229, 220, 255)\",\"ratio\":13.51}"
+    },
+    {
+      "name": "k3 tekstkontrast .status.missing",
+      "passed": true,
+      "details": "{\"selector\":\".status.missing\",\"color\":\"rgb(245, 237, 255)\",\"background\":\"rgb(25, 25, 29)\",\"ratio\":15.39}"
+    },
+    {
+      "name": "k3 tekstkontrast .status.documented",
+      "passed": true,
+      "details": "{\"selector\":\".status.documented\",\"color\":\"rgb(48, 59, 22)\",\"background\":\"rgb(217, 247, 115)\",\"ratio\":9.93}"
+    },
+    {
+      "name": "k3 tekstkontrast .bottom-actions .action:not(.secondary)",
+      "passed": true,
+      "details": "{\"selector\":\".bottom-actions .action:not(.secondary)\",\"color\":\"rgb(255, 255, 255)\",\"background\":\"rgb(103, 55, 217)\",\"ratio\":6.72}"
+    },
+    {
+      "name": "k3 navigasjon viser bare cv",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 felter har etiketter cv",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt cv 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt cv 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt cv 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt cv 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 navigasjon viser bare analyse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 felter har etiketter analyse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt analyse 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt analyse 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt analyse 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt analyse 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 navigasjon viser bare tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 felter har etiketter tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt tekst 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt tekst 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt tekst 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "k3 ingen overflyt tekst 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde cv/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde cv/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde analyse/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde analyse/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde tekst/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning samme skjerm/bredde tekst/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning ingen overflyt 375px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning ingen overflyt 390px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning ingen overflyt 1280px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Sammenligning ingen overflyt 1440px",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/cv/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/cv/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/cv/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/cv/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/cv/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/cv/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/analyse/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/analyse/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/analyse/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/analyse/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/analyse/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/analyse/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/tekst/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k1/tekst/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/tekst/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k2/tekst/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/tekst/pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skjermbilde har rendret innhold k3/tekst/mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: konsept-1-veiviser.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: konsept-1.css",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: felles/prototype-logikk.js",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: felles/scenarioer.js",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: README.md",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konsept 1 uendret: spec-konsept-1.md",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen JS-unntak",
+      "passed": true,
+      "details": "[]"
+    },
+    {
+      "name": "Ingen eksterne HTTP-kall",
+      "passed": true,
+      "details": "[]"
+    }
+  ],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "screenshots": [
+    {
+      "name": "k1-cv-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1848
+      ]
+    },
+    {
+      "name": "k1-cv-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2592
+      ]
+    },
+    {
+      "name": "k1-analyse-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        2134
+      ]
+    },
+    {
+      "name": "k1-analyse-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2531
+      ]
+    },
+    {
+      "name": "k1-tekst-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1828
+      ]
+    },
+    {
+      "name": "k1-tekst-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2600
+      ]
+    },
+    {
+      "name": "k2-cv-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1523
+      ]
+    },
+    {
+      "name": "k2-cv-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2266
+      ]
+    },
+    {
+      "name": "k2-analyse-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1629
+      ]
+    },
+    {
+      "name": "k2-analyse-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2453
+      ]
+    },
+    {
+      "name": "k2-tekst-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1747
+      ]
+    },
+    {
+      "name": "k2-tekst-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2607
+      ]
+    },
+    {
+      "name": "k3-cv-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1538
+      ]
+    },
+    {
+      "name": "k3-cv-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2379
+      ]
+    },
+    {
+      "name": "k3-analyse-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1680
+      ]
+    },
+    {
+      "name": "k3-analyse-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2645
+      ]
+    },
+    {
+      "name": "k3-tekst-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1784
+      ]
+    },
+    {
+      "name": "k3-tekst-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        2792
+      ]
+    },
+    {
+      "name": "sammenligning-pc.png",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "size": [
+        1425,
+        1884
+      ]
+    },
+    {
+      "name": "sammenligning-mobil.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": [
+        390,
+        3657
+      ]
+    }
+  ],
+  "contrast": [
+    {
+      "concept": 2,
+      "pairs": [
+        {
+          "selector": ".intro",
+          "color": "rgb(115, 104, 92)",
+          "background": "rgb(245, 240, 231)",
+          "ratio": 4.79
+        },
+        {
+          "selector": ".gap-card > p",
+          "color": "rgb(52, 46, 39)",
+          "background": "rgb(237, 224, 206)",
+          "ratio": 10.32
+        },
+        {
+          "selector": ".status.missing",
+          "color": "rgb(112, 72, 41)",
+          "background": "rgb(248, 238, 224)",
+          "ratio": 6.91
+        },
+        {
+          "selector": ".status.documented",
+          "color": "rgb(76, 89, 53)",
+          "background": "rgb(232, 237, 223)",
+          "ratio": 6.32
+        },
+        {
+          "selector": ".bottom-actions .action:not(.secondary)",
+          "color": "rgb(255, 253, 245)",
+          "background": "rgb(75, 87, 56)",
+          "ratio": 7.58
+        }
+      ]
+    },
+    {
+      "concept": 3,
+      "pairs": [
+        {
+          "selector": ".intro",
+          "color": "rgb(86, 86, 95)",
+          "background": "rgb(239, 239, 233)",
+          "ratio": 6.29
+        },
+        {
+          "selector": ".gap-card > p",
+          "color": "rgb(24, 24, 27)",
+          "background": "rgb(229, 220, 255)",
+          "ratio": 13.51
+        },
+        {
+          "selector": ".status.missing",
+          "color": "rgb(245, 237, 255)",
+          "background": "rgb(25, 25, 29)",
+          "ratio": 15.39
+        },
+        {
+          "selector": ".status.documented",
+          "color": "rgb(48, 59, 22)",
+          "background": "rgb(217, 247, 115)",
+          "ratio": 9.93
+        },
+        {
+          "selector": ".bottom-actions .action:not(.secondary)",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(103, 55, 217)",
+          "ratio": 6.72
+        }
+      ]
+    }
+  ],
+  "originalHashes": {
+    "konsept-1-veiviser.html": "de5dc4d7afe628033f245361384f4eafbdfa5edfdc938adc81fadd61f4aca72d",
+    "konsept-1.css": "29b22914c32abaa792238aed5060331bb1ff955583fd36ea7bcf87cb742eb08a",
+    "felles/prototype-logikk.js": "8b06a1d506676d76c1dbe975bf64ed1e5b19eff0ecc3952a01d34ee9b8d30efe",
+    "felles/scenarioer.js": "7befcb81d811738fc66ece7c2b498b11898527714d16ffbd1731f44b14753ccb",
+    "README.md": "83608a62f81f5167d69d183d4c43f89f27ab5dbf88a0fdc8552c3e237f68d715",
+    "spec-konsept-1.md": "ac6ba372e6e209f2ba39dcd9b292efeae57907842a13f9f99f0f0a304976266b"
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "passed": true
+}
