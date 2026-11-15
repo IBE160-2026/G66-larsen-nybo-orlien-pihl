@@ -1,0 +1,64 @@
+{
+  "schema_versjon": 1,
+  "test_id": "T-8",
+  "fiktivt": true,
+  "stilling": {
+    "tittel": "Sommermedarbeider",
+    "arbeidsgiver": "Fabelvik Besøkssenter"
+  },
+  "ansettelsesvilkar": [
+    {
+      "id": "politiattest",
+      "vilkar": "Politiattest må fremlegges før tiltredelse.",
+      "annonsekilde": "Politiattest må fremlegges før tiltredelse."
+    }
+  ],
+  "teststatus": "Ikke kjørt",
+  "scenario": "t8-kompetanse-og-vilkar",
+  "krav": [
+    {
+      "id": "kundeservice",
+      "krav": "Erfaring med kundeservice",
+      "annonsekilde": "Erfaring med kundeservice.",
+      "status": "dekket",
+      "kilde": "Kundeservice ved disk"
+    },
+    {
+      "id": "norsk",
+      "krav": "Gode norskkunnskaper",
+      "annonsekilde": "Gode norskkunnskaper.",
+      "status": "dekket",
+      "kilde": "Norsk – morsmål"
+    },
+    {
+      "id": "forerkort-b",
+      "krav": "Førerkort klasse B",
+      "annonsekilde": "Førerkort klasse B.",
+      "status": "mangler"
+    }
+  ],
+  "forventet": {
+    "kompetansekrav": 3,
+    "dokumentert": 2,
+    "mangler": 1,
+    "svarfelt_for": [
+      "forerkort-b"
+    ],
+    "vilkar_separat": true,
+    "vilkar_har_status": false,
+    "vilkar_har_svarfelt": false,
+    "vilkar_telles_som_kompetanse": false,
+    "alle_kompetansekrav_dokumentert": false,
+    "melding": null,
+    "begge_resultattyper_mulig": true,
+    "kan_rette_annonse": true,
+    "ubesvarte_krav_utelates_fra_forslag": ["forerkort-b"],
+    "veiledning_utenfor_tekst": true,
+    "veiledning_folger_ikke_kopiering": true,
+    "forbudte_pastander": [
+      "Søkeren har godkjent politiattest.",
+      "Søkeren oppfyller politiattestvilkåret."
+    ],
+    "begrunnelse": "To kompetansekrav er dokumentert, førerkort står ikke i CV-en. Politiattest er verken dokumentert kompetanse eller et kompetansegap."
+  }
+}
