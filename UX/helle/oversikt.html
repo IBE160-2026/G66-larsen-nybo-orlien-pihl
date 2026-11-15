@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helles designkonsepter for Supersøker – sammenligning</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --surface: #ffffff; --ink: #16181d; --muted: #4a505c; --line: #d5d9e0;
+    --accent: #2b4c7e; --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  .k1 { --c: #34557a; } .k2 { --c: #1c3d8f; } .k3 { --c: #4b1d5e; }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); color: var(--ink); font: 400 1rem/1.55 var(--sans); }
+  body { margin: 0; }
+  a { color: var(--accent); text-underline-offset: 0.2em; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .skip { position: absolute; left: 1rem; top: -4rem; background: var(--surface); padding: 0.75rem 1rem; border: 2px solid var(--accent); }
+  .skip:focus { top: 1rem; }
+  header, main, footer { width: min(90rem, 100% - 2.5rem); margin-inline: auto; }
+  header { padding-block: 2.5rem 0.5rem; }
+  h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); line-height: 1.2; margin: 0 0 0.75rem; }
+  .lead { max-width: 48rem; color: var(--muted); margin: 0 0 1.25rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; padding: 0; margin: 0; list-style: none; }
+  .concepts { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin: 2rem 0; padding: 0; list-style: none; }
+  .concept { background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--c); border-radius: 0.5rem; padding: 1.25rem 1.5rem; }
+  .concept h2 { margin: 0 0 0.25rem; font-size: 1.2rem; }
+  .concept p { margin: 0.5rem 0 0; color: var(--muted); }
+  .screen { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.25rem 1.5rem 1.5rem; margin-bottom: 1.5rem; }
+  .screen h2 { font-size: 1.15rem; margin: 0 0 0.25rem; }
+  .screen > p { margin: 0 0 1rem; color: var(--muted); }
+  .row { display: grid; gap: 1rem; grid-template-columns: 1fr; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 60rem) { .row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .row li { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+  .row .label { font-weight: 600; font-size: 0.95rem; padding-left: 0.75rem; border-left: 4px solid var(--c); }
+  .thumb { display: block; border: 1px solid var(--line); border-radius: 0.375rem; background: var(--bg); padding: 0.75rem; max-height: 30rem; overflow: hidden; }
+  .thumb.mobile { max-width: 16rem; }
+  .thumb img { display: block; width: 100%; height: auto; }
+  footer { padding-block: 1rem 3rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#skjermer">Hopp til skjermene</a>
+<header>
+  <h1>Helles designkonsepter for Supersøker</h1>
+  <p class="lead">Tre konsepter med de samme 17 skjermene og det samme innholdet (testpar 1), vist side om side. Klikk på en skisse for å åpne den i full størrelse. Beskrivelse, styrker, svakheter og antagelser står i <a href="oversikt.md">oversikt.md</a>. Skjermlisten og reglene står i <a href="felles-brief.md">felles-brief.md</a>.</p>
+  <ul class="links">
+    <li><a href="konsept-1/index.html">Galleri: Konsept 1</a></li>
+    <li><a href="konsept-2/index.html">Galleri: Konsept 2</a></li>
+    <li><a href="konsept-3/index.html">Galleri: Konsept 3</a></li>
+  </ul>
+  <ul class="concepts">
+    <li class="concept k1"><h2>1 · Rolig veiviser</h2><p>Én ting om gangen: enkolonnes veiviser på varmt papir, én dempet blå aksent og én primærhandling nederst på hvert steg.</p></li>
+    <li class="concept k2"><h2>2 · Arbeidsbenk med bevis</h2><p>CV, krav og annonse side om side. Hvert dokumentert krav peker til et nummerert, uthevet sitat i CV-teksten.</p></li>
+    <li class="concept k3"><h2>3 · Kort og mot</h2><p>Mobil først: store kort, bevis-klistremerker, tung typografi og en fast handlingslinje. Coachende tone, ikke chat.</p></li>
+  </ul>
+</header>
+<main id="skjermer">
+  <section class="screen" aria-labelledby="h-01-logg-inn">
+    <h2 id="h-01-logg-inn">01 · Logg inn</h2>
+    <p>Innlogging med hint om testbrukeren og felles melding for feil e-post eller passord (FR-2, FR-3).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/01-logg-inn.svg"><img src="konsept-1/skjermer/01-logg-inn.svg" alt="Konsept 1: Logg inn" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/01-logg-inn.svg"><img src="konsept-2/skjermer/01-logg-inn.svg" alt="Konsept 2: Logg inn" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/01-logg-inn.svg"><img src="konsept-3/skjermer/01-logg-inn.svg" alt="Konsept 3: Logg inn" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-02-opprett-konto">
+    <h2 id="h-02-opprett-konto">02 · Opprett konto</h2>
+    <p>Valideringsfeil der e-posten beholdes og passordet tømmes (FR-1).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/02-opprett-konto.svg"><img src="konsept-1/skjermer/02-opprett-konto.svg" alt="Konsept 1: Opprett konto" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/02-opprett-konto.svg"><img src="konsept-2/skjermer/02-opprett-konto.svg" alt="Konsept 2: Opprett konto" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/02-opprett-konto.svg"><img src="konsept-3/skjermer/02-opprett-konto.svg" alt="Konsept 3: Opprett konto" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-03-cv-og-annonse-tom">
+    <h2 id="h-03-cv-og-annonse-tom">03 · Steg 1: CV og annonse, tom tilstand</h2>
+    <p>Lim inn eller last opp CV, annonse med hjelpetekst og «Last inn eksempel (testpar 1)» (FR-4, FR-7, FR-27).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/03-cv-og-annonse-tom.svg"><img src="konsept-1/skjermer/03-cv-og-annonse-tom.svg" alt="Konsept 1: Steg 1: CV og annonse, tom tilstand" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/03-cv-og-annonse-tom.svg"><img src="konsept-2/skjermer/03-cv-og-annonse-tom.svg" alt="Konsept 2: Steg 1: CV og annonse, tom tilstand" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/03-cv-og-annonse-tom.svg"><img src="konsept-3/skjermer/03-cv-og-annonse-tom.svg" alt="Konsept 3: Steg 1: CV og annonse, tom tilstand" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-04-cv-og-annonse-utfylt">
+    <h2 id="h-04-cv-og-annonse-utfylt">04 · Steg 1: utfylt etter PDF-opplasting</h2>
+    <p>Innlest tekst kan rettes, med påminnelse om kolonner og overskrifter (FR-5).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/04-cv-og-annonse-utfylt.svg"><img src="konsept-1/skjermer/04-cv-og-annonse-utfylt.svg" alt="Konsept 1: Steg 1: utfylt etter PDF-opplasting" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/04-cv-og-annonse-utfylt.svg"><img src="konsept-2/skjermer/04-cv-og-annonse-utfylt.svg" alt="Konsept 2: Steg 1: utfylt etter PDF-opplasting" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/04-cv-og-annonse-utfylt.svg"><img src="konsept-3/skjermer/04-cv-og-annonse-utfylt.svg" alt="Konsept 3: Steg 1: utfylt etter PDF-opplasting" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-05-cv-og-annonse-feil">
+    <h2 id="h-05-cv-og-annonse-feil">05 · Steg 1: feiltilstander</h2>
+    <p>Fila kan ikke leses, og annonsefeltet er tomt med fokus og melding ved feltet (FR-4, FR-6, FR-8).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/05-cv-og-annonse-feil.svg"><img src="konsept-1/skjermer/05-cv-og-annonse-feil.svg" alt="Konsept 1: Steg 1: feiltilstander" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/05-cv-og-annonse-feil.svg"><img src="konsept-2/skjermer/05-cv-og-annonse-feil.svg" alt="Konsept 2: Steg 1: feiltilstander" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/05-cv-og-annonse-feil.svg"><img src="konsept-3/skjermer/05-cv-og-annonse-feil.svg" alt="Konsept 3: Steg 1: feiltilstander" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-06-tittel-og-arbeidsgiver">
+    <h2 id="h-06-tittel-og-arbeidsgiver">06 · Stillingstittel og arbeidsgiver</h2>
+    <p>Funnet tittel kan rettes, og manglende arbeidsgiver etterspørres (FR-9).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/06-tittel-og-arbeidsgiver.svg"><img src="konsept-1/skjermer/06-tittel-og-arbeidsgiver.svg" alt="Konsept 1: Stillingstittel og arbeidsgiver" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/06-tittel-og-arbeidsgiver.svg"><img src="konsept-2/skjermer/06-tittel-og-arbeidsgiver.svg" alt="Konsept 2: Stillingstittel og arbeidsgiver" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/06-tittel-og-arbeidsgiver.svg"><img src="konsept-3/skjermer/06-tittel-og-arbeidsgiver.svg" alt="Konsept 3: Stillingstittel og arbeidsgiver" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-07-analyserer">
+    <h2 id="h-07-analyserer">07 · Analyserer …</h2>
+    <p>Venting med deaktivert knapp, og inndataene beholdes (FR-30).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/07-analyserer.svg"><img src="konsept-1/skjermer/07-analyserer.svg" alt="Konsept 1: Analyserer …" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/07-analyserer.svg"><img src="konsept-2/skjermer/07-analyserer.svg" alt="Konsept 2: Analyserer …" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/07-analyserer.svg"><img src="konsept-3/skjermer/07-analyserer.svg" alt="Konsept 3: Analyserer …" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-08-gap-analyse">
+    <h2 id="h-08-gap-analyse">08 · Steg 2: Gap-analyse</h2>
+    <p>Kjerneskjermen: manglende krav først med svarfelt, dokumenterte krav med sitat, ansettelsesvilkår for seg og omskrivingsvalg (FR-10–FR-15).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/08-gap-analyse.svg"><img src="konsept-1/skjermer/08-gap-analyse.svg" alt="Konsept 1: Steg 2: Gap-analyse" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/08-gap-analyse.svg"><img src="konsept-2/skjermer/08-gap-analyse.svg" alt="Konsept 2: Steg 2: Gap-analyse" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/08-gap-analyse.svg"><img src="konsept-3/skjermer/08-gap-analyse.svg" alt="Konsept 3: Steg 2: Gap-analyse" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-09-gap-tomtilstander">
+    <h2 id="h-09-gap-tomtilstander">09 · Gap-analyse: tomtilstander</h2>
+    <p>Alle krav dokumentert (testpar 4) og ingen tydelige krav i annonsen (FR-10, FR-14).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/09-gap-tomtilstander.svg"><img src="konsept-1/skjermer/09-gap-tomtilstander.svg" alt="Konsept 1: Gap-analyse: tomtilstander" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/09-gap-tomtilstander.svg"><img src="konsept-2/skjermer/09-gap-tomtilstander.svg" alt="Konsept 2: Gap-analyse: tomtilstander" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/09-gap-tomtilstander.svg"><img src="konsept-3/skjermer/09-gap-tomtilstander.svg" alt="Konsept 3: Gap-analyse: tomtilstander" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-10-soknadsutkast">
+    <h2 id="h-10-soknadsutkast">10 · Steg 3: Helt søknadsutkast</h2>
+    <p>Redigerbart brev, «Teksten bygger på», «Kopier tekst» og melding om sletting ved utlogging (FR-16, FR-19, FR-20).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/10-soknadsutkast.svg"><img src="konsept-1/skjermer/10-soknadsutkast.svg" alt="Konsept 1: Steg 3: Helt søknadsutkast" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/10-soknadsutkast.svg"><img src="konsept-2/skjermer/10-soknadsutkast.svg" alt="Konsept 2: Steg 3: Helt søknadsutkast" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/10-soknadsutkast.svg"><img src="konsept-3/skjermer/10-soknadsutkast.svg" alt="Konsept 3: Steg 3: Helt søknadsutkast" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-11-forslag-til-formuleringer">
+    <h2 id="h-11-forslag-til-formuleringer">11 · Steg 3: Forslag til formuleringer</h2>
+    <p>Forslag som liste, med veiledning merket «ikke del av søknaden» (FR-17, FR-19).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/11-forslag-til-formuleringer.svg"><img src="konsept-1/skjermer/11-forslag-til-formuleringer.svg" alt="Konsept 1: Steg 3: Forslag til formuleringer" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/11-forslag-til-formuleringer.svg"><img src="konsept-2/skjermer/11-forslag-til-formuleringer.svg" alt="Konsept 2: Steg 3: Forslag til formuleringer" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/11-forslag-til-formuleringer.svg"><img src="konsept-3/skjermer/11-forslag-til-formuleringer.svg" alt="Konsept 3: Steg 3: Forslag til formuleringer" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-12-endre-cv-dialog">
+    <h2 id="h-12-endre-cv-dialog">12 · Dialog: Endre CV eller annonse</h2>
+    <p>Bekreft at svar, analyse og tekst forkastes, eller avbryt (FR-21).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/12-endre-cv-dialog.svg"><img src="konsept-1/skjermer/12-endre-cv-dialog.svg" alt="Konsept 1: Dialog: Endre CV eller annonse" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/12-endre-cv-dialog.svg"><img src="konsept-2/skjermer/12-endre-cv-dialog.svg" alt="Konsept 2: Dialog: Endre CV eller annonse" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/12-endre-cv-dialog.svg"><img src="konsept-3/skjermer/12-endre-cv-dialog.svg" alt="Konsept 3: Dialog: Endre CV eller annonse" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-13-feil-fra-sprakmodell">
+    <h2 id="h-13-feil-fra-sprakmodell">13 · Feil fra språkmodellen</h2>
+    <p>Tidsavbrudd med «Prøv igjen», og analyse som ble avvist fordi et sitat ikke kunne bekreftes (FR-30).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/13-feil-fra-sprakmodell.svg"><img src="konsept-1/skjermer/13-feil-fra-sprakmodell.svg" alt="Konsept 1: Feil fra språkmodellen" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/13-feil-fra-sprakmodell.svg"><img src="konsept-2/skjermer/13-feil-fra-sprakmodell.svg" alt="Konsept 2: Feil fra språkmodellen" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/13-feil-fra-sprakmodell.svg"><img src="konsept-3/skjermer/13-feil-fra-sprakmodell.svg" alt="Konsept 3: Feil fra språkmodellen" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-14-leverandorvarsel">
+    <h2 id="h-14-leverandorvarsel">14 · Varsel før data sendes (API-modus)</h2>
+    <p>Navngir leverandøren og må bekreftes før første modellkall (FR-25).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/14-leverandorvarsel.svg"><img src="konsept-1/skjermer/14-leverandorvarsel.svg" alt="Konsept 1: Varsel før data sendes (API-modus)" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/14-leverandorvarsel.svg"><img src="konsept-2/skjermer/14-leverandorvarsel.svg" alt="Konsept 2: Varsel før data sendes (API-modus)" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/14-leverandorvarsel.svg"><img src="konsept-3/skjermer/14-leverandorvarsel.svg" alt="Konsept 3: Varsel før data sendes (API-modus)" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-15-oktvarsel">
+    <h2 id="h-15-oktvarsel">15 · Øktvarsel og utløpt økt</h2>
+    <p>Varsel ved 25 minutter med «Fortsett økten», og innlogging etter automatisk utlogging (FR-22, FR-23).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb" href="konsept-1/skjermer/15-oktvarsel.svg"><img src="konsept-1/skjermer/15-oktvarsel.svg" alt="Konsept 1: Øktvarsel og utløpt økt" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb" href="konsept-2/skjermer/15-oktvarsel.svg"><img src="konsept-2/skjermer/15-oktvarsel.svg" alt="Konsept 2: Øktvarsel og utløpt økt" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb" href="konsept-3/skjermer/15-oktvarsel.svg"><img src="konsept-3/skjermer/15-oktvarsel.svg" alt="Konsept 3: Øktvarsel og utløpt økt" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-16-mobil-gap-analyse">
+    <h2 id="h-16-mobil-gap-analyse">16 · Mobil: Gap-analyse</h2>
+    <p>390 px med stablede kolonner, og steglisten viser bare aktivt steg (NFR-2).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb mobile" href="konsept-1/skjermer/16-mobil-gap-analyse.svg"><img src="konsept-1/skjermer/16-mobil-gap-analyse.svg" alt="Konsept 1: Mobil: Gap-analyse" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb mobile" href="konsept-2/skjermer/16-mobil-gap-analyse.svg"><img src="konsept-2/skjermer/16-mobil-gap-analyse.svg" alt="Konsept 2: Mobil: Gap-analyse" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb mobile" href="konsept-3/skjermer/16-mobil-gap-analyse.svg"><img src="konsept-3/skjermer/16-mobil-gap-analyse.svg" alt="Konsept 3: Mobil: Gap-analyse" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="screen" aria-labelledby="h-17-mobil-tekst">
+    <h2 id="h-17-mobil-tekst">17 · Mobil: Søknadsutkast</h2>
+    <p>390 px med «Teksten bygger på» og «Kopier tekst» (NFR-2).</p>
+    <ul class="row">
+      <li class="k1"><span class="label">Konsept 1 · Rolig veiviser</span><a class="thumb mobile" href="konsept-1/skjermer/17-mobil-tekst.svg"><img src="konsept-1/skjermer/17-mobil-tekst.svg" alt="Konsept 1: Mobil: Søknadsutkast" loading="lazy"></a></li>
+      <li class="k2"><span class="label">Konsept 2 · Arbeidsbenk med bevis</span><a class="thumb mobile" href="konsept-2/skjermer/17-mobil-tekst.svg"><img src="konsept-2/skjermer/17-mobil-tekst.svg" alt="Konsept 2: Mobil: Søknadsutkast" loading="lazy"></a></li>
+      <li class="k3"><span class="label">Konsept 3 · Kort og mot</span><a class="thumb mobile" href="konsept-3/skjermer/17-mobil-tekst.svg"><img src="konsept-3/skjermer/17-mobil-tekst.svg" alt="Konsept 3: Mobil: Søknadsutkast" loading="lazy"></a></li>
+    </ul>
+  </section>
+</main>
+<footer>
+  <p>Konseptskisser til gruppevurdering i G66, laget 2026-11-15 med Claude Code (bmad-ux og impeccable). Alle personer og arbeidsgivere er fiktive.</p>
+</footer>
+</body>
+</html>
