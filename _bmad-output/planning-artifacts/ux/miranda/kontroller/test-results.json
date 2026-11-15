@@ -1,0 +1,453 @@
+{
+  "date": "2026-11-15T09:47:00.358Z",
+  "browser": "Chrome headless via CDP",
+  "checks": [
+    {
+      "name": "Start viser simulert konto og mock-modus",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt innlogging-pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ugyldig e-post valideres og får fokus",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Registrering krever åtte tegn",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Innlogging med testbruker",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Tom CV blokkerer analyse og får fokus",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Eksempel fyller CV, annonse og stillingsdata",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-1-pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-1-mobil-375",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-1-mobil-390",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-1-pc-1280",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Analyse har ett gap og tre dokumenterte krav",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Stegbytte fokuserer overskriften",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Dokumenterte krav har CV-sitater",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Tekstkontrast minst 4,5:1 .section-subheading p",
+      "passed": true,
+      "details": "{\"selector\":\".section-subheading p\",\"color\":\"rgb(82, 99, 122)\",\"background\":\"rgb(245, 247, 251)\",\"ratio\":5.72}"
+    },
+    {
+      "name": "Tekstkontrast minst 4,5:1 .requirement.gap label",
+      "passed": true,
+      "details": "{\"selector\":\".requirement.gap label\",\"color\":\"rgb(23, 42, 67)\",\"background\":\"rgb(255, 255, 255)\",\"ratio\":14.5}"
+    },
+    {
+      "name": "Tekstkontrast minst 4,5:1 #generate",
+      "passed": true,
+      "details": "{\"selector\":\"#generate\",\"color\":\"rgb(255, 255, 255)\",\"background\":\"rgb(36, 79, 208)\",\"ratio\":6.76}"
+    },
+    {
+      "name": "Tekstkontrast minst 4,5:1 .requirement.gap .pill",
+      "passed": true,
+      "details": "{\"selector\":\".requirement.gap .pill\",\"color\":\"rgb(131, 80, 25)\",\"background\":\"rgb(255, 247, 233)\",\"ratio\":6.31}"
+    },
+    {
+      "name": "Tekstkontrast minst 4,5:1 .requirement.documented .pill",
+      "passed": true,
+      "details": "{\"selector\":\".requirement.documented .pill\",\"color\":\"rgb(36, 102, 75)\",\"background\":\"rgb(237, 246, 240)\",\"ratio\":6.19}"
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-2-mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-2-pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Negativt svar beholdes ordrett i søknaden",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-3-pc",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen horisontal overflyt steg-3-mobil",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Navigasjon beholder egenredigert tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Oppdatering beholder innlogget økt og redigering",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kopiering har markeringsfallback",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Erstatning av egen tekst krever bekreftelse",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Avbrutt erstatning beholder teksten",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Bekreftet erstatning bevarer begrensning",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Avbrutt CV-endring beholder resultat og lås",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Bekreftet CV-endring forkaster analyse, svar og tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Tidsavbrudd viser feil og beholder CV",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Manuell retry virker",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst 0",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev 0",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste 0",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad 0",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst 1",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev 1",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste 1",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad 1",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst 2",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev 2",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste 2",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad 2",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Alle krav dokumentert uten svarfelt",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst 3",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev 3",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste 3",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad 3",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen tydelige krav vises som tomtilstand",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst none",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev none",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste none",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad none",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ansettelsesvilkår er separat conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ansettelsesvilkår er separat only-conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Kjent eksempel er ikke feilaktig merket egen tekst only-conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Helt søknadsutkast er brev only-conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Forslag er en liste only-conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Veiledning kopieres ikke som søknad only-conditions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ugyldig sitat avviser hele analysen",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Konfigurasjonsfeil tilbyr ikke retry",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Skannet PDF vises tydelig som simulert",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Simulert øktutløp tømmer data",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Utlogging og ny innlogging gir tom økt",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "TXT-opplasting leser faktisk lokal tekst",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Feil filformat bevarer gyldig CV",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Fil over 2 MB avvises uten datatap",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "PDF-funksjon er tydelig merket simulert",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Egen tekst merkes som fast eksempelsvar",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Tab flytter tastaturfokus",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Synlige skjemafelt har etiketter",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Ingen eksterne HTTP-forespørsler fra appen",
+      "passed": true,
+      "details": "[]"
+    },
+    {
+      "name": "Ingen JavaScript-unntak i nettleseren",
+      "passed": true,
+      "details": "[]"
+    }
+  ],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "screenshots": [
+    "innlogging-pc.png",
+    "steg-1-pc.png",
+    "steg-1-mobil-375.png",
+    "steg-1-mobil-390.png",
+    "steg-1-pc-1280.png",
+    "steg-2-mobil.png",
+    "steg-2-pc.png",
+    "steg-3-pc.png",
+    "steg-3-mobil.png"
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "contrast": [
+    {
+      "selector": ".section-subheading p",
+      "color": "rgb(82, 99, 122)",
+      "background": "rgb(245, 247, 251)",
+      "ratio": 5.72
+    },
+    {
+      "selector": ".requirement.gap label",
+      "color": "rgb(23, 42, 67)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 14.5
+    },
+    {
+      "selector": "#generate",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(36, 79, 208)",
+      "ratio": 6.76
+    },
+    {
+      "selector": ".requirement.gap .pill",
+      "color": "rgb(131, 80, 25)",
+      "background": "rgb(255, 247, 233)",
+      "ratio": 6.31
+    },
+    {
+      "selector": ".requirement.documented .pill",
+      "color": "rgb(36, 102, 75)",
+      "background": "rgb(237, 246, 240)",
+      "ratio": 6.19
+    }
+  ],
+  "passed": true
+}
