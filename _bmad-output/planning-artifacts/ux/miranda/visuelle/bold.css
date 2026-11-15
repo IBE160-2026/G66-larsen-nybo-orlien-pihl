@@ -1,0 +1,111 @@
+/* Moderne / Bold: et typografisk arbeidsrom i blekk, lime og lilla. */
+.bold {
+  --ink: #18181b; --muted: #56565f; --paper: #efefe9; --field: #fffefa;
+  --line: #b5b5ab; --field-line: #75756d; --focus: #6737d9; --radius: 0px;
+  --body-font: Arial, Helvetica, sans-serif; --display-font: Impact, "Arial Narrow", sans-serif;
+  --heading-size: 84px; --mobile-heading: 58px;
+}
+.bold .review-bar { background: #d9f773; color: #22251b; border-bottom: 2px solid #18181b; font-weight: 600; }
+.bold .app-shell { display: grid; grid-template-columns: 205px minmax(0,1fr); min-height: calc(100vh - 38px); }
+.bold .identity { background: #19191d; color: #f3f3e9; display: flex; flex-direction: column; padding: 35px 24px; border-right: 2px solid #18181b; }
+.bold .wordmark { font: 42px/.86 Impact, "Arial Narrow", sans-serif; letter-spacing: -.025em; align-items: start; gap: 9px; }
+.bold .bold-mark { color: #d9f773; font: 28px/1 Arial,sans-serif; }
+.bold .logo-dot { color: #d9f773; font: 19px/1 Arial,sans-serif; }
+.bold .identity-story { display: block; margin-top: 120px; }
+.bold .identity-story .small-label { color: #c0c0b6; font-size: 8px; }
+.bold .identity-story p { font: 32px/1.03 Impact, "Arial Narrow", sans-serif; margin-top: 15px; }
+.bold .identity-symbol { display: block; color: #d9f773; font: 100px/1 Arial,sans-serif; margin-top: 25px; }
+.bold .identity-bottom { display: block; margin-top: auto; padding-top: 100px; font-size: 11px; color: #c0c0b6; }
+.bold .app-body { min-width: 0; padding: 0 42px; max-width: 1350px; }
+.bold .app-header { padding: 24px 0 19px; border-bottom: 2px solid var(--ink); }
+.bold .edition { font-weight: 700; letter-spacing: .08em; }
+.bold .avatar { background: #6737d9; color: white; border: 0; border-radius: 0; font-weight: 700; }
+.bold .mock-note { color: #45454c; border-bottom: 1px solid var(--line); }
+.bold .mock-note > span:first-child { color: #6737d9; }
+.bold .screen-nav { border-bottom: 2px solid var(--ink); margin-bottom: 32px; }
+.bold .screen-nav a { padding: 17px 14px; font-weight: 700; border-right: 1px solid var(--line); }
+.bold .screen-nav a:last-child { border-right: 0; }
+.bold .screen-nav a[aria-current] { background: #19191d; color: #d9f773; }
+.bold .nav-number { font: 25px/1 Impact, sans-serif; }
+.bold .nav-arrow { font-size: 18px; }
+.bold .page-heading { align-items: center; gap: 18px; }
+.bold .kicker { display: inline-block; padding: 4px 8px; background: #6737d9; color: #fff; letter-spacing: .08em; }
+.bold .page-heading h1 { text-transform: uppercase; font-weight: 400; letter-spacing: -.02em; }
+.bold h1 em { font-style: normal; color: #6737d9; }
+.bold .intro { max-width: 435px; }
+.bold .job-stamp { border: 2px solid var(--ink); padding: 16px; flex-basis: 222px; background: #d9f773; transform: rotate(1deg); }
+.bold .job-stamp .small-label { font-size: 9px; }
+.bold .job-stamp .stamp-line { color: #464c32; border-top: 1px solid #8b9f49; padding-top: 9px; }
+.bold .summary { background: #19191d; color: #fafaf0; padding: 23px 27px; border: 2px solid var(--ink); }
+.bold .summary-number { color: #d9f773; font-size: 73px; letter-spacing: -.02em; }
+.bold .summary-number span { font-size: 40px; }
+.bold .summary .small-label { color: #bfc0b3; }
+.bold .summary h2 { font-size: 18px; }
+.bold .summary p:not(.small-label) { color: #cbcbc2; }
+.bold .summary-symbol { color: #d9f773; font-size: 65px; line-height: 1; }
+.bold .analysis-board { grid-template-columns: minmax(0,1fr) minmax(0,1.35fr); gap: 28px; }
+.bold .section-label { border-bottom: 2px solid var(--ink); padding-bottom: 11px; gap: 8px; }
+.bold .section-label > span { background: var(--ink); color: #d9f773; padding: 2px 5px; font-size: 9px; }
+.bold .section-label h2 { font-size: 15px; font-weight: 800; letter-spacing: -.035em; }
+.bold .gap-card { border: 2px solid #18181b; background: #e5dcff; box-shadow: 5px 5px 0 #18181b; }
+.bold .gap-card h3 { font: 31px/1.1 Impact, sans-serif; text-transform: uppercase; font-weight: 400; }
+.bold .gap-card textarea { border: 1px solid #6b5d87; }
+.bold .missing { background: #19191d; color: #f5edff; }
+.bold .documented { background: #d9f773; color: #303b16; border: 1px solid #8c9d51; }
+.bold .documented-card { border-bottom: 1px solid #a7a79f; padding: 23px 0; }
+.bold .documented-card:first-child { padding-top: 5px; }
+.bold .documented-number { color: #6737d9; font-weight: 700; }
+.bold .documented-card h3 { font-size: 13px; }
+.bold .documented-card blockquote { background: #fffefa; border-left: 3px solid #6737d9; padding: 10px 12px; font-size: 12px; }
+.bold .check { color: #3b5522; font-weight: 800; }
+.bold .writing-choice { background: #fffefa; border: 2px solid #18181b; padding: 24px; }
+.bold .writing-choice h2 { font: 29px/1.05 Impact,sans-serif; font-weight: 400; text-transform: uppercase; }
+.bold .choice { border-color: #99998c; }
+.bold .choice.selected { background: #d9f773; border: 2px solid var(--ink); padding: 17px; }
+.bold .action, .bold .visual-button { background: #6737d9; color: #fff; border: 2px solid #18181b; box-shadow: 3px 3px 0 #18181b; font-weight: 700; }
+.bold .action:hover { background: #492399; }
+.bold .action.secondary { background: transparent; color: var(--ink); box-shadow: none; }
+.bold .documents { gap: 22px; }
+.bold .document-panel, .bold .letter-panel { background: #fffefa; border: 2px solid #18181b; }
+.bold .document-panel h2, .bold .letter-panel h2 { font: 28px/1 Impact,sans-serif; text-transform: uppercase; font-weight: 400; }
+.bold .static-tabs b { color: #6737d9; }
+.bold .source-panel h2 { font-size: 44px; text-transform: uppercase; font-weight: 400; }
+.bold .source-panel h2 em { font-style: normal; color: #6737d9; }
+.bold .session-callout { background: #d9f773; border: 2px solid #18181b; }
+@media (min-width: 1600px) { .bold .app-body { padding-inline: 65px; } }
+@media (max-width: 1150px) {
+  .bold .app-shell { grid-template-columns: 160px minmax(0,1fr); }
+  .bold .identity { padding-inline: 18px; }
+  .bold .wordmark { font-size: 32px; gap: 6px; }
+  .bold .bold-mark { font-size: 23px; }
+  .bold .identity-story p { font-size: 27px; }
+  .bold .app-body { padding-inline: 28px; }
+  .bold .page-heading h1 { font-size: 65px; }
+  .bold .job-stamp { flex-basis: 190px; }
+  .bold .requirement-heading { flex-wrap: wrap; }
+}
+@media (max-width: 760px) {
+  .bold .app-shell { display: block; }
+  .bold .identity { padding: 19px 20px; border-right: 0; flex-direction: row; justify-content: space-between; align-items: center; }
+  .bold .wordmark { font-size: 29px; }
+  .bold .wordmark br { display: none; }
+  .bold .identity-story { display: none; }
+  .bold .identity-bottom { display: block; margin: 0; padding: 0; font-size: 9px; }
+  .bold .app-body { padding: 0 19px; }
+  .bold .app-header { padding-block: 15px; }
+  .bold .user-name { font-size: 10px; }
+  .bold .screen-nav { margin-bottom: 25px; gap: 0; }
+  .bold .screen-nav a { padding: 13px 7px; gap: 5px; font-size: 9px; }
+  .bold .nav-number { font-size: 18px; }
+  .bold .page-heading h1 { font-size: 58px; }
+  .bold .job-stamp { transform: none; padding: 13px; margin-top: 20px; }
+  .bold .summary { padding: 18px 14px; gap: 15px; }
+  .bold .summary-number { font-size: 60px; }
+  .bold .summary-number span { font-size: 29px; }
+  .bold .summary h2 { font-size: 15px; }
+  .bold .analysis-board { grid-template-columns: minmax(0,1fr); gap: 30px; }
+  .bold .section-label h2 { font-size: 15px; }
+  .bold .documented-card h3 { font-size: 14px; }
+  .bold .writing-choice { padding: 20px; }
+  .bold .writing-choice h2 { font-size: 27px; }
+}
