@@ -10,3 +10,6 @@
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — gruppa må godkjenne vedtak 10, 12 og 13 i PRD-revisjonen (PR) før merge; PRD gjelder som final fra merge
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — UX-prototypen må oppdateres til «Lag tekst», «Teksten bygger på» og flyten for «Endre CV eller annonse»
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — arkitekturen må bekrefte eller justere startverdiene i PRD §10 (grenser, tidsavbrudd, gpt-5-mini-pris)
+- [ ] 2026-11-22 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — Elisabeth går gjennom sine tre UX-konsepter og ber om endringer før de sendes til gruppa
+- [ ] 2026-11-22 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — gruppa velger én designretning av de ni konseptene; deretter `bmad-ux` for DESIGN.md og EXPERIENCE.md
+- [ ] 2026-11-22 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — gruppa blir enige om én plassering for UX-konseptene (`UX/` i rot eller `_bmad-output/planning-artifacts/ux/`)
