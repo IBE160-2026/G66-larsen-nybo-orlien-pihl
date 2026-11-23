@@ -79,8 +79,8 @@ Elisabeth likte den nye oversikten, men syntes konseptene ble litt kjedelige. Ap
 - `oversikt.html`, `README.md` (ny iterasjonstabell over tre runder, tokens og kontrast) og `verktoy/skjermbilder.cjs` er oppdatert, og alle 15 bildene er laget på nytt.
 - Kontroll: all tekst holder minst 4,5:1, og ingen overflyt ved 375 px.
 - KI-feil funnet og rettet: en ny regel som fjernet kantlinjen på kortene, fjernet også den stiplede rammen rundt ansettelsesvilkår i Solnedgang og Elektrisk. Feilen er dokumentert i README.
-- Runde 3 er ikke committet ennå, fordi Elisabeth skal se gjennom den.
+- Elisabeth godkjente runde 3. Det som er verdt å vite (Bahnschrift bare på Windows, Bento tåler få krav, kontrast i gradienten, risiko for at avhuking leses som score, «Før du sender» utenfor PRD, 5 av 17 skjermer) står i en egen boks øverst i `oversikt.html`, i README og i PR-beskrivelsen, slik at det er med når gruppa velger.
+- Committet som `531cfc2`, pushet og PR #18 opprettet: https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/pull/18
 
 ### Åpne punkter
-- Elisabeth går gjennom runde 3 (Solnedgang, Elektrisk, Bento) før commit og deling med gruppa.
 - Bahnschrift finnes bare på Windows. Velger gruppa Elektrisk, må en nettskrift vurderes.
