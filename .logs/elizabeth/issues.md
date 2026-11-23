@@ -4,13 +4,9 @@
 - [x] 2026-10-18 [product-brief-oppdatering](998-2026-10-18-19-32-00-product-brief-oppdatering.md) — malen for refleksjonsnotater ligger bare i chatten fra 18.10; lagre den der du skriver notater (løst 2026-10-26: ligger i eget Word-dokument utenfor repoet)
 - [x] 2026-10-26 [testpar](997-2026-10-26-21-07-32-testpar.md) — gruppa må gå gjennom testparene og avklare politiattest-kategori og gråsoner (løst 2026-10-30: testparene godkjent av gruppa; politiattest og gråsoner flyttet til «Innspill til PRD» i addendum.md)
 - [ ] 2026-10-30 [product-brief-sammenslaing](999-2026-10-26-20-27-56-product-brief-sammenslaing.md) — Elisabeth setter budsjettgrense på 100 kr i OpenAI-kontoen før betalte kall aktiveres
-<<<<<<< HEAD
 - [x] 2026-10-30 [product-brief-sammenslaing](999-2026-10-26-20-27-56-product-brief-sammenslaing.md) — lage PRD basert på den ferdige briefen (et annet gruppemedlem starter; se «Innspill til PRD» i addendum.md) (løst 2026-11-05: samlet PRD-utkast merget til main via PR #9, commit 0e289e2)
-- [ ] 2026-11-01 [walkthrough-pr3](995-2026-11-01-21-08-25-walkthrough-pr3.md) — legge ukeplanen i repoet når gruppa har godtatt den og PR #5 er merget
-- [ ] 2026-11-03 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa må behandle Mirandas forslag i PRD §9 (punkt 1–9) før stories låses
-- [ ] 2026-11-05 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa velger bestått-kriterium mot ekte modell (PRD §9 punkt 4: A = 4/4 i tre runder, B = null oppdiktede påstander + terskel for gap-status)
+- [x] 2026-11-05 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa velger bestått-kriterium mot ekte modell (PRD §9 punkt 4: A = 4/4 i tre runder, B = null oppdiktede påstander + terskel for gap-status) (løst 2026-11-07: vedtak 4, fire av fire testpar i tre runder)
 - [ ] 2026-11-05 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — oppdatere tests/fixtures/job-applications/README.md om politiattest når PRD §9 punkt 1 er vedtatt
-=======
 - [x] 2026-10-30 [product-brief-sammenslaing](999-2026-10-26-20-27-56-product-brief-sammenslaing.md) — lage PRD basert på den ferdige briefen (et annet gruppemedlem starter; se «Innspill til PRD» i addendum.md) (løst 2026-11-12: PRD laget og ferdigstilt i PR #11)
 - [ ] 2026-11-01 [walkthrough-pr3](995-2026-11-01-21-08-25-walkthrough-pr3.md) — legge ukeplanen i repoet når gruppa har godtatt den og PR #5 er merget
 - [x] 2026-11-03 [prd-sammenslaing](993-2026-11-03-17-21-50-prd-sammenslaing.md) — gruppa må behandle Mirandas forslag i PRD §9 (punkt 1–9) før stories låses (løst 2026-11-12: godkjent av gruppa 2026-11-07, PR #11)
@@ -19,5 +15,4 @@
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — arkitekturen må bekrefte eller justere startverdiene i PRD §10 (grenser, tidsavbrudd, gpt-5-mini-pris)
 - [x] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa bestemmer seg for NFR-2 (mobil) og dokumenterer begrunnelsen i PRD-en (løst 2026-11-23: vedtak 15, PR #20)
 - [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa vurderer de åpne spørsmålene i samlet-forslag/README.md (lime, serif, klistremerke)
-- [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa merger PR #19 og #20 (begrunnelsen for vedtak 15 bekreftet 2026-11-23)
->>>>>>> origin/main
+- [x] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa merger PR #19 og #20 (begrunnelsen for vedtak 15 bekreftet 2026-11-23) (løst 2026-11-23: merget av Helle)
