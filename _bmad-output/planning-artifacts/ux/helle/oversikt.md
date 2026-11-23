@@ -113,6 +113,6 @@ Subagentene valgte uavhengig av hverandre de samme navnene. Det tyder på at nav
 - Alle 51 SVG-er (3 × 17) er kontrollert som velformet XML med `<title>`. Filnavnene er like i alle tre konseptene. Hver subagent har sett gjennom skjermene sine rendret i Chrome. Jeg har i tillegg sett på gap-analysen (skjerm 08) i alle tre.
 - **Impeccable-detektoren** fant to ting i galleriene:
   - *Trang padding* på mock-stripen i `konsept-3/index.html`: rettet.
-  - *Krem/beige bakgrunn* i konsept 1 og 3: står fortsatt, fordi fargene var en bevisst retning i briefen. Funnet er tatt med som svakhet over. Undertrykking ville krevd en fil utenfor `UX/helle/`, så jeg gjorde det ikke.
-- **Avvik fra `bmad-ux`-flyten:** Det er ikke laget DESIGN.md, EXPERIENCE.md eller memlog i `planning-artifacts`, fordi oppdraget var å holde alt i `UX/helle/` og ikke stille spørsmål. Når gruppa har valgt retning, bør `bmad-ux` kjøres i Create-modus på det valgte konseptet, med denne mappa som `imports/`.
+  - *Krem/beige bakgrunn* i konsept 1 og 3: står fortsatt, fordi fargene var en bevisst retning i briefen. Funnet er tatt med som svakhet over. Undertrykking ville krevd en fil utenfor `_bmad-output/planning-artifacts/ux/helle/`, så jeg gjorde det ikke.
+- **Avvik fra `bmad-ux`-flyten:** Det er ikke laget DESIGN.md, EXPERIENCE.md eller memlog i `planning-artifacts`, fordi oppdraget var å holde alt i `_bmad-output/planning-artifacts/ux/helle/` og ikke stille spørsmål. Når gruppa har valgt retning, bør `bmad-ux` kjøres i Create-modus på det valgte konseptet, med denne mappa som `imports/`.
 - Konsept 1 har med generatorskriptene i `konsept-1/kilde/`, så skjermene kan lages på nytt. De andre konseptene har ikke det. Mappa kan slettes hvis gruppa ikke vil ha den.

@@ -1,12 +1,12 @@
 # Felles brief for designkonseptene (Helle, 2026-11-15)
 
-Denne briefen ble gitt likt til alle tre subagentene, så konseptene dekker de samme sidene med det samme innholdet og kan sammenlignes side for side. Kilder: [PRD](../../_bmad-output/planning-artifacts/prds/prd-supersoker-2026-11-03/prd.md), [UX-prototypen](../../_bmad-output/planning-artifacts/ux/prototype-kjerneflyt.html) og [testpar 1](../../tests/fixtures/job-applications/01-mangler-sertifikat/).
+Denne briefen ble gitt likt til alle tre subagentene, så konseptene dekker de samme sidene med det samme innholdet og kan sammenlignes side for side. Kilder: [PRD](../../prds/prd-supersoker-2026-11-03/prd.md), [UX-prototypen](../prototype-kjerneflyt.html) og [testpar 1](../../../../tests/fixtures/job-applications/01-mangler-sertifikat/).
 
 ## Oppdraget
 
 Tre SVG-baserte designkonsepter for Supersøker v1, med tydelig ulik retning. **Brukervennlighet er viktigst**, kreativ variasjon nest viktigst. Gruppa (fire personer × tre konsepter = ni) velger retning før detaljarbeidet, så dette er konseptskisser, ikke ferdige spesifikasjoner. Det er ikke stilt avklaringsspørsmål; antagelser er skrevet ned i hvert konsept.
 
-## Leveranse per konsept (`UX/helle/konsept-N/`)
+## Leveranse per konsept (`_bmad-output/planning-artifacts/ux/helle/konsept-N/`)
 
 - `skjermer/NN-navn.svg` – én SVG per skjerm i listen under, med nøyaktig samme filnavn i alle konsepter.
 - `index.html` – galleri som viser alle SVG-ene i rekkefølge med skjermnavn og 1–2 setninger om hva skjermen viser.

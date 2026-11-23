@@ -111,7 +111,7 @@ ${toc}
 ${figs}
   </main>
   <footer>
-    <p>Felles brief: <a href="../felles-brief.md">UX/helle/felles-brief.md</a>. Alle navn og dokumenter er fiktive.</p>
+    <p>Felles brief: <a href="../felles-brief.md">_bmad-output/planning-artifacts/ux/helle/felles-brief.md</a>. Alle navn og dokumenter er fiktive.</p>
   </footer>
 </body>
 </html>

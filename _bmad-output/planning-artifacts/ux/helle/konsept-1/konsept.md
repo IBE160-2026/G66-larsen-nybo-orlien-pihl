@@ -159,6 +159,6 @@ Hierarkiet kommer fra størrelse og vekt, ikke fra farge. Ingen versaler og inge
 Skjermene er generert med et lite Node-skript i [kilde/](kilde/), med manuell linjebryting basert på metrikk fra Segoe UI (krever Windows-fonter i `C:/Windows/Fonts`):
 
 ```bash
-node UX/helle/konsept-1/kilde/screens.js UX/helle/konsept-1/skjermer
-node UX/helle/konsept-1/kilde/gallery.js UX/helle/konsept-1
+node _bmad-output/planning-artifacts/ux/helle/konsept-1/kilde/screens.js _bmad-output/planning-artifacts/ux/helle/konsept-1/skjermer
+node _bmad-output/planning-artifacts/ux/helle/konsept-1/kilde/gallery.js _bmad-output/planning-artifacts/ux/helle/konsept-1
 ```
