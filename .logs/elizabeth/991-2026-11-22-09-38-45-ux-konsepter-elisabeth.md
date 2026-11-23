@@ -25,3 +25,20 @@ Gruppa har avtalt at hver lager tre visuelle designkonsepter for Supersøker, sl
 - Elisabeth går gjennom de tre konseptene og ber om endringer før de sendes til gruppa.
 - Gruppa må velge én designretning av de ni konseptene, og deretter kjøres `bmad-ux` for DESIGN.md og EXPERIENCE.md.
 - Gruppa bør bli enige om én plassering for UX-konseptene. Helle bruker `UX/` i rotmappen, mens Miranda og Elisabeth bruker `_bmad-output/planning-artifacts/ux/`.
+
+## 2026-11-23 kl. 15:05 — elizabeth
+
+### Oppgave
+Elisabeth ville se UX-konseptene sine på GitHub.
+
+### Plan
+- Committet mappen `_bmad-output/planning-artifacts/ux/elisabeth/` på `elisabeth/ux-konsepter`.
+- Pushet branchen til `origin` (første push, med upstream).
+
+### Resultat
+- Commit `5cabb9b` «UX: tre designkonsepter og oversikt (Elisabeth)» med de fem filene.
+- Branchen ligger på GitHub: https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/tree/elisabeth/ux-konsepter
+- Ingen PR er opprettet ennå.
+
+### Åpne punkter
+- Ingen nye (punktene fra 2026-11-22 står fortsatt åpne i `issues.md`).
