@@ -48,7 +48,7 @@ Felles for alle tre variantene:
 
 ## Grunnlag
 
-- Skjermene, reglene og innholdet følger Helles [felles-brief.md](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/blob/helle/konsepter/UX/helle/felles-brief.md) (PR #15), slik at konseptene kan sammenlignes skjerm for skjerm med hennes og Mirandas. Kildene er [PRD-en](../../prds/prd-supersoker-2026-11-03/prd.md) og [testpar 1](../../../../tests/fixtures/job-applications/01-mangler-sertifikat/).
+- Skjermene, reglene og innholdet følger Helles [felles-brief.md](../helle/felles-brief.md) (PR #15), slik at konseptene kan sammenlignes skjerm for skjerm med hennes og Mirandas. Kildene er [PRD-en](../../prds/prd-supersoker-2026-11-03/prd.md) og [testpar 1](../../../../tests/fixtures/job-applications/01-mangler-sertifikat/).
 - Svaret fra Ida er «Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.», som i Helles brief. Mirandas konsepter bruker «Jeg har ikke førerkort.».
 - Hvert konsept viser **fem av de 17 skjermene** med samme nummer som i briefen: 01 Logg inn, 03 CV og annonse (tom), 08 Gap-analyse, 10 Søknadsutkast og 16 Mobil gap-analyse. Dette er skjermene der konseptene skiller seg mest fra hverandre. Konto-, feil- og varselskjermene (02, 04–07, 09, 11–15, 17) er ikke tegnet. De følger samme mønstre og kan tegnes for konseptet gruppa velger.
 - Skjermene er statiske HTML-skisser. Ingenting kan klikkes, analyseres eller lagres.
