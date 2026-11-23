@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konsept 3 – Sjekkliste: Bento</title>
+<style>
+  :root {
+    --krem: #FBF7F2;
+    --flate: #FFFFFF;
+    --blekk: #1E2A4A;
+    --dempet: #525C72;
+    --korall: #B3360F;
+    --korall-myk: #FBE4DA;
+    --dok: #1D5B3A;
+    --dok-myk: #E3F1E7;
+    --linje: #E4DCD1;
+    --radius: 14px;
+    --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    --tittel: "Trebuchet MS", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E9E1D6; color: var(--blekk); font: 16px/1.5 var(--sans); }
+  .galleri { max-width: 1280px; margin: 0 auto; padding: 32px 16px 64px; }
+  .galleri > header h1 { margin: 0 0 4px; font-size: 28px; font-family: var(--tittel); }
+  .galleri > header p { margin: 0 0 8px; max-width: 70ch; color: var(--dempet); }
+  figure { margin: 48px 0 0; }
+  figcaption { margin-bottom: 12px; max-width: 80ch; }
+  figcaption strong { display: block; font-size: 18px; }
+  figcaption span { color: var(--dempet); font-size: 14px; }
+
+  .ramme { background: var(--krem); border: 1px solid var(--linje); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(30,42,74,.12); }
+  .ramme.mobil { width: 390px; max-width: 100%; }
+  .mock { background: var(--blekk); color: #fff; font-size: 14px; padding: 6px 24px; }
+  .topp { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid var(--linje); background: var(--flate); }
+  .logo { font: 700 20px var(--tittel); }
+  .logo span { color: var(--korall); }
+  .lenke { color: var(--korall); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+  .oppsett { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 520px; }
+  .huskeliste { background: var(--blekk); color: #fff; padding: 24px 20px; }
+  .huskeliste h2 { font: 700 15px var(--sans); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 12px; color: #fff; }
+  .huskeliste ol { list-style: none; margin: 0 0 24px; padding: 0; }
+  .huskeliste li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; font-size: 15px; }
+  .huskeliste li[aria-current] { background: rgba(255,255,255,.12); font-weight: 700; }
+  .huskeliste li small { display: block; font-size: 13px; opacity: .9; font-weight: 400; }
+  .merke { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
+  .merke.ferdig { background: #fff; color: var(--blekk); }
+  .merke.aapen { border: 2px dashed #fff; }
+  .merke.na { border: 2px solid #fff; }
+
+  .arbeid { padding: 28px 32px 40px; }
+  h3.side { font: 700 28px/1.2 var(--tittel); margin: 0 0 6px; }
+  .ingress { margin: 0 0 20px; color: var(--dempet); max-width: 62ch; }
+  .kort { background: var(--flate); border: 1px solid var(--linje); border-radius: var(--radius); padding: 20px 22px; }
+  .kort + .kort { margin-top: 14px; }
+  h4 { margin: 0 0 6px; font-size: 18px; }
+
+  .rad { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+  .boks { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; }
+  .boks.dok { background: var(--dok); color: #fff; }
+  .boks.mangler { border: 3px dashed var(--korall); color: var(--korall); }
+  .boks.tom { border: 2px solid var(--dempet); }
+  .statusord { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 999px; margin-bottom: 6px; }
+  .statusord.dok { background: var(--dok-myk); color: var(--dok); }
+  .statusord.mangler { background: var(--korall-myk); color: var(--blekk); }
+  .tagg { display: inline-block; font-size: 13px; font-weight: 600; border: 1.5px solid var(--blekk); border-radius: 999px; padding: 1px 10px; margin-left: 6px; }
+  .sitat { margin: 4px 0 0; padding: 8px 12px; background: var(--krem); border-radius: 8px; font-style: italic; }
+  .kort.mangler { border: 2px solid var(--korall); }
+
+  label, .label { display: block; font-weight: 600; margin: 12px 0 4px; }
+  .hjelp { display: block; font-weight: 400; font-size: 14px; color: var(--dempet); }
+  .input { width: 100%; border: 1.5px solid #7A8296; border-radius: 10px; background: #fff; padding: 10px 12px; min-height: 44px; font: inherit; }
+  .stor { min-height: 120px; }
+  .fokus { outline: 3px solid var(--korall); outline-offset: 2px; }
+  .veksle { display: inline-flex; background: var(--krem); border-radius: 999px; padding: 4px; gap: 4px; }
+  .veksle span { padding: 6px 14px; border-radius: 999px; font-size: 14px; }
+  .veksle span[aria-pressed="true"] { background: var(--blekk); color: #fff; font-weight: 600; }
+
+  .knapp { display: inline-block; font: 700 16px/1 var(--sans); padding: 14px 24px; border-radius: 999px; background: var(--korall); color: #fff; border: 2px solid var(--korall); }
+  .knapp.sekundar { background: #fff; color: var(--blekk); border-color: var(--blekk); }
+  .handling { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+
+  .teller { display: flex; gap: 12px; align-items: center; margin: 0 0 18px; font-size: 18px; font-weight: 700; }
+  .prikker { display: flex; gap: 6px; }
+  .prikker i { width: 14px; height: 14px; border-radius: 50%; background: var(--dok); display: block; }
+  .prikker i.aapen { background: none; border: 2px dashed var(--korall); }
+  .seksjon { font: 700 14px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--dempet); margin: 24px 0 10px; }
+  .vilkar { border: 1.5px dashed #7A8296; background: transparent; }
+
+  .valg { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .valg div { border: 2px solid var(--linje); border-radius: var(--radius); padding: 14px; background: #fff; }
+  .valg div.valgt { border-color: var(--blekk); box-shadow: inset 0 0 0 1px var(--blekk); }
+  .valg b::before { content: "○ "; }
+  .valg .valgt b::before { content: "● "; }
+
+  .brev { background: #fff; border: 1px solid var(--linje); border-radius: var(--radius); padding: 28px 32px; font-size: 16.5px; line-height: 1.65; }
+  .brev p { margin: 0 0 12px; }
+  .to-kol { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 20px; align-items: start; }
+  .for-du-sender ul, .grunnlag ul { list-style: none; margin: 0; padding: 0; }
+  .for-du-sender li, .grunnlag li { display: flex; gap: 10px; padding: 7px 0; border-top: 1px solid var(--linje); font-size: 15px; }
+  .grunnlag li small { display: block; color: var(--dempet); font-size: 13px; }
+  .kopiert { background: var(--dok-myk); color: var(--blekk); border-radius: 10px; padding: 10px 14px; font-size: 15px; }
+  .kopiert::before { content: "✓ "; color: var(--dok); font-weight: 700; }
+  .slettes { font-size: 14px; color: var(--dempet); }
+  .feil { background: var(--korall-myk); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+  .feil strong::before { content: "! "; color: var(--korall); }
+
+  .mobil .topp { padding: 12px 16px; }
+  .mobil .mock { padding: 6px 16px; }
+  .mobil .oppsett { display: block; }
+  .mobil .huskeliste { padding: 12px 16px; }
+  .mobil .arbeid { padding: 20px 16px 28px; }
+  .mobil h3.side { font-size: 23px; }
+  .mobil .knapp { width: 100%; text-align: center; }
+
+  /* Variant: Konsept 3 – Sjekkliste: Bento */
+  :root { --krem: #FFFFFF; --blekk: #12233D; --dempet: #4A5568; --korall: #111827; --korall-myk: #FFE8D6; --dok: #0B6B45; --dok-myk: #FFFFFF; --linje: #E6E8EE; --himmel: #DCEBFF; --mint: #E4F6EC; --mangler: #A63D12; --radius: 24px;
+    --tittel: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; }
+  body { background: #EEF0F5; }
+  .ramme { border: none; border-radius: 28px; }
+  .mock { background: var(--korall); }
+  .topp { border-bottom: none; }
+  .logo { font-weight: 800; letter-spacing: -.02em; }
+  .logo span { color: #D6336C; }
+  .oppsett { gap: 16px; padding: 0 16px 16px; }
+  .huskeliste { background: var(--himmel); color: var(--blekk); border-radius: var(--radius); align-self: start; }
+  .huskeliste h2 { color: var(--blekk); }
+  .huskeliste li[aria-current] { background: #fff; }
+  .merke.ferdig { background: var(--blekk); color: #fff; }
+  .merke.aapen, .merke.na { border-color: var(--blekk); }
+  .arbeid { padding: 8px 8px 16px; }
+  h3.side { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .kort { border: none; background: var(--mint); border-radius: var(--radius); }
+  .kort.mangler { border: none; background: var(--korall-myk); }
+  .kort.vilkar { background: #F1F2F6; border: 2px dashed #7A8296; }
+  .kort.grunnlag { background: var(--himmel); }
+  .sitat { background: rgba(255,255,255,.7); }
+  .boks.mangler { border-color: var(--mangler); color: var(--mangler); }
+  .statusord.mangler { background: #fff; color: var(--blekk); }
+  .prikker i.aapen { border-color: var(--mangler); }
+  .knapp { padding: 16px 28px; }
+  .valg div { border: 2px solid transparent; background: #F1F2F6; border-radius: var(--radius); }
+  .valg div.valgt { border-color: var(--korall); background: #fff; box-shadow: none; }
+  .brev { background: #FFFBF3; border: none; border-radius: var(--radius); }
+  .feil strong::before { color: var(--mangler); }
+  .arbeid:has(.teller) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-content: start; }
+  .arbeid:has(.teller) > * { grid-column: 1 / -1; margin: 0; }
+  .arbeid:has(.teller) > .kort:not(.mangler):not(.vilkar) { grid-column: span 1; }
+  .arbeid:has(.teller) > .kort + .kort { margin-top: 0; }
+  .arbeid:has(.teller) .rad { grid-template-columns: 1fr; gap: 8px; }
+  .mobil .oppsett { padding: 0 12px 12px; }
+  .mobil .arbeid:has(.teller) { display: block; }
+  .mobil .arbeid:has(.teller) > * + * { margin-top: 12px; }
+  .mobil h3.side { font-size: 28px; }
+  @media (max-width: 900px) { .arbeid:has(.teller) { grid-template-columns: 1fr; } .arbeid:has(.teller) > .kort:not(.mangler):not(.vilkar) { grid-column: 1 / -1; } }
+
+  @media (max-width: 900px) {
+    .oppsett, .to-kol, .valg { grid-template-columns: 1fr; }
+    .arbeid { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+<main class="galleri">
+  <header>
+    <h1>Konsept 3 – Sjekkliste: Bento</h1>
+    <p>Sjekklisten som fliser. Innholdet står i myke pastell-fliser som i en bento-boks: huskelisten i himmelblått, manglende krav i fersken og dokumenterte krav i mint, side om side. Svarte knapper og store overskrifter. Fylte punkter er dokumentert i CV-en. Stiplede punkter står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon.</p>
+    <p>Fiktivt innhold fra testpar 1. Skjermene er statiske skisser, ikke en fungerende app. Se <a href="README.md">README.md</a> for tokens, kontrast og antagelser, og <a href="oversikt.html">oversikt.html</a> for alle tre konseptene.</p>
+  </header>
+
+  <!-- 01 -->
+  <figure>
+    <figcaption><strong>01 · Logg inn</strong><span>Feilmelding over skjemaet, hint om testbruker, lenke til «Opprett konto». FR-2, FR-3.</span></figcaption>
+    <div class="ramme" role="img" aria-label="Skisse av innloggingssiden">
+      <div class="mock">Mock-modus er på: ingen tekst sendes til en språkmodell.</div>
+      <div class="oppsett">
+        <div class="huskeliste">
+          <h2>Slik fungerer det</h2>
+          <ol>
+            <li><span class="merke na">1</span><span>Legg inn CV og annonse</span></li>
+            <li><span class="merke na">2</span><span>Se hvilke krav CV-en dokumenterer</span></li>
+            <li><span class="merke na">3</span><span>Få en tekst du kan redigere</span></li>
+          </ol>
+        </div>
+        <div class="arbeid" style="max-width:520px">
+          <div class="logo" style="margin-bottom:16px">Super<span>søker</span></div>
+          <h3 class="side">Logg inn</h3>
+          <div class="feil"><strong>Feil e-post eller passord.</strong> Sjekk skrivemåten og prøv igjen.</div>
+          <span class="label">E-post</span><div class="input">test@supersoker.no</div>
+          <span class="label">Passord</span><div class="input fokus"></div>
+          <div class="handling"><span class="knapp">Logg inn</span><span class="lenke">Opprett konto</span></div>
+          <p class="slettes" style="margin-top:16px">Testbruker står i README.</p>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 03 -->
+  <figure>
+    <figcaption><strong>03 · Steg 1: CV og annonse (tom)</strong><span>Huskelisten viser to åpne punkter: CV og annonse. FR-4, FR-7, FR-27.</span></figcaption>
+    <div class="ramme" role="img" aria-label="Skisse av steg 1 i tom tilstand">
+      <div class="mock">Mock-modus er på: ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">Super<span>søker</span></span><span class="lenke">Logg ut</span></div>
+      <div class="oppsett">
+        <nav class="huskeliste" aria-label="Steg">
+          <h2>Steg</h2>
+          <ol>
+            <li aria-current="step"><span class="merke na">1</span><span>CV og annonse</span></li>
+            <li><span class="merke na">2</span><span>Gap-analyse</span></li>
+            <li><span class="merke na">3</span><span>Teksten</span></li>
+          </ol>
+          <h2>Før du analyserer</h2>
+          <ol>
+            <li><span class="merke aapen"></span><span>CV lagt inn</span></li>
+            <li><span class="merke aapen"></span><span>Annonse lagt inn</span></li>
+          </ol>
+        </nav>
+        <div class="arbeid">
+          <h3 class="side">CV og annonse</h3>
+          <p class="ingress">Legg inn CV-en og annonsen. Punktene til venstre hukes av når feltene er fylt.</p>
+          <div class="kort">
+            <div class="rad"><span class="boks tom"></span><div>
+              <h4>CV</h4>
+              <div class="veksle"><span aria-pressed="true">Lim inn tekst</span><span aria-pressed="false">Last opp fil</span></div>
+              <span class="label">CV-tekst <span class="hjelp">Lim inn hele CV-en.</span></span>
+              <div class="input stor fokus"></div>
+            </div></div>
+          </div>
+          <div class="kort">
+            <div class="rad"><span class="boks tom"></span><div>
+              <h4>Stillingsannonse</h4>
+              <span class="label">Annonsetekst <span class="hjelp">Kopier teksten fra annonsen, også kravene.</span></span>
+              <div class="input stor"></div>
+            </div></div>
+          </div>
+          <div class="handling"><span class="knapp">Analyser kravene</span><span class="knapp sekundar">Last inn eksempel (testpar 1)</span></div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 08 -->
+  <figure>
+    <figcaption><strong>08 · Steg 2: Gap-analyse (kjerneskjermen)</strong><span>Kravene står som punkter både i huskelisten og i hovedfeltet. Førerkort har fått et svar, men punktet er fortsatt åpent. FR-10–FR-15.</span></figcaption>
+    <div class="ramme" role="img" aria-label="Skisse av gap-analysen">
+      <div class="mock">Mock-modus er på: ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">Super<span>søker</span></span><span class="lenke">Logg ut</span></div>
+      <div class="oppsett">
+        <nav class="huskeliste" aria-label="Steg og krav">
+          <h2>Steg</h2>
+          <ol>
+            <li><span class="merke ferdig">✓</span><span>CV og annonse</span></li>
+            <li aria-current="step"><span class="merke na">2</span><span>Gap-analyse</span></li>
+            <li><span class="merke na">3</span><span>Teksten</span></li>
+          </ol>
+          <h2>Kravene</h2>
+          <ol>
+            <li><span class="merke aapen">!</span><span>Førerkort klasse B<small>Står ikke i CV-en · svar lagt til</small></span></li>
+            <li><span class="merke ferdig">✓</span><span>Gode norskkunnskaper<small>Dokumentert</small></span></li>
+            <li><span class="merke ferdig">✓</span><span>Jobbe med mennesker<small>Dokumentert</small></span></li>
+            <li><span class="merke ferdig">✓</span><span>Gode samarbeidsevner<small>Dokumentert</small></span></li>
+          </ol>
+        </nav>
+        <div class="arbeid">
+          <h3 class="side">Sommervikar i hjemmetjenesten – Testvik kommune</h3>
+          <p class="teller"><span class="prikker" aria-hidden="true"><i class="aapen"></i><i></i><i></i><i></i></span>3 av 4 kompetansekrav er dokumentert i CV-en.</p>
+
+          <p class="seksjon">Står ikke i CV-en</p>
+          <div class="kort mangler">
+            <div class="rad"><span class="boks mangler" aria-hidden="true">!</span><div>
+              <span class="statusord mangler">Mangler dokumentasjon</span><span class="tagg">Svar lagt til</span>
+              <h4>Førerkort klasse B</h4>
+              <p style="margin:0">Dette står ikke i CV-en. Det betyr ikke at du mangler det.</p>
+              <span class="label">Vil du si noe om dette? <span class="hjelp">Valgfritt. Svaret ditt brukes i teksten slik du skriver det.</span></span>
+              <div class="input fokus" style="min-height:70px">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div>
+            </div></div>
+          </div>
+
+          <p class="seksjon">Dokumentert i CV-en</p>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Gode norskkunnskaper, muntlig og skriftlig</h4><p class="sitat">«Norsk – morsmål»</p></div></div></div>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Erfaring med eller interesse for å jobbe med mennesker</h4><p class="sitat">«Besøksvenn, Røde Kors besøkstjeneste»</p></div></div></div>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="sitat">«Gruppeprosjekt i helsefremmende arbeid»</p></div></div></div>
+
+          <p class="seksjon">Ansettelsesvilkår (ikke en del av opptellingen)</p>
+          <div class="kort vilkar"><h4>Politiattest</h4><p style="margin:0">Arbeidsgiveren ber om dette ved ansettelse. Teksten påstår ikke at du har det.</p></div>
+
+          <p class="seksjon">Hva vil du ha?</p>
+          <div class="valg">
+            <div class="valgt"><b>Helt søknadsutkast</b><br><span class="hjelp">Et sammenhengende brev du redigerer selv.</span></div>
+            <div><b>Forslag til formuleringer</b><br><span class="hjelp">Setninger du kan bruke i ditt eget brev.</span></div>
+          </div>
+          <div class="handling"><span class="knapp">Lag tekst</span><span class="lenke">Endre CV eller annonse</span></div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 10 -->
+  <figure>
+    <figcaption><strong>10 · Steg 3: Søknadsutkast</strong><span>Huskelisten blir brukerens egen sjekkliste før innsending. «Teksten bygger på» i høyre kolonne. FR-16, FR-19, FR-20.</span></figcaption>
+    <div class="ramme" role="img" aria-label="Skisse av søknadsutkastet">
+      <div class="mock">Mock-modus er på: ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">Super<span>søker</span></span><span class="lenke">Logg ut</span></div>
+      <div class="oppsett">
+        <nav class="huskeliste" aria-label="Steg og sjekkliste">
+          <h2>Steg</h2>
+          <ol>
+            <li><span class="merke ferdig">✓</span><span>CV og annonse</span></li>
+            <li><span class="merke ferdig">✓</span><span>Gap-analyse</span></li>
+            <li aria-current="step"><span class="merke na">3</span><span>Teksten</span></li>
+          </ol>
+          <h2>Før du sender</h2>
+          <ol>
+            <li><span class="merke aapen"></span><span>Les gjennom teksten</span></li>
+            <li><span class="merke aapen"></span><span>Sjekk at alt stemmer med deg<small>Teksten bygger bare på CV-en og svaret ditt</small></span></li>
+            <li><span class="merke ferdig">✓</span><span>Kopier teksten</span></li>
+          </ol>
+        </nav>
+        <div class="arbeid">
+          <h3 class="side">Søknadsutkastet ditt</h3>
+          <p class="ingress">Skriv rett i teksten. Det er ditt brev nå.</p>
+          <div class="to-kol">
+            <div>
+              <div class="brev fokus" aria-label="Søknadsutkast, redigerbart">
+                <p>Søknad på stilling som sommervikar i hjemmetjenesten</p>
+                <p>Hei,</p>
+                <p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p>
+                <p>Som besøksvenn i Røde Kors besøkstjeneste besøker jeg en eldre dame hver uke for samtale og turer. I et gruppeprosjekt i helsefremmende arbeid planla jeg og fire medstudenter et kurs om fallforebygging for eldre, og jeg hadde ansvaret for å koordinere gruppens møter.</p>
+                <p>Jeg har ikke førerkort ennå, men jeg har oppkjøring i april.</p>
+                <p>Norsk er morsmålet mitt, og jeg har deltidsjobb med kundeservice hos Testvik Mat.</p>
+                <p>Jeg ser fram til å høre fra dere.</p>
+                <p>Vennlig hilsen<br>Ida Testesen</p>
+              </div>
+              <div class="handling"><span class="knapp">Kopier tekst</span><span class="kopiert">Kopiert. Lim inn teksten der du skriver søknaden.</span></div>
+              <p class="slettes">Teksten slettes når du logger ut. Kopier den før du går.</p>
+            </div>
+            <div class="kort grunnlag">
+              <h4>Teksten bygger på</h4>
+              <ul>
+                <li><span><small>Stilling og arbeidsgiver</small>Sommervikar i hjemmetjenesten, Testvik kommune</span></li>
+                <li><span><small>Fra CV-en</small>«Norsk – morsmål»</span></li>
+                <li><span><small>Fra CV-en</small>«Besøksvenn, Røde Kors besøkstjeneste»</span></li>
+                <li><span><small>Fra CV-en</small>«Gruppeprosjekt i helsefremmende arbeid»</span></li>
+                <li><span><small>Ditt svar</small>«Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.»</span></li>
+              </ul>
+              <div class="handling" style="margin-top:12px"><span class="lenke">Endre svar eller valg</span><span class="lenke">Endre CV eller annonse</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 16 -->
+  <figure>
+    <figcaption><strong>16 · Mobil: gap-analyse (390 px)</strong><span>Huskelisten krymper til en stripe øverst med aktivt steg og opptellingen som prikker. NFR-2.</span></figcaption>
+    <div class="ramme mobil" role="img" aria-label="Skisse av gap-analysen på mobil">
+      <div class="mock">Mock-modus: ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">Super<span>søker</span></span><span class="lenke">Logg ut</span></div>
+      <div class="oppsett">
+        <nav class="huskeliste" aria-label="Steg">
+          <ol style="margin:0"><li aria-current="step"><span class="merke na">2</span><span>Steg 2 av 3: Gap-analyse</span></li></ol>
+        </nav>
+        <div class="arbeid">
+          <h3 class="side">Sommervikar i hjemmetjenesten – Testvik kommune</h3>
+          <p class="teller" style="font-size:16px"><span class="prikker" aria-hidden="true"><i class="aapen"></i><i></i><i></i><i></i></span>3 av 4 dokumentert i CV-en.</p>
+          <div class="kort mangler">
+            <div class="rad"><span class="boks mangler" aria-hidden="true">!</span><div>
+              <span class="statusord mangler">Mangler dokumentasjon</span>
+              <h4>Førerkort klasse B</h4>
+              <span class="label">Vil du si noe om dette? <span class="hjelp">Valgfritt.</span></span>
+              <div class="input" style="min-height:70px">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div>
+            </div></div>
+          </div>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Gode norskkunnskaper</h4><p class="sitat">«Norsk – morsmål»</p></div></div></div>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Jobbe med mennesker</h4><p class="sitat">«Besøksvenn, Røde Kors besøkstjeneste»</p></div></div></div>
+          <div class="kort"><div class="rad"><span class="boks dok" aria-hidden="true">✓</span><div><span class="statusord dok">Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="sitat">«Gruppeprosjekt i helsefremmende arbeid»</p></div></div></div>
+          <div class="handling"><span class="knapp">Lag tekst</span></div>
+        </div>
+      </div>
+    </div>
+  </figure>
+</main>
+</body>
+</html>
