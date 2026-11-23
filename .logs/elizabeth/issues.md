@@ -10,3 +10,5 @@
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — gruppa må godkjenne vedtak 10, 12 og 13 i PRD-revisjonen (PR) før merge; PRD gjelder som final fra merge
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — UX-prototypen må oppdateres til «Lag tekst», «Teksten bygger på» og flyten for «Endre CV eller annonse»
 - [ ] 2026-11-12 [prd-revisjon-tilbakemelding](992-2026-11-12-19-57-35-prd-revisjon-tilbakemelding.md) — arkitekturen må bekrefte eller justere startverdiene i PRD §10 (grenser, tidsavbrudd, gpt-5-mini-pris)
+- [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa bestemmer seg for NFR-2 (mobil) og dokumenterer begrunnelsen i PRD-en
+- [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa vurderer de åpne spørsmålene i samlet-forslag/README.md (lime, serif, klistremerke)
