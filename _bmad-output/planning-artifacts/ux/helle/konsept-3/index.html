@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konsept 3 «Kort og mot» – Supersøker</title>
+<style>
+  :root {
+    --ink: #24102F; --plum: #4B1D63; --cream: #FFF3E2; --cream2: #F6E6CF; --card: #FFFDF9;
+    --muted: #5C4868; --lime: #C9F46A; --mari: #FFC247; --mint: #E3F8C4; --hair: #E8D8C4;
+    --text: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Roboto, Arial, sans-serif;
+    --display: 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--cream); color: var(--ink); font: 400 1.0625rem/1.55 var(--text); }
+  body { margin: 0; }
+  ::selection { background: var(--lime); color: var(--ink); }
+  a { color: var(--plum); text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+  .skip { position: absolute; left: 1rem; top: -4rem; background: var(--lime); color: var(--ink); padding: 0.6rem 1rem; border-radius: 999px; font-weight: 700; }
+  .skip:focus { top: 0.75rem; }
+  header { background: var(--plum); color: var(--cream); }
+  header .wrap { display: flex; align-items: center; gap: 0.75rem; padding-block: 1rem; }
+  header :focus-visible { outline-color: var(--lime); }
+  .mark { width: 2rem; height: 2rem; flex: none; }
+  .brand { font: 900 1.5rem/1 var(--display); margin: 0; }
+  .strip { background: var(--lime); color: var(--ink); font-weight: 600; font-size: 0.95rem; padding: 0.8rem 0.75rem; }
+  .wrap { width: min(72rem, 100% - 2.5rem); margin-inline: auto; }
+  main { padding-block: 2.5rem 4rem; }
+  h1 { font: 900 clamp(2.2rem, 6vw, 3.6rem)/1.05 var(--display); margin: 0 0 1rem; letter-spacing: -0.01em; }
+  .lead { font-size: 1.2rem; max-width: 46rem; margin: 0 0 1rem; }
+  .meta { color: var(--muted); max-width: 46rem; margin: 0 0 2.5rem; }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 52rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .shot { background: var(--card); border: 1.5px solid var(--hair); border-radius: 1.75rem; box-shadow: 0 6px 18px rgb(36 16 47 / 0.12); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .frame { background: var(--cream2); padding: 1rem; display: flex; justify-content: center; align-items: flex-start; max-height: 34rem; overflow: hidden; }
+  .frame img { display: block; width: 100%; height: auto; border-radius: 0.75rem; box-shadow: 0 2px 8px rgb(36 16 47 / 0.18); }
+  .mobil .frame img { width: auto; max-width: 15rem; }
+  .body { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+  .num { display: inline-grid; place-items: center; min-width: 2.5rem; height: 2.5rem; padding-inline: 0.75rem; border-radius: 999px; background: var(--lime); font: 900 1rem/1 var(--display); margin-right: 0.6rem; }
+  h2 { font: 900 1.45rem/1.2 var(--display); margin: 0; display: flex; align-items: center; }
+  .body p { margin: 0; }
+  .req { color: var(--muted); font-size: 0.95rem; }
+  footer { border-top: 2px solid var(--hair); padding-block: 1.5rem 2.5rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#innhold">Hopp til skjermene</a>
+<header>
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 36 38" aria-hidden="true"><rect x="0" y="2" width="34" height="34" rx="10" fill="#C9F46A" transform="rotate(-8 17 19)"/><path d="M10 20.5l4.5 4.5L24 15.5" fill="none" stroke="#24102F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <p class="brand">Supersøker</p>
+  </div>
+</header>
+<div class="strip"><div class="wrap">Designkonsept – skissene viser mock-modus, der ingen tekst sendes til en språkmodell.</div></div>
+<main id="innhold" class="wrap">
+  <h1>Konsept 3: Kort og mot</h1>
+  <p class="lead">Mobil-først og oppmuntrende. Hvert krav er et stort kort: manglende krav har en «Fortell oss kort»-flate, dokumenterte krav har sitatet fra CV-en som et bevis-klistremerke.</p>
+  <p class="meta">17 skjermer for Supersøker v1, med fiktivt innhold fra testpar 1. Desktop er 1440 px bred og mobil 390 px. Retning, fargetokens, kontrastberegninger og antagelser står i <a href="konsept.md">konsept.md</a>. Velg et bilde for å åpne SVG-en i full størrelse.</p>
+  <ul class="grid">
+    <li class="shot"><a class="frame" href="skjermer/01-logg-inn.svg"><img src="skjermer/01-logg-inn.svg" alt="Innloggingsside med feilmeldingen Feil e-post eller passord, utfylt e-post, passordfelt med fokus, lenke til Opprett konto og hint om testbrukeren." loading="lazy" width="1440" height="1045"></a>
+      <div class="body"><h2><span class="num">01</span>Logg inn</h2><p>Innlogging med samme melding for feil e-post og feil passord. Testbrukeren vises som et hint som peker til README, uten passord i grensesnittet.</p><p class="req">FR-2, FR-3</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/02-opprett-konto.svg"><img src="skjermer/02-opprett-konto.svg" alt="Opprett konto: e-post er beholdt, passordfeltet er tømt, rødt merket og har fokus, med meldingen om minst 8 tegn." loading="lazy" width="1440" height="1034"></a>
+      <div class="body"><h2><span class="num">02</span>Opprett konto</h2><p>Valideringsfeil ved feltet og øverst i skjemaet. E-posten beholdes, passordet tømmes, og meldingen sier hvordan feilen rettes.</p><p class="req">FR-1</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/03-cv-og-annonse-tom.svg"><img src="skjermer/03-cv-og-annonse-tom.svg" alt="Steg 1 tomt: kortet Vil du prøve først med knappen Last inn eksempel (testpar 1), CV-kort med veksler Lim inn tekst eller Last opp fil, og annonsekort med hjelpetekst." loading="lazy" width="1440" height="1320"></a>
+      <div class="body"><h2><span class="num">03</span>CV og annonse – tom</h2><p>To store kort side om side, og et eget kort for å prøve med testpar 1. «Analyser kravene» ligger fast i handlingslinjen nederst.</p><p class="req">FR-4, FR-7, FR-27</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/04-cv-og-annonse-utfylt.svg"><img src="skjermer/04-cv-og-annonse-utfylt.svg" alt="Steg 1 etter opplasting av cv-ida.pdf: innlest CV-tekst i redigerbart felt med tegnteller, påminnelsen Sjekk rekkefølgen, og utfylt annonse." loading="lazy" width="1440" height="1421"></a>
+      <div class="body"><h2><span class="num">04</span>CV og annonse – utfylt</h2><p>Teksten fra cv-ida.pdf står i et redigerbart felt med tegnteller. En gul påminnelse ber brukeren sjekke kolonner og overskrifter.</p><p class="req">FR-5, FR-7</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/05-cv-og-annonse-feil.svg"><img src="skjermer/05-cv-og-annonse-feil.svg" alt="To feil: filen cv-ida-skannet.pdf kunne ikke leses, med knappene Velg en annen fil og Lim inn tekst i stedet, og tomt annonsefelt merket ugyldig med fokus." loading="lazy" width="1440" height="1199"></a>
+      <div class="body"><h2><span class="num">05</span>CV og annonse – feil</h2><p>Filfeilen navngir fila og gir to veier videre. Det tomme annonsefeltet får melding, rød kant med varseltrekant og fokus.</p><p class="req">FR-4, FR-6, FR-8</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/06-tittel-og-arbeidsgiver.svg"><img src="skjermer/06-tittel-og-arbeidsgiver.svg" alt="Stillingstittel funnet og redigerbar i et grønt kort; arbeidsgiver ikke funnet, med forklaring og tomt obligatorisk felt med fokus i et gult kort." loading="lazy" width="1440" height="949"></a>
+      <div class="body"><h2><span class="num">06</span>Tittel og arbeidsgiver</h2><p>Det som ble funnet, kan rettes. Det som mangler, etterspørres med en forklaring på hvorfor det trengs. Appen gjetter ikke.</p><p class="req">FR-9</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/07-analyserer.svg"><img src="skjermer/07-analyserer.svg" alt="Analyserer: statusmelding, CV og annonse synlige og beholdt, og deaktivert knapp med teksten Analyserer." loading="lazy" width="1440" height="1250"></a>
+      <div class="body"><h2><span class="num">07</span>Analyserer</h2><p>Statusmeldingen sier hva som skjer og at inndataene er beholdt. Knappen er grå og deaktivert, så et dobbeltklikk ikke starter et nytt kall.</p><p class="req">FR-30</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/08-gap-analyse.svg"><img src="skjermer/08-gap-analyse.svg" alt="Gap-analyse: overskrift Sommervikar i hjemmetjenesten – Testvik kommune, 3 av 4 kompetansekrav er dokumentert, kortet Førerkort klasse B med utfylt Fortell oss kort-svar, tre dokumenterte krav med sitat-klistremerker, Politiattest som vilkår og omskrivingsvalg." loading="lazy" width="1440" height="2060"></a>
+      <div class="body"><h2><span class="num">08</span>Gap-analyse</h2><p>Kjerneskjermen. Det manglende kravet kommer først, med en stor «Fortell oss kort»-flate. Dokumenterte krav viser sitatet som et klistremerke, og vilkår og omskrivingsvalg har egne seksjoner.</p><p class="req">FR-10–FR-15</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/09-gap-tomtilstander.svg"><img src="skjermer/09-gap-tomtilstander.svg" alt="To tomtilstander: alle kompetansekrav er dokumentert (testpar 4), og Vi fant ingen tydelige krav i annonsen med knappen Endre CV eller annonse." loading="lazy" width="1440" height="2234"></a>
+      <div class="body"><h2><span class="num">09</span>Gap-analyse – tomtilstander</h2><p>Variant A bekrefter at alle kompetansekrav er dokumentert. Variant B sier at ingen tydelige krav ble funnet, og lister ingen krav.</p><p class="req">FR-10, FR-14</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/10-soknadsutkast.svg"><img src="skjermer/10-soknadsutkast.svg" alt="Søknadsutkast i redigerbart felt, kortet Teksten bygger på med sitater og brukerens svar, melding om sletting ved utlogging og bekreftelsen Kopiert ved knappen Kopier tekst." loading="lazy" width="1440" height="1343"></a>
+      <div class="body"><h2><span class="num">10</span>Søknadsutkast</h2><p>Brevet står ved siden av «Teksten bygger på». Etter kopiering vises bekreftelsen i et grønt felt ved knappen.</p><p class="req">FR-16, FR-19, FR-20</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/11-forslag-til-formuleringer.svg"><img src="skjermer/11-forslag-til-formuleringer.svg" alt="Forslag til formuleringer som punktliste, en stiplet boks merket Veiledning – ikke del av søknaden, og Teksten bygger på." loading="lazy" width="1440" height="1372"></a>
+      <div class="body"><h2><span class="num">11</span>Forslag til formuleringer</h2><p>Forslagene står som en liste. Veiledningen har stiplet ramme utenfor teksten og blir ikke med når brukeren kopierer.</p><p class="req">FR-17, FR-19</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/12-endre-cv-dialog.svg"><img src="skjermer/12-endre-cv-dialog.svg" alt="Dialogen Endre CV eller annonse? lister det som forkastes; Avbryt har fokus og Forkast og endre bekrefter." loading="lazy" width="1440" height="2060"></a>
+      <div class="body"><h2><span class="num">12</span>Endre CV – bekreftelse</h2><p>Dialogen lister hva som går tapt, også egenredigert tekst. «Avbryt» har fokus, så det trygge valget er nærmest.</p><p class="req">FR-21</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/13-feil-fra-sprakmodell.svg"><img src="skjermer/13-feil-fra-sprakmodell.svg" alt="To feilvarianter med knappen Prøv igjen: Vi fikk ikke svar, og Vi kunne ikke bekrefte analysen. CV og annonse er beholdt under." loading="lazy" width="1440" height="1568"></a>
+      <div class="body"><h2><span class="num">13</span>Feil fra språkmodellen</h2><p>Tidsavbrudd og ugyldig analyse vises med ikon, forklaring og «Prøv igjen». Inndataene står urørt under meldingen.</p><p class="req">FR-30</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/14-leverandorvarsel.svg"><img src="skjermer/14-leverandorvarsel.svg" alt="API-modus: oransje stripe om at data sendes til OpenAI etter bekreftelse, og dialog som navngir OpenAI og gpt-5-mini og lister hva som sendes." loading="lazy" width="1440" height="1124"></a>
+      <div class="body"><h2><span class="num">14</span>Leverandørvarsel</h2><p>Det eneste arket i API-modus. Stripen blir oransje, og dialogen navngir leverandøren og hva som sendes, før noe sendes.</p><p class="req">FR-25</p></div></li>
+    <li class="shot"><a class="frame" href="skjermer/15-oktvarsel.svg"><img src="skjermer/15-oktvarsel.svg" alt="Øverst varsel om utlogging om 5 minutter med Fortsett økten i fokus; under innloggingssiden med meldingen Du ble logget ut og at dataene er slettet." loading="lazy" width="1440" height="2461"></a>
+      <div class="body"><h2><span class="num">15</span>Øktvarsel og utlogging</h2><p>Varselet etter 25 minutter sier hva som slettes, med «Fortsett økten». Etter utløp forklarer innloggingssiden at alt er slettet.</p><p class="req">FR-22, FR-23</p></div></li>
+    <li class="shot mobil"><a class="frame" href="skjermer/16-mobil-gap-analyse.svg"><img src="skjermer/16-mobil-gap-analyse.svg" alt="Gap-analysen på mobil: Steg 2 av 3 med fremdriftsstripe, stablede kravkort, svarfelt med fokus og handlingslinje med Lag tekst." loading="lazy" width="390" height="2925"></a>
+      <div class="body"><h2><span class="num">16</span>Mobil – gap-analyse</h2><p>Her er konseptet hjemme: ett kort i bredden, bare aktivt steg i steglisten, og en tommelvennlig handlingslinje nederst.</p><p class="req">NFR-2</p></div></li>
+    <li class="shot mobil"><a class="frame" href="skjermer/17-mobil-tekst.svg"><img src="skjermer/17-mobil-tekst.svg" alt="Søknadsutkastet på mobil med brevet, melding om sletting, Teksten bygger på og handlingslinjen med Kopiert-bekreftelse og Kopier tekst; Endre svar eller tekstvalg ligger over linjen." loading="lazy" width="390" height="2241"></a>
+      <div class="body"><h2><span class="num">17</span>Mobil – teksten</h2><p>Brevet først, deretter «Teksten bygger på». «Kopier tekst» og bekreftelsen ligger fast nederst.</p><p class="req">NFR-2</p></div></li>
+  </ul>
+</main>
+<footer><div class="wrap">Konseptskisser for gruppevalg i IBE160 (G66). Alt innhold er fiktivt.</div></footer>
+</body>
+</html>
