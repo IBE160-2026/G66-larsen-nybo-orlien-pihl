@@ -53,18 +53,15 @@ Fordi status nå bruker gult (mangler) og blått (dokumentert), forsvinner også
 - **Prikkene og «3/4»-tallet** (fra Bento og Editorial). Opptellingen står som en vanlig setning, slik som i Kort og mot. Det reduserer risikoen for at analysen leses som en poengsum (SM-C1).
 - **Tung typografi på alle overskrifter** (fra Kort og mot). Serif og en tung sans-serif ble for mye sammen, så den tunge vekten brukes bare på kravtitler.
 
-## Avvik fra PRD: ingen mobilvisning (NFR-2)
+## Ingen mobilvisning (NFR-2, vedtak 15)
 
-PRD-en sier i **NFR-2**: «Kjerneflyten fungerer på mobil og datamaskin. På smale skjermer stables kolonnene, og steglisten viser bare aktivt steg.» Akseptansekriteriene sier også at kjerneflyten skal kontrolleres «på mobil- og PC-størrelse».
+PRD-en krevde opprinnelig at kjerneflyten skulle fungere «på mobil og datamaskin» (NFR-2). Gruppa bestemte 2026-11-23 at Supersøker er laget for datamaskin, og PRD-en er oppdatert med vedtak 15 i [PR #20](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/pull/20):
 
-Gruppa har bestemt at appen ikke skal brukes på mobil, så forslaget er tegnet for desktop (1280 px). Dette er et avvik fra PRD-en, og det må håndteres før implementering. `[ASSUMPTION]` Begrunnelsen er ikke skrevet ned av gruppa ennå.
+- Kjerneflyten fungerer i nettleservinduer fra 1024 px bredde og testes ved 1024 og 1440 px.
+- Under 1024 px kan siden rulle sidelengs, men innhold og knapper skal ikke overlappe eller forsvinne.
+- Mobil og nettbrett støttes ikke i v1.
 
-**Gruppa må velge én av disse:**
-
-1. **Endre NFR-2** til bare datamaskin, med begrunnelse, og oppdatere akseptansekriteriene. Helles brief antar at målgruppen bruker mobil mest, så den antagelsen må også trekkes tilbake.
-2. **Behold et minimum:** ikke design for mobil, men la kolonnene stables på smale skjermer, slik at appen ikke brekker. Det koster lite i CSS og holder NFR-2 delvis oppfylt.
-
-Uansett valg bør beslutningen og begrunnelsen dokumenteres (f.eks. med `bmad-correct-course` eller som en revisjon av PRD-en). Det er nettopp slike sporbare avvik sensor ser etter.
+Forslaget er derfor tegnet ved 1280 px og har ingen mobilskjerm. Skjermene ved 1024 px er ikke tegnet ennå.
 
 ## Designtokens
 
