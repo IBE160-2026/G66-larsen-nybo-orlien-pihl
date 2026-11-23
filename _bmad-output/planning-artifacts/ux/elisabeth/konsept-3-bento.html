@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Konsept 3 – Sjekkliste: Fremdrift</title>
+<title>Konsept 3 – Sjekkliste: Bento</title>
 <style>
   :root {
     --krem: #FBF7F2;
@@ -114,19 +114,46 @@
   .mobil h3.side { font-size: 23px; }
   .mobil .knapp { width: 100%; text-align: center; }
 
-  /* Variant: Konsept 3 – Sjekkliste: Fremdrift */
-  .oppsett { display: block; min-height: 0; }
-  .huskeliste { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 20px; align-items: center; padding: 14px 32px; }
-  .huskeliste h2 { margin: 0; font-size: 13px; }
-  .huskeliste ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-  .huskeliste li { align-items: center; padding: 5px 12px 5px 6px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; font-size: 14px; }
-  .huskeliste li small { display: inline; }
-  .huskeliste li small::before { content: " · "; }
-  .huskeliste li[aria-current] { background: #fff; color: var(--blekk); }
-  .huskeliste li[aria-current] .merke { border-color: var(--blekk); }
-  .arbeid { max-width: 920px; margin: 0 auto; }
-  .mobil .huskeliste { display: block; padding: 10px 16px; }
-  @media (max-width: 900px) { .huskeliste { grid-template-columns: 1fr; padding: 12px 16px; } }
+  /* Variant: Konsept 3 – Sjekkliste: Bento */
+  :root { --krem: #FFFFFF; --blekk: #12233D; --dempet: #4A5568; --korall: #111827; --korall-myk: #FFE8D6; --dok: #0B6B45; --dok-myk: #FFFFFF; --linje: #E6E8EE; --himmel: #DCEBFF; --mint: #E4F6EC; --mangler: #A63D12; --radius: 24px;
+    --tittel: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; }
+  body { background: #EEF0F5; }
+  .ramme { border: none; border-radius: 28px; }
+  .mock { background: var(--korall); }
+  .topp { border-bottom: none; }
+  .logo { font-weight: 800; letter-spacing: -.02em; }
+  .logo span { color: #D6336C; }
+  .oppsett { gap: 16px; padding: 0 16px 16px; }
+  .huskeliste { background: var(--himmel); color: var(--blekk); border-radius: var(--radius); align-self: start; }
+  .huskeliste h2 { color: var(--blekk); }
+  .huskeliste li[aria-current] { background: #fff; }
+  .merke.ferdig { background: var(--blekk); color: #fff; }
+  .merke.aapen, .merke.na { border-color: var(--blekk); }
+  .arbeid { padding: 8px 8px 16px; }
+  h3.side { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .kort { border: none; background: var(--mint); border-radius: var(--radius); }
+  .kort.mangler { border: none; background: var(--korall-myk); }
+  .kort.vilkar { background: #F1F2F6; border: 2px dashed #7A8296; }
+  .kort.grunnlag { background: var(--himmel); }
+  .sitat { background: rgba(255,255,255,.7); }
+  .boks.mangler { border-color: var(--mangler); color: var(--mangler); }
+  .statusord.mangler { background: #fff; color: var(--blekk); }
+  .prikker i.aapen { border-color: var(--mangler); }
+  .knapp { padding: 16px 28px; }
+  .valg div { border: 2px solid transparent; background: #F1F2F6; border-radius: var(--radius); }
+  .valg div.valgt { border-color: var(--korall); background: #fff; box-shadow: none; }
+  .brev { background: #FFFBF3; border: none; border-radius: var(--radius); }
+  .feil strong::before { color: var(--mangler); }
+  .arbeid:has(.teller) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-content: start; }
+  .arbeid:has(.teller) > * { grid-column: 1 / -1; margin: 0; }
+  .arbeid:has(.teller) > .kort:not(.mangler):not(.vilkar) { grid-column: span 1; }
+  .arbeid:has(.teller) > .kort + .kort { margin-top: 0; }
+  .arbeid:has(.teller) .rad { grid-template-columns: 1fr; gap: 8px; }
+  .mobil .oppsett { padding: 0 12px 12px; }
+  .mobil .arbeid:has(.teller) { display: block; }
+  .mobil .arbeid:has(.teller) > * + * { margin-top: 12px; }
+  .mobil h3.side { font-size: 28px; }
+  @media (max-width: 900px) { .arbeid:has(.teller) { grid-template-columns: 1fr; } .arbeid:has(.teller) > .kort:not(.mangler):not(.vilkar) { grid-column: 1 / -1; } }
 
   @media (max-width: 900px) {
     .oppsett, .to-kol, .valg { grid-template-columns: 1fr; }
@@ -137,8 +164,8 @@
 <body>
 <main class="galleri">
   <header>
-    <h1>Konsept 3 – Sjekkliste: Fremdrift</h1>
-    <p>Sjekklisten som et bånd øverst. Samme farger som den første Sjekkliste-skissen (krem, marineblå og korall), men stegene og kravene står som merker i et mørkt bånd over innholdet, og innholdet står i én kolonne. Fylte punkter er dokumentert i CV-en. Punkter med stiplet ring står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon.</p>
+    <h1>Konsept 3 – Sjekkliste: Bento</h1>
+    <p>Sjekklisten som fliser. Innholdet står i myke pastell-fliser som i en bento-boks: huskelisten i himmelblått, manglende krav i fersken og dokumenterte krav i mint, side om side. Svarte knapper og store overskrifter. Fylte punkter er dokumentert i CV-en. Stiplede punkter står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon.</p>
     <p>Fiktivt innhold fra testpar 1. Skjermene er statiske skisser, ikke en fungerende app. Se <a href="README.md">README.md</a> for tokens, kontrast og antagelser, og <a href="oversikt.html">oversikt.html</a> for alle tre konseptene.</p>
   </header>
 
@@ -191,7 +218,7 @@
         </nav>
         <div class="arbeid">
           <h3 class="side">CV og annonse</h3>
-          <p class="ingress">Legg inn CV-en og annonsen. Punktene i båndet øverst hukes av når feltene er fylt.</p>
+          <p class="ingress">Legg inn CV-en og annonsen. Punktene til venstre hukes av når feltene er fylt.</p>
           <div class="kort">
             <div class="rad"><span class="boks tom"></span><div>
               <h4>CV</h4>

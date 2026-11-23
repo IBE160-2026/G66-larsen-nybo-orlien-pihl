@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Konsept 1 – Sjekkliste: Huskelapp</title>
+<title>Konsept 2 – Sjekkliste: Elektrisk</title>
 <style>
   :root {
     --krem: #FBF7F2;
@@ -114,25 +114,38 @@
   .mobil h3.side { font-size: 23px; }
   .mobil .knapp { width: 100%; text-align: center; }
 
-  /* Variant: Konsept 1 – Sjekkliste: Huskelapp */
-  :root { --krem: #F7F4EC; --blekk: #22303C; --dempet: #545F6B; --korall: #1F4FA3; --korall-myk: #FFE3C2; --dok: #1E6B3A; --dok-myk: #E2F0E6; --linje: #E2DCCB; --lapp: #FFF1A8; --mangler: #9A4A00; --radius: 8px; --tittel: Georgia, "Times New Roman", serif; }
-  body { background: #E8E2D3; }
-  .huskeliste { background: var(--lapp); color: var(--blekk); border-right: 1px solid #D9C664; }
-  .huskeliste h2 { color: var(--blekk); font: italic 700 18px var(--tittel); text-transform: none; letter-spacing: 0; border-bottom: 1px solid #D9C664; padding-bottom: 6px; }
-  .huskeliste li[aria-current] { background: rgba(34,48,60,.08); }
-  .merke { border-radius: 4px; }
-  .merke.ferdig { background: var(--blekk); color: #fff; }
-  .merke.aapen { border-color: var(--blekk); }
-  .merke.na { border-color: var(--blekk); }
-  .boks { border-radius: 6px; }
+  /* Variant: Konsept 2 – Sjekkliste: Elektrisk */
+  :root { --krem: #F4F6FF; --blekk: #0B1640; --dempet: #4A5480; --korall: #1E3FD8; --korall-myk: #FF7A59; --dok: #0A7A55; --linje: #D5DCFF; --mangler: #C2341B; --radius: 16px;
+    --tittel: Bahnschrift, "Segoe UI", system-ui, sans-serif; }
+  body { background: #DDE3FF; }
+  .ramme { border: none; border-radius: 20px; box-shadow: 0 16px 40px rgba(30,63,216,.2); }
+  .mock { background: var(--blekk); }
+  .logo { font-size: 24px; }
+  .logo span { color: var(--korall); }
+  .huskeliste { background: var(--korall); }
+  .huskeliste h2 { font-family: var(--tittel); letter-spacing: .14em; }
+  .huskeliste li { font-family: var(--tittel); font-size: 16px; align-items: center; }
+  .huskeliste li small { opacity: 1; }
+  .merke { width: 30px; height: 30px; font: 700 16px var(--tittel); }
+  .merke.na { border: none; background: rgba(255,255,255,.2); }
+  .merke.ferdig { color: var(--korall); }
+  .huskeliste li[aria-current] { background: var(--korall-myk); color: var(--blekk); }
+  .huskeliste li[aria-current] .merke { background: var(--blekk); color: #fff; }
+  h3.side { font-size: 36px; font-weight: 700; }
+  .teller { font-family: var(--tittel); font-size: 22px; }
+  .seksjon { font-family: var(--tittel); color: var(--korall); letter-spacing: .12em; }
+  .kort { border: none; box-shadow: 0 2px 0 var(--linje), 0 6px 18px rgba(11,22,64,.06); }
+  .kort.mangler { border: 2px solid var(--mangler); background: #FFF3EF; }
+  .boks { font-family: var(--tittel); }
   .boks.mangler { border-color: var(--mangler); color: var(--mangler); }
-  .kort.mangler { border-color: var(--mangler); }
-  .prikker i { border-radius: 3px; }
+  .statusord.mangler { background: var(--korall-myk); color: var(--blekk); }
   .prikker i.aapen { border-color: var(--mangler); }
+  .knapp { border-radius: 12px; font: 700 17px/1 var(--tittel); }
+  .knapp.sekundar { border-color: var(--blekk); }
+  .kort.vilkar { border: 1.5px dashed #7A8296; background: transparent; box-shadow: none; }
+  .valg div.valgt { border-color: var(--korall); box-shadow: inset 0 0 0 1px var(--korall); }
+  .feil { background: #FFF3EF; }
   .feil strong::before { color: var(--mangler); }
-  .knapp { border-radius: 8px; }
-  .statusord, .tagg, .veksle, .veksle span { border-radius: 6px; }
-  .brev { font-family: Georgia, "Times New Roman", serif; }
 
   @media (max-width: 900px) {
     .oppsett, .to-kol, .valg { grid-template-columns: 1fr; }
@@ -143,8 +156,8 @@
 <body>
 <main class="galleri">
   <header>
-    <h1>Konsept 1 – Sjekkliste: Huskelapp</h1>
-    <p>Sjekklisten som en gul huskelapp. Lyst og varmt uttrykk med firkantede avkrysningsbokser, som på papir. Fylte bokser er dokumentert i CV-en. Stiplede bokser står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon. På siste steg blir lappen en sjekkliste for deg: les gjennom, sjekk og kopier.</p>
+    <h1>Konsept 2 – Sjekkliste: Elektrisk</h1>
+    <p>Sjekklisten med fart. Koboltblått sidepanel med store steg-tall, korall som markerer hvor du er, og den moderne skriften Bahnschrift i overskrifter og stegliste. Fylte punkter er dokumentert i CV-en. Stiplede punkter står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon.</p>
     <p>Fiktivt innhold fra testpar 1. Skjermene er statiske skisser, ikke en fungerende app. Se <a href="README.md">README.md</a> for tokens, kontrast og antagelser, og <a href="oversikt.html">oversikt.html</a> for alle tre konseptene.</p>
   </header>
 
@@ -197,7 +210,7 @@
         </nav>
         <div class="arbeid">
           <h3 class="side">CV og annonse</h3>
-          <p class="ingress">Legg inn CV-en og annonsen. Boksene på huskelappen hukes av når feltene er fylt.</p>
+          <p class="ingress">Legg inn CV-en og annonsen. Punktene til venstre hukes av når feltene er fylt.</p>
           <div class="kort">
             <div class="rad"><span class="boks tom"></span><div>
               <h4>CV</h4>

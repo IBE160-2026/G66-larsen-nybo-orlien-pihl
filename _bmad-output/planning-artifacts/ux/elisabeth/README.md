@@ -14,21 +14,37 @@ node _bmad-output/planning-artifacts/ux/elisabeth/verktoy/skjermbilder.cjs
 
 Skriptet sjekker også at ingen av konseptene har horisontal overflyt ved 375 px. Ligger Chrome et annet sted, setter du `CHROME_PATH`.
 
-- [Konsept 1 – Huskelapp](konsept-1-huskelapp.html)
-- [Konsept 2 – Kveld](konsept-2-kveld.html)
-- [Konsept 3 – Fremdrift](konsept-3-fremdrift.html)
+- [Konsept 1 – Solnedgang](konsept-1-solnedgang.html)
+- [Konsept 2 – Elektrisk](konsept-2-elektrisk.html)
+- [Konsept 3 – Bento](konsept-3-bento.html)
 
-## Iterasjon: fra tre retninger til tre varianter av Sjekkliste
+## Verdt å vite før dere velger
 
-Første runde (2026-11-22, commit `5cabb9b`) hadde tre ulike retninger: *Brevet vokser*, *Klar tale* og *Sjekkliste*. Etter å ha sammenlignet dem med Helles og Mirandas konsepter likte Elisabeth Sjekkliste best og de to andre mindre. 2026-11-23 ble derfor alle tre erstattet av tre varianter av Sjekkliste. Kjerneideen er beholdt, men uttrykket og plasseringen av huskelisten varieres. De gamle filene finnes i git-historikken.
+- **Elektrisk:** Skriften Bahnschrift finnes bare på Windows. På Mac og mobil blir den byttet ut med systemskriften, og noe av særpreget forsvinner. Velger vi Elektrisk, må vi finne en nettskrift med lignende uttrykk.
+- **Bento:** Flisene side om side passer best med få og korte krav. Med mange krav eller lange sitater blir radene ujevne. Fersken og mint kan leses som rødt og grønt («feil» og «riktig») og må forklares. Oppsettet bruker CSS-velgeren `:has()`, som ikke virker i eldre nettlesere.
+- **Solnedgang:** Gradienter kan bli slitsomme over tid. Hvit tekst har lavest kontrast i den oransje enden (5,5:1), så gradienten må ikke bli lysere.
+- **Alle tre:** Avhuking kan oppleves som en poengsum («3 av 4»), og det er et ikke-mål i PRD-en (SM-C1). Sjekklisten «Før du sender» står ikke i PRD-en. Bare 5 av de 17 skjermene er tegnet.
 
-Fra de forkastede konseptene tar vi med to lærdommer: gul fokus må alltid ha en mørk kant (Klar tale), og brevet bør skille seg visuelt fra grensesnittet (Brevet vokser). Kveld bruker det siste.
+Detaljene står under hvert konsept nedenfor.
+
+## Iterasjoner
+
+Konseptene har gått gjennom tre runder. Alle tidligere versjoner finnes i git-historikken.
+
+| Runde | Dato | Konsepter | Hvorfor endret |
+|---|---|---|---|
+| 1 | 2026-11-22 (commit `5cabb9b`) | Brevet vokser, Klar tale, Sjekkliste | Tre ulike retninger. Etter sammenligning med Helles og Mirandas konsepter likte Elisabeth Sjekkliste best og de to andre mindre. |
+| 2 | 2026-11-23 (commit `9dd71bd`) | Huskelapp, Kveld, Fremdrift | Tre varianter av Sjekkliste. Oversikten ble bygget om etter mønster fra Helles, med alle skjermene side om side. Elisabeth syntes uttrykket ble litt kjedelig for målgruppen. |
+| 3 | 2026-11-23 | **Solnedgang, Elektrisk, Bento** | Tre mer fargerike og spennende varianter av Sjekkliste, fordi appen i hovedsak skal appellere til unge jobbsøkere. |
+
+I runde 3 er det bevisst holdt avstand til fargene som allerede er brukt av Miranda (limegrønt, lilla og svart i «Bold») og Helle (lilla, limegrønt og gult i «Kort og mot»). Fra de forkastede konseptene tar vi med to lærdommer: fokus må alltid ha god kontrast mot bakgrunnen (Klar tale), og brevet bør skille seg visuelt fra grensesnittet (Brevet vokser).
 
 Felles for alle tre variantene:
 - Kravene er punkter i en huskeliste. Fylt merke betyr at kravet er dokumentert i CV-en. Stiplet merke betyr at det ikke står i CV-en.
 - Et krav med svar får merket «Svar lagt til», men punktet forblir åpent, fordi et svar ikke er dokumentasjon (FR-13, FR-18).
 - På steg 3 blir huskelisten brukerens egen sjekkliste «Før du sender». «Teksten bygger på» står i høyre kolonne (FR-19).
-- Ansettelsesvilkår står for seg og telles ikke med.
+- Ansettelsesvilkår står for seg med stiplet ramme og telles ikke med.
+- Ingen poeng, nivåer eller premier. Uttrykket skal være spennende, men appen skal ikke gi en score (SM-C1).
 
 ## Grunnlag
 
@@ -40,90 +56,89 @@ Felles for alle tre variantene:
 
 ## Sammenligning
 
-| | 1 · Huskelapp | 2 · Kveld | 3 · Fremdrift |
+| | 1 · Solnedgang | 2 · Elektrisk | 3 · Bento |
 |---|---|---|---|
-| **Huskelisten** | Gul lapp, fast panel til venstre | Mørkt panel, fast til venstre | Mørkt bånd øverst med merker |
-| **Status** | Fylt / stiplet firkant | Fylt sirkel / ravgul stiplet ring | Fylt sirkel / stiplet ring |
-| **Uttrykk** | Lyst og varmt, Georgia i overskrifter | Mørkt tema, mint aksent, lyst brevark | Krem, marineblå og korall (som originalen) |
-| **Layout** | Panel 300 px og arbeidsflate | Panel 300 px og arbeidsflate | Én kolonne, maks 920 px |
-| **Best for** | Et personlig, uformelt preg | Unge brukere vant til mørke apper | Oversikt uten sidepanel |
-| **Største risiko** | Papirpreget kan virke gammeldags | Lyst på mørkt er tyngre å lese i lange tekster | Båndet blir høyt med mange krav |
+| **Huskelisten** | Gradient-panel til venstre | Koboltblått panel, aktivt steg i korall | Himmelblå flis til venstre |
+| **Kravene** | Svevende hvite kort under hverandre | Hvite kort, manglende krav på rosa | Pastell-fliser, dokumenterte krav side om side |
+| **Uttrykk** | Varmt og energisk, Segoe UI Black | Kraftig og sporty, Bahnschrift | Lekent og luftig, svarte knapper |
+| **Best for** | Et inspirerende førsteinntrykk | Fart og tydelig fremdrift | Rask oversikt over alle kravene |
+| **Største risiko** | Gradienten kan bli for mye over tid | Mye blått kan føles tungt | Fliser side om side tåler få lange krav |
 
-## Konsept 1 – Huskelapp
+## Konsept 1 – Solnedgang
 
-**Idé:** Huskelisten er en gul lapp festet til venstre, med firkantede avkrysningsbokser som på et papirark. Overskrifter og brevet står i Georgia. Knappene er blå med små hjørner, og «mangler dokumentasjon» har en brun kant.
+**Idé:** Sjekklisten med varm energi. Sidepanelet og primærknappene har en gradient fra bringebær via rosa til brent oransje. Kortene har ingen kantlinje, men svever med en myk skygge på en lys, rosa bakgrunn. Overskriftene står i Segoe UI Black og er tette og tunge.
 
 | Token | Verdi | Kontrast |
 |---|---|---|
-| Blekk (tekst) | `#22303C` på lapp `#FFF1A8` / krem `#F7F4EC` | 11,8:1 / 12,3:1 |
-| Dempet tekst | `#545F6B` på krem / hvit | 5,9:1 / 6,5:1 |
-| Blå (knapp, lenke, fokus) | `#1F4FA3`, hvit tekst | 7,8:1 |
-| Mangler (kant, ikon) | `#9A4A00` på hvit | 6,3:1 |
-| Mangler (merke) | `#22303C` på `#FFE3C2` | 10,9:1 |
-| Dokumentert (merke) | `#1E6B3A` på `#E2F0E6` | 5,5:1 |
+| Hvit tekst på gradient | `#FFFFFF` på `#A3134D` → `#C2185B` → `#B8430A` | 7,6:1 → 5,9:1 → 5,5:1 (laveste punkt) |
+| Blekk (tekst) | `#2A1620` på krem `#FFF7F2` | 16,1:1 |
+| Dempet tekst | `#6A4B55` på hvit / krem | 7,6:1 / 7,2:1 |
+| Bringebær (lenke, fokus) | `#C2185B` på hvit | 5,9:1 |
+| Mangler (kant, ikon) | `#B8430A` på hvit | 5,5:1 |
+| Mangler (merke) | `#2A1620` på `#FFE6D6` | 14,2:1 |
+| Dokumentert (merke) | `#0F7B5F` på `#DDF5EC` | 4,6:1 |
+| Feltkant (ikke-tekst) | `#8F7A82` på hvit | 4,0:1 (krav 3:1) |
+| Typografi | Segoe UI Black / Arial Black for overskrifter, Segoe UI / system-ui for tekst | |
+| Former | 20–24 px hjørner, pilleformede knapper med farget skygge | |
+
+**Styrker**
+- Varmt og optimistisk. Kan gjøre en kjedelig oppgave (å søke jobb) mer inspirerende.
+- Gradienten gjør sidepanelet til et tydelig blikkfang uten at innholdet blir rotete.
+
+**Svakheter og risiko**
+- Gradienter går fort ut på dato og kan bli slitsomme ved daglig bruk.
+- Hvit tekst har lavest kontrast i den oransje enden (5,5:1). Blir panelet høyere, må gradienten ikke gå lysere.
+
+## Konsept 2 – Elektrisk
+
+**Idé:** Sjekklisten med fart. Sidepanelet er koboltblått, stegene har store tall, og steget du er på lyser i korall. Overskrifter, stegliste og knapper står i Bahnschrift, en moderne og litt teknisk skrift som følger med Windows.
+
+| Token | Verdi | Kontrast |
+|---|---|---|
+| Hvit på kobolt (panel, knapp) | `#FFFFFF` på `#1E3FD8` | 7,6:1 |
+| Aktivt steg | `#0B1640` på korall `#FF7A59` | 6,8:1 |
+| Blekk (tekst) | `#0B1640` på `#F4F6FF` | 16,2:1 |
+| Dempet tekst | `#4A5480` på hvit / rosa `#FFF3EF` | 7,3:1 / 6,7:1 |
+| Kobolt (lenke, seksjonstitler, fokus) | `#1E3FD8` på `#F4F6FF` | 7,1:1 |
+| Mangler (kant, ikon) | `#C2341B` på hvit / rosa | 5,5:1 / 5,1:1 |
+| Dokumentert (merke) | `#0A7A55` på `#E3F1E7` | 4,6:1 |
+| Typografi | Bahnschrift for overskrifter, steg og knapper, Segoe UI / system-ui for tekst | |
+| Former | 12–20 px hjørner, store runde steg-tall | |
+
+Korall (`#FF7A59`) brukes bare som bakgrunn med mørk tekst. Mot hvit har den for lav kontrast til å brukes som tekstfarge.
+
+**Styrker**
+- Det er alltid lett å se hvor du er: korall-steget skiller seg kraftig ut.
+- Bahnschrift gir et særpreg uten å laste ned skrifter.
+
+**Svakheter og risiko**
+- Bahnschrift finnes bare på Windows. På Mac og mobil faller den tilbake til systemskriften, og noe av særpreget forsvinner. En nettskrift med lignende uttrykk må vurderes. `[ASSUMPTION]`
+- Den store blå flaten kan føles tung på små skjermer.
+
+## Konsept 3 – Bento
+
+**Idé:** Sjekklisten som fliser, slik som rommene i en bento-boks. Huskelisten er en himmelblå flis, krav som mangler dokumentasjon står på fersken, og dokumenterte krav står i mint, tre side om side. Knappene er svarte, og overskriftene er store og tette.
+
+| Token | Verdi | Kontrast |
+|---|---|---|
+| Blekk (tekst) | `#12233D` på himmel `#DCEBFF` / mint `#E4F6EC` / fersken `#FFE8D6` | 13,0:1 / 14,0:1 / 13,3:1 |
+| Dempet tekst | `#4A5568` på hvit / mint / fersken | 7,5:1 / 6,7:1 / 6,4:1 |
+| Svart (knapp, lenke, fokus) | `#111827`, hvit tekst | 17,7:1 |
+| Rosa (logo) | `#D6336C` på hvit | 4,6:1 |
+| Mangler (ikon) | `#A63D12` på fersken | 5,4:1 |
+| Dokumentert (ikon) | `#0B6B45` på mint | 5,8:1 |
 | Feltkant (ikke-tekst) | `#7A8296` på hvit | 3,8:1 (krav 3:1) |
-| Typografi | Georgia for overskrifter og brev, Segoe UI / system-ui for tekst | |
-| Former | 8 px hjørner, firkantede bokser | |
-
-Kanten mellom lappen og arbeidsflaten (`#D9C664`) har bare 1,5:1, men den er pynt og bærer ingen informasjon.
+| Typografi | Segoe UI Variable Display for overskrifter (40 px, tett), Segoe UI / system-ui for tekst | |
+| Former | 24–28 px hjørner, flater uten kantlinjer | |
 
 **Styrker**
-- Avkrysningsboksene er et kjent bilde: en huskeliste man krysser av.
-- Lyst og vennlig, med et mer personlig preg enn de andre konseptene.
+- Fargen på flisen forteller status før brukeren leser noe. Status vises likevel også med ikon og tekst, ikke bare med farge.
+- Dokumenterte krav side om side gir rask oversikt og kortere side.
 
 **Svakheter og risiko**
-- Papir og Georgia kan virke gammeldags for unge brukere.
-- Firkantede bokser ligner skjemafelt man kan klikke i. Brukerne kan prøve å krysse av selv.
-
-## Konsept 2 – Kveld
-
-**Idé:** Samme oppsett som Sjekkliste, men i mørkt tema. Aksenten er mintgrønn, og åpne punkter er ravgule. Søknadsbrevet på steg 3 står som et lyst ark, slik at brukerens tekst skiller seg tydelig fra appen.
-
-| Token | Verdi | Kontrast |
-|---|---|---|
-| Tekst | `#EEF1F5` på flate `#1F2630` / bakgrunn `#161B22` | 13,4:1 / 15,3:1 |
-| Dempet tekst | `#AEB8C5` på flate / panel `#0F1319` | 7,6:1 / 9,3:1 |
-| Mint (knapp, fokus) | `#7DD3C0`, mørk tekst `#0B0E13` | 11,0:1 |
-| Mint lenke | `#7DD3C0` på bakgrunn | 9,8:1 |
-| Mangler (kant, ikon) | `#F5B971` på flate | 8,8:1 |
-| Mangler (merke) | `#1A1206` på `#F5B971` | 10,6:1 |
-| Dokumentert (merke) | `#8BE0A4` på `#1D3527` | 8,4:1 |
-| Brev | `#1B1F24` på `#F7F4EE` | 15,1:1 |
-| Feltkant (ikke-tekst) | `#7C8797` mot felt `#0F1319` | 5,1:1 (krav 3:1) |
-| Typografi | Segoe UI Semibold for overskrifter, Segoe UI / system-ui for tekst | |
-| Former | 16 px hjørner, pilleformede knapper | |
-
-**Styrker**
-- Moderne uttrykk som mange unge kjenner fra andre apper.
-- Det lyse brevarket gjør det tydelig hva som er brukerens tekst.
-
-**Svakheter og risiko**
-- Lys tekst på mørk bakgrunn er tyngre å lese i lange tekster, og noen med astigmatisme opplever den som uskarp.
-- Mange brukere foretrekker lyst tema. Et ekte produkt bør følge systeminnstillingen (`prefers-color-scheme`) og ha begge. `[ASSUMPTION]`
-
-## Konsept 3 – Fremdrift
-
-**Idé:** Samme farger og former som den første Sjekkliste-skissen, men huskelisten er flyttet fra sidepanelet til et mørkt bånd øverst. Stegene og kravene står som merker på rad, og innholdet står i én kolonne.
-
-| Token | Verdi | Kontrast |
-|---|---|---|
-| Blekk (tekst, bånd) | `#1E2A4A` på krem `#FBF7F2` / hvit på blekk | 13,3:1 / 14,1:1 |
-| Aktivt merke | `#1E2A4A` på hvit | 14,1:1 |
-| Dempet tekst | `#525C72` på krem / hvit | 6,3:1 / 6,7:1 |
-| Korall (primærknapp, fokus, lenker) | `#B3360F`, hvit tekst | 6,1:1 |
-| Mangler (merke) | `#1E2A4A` på `#FBE4DA` | 11,6:1 |
-| Dokumentert (merke) | `#1D5B3A` på `#E3F1E7` | 6,9:1 |
-| Feltkant (ikke-tekst) | `#7A8296` på hvit | 3,9:1 (krav 3:1) |
-| Typografi | Trebuchet MS for overskrifter, Segoe UI / system-ui for tekst | |
-| Former | 14 px hjørner, pilleformede knapper og merker | |
-
-**Styrker**
-- Hele bredden går til innholdet, og leseveien er enkel.
-- Mobil og desktop ligner hverandre mer enn med sidepanel.
-
-**Svakheter og risiko**
-- Med mange krav blir båndet høyt, og kravene med «Står ikke i CV-en · svar lagt til» blir lange merker. På 1440 px brytes kravene over to linjer.
-- Båndet bør være klistret (sticky) når brukeren scroller. Det er ikke vist i den statiske skissen.
+- Fliser side om side tåler få og korte krav. Med seks krav eller lange sitater blir radene ujevne.
+- Fargekodingen (fersken og mint) må forklares første gang, ellers kan den oppleves som rødt og grønt, altså som «feil» og «riktig».
+- Oppsettet bruker CSS-velgeren `:has()`, som ikke virker i eldre nettlesere.
 
 ## Risiko felles for alle tre
 
@@ -139,10 +154,13 @@ Kanten mellom lappen og arbeidsflaten (`#D9C664`) har bare 1,5:1, men den er pyn
 
 ## Kvalitetssikring
 
-**Utført 2026-11-23 (variantene)**
-- Kontrast for alle nye fargepar er regnet ut med WCAG-formelen. All tekst holder minst 5,5:1 og alle feltkanter minst 3:1.
-- Skjermbilder i Chrome headless ved 1440 px av alle fem skjermene i alle tre variantene. Sjekken fant at lenkene i toppteksten til konsept 2 hadde nettleserens standardblå på mørk bakgrunn og var nesten uleselige. De fikk mintfargen.
-- Ingen horisontal overflyt ved 375 px i noen av variantene (`scrollWidth` = 375, målt med `verktoy/skjermbilder.cjs` via Chrome DevTools-protokollen).
+**Utført 2026-11-23 (runde 3)**
+- Kontrast for alle nye fargepar er regnet ut med WCAG-formelen. All tekst holder minst 4,5:1 og alle feltkanter minst 3:1.
+- Skjermbilder av alle fem skjermene i alle tre variantene med `verktoy/skjermbilder.cjs`. Sjekken fant at den stiplede rammen rundt ansettelsesvilkår (Politiattest) forsvant i Solnedgang og Elektrisk, fordi en ny regel som fjernet kantlinjen på alle kort overstyrte den. Vilkårene så dermed ut som vanlig tekst. Rammen ble lagt tilbake med en mer spesifikk regel.
+- Ingen horisontal overflyt ved 375 px i noen av variantene (`scrollWidth` = 375).
+
+**Utført 2026-11-23 (runde 2)**
+- Kontrast regnet ut, skjermbilder tatt og overflyt målt. Lenkene i toppteksten til Kveld hadde nettleserens standardblå på mørk bakgrunn og ble rettet.
 
 **Utført 2026-11-22 (første runde)**
 - Kontrast for alle fargepar regnet ut, skjermbilder ved 1440 px, og ingen horisontal overflyt ved 375 px (iframe) eller 504 px.
@@ -154,4 +172,4 @@ Kanten mellom lappen og arbeidsflaten (`#D9C664`) har bare 1,5:1, men den er pyn
 - **Oppdiktet påstand i søknadsutkastet.** Claudes første utkast skrev at Ida jobber med kundeservice «hver uke» hos Testvik Mat, men det står ikke i CV-en. Setningen ble endret til «jeg har deltidsjobb med kundeservice hos Testvik Mat.» Dette er samme type feil som ærlighetsregelen i FR-18 skal hindre, og den bør inn i testene for mock-svaret.
 - **Feilaktig overflyt på mobil.** De første skjermbildene på 390 px så ut til å flyte over kanten i konsept 2. Det viste seg at headless Chrome ikke tegner smalere enn ca. 500 px, så skjermbildene var kuttet. Ny måling i en iframe på 375 px viste at sidene ikke har overflyt.
 - **Gul fokus ga for lav kontrast.** Kontrollen viste at gul fokus alene mot hvit har 1,4:1. Fokus er derfor alltid tegnet med svart kant eller svart understrek.
-
+- **Ansettelsesvilkår mistet rammen (runde 3).** Claude la til en regel som fjernet kantlinjen på alle kort for å få et luftigere uttrykk, uten å se at regelen også traff kortet for ansettelsesvilkår. Da så Politiattest ut som vanlig tekst og ikke som et vilkår som står for seg (FR-14). Feilen ble funnet på skjermbildene og rettet med en mer spesifikk regel for `.kort.vilkar`.

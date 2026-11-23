@@ -7,7 +7,7 @@
 <style>
   :root { --bg: #F6F7F8; --flate: #FFFFFF; --tekst: #1A1D21; --dempet: #4B525A; --linje: #D5D9DD; --lenke: #1A4FB4;
     --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
-  .k1 { --c: #C9A800; } .k2 { --c: #161B22; } .k3 { --c: #B3360F; }
+  .k1 { --c: #C2185B; } .k2 { --c: #1E3FD8; } .k3 { --c: #7FB2F0; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--tekst); font: 16px/1.55 var(--sans); }
   a { color: var(--lenke); text-underline-offset: .2em; }
@@ -46,6 +46,10 @@
   caption { text-align: left; font-weight: 700; font-size: 1.2rem; padding-bottom: .6rem; }
   th, td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-top: 1px solid var(--linje); }
   thead th { background: #EEF0F2; }
+  .viktig { background: #FFF8E1; border: 1px solid #E0C36A; border-left: 6px solid #8A6A00; border-radius: .5rem; padding: 1rem 1.4rem; margin: 0 0 2rem; }
+  .viktig h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+  .viktig ul { margin: 0; padding-left: 1.2rem; }
+  .viktig li + li { margin-top: .35rem; }
   footer { padding-block: 1.5rem 3rem; color: var(--dempet); font-size: .9rem; }
 </style>
 </head>
@@ -53,29 +57,39 @@
 <a class="hopp" href="#skjermer">Hopp til skjermene</a>
 <header>
   <h1>Elisabeths designkonsepter for Supersøker</h1>
-  <p class="ingress">Tre varianter av Sjekkliste med de samme fem skjermene og det samme innholdet (Ida Testesen fra testpar 1), vist side om side. Alle har kravene som en huskeliste, og et svar holder punktet åpent fordi et svar ikke er dokumentasjon. Klikk på et bilde for full størrelse, eller åpne hele konseptet. Tokens, kontrast, styrker, svakheter og antagelser står i <a href="README.md">README.md</a>. Skjermnumrene følger Helles felles brief.</p>
+  <p class="ingress">Tre fargerike varianter av Sjekkliste for unge jobbsøkere, med de samme fem skjermene og det samme innholdet (Ida Testesen fra testpar 1), vist side om side. Alle har kravene som en huskeliste, og et svar holder punktet åpent fordi et svar ikke er dokumentasjon. Klikk på et bilde for full størrelse, eller åpne hele konseptet. Tokens, kontrast, styrker, svakheter og antagelser står i <a href="README.md">README.md</a>. Skjermnumrene følger Helles felles brief.</p>
+
+  <section class="viktig" aria-labelledby="h-viktig">
+    <h2 id="h-viktig">Verdt å vite før dere velger</h2>
+    <ul>
+      <li><strong>Elektrisk:</strong> Skriften Bahnschrift finnes bare på Windows. På Mac og mobil blir den byttet ut med systemskriften, og noe av særpreget forsvinner. Velger vi Elektrisk, må vi finne en nettskrift med lignende uttrykk.</li>
+      <li><strong>Bento:</strong> Flisene side om side passer best med få og korte krav. Med mange krav eller lange sitater blir radene ujevne. Fersken og mint kan leses som rødt og grønt («feil» og «riktig») og må forklares. Oppsettet bruker CSS-velgeren <code>:has()</code>, som ikke virker i eldre nettlesere.</li>
+      <li><strong>Solnedgang:</strong> Gradienter kan bli slitsomme over tid. Hvit tekst har lavest kontrast i den oransje enden (5,5:1), så gradienten må ikke bli lysere.</li>
+      <li><strong>Alle tre:</strong> Avhuking kan oppleves som en poengsum («3 av 4»), og det er et ikke-mål i PRD-en (SM-C1). Sjekklisten «Før du sender» står ikke i PRD-en. Bare 5 av de 17 skjermene er tegnet.</li>
+    </ul>
+  </section>
 
   <ul class="konsepter">
     <li class="konsept k1">
-      <h2>1 · Huskelapp</h2>
-      <div class="farger" aria-hidden="true"><span style="background:#FFF1A8"></span><span style="background:#22303C"></span><span style="background:#1F4FA3"></span><span style="background:#9A4A00"></span></div>
-      <p>Huskelisten er en gul lapp i sidepanelet, med firkantede avkrysningsbokser som på papir.</p>
-      <dl><dt>Uttrykk</dt><dd>Lyst og varmt, Georgia i overskrifter</dd><dt>Best for</dt><dd>Et personlig, uformelt preg</dd><dt>Risiko</dt><dd>Kan virke gammeldags</dd></dl>
-      <a class="apne" href="konsept-1-huskelapp.html">Åpne konsept 1</a>
+      <h2>1 · Solnedgang</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#A3134D"></span><span style="background:#C2185B"></span><span style="background:#B8430A"></span><span style="background:#FFF7F2"></span></div>
+      <p>Varm gradient fra bringebær til oransje i sidepanelet og på knappene, svevende kort og tunge overskrifter.</p>
+      <dl><dt>Uttrykk</dt><dd>Varmt, energisk, myke skygger</dd><dt>Best for</dt><dd>Et inspirerende førsteinntrykk</dd><dt>Risiko</dt><dd>Gradienten kan bli for mye over tid</dd></dl>
+      <a class="apne" href="konsept-1-solnedgang.html">Åpne konsept 1</a>
     </li>
     <li class="konsept k2">
-      <h2>2 · Kveld</h2>
-      <div class="farger" aria-hidden="true"><span style="background:#161B22"></span><span style="background:#7DD3C0"></span><span style="background:#F5B971"></span><span style="background:#F7F4EE"></span></div>
-      <p>Mørkt tema med mintgrønn aksent. Søknadsbrevet står som et lyst ark og skiller seg tydelig fra appen.</p>
-      <dl><dt>Uttrykk</dt><dd>Mørkt, moderne, myke former</dd><dt>Best for</dt><dd>Unge brukere vant til mørke apper</dd><dt>Risiko</dt><dd>Lyst på mørkt er tyngre å lese</dd></dl>
-      <a class="apne" href="konsept-2-kveld.html">Åpne konsept 2</a>
+      <h2>2 · Elektrisk</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#1E3FD8"></span><span style="background:#FF7A59"></span><span style="background:#0B1640"></span><span style="background:#F4F6FF"></span></div>
+      <p>Koboltblått sidepanel med store steg-tall, korall som viser hvor du er, og Bahnschrift i overskriftene.</p>
+      <dl><dt>Uttrykk</dt><dd>Kraftig, sporty, moderne</dd><dt>Best for</dt><dd>Fart og tydelig fremdrift</dd><dt>Risiko</dt><dd>Mye blått kan føles tungt</dd></dl>
+      <a class="apne" href="konsept-2-elektrisk.html">Åpne konsept 2</a>
     </li>
     <li class="konsept k3">
-      <h2>3 · Fremdrift</h2>
-      <div class="farger" aria-hidden="true"><span style="background:#FBF7F2"></span><span style="background:#1E2A4A"></span><span style="background:#B3360F"></span><span style="background:#1D5B3A"></span></div>
-      <p>Huskelisten er et bånd øverst med steg og krav som merker, og innholdet står i én kolonne.</p>
-      <dl><dt>Uttrykk</dt><dd>Krem, marineblå og korall</dd><dt>Best for</dt><dd>Oversikt uten sidepanel</dd><dt>Risiko</dt><dd>Båndet blir høyt med mange krav</dd></dl>
-      <a class="apne" href="konsept-3-fremdrift.html">Åpne konsept 3</a>
+      <h2>3 · Bento</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#DCEBFF"></span><span style="background:#E4F6EC"></span><span style="background:#FFE8D6"></span><span style="background:#111827"></span></div>
+      <p>Innholdet som pastell-fliser: himmelblå huskeliste, fersken for det som mangler og mint for det som er dokumentert.</p>
+      <dl><dt>Uttrykk</dt><dd>Lekent, luftig, svarte knapper</dd><dt>Best for</dt><dd>Rask oversikt over alle kravene</dd><dt>Risiko</dt><dd>Fliser side om side tåler få lange krav</dd></dl>
+      <a class="apne" href="konsept-3-bento.html">Åpne konsept 3</a>
     </li>
   </ul>
 </header>
@@ -85,63 +99,63 @@
     <h2 id="h-01">01 · Logg inn</h2>
     <p>Feilmelding over skjemaet, hint om testbruker og lenke til «Opprett konto» (FR-2, FR-3).</p>
     <ul class="rad">
-      <li class="k1"><span class="navn">Konsept 1 · Huskelapp</span><a class="bilde" href="skjermer/konsept-1-01.png"><img src="skjermer/konsept-1-01.png" alt="Konsept 1 Huskelapp: Logg inn" loading="lazy"></a></li>
-      <li class="k2"><span class="navn">Konsept 2 · Kveld</span><a class="bilde" href="skjermer/konsept-2-01.png"><img src="skjermer/konsept-2-01.png" alt="Konsept 2 Kveld: Logg inn" loading="lazy"></a></li>
-      <li class="k3"><span class="navn">Konsept 3 · Fremdrift</span><a class="bilde" href="skjermer/konsept-3-01.png"><img src="skjermer/konsept-3-01.png" alt="Konsept 3 Fremdrift: Logg inn" loading="lazy"></a></li>
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-01.png"><img src="skjermer/konsept-1-01.png" alt="Konsept 1 Solnedgang: Logg inn" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-01.png"><img src="skjermer/konsept-2-01.png" alt="Konsept 2 Elektrisk: Logg inn" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-01.png"><img src="skjermer/konsept-3-01.png" alt="Konsept 3 Bento: Logg inn" loading="lazy"></a></li>
     </ul>
   </section>
   <section class="skjerm" aria-labelledby="h-03">
     <h2 id="h-03">03 · Steg 1: CV og annonse, tom tilstand</h2>
     <p>Huskelisten viser to åpne punkter: CV og annonse (FR-4, FR-7, FR-27).</p>
     <ul class="rad">
-      <li class="k1"><span class="navn">Konsept 1 · Huskelapp</span><a class="bilde" href="skjermer/konsept-1-03.png"><img src="skjermer/konsept-1-03.png" alt="Konsept 1 Huskelapp: Steg 1, CV og annonse" loading="lazy"></a></li>
-      <li class="k2"><span class="navn">Konsept 2 · Kveld</span><a class="bilde" href="skjermer/konsept-2-03.png"><img src="skjermer/konsept-2-03.png" alt="Konsept 2 Kveld: Steg 1, CV og annonse" loading="lazy"></a></li>
-      <li class="k3"><span class="navn">Konsept 3 · Fremdrift</span><a class="bilde" href="skjermer/konsept-3-03.png"><img src="skjermer/konsept-3-03.png" alt="Konsept 3 Fremdrift: Steg 1, CV og annonse" loading="lazy"></a></li>
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-03.png"><img src="skjermer/konsept-1-03.png" alt="Konsept 1 Solnedgang: Steg 1, CV og annonse" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-03.png"><img src="skjermer/konsept-2-03.png" alt="Konsept 2 Elektrisk: Steg 1, CV og annonse" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-03.png"><img src="skjermer/konsept-3-03.png" alt="Konsept 3 Bento: Steg 1, CV og annonse" loading="lazy"></a></li>
     </ul>
   </section>
   <section class="skjerm" aria-labelledby="h-08">
     <h2 id="h-08">08 · Steg 2: Gap-analyse</h2>
     <p>Kjerneskjermen: manglende krav først med svarfelt, dokumenterte krav med sitat, ansettelsesvilkår for seg og omskrivingsvalg (FR-10–FR-15).</p>
     <ul class="rad">
-      <li class="k1"><span class="navn">Konsept 1 · Huskelapp</span><a class="bilde" href="skjermer/konsept-1-08.png"><img src="skjermer/konsept-1-08.png" alt="Konsept 1 Huskelapp: Steg 2, gap-analyse" loading="lazy"></a></li>
-      <li class="k2"><span class="navn">Konsept 2 · Kveld</span><a class="bilde" href="skjermer/konsept-2-08.png"><img src="skjermer/konsept-2-08.png" alt="Konsept 2 Kveld: Steg 2, gap-analyse" loading="lazy"></a></li>
-      <li class="k3"><span class="navn">Konsept 3 · Fremdrift</span><a class="bilde" href="skjermer/konsept-3-08.png"><img src="skjermer/konsept-3-08.png" alt="Konsept 3 Fremdrift: Steg 2, gap-analyse" loading="lazy"></a></li>
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-08.png"><img src="skjermer/konsept-1-08.png" alt="Konsept 1 Solnedgang: Steg 2, gap-analyse" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-08.png"><img src="skjermer/konsept-2-08.png" alt="Konsept 2 Elektrisk: Steg 2, gap-analyse" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-08.png"><img src="skjermer/konsept-3-08.png" alt="Konsept 3 Bento: Steg 2, gap-analyse" loading="lazy"></a></li>
     </ul>
   </section>
   <section class="skjerm" aria-labelledby="h-10">
     <h2 id="h-10">10 · Steg 3: Søknadsutkast</h2>
     <p>Redigerbart brev, sjekklisten «Før du sender», «Teksten bygger på» og «Kopier tekst» (FR-16, FR-19, FR-20).</p>
     <ul class="rad">
-      <li class="k1"><span class="navn">Konsept 1 · Huskelapp</span><a class="bilde" href="skjermer/konsept-1-10.png"><img src="skjermer/konsept-1-10.png" alt="Konsept 1 Huskelapp: Steg 3, søknadsutkast" loading="lazy"></a></li>
-      <li class="k2"><span class="navn">Konsept 2 · Kveld</span><a class="bilde" href="skjermer/konsept-2-10.png"><img src="skjermer/konsept-2-10.png" alt="Konsept 2 Kveld: Steg 3, søknadsutkast" loading="lazy"></a></li>
-      <li class="k3"><span class="navn">Konsept 3 · Fremdrift</span><a class="bilde" href="skjermer/konsept-3-10.png"><img src="skjermer/konsept-3-10.png" alt="Konsept 3 Fremdrift: Steg 3, søknadsutkast" loading="lazy"></a></li>
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-10.png"><img src="skjermer/konsept-1-10.png" alt="Konsept 1 Solnedgang: Steg 3, søknadsutkast" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-10.png"><img src="skjermer/konsept-2-10.png" alt="Konsept 2 Elektrisk: Steg 3, søknadsutkast" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-10.png"><img src="skjermer/konsept-3-10.png" alt="Konsept 3 Bento: Steg 3, søknadsutkast" loading="lazy"></a></li>
     </ul>
   </section>
   <section class="skjerm" aria-labelledby="h-16">
     <h2 id="h-16">16 · Mobil: gap-analyse (390 px)</h2>
     <p>Huskelisten krymper til en stripe øverst med aktivt steg og opptellingen som prikker (NFR-2).</p>
     <ul class="rad">
-      <li class="k1"><span class="navn">Konsept 1 · Huskelapp</span><a class="bilde mobil" href="skjermer/konsept-1-16.png"><img src="skjermer/konsept-1-16.png" alt="Konsept 1 Huskelapp: Gap-analyse på mobil" loading="lazy"></a></li>
-      <li class="k2"><span class="navn">Konsept 2 · Kveld</span><a class="bilde mobil" href="skjermer/konsept-2-16.png"><img src="skjermer/konsept-2-16.png" alt="Konsept 2 Kveld: Gap-analyse på mobil" loading="lazy"></a></li>
-      <li class="k3"><span class="navn">Konsept 3 · Fremdrift</span><a class="bilde mobil" href="skjermer/konsept-3-16.png"><img src="skjermer/konsept-3-16.png" alt="Konsept 3 Fremdrift: Gap-analyse på mobil" loading="lazy"></a></li>
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde mobil" href="skjermer/konsept-1-16.png"><img src="skjermer/konsept-1-16.png" alt="Konsept 1 Solnedgang: Gap-analyse på mobil" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde mobil" href="skjermer/konsept-2-16.png"><img src="skjermer/konsept-2-16.png" alt="Konsept 2 Elektrisk: Gap-analyse på mobil" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde mobil" href="skjermer/konsept-3-16.png"><img src="skjermer/konsept-3-16.png" alt="Konsept 3 Bento: Gap-analyse på mobil" loading="lazy"></a></li>
     </ul>
   </section>
 
   <div class="tabell">
     <table>
       <caption>Sammenligning</caption>
-      <thead><tr><th scope="col"></th><th scope="col">1 · Huskelapp</th><th scope="col">2 · Kveld</th><th scope="col">3 · Fremdrift</th></tr></thead>
+      <thead><tr><th scope="col"></th><th scope="col">1 · Solnedgang</th><th scope="col">2 · Elektrisk</th><th scope="col">3 · Bento</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Huskelisten</th><td>Gul lapp, fast til venstre</td><td>Mørkt panel, fast til venstre</td><td>Mørkt bånd øverst med merker</td></tr>
-        <tr><th scope="row">Status</th><td>Fylt / stiplet firkant</td><td>Fylt sirkel / ravgul stiplet ring</td><td>Fylt sirkel / stiplet ring</td></tr>
-        <tr><th scope="row">Uttrykk</th><td>Lyst, Georgia, blå knapper</td><td>Mørkt, mint knapper, lyst brevark</td><td>Krem, korall, pilleformede knapper</td></tr>
-        <tr><th scope="row">Mobil</th><td>Lappen blir en stripe</td><td>Panelet blir en stripe</td><td>Båndet viser bare aktivt steg</td></tr>
+        <tr><th scope="row">Huskelisten</th><td>Gradient-panel til venstre</td><td>Koboltblått panel, aktivt steg i korall</td><td>Himmelblå flis til venstre</td></tr>
+        <tr><th scope="row">Kravene</th><td>Svevende hvite kort under hverandre</td><td>Hvite kort, manglende krav på rosa</td><td>Pastell-fliser, dokumenterte krav side om side</td></tr>
+        <tr><th scope="row">Uttrykk</th><td>Segoe UI Black, gradient-knapper</td><td>Bahnschrift, blå knapper</td><td>Store overskrifter, svarte knapper</td></tr>
+        <tr><th scope="row">Mobil</th><td>Panelet blir en gradient-stripe</td><td>Panelet blir en blå stripe</td><td>Flisene stables</td></tr>
         <tr><th scope="row">Utenfor PRD</th><td colspan="3">Sjekklisten «Før du sender» (felles for alle tre)</td></tr>
       </tbody>
     </table>
   </div>
 </main>
 
-<footer>Første runde laget 2026-11-22, erstattet av tre Sjekkliste-varianter 2026-11-23. Laget av Elisabeth med Claude Code. Bildene lages med <code>verktoy/skjermbilder.cjs</code> (se README). Fiktivt innhold fra testpar 1.</footer>
+<footer>Runde 1 laget 2026-11-22. Runde 2 og 3 (varianter av Sjekkliste) laget 2026-11-23. Laget av Elisabeth med Claude Code. Bildene lages med <code>verktoy/skjermbilder.cjs</code> (se README). Fiktivt innhold fra testpar 1.</footer>
 </body>
 </html>

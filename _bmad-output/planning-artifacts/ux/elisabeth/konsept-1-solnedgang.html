@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Konsept 2 – Sjekkliste: Kveld</title>
+<title>Konsept 1 – Sjekkliste: Solnedgang</title>
 <style>
   :root {
     --krem: #FBF7F2;
@@ -114,36 +114,31 @@
   .mobil h3.side { font-size: 23px; }
   .mobil .knapp { width: 100%; text-align: center; }
 
-  /* Variant: Konsept 2 – Sjekkliste: Kveld */
-  :root { --krem: #161B22; --flate: #1F2630; --blekk: #EEF1F5; --dempet: #AEB8C5; --korall: #7DD3C0; --korall-myk: #3A2C17; --dok: #8BE0A4; --dok-myk: #1D3527; --linje: #323C4A; --mangler: #F5B971; --radius: 16px; --tittel: "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif; }
-  body { background: #0B0E13; }
-  .ramme { border-color: #2A3340; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
-  .mock { background: #0B0E13; color: var(--dempet); border-bottom: 1px solid var(--linje); }
-  .topp { background: var(--krem); }
-  .huskeliste { background: #0F1319; border-right: 1px solid var(--linje); }
-  .huskeliste h2 { color: var(--dempet); }
-  .huskeliste li[aria-current] { background: rgba(125,211,192,.14); }
-  .merke.ferdig { background: var(--korall); color: #0B0E13; }
-  .merke.aapen { border-color: var(--mangler); color: var(--mangler); }
-  .boks.dok { background: var(--dok); color: #0B0E13; }
+  /* Variant: Konsept 1 – Sjekkliste: Solnedgang */
+  :root { --krem: #FFF7F2; --blekk: #2A1620; --dempet: #6A4B55; --korall: #C2185B; --korall-myk: #FFE6D6; --dok: #0F7B5F; --dok-myk: #DDF5EC; --linje: #F3D9DF; --mangler: #B8430A; --radius: 20px;
+    --tittel: "Segoe UI Black", "Arial Black", "Segoe UI", sans-serif; --grad: linear-gradient(160deg, #A3134D 0%, #C2185B 45%, #B8430A 100%); }
+  body { background: #FBE9E4; }
+  .ramme { border: none; border-radius: 24px; box-shadow: 0 20px 50px rgba(163,19,77,.18); }
+  .mock { background: var(--blekk); }
+  .topp { border-bottom: none; }
+  .logo { letter-spacing: -.02em; font-weight: 900; }
+  .huskeliste { background: var(--grad); }
+  .huskeliste h2 { letter-spacing: .14em; }
+  .huskeliste li small { opacity: 1; }
+  .huskeliste li[aria-current] { background: rgba(255,255,255,.22); }
+  .merke.ferdig { color: #A3134D; }
+  h3.side { font-size: 34px; letter-spacing: -.02em; }
+  .kort { border: none; box-shadow: 0 6px 20px rgba(42,22,32,.08); }
+  .kort.mangler { border: 2px solid var(--mangler); }
   .boks.mangler { border-color: var(--mangler); color: var(--mangler); }
-  .boks.tom { border-color: var(--dempet); }
-  .kort.mangler { border-color: var(--mangler); }
-  .statusord.mangler { background: var(--mangler); color: #1A1206; }
-  .statusord.dok { background: var(--dok-myk); color: var(--dok); }
-  .prikker i { background: var(--dok); }
   .prikker i.aapen { border-color: var(--mangler); }
-  .input { background: #0F1319; border-color: #7C8797; color: var(--blekk); }
-  .veksle { background: #0F1319; }
-  .veksle span[aria-pressed="true"] { background: var(--korall); color: #0B0E13; }
-  .knapp { color: #0B0E13; }
-  .knapp.sekundar { background: transparent; color: var(--blekk); border-color: var(--blekk); }
-  .valg div { background: var(--flate); border-color: var(--linje); }
+  .knapp { background: var(--grad); border: none; padding: 16px 28px; box-shadow: 0 8px 20px rgba(194,24,91,.3); }
+  .knapp.sekundar { background: #fff; border: 2px solid var(--blekk); box-shadow: none; }
+  .kort.vilkar { border: 1.5px dashed #8F7A82; background: transparent; box-shadow: none; }
+  .valg div { border-color: var(--linje); }
   .valg div.valgt { border-color: var(--korall); box-shadow: inset 0 0 0 1px var(--korall); }
-  .brev { background: #F7F4EE; color: #1B1F24; border-color: #F7F4EE; }
+  .input { border-color: #8F7A82; }
   .feil strong::before { color: var(--mangler); }
-  .vilkar { border-color: #7C8797; }
-  .galleri > header a { color: var(--korall); }
 
   @media (max-width: 900px) {
     .oppsett, .to-kol, .valg { grid-template-columns: 1fr; }
@@ -154,8 +149,8 @@
 <body>
 <main class="galleri">
   <header>
-    <h1>Konsept 2 – Sjekkliste: Kveld</h1>
-    <p>Sjekklisten i mørkt tema. Rolig og moderne, med mintgrønn aksent og ravgule åpne punkter. Fylte punkter er dokumentert i CV-en. Punkter med stiplet ring står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon. Søknadsbrevet står som et lyst ark, så det skiller seg tydelig fra appen.</p>
+    <h1>Konsept 1 – Sjekkliste: Solnedgang</h1>
+    <p>Sjekklisten med varm energi. Sidepanelet og knappene har en gradient fra bringebær til oransje, kortene svever på en lys, rosa bakgrunn, og overskriftene er tunge og tette. Fylte punkter er dokumentert i CV-en. Stiplede punkter står ikke i CV-en, og de forblir åpne selv om du skriver et svar, fordi et svar ikke er dokumentasjon.</p>
     <p>Fiktivt innhold fra testpar 1. Skjermene er statiske skisser, ikke en fungerende app. Se <a href="README.md">README.md</a> for tokens, kontrast og antagelser, og <a href="oversikt.html">oversikt.html</a> for alle tre konseptene.</p>
   </header>
 

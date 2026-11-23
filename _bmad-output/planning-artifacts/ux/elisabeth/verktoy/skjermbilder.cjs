@@ -15,7 +15,7 @@ const { pathToFileURL } = require('node:url');
 
 const mappe = path.resolve(__dirname, '..');
 const utMappe = path.join(mappe, 'skjermer');
-const konsepter = ['konsept-1-huskelapp', 'konsept-2-kveld', 'konsept-3-fremdrift'];
+const konsepter = ['konsept-1-solnedgang', 'konsept-2-elektrisk', 'konsept-3-bento'];
 const skjermer = ['01', '03', '08', '10', '16']; // samme rekkefølge som figurene i konseptfilene
 const chromeSti = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
