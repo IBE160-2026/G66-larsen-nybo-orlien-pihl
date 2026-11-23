@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sammenlign designkonsepter</title>
+<style>
+  :root { --bg: #F4F5F7; --flate: #FFFFFF; --tekst: #16181D; --dempet: #4A505C; --linje: #D5D9E0; --aksent: #1A4FB4;
+    --miranda: #6A3DB8; --helle: #2B4C7E; --elisabeth: #B8174F; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--tekst); font: 16px/1.5 "Segoe UI", system-ui, sans-serif; }
+  :focus-visible { outline: 3px solid var(--aksent); outline-offset: 2px; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--flate); border-bottom: 1px solid var(--linje); padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+  h1 { font-size: 20px; margin: 0; }
+  .gruppe { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .gruppe > span { font-size: 14px; color: var(--dempet); font-weight: 600; margin-right: 2px; }
+  button, select { font: inherit; }
+  .valg button { border: 1.5px solid var(--linje); background: var(--flate); border-radius: 999px; padding: 6px 14px; cursor: pointer; color: var(--tekst); }
+  .valg button[aria-pressed="true"] { background: var(--tekst); color: #fff; border-color: var(--tekst); }
+  .teller { font-size: 14px; color: var(--dempet); }
+  .lenkeknapp { border: none; background: none; color: var(--aksent); text-decoration: underline; cursor: pointer; padding: 4px; }
+  main { padding: 20px; max-width: 1800px; margin: 0 auto; }
+  .hjelp { margin: 0 0 16px; color: var(--dempet); max-width: 90ch; }
+
+  .person { margin-bottom: 28px; }
+  .person h2 { font-size: 18px; margin: 0 0 10px; padding-left: 10px; border-left: 5px solid var(--farge); }
+  .rad { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .kort { background: var(--flate); border: 1px solid var(--linje); border-top: 5px solid var(--farge); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .kort.ute { opacity: .35; }
+  .kort.ute .bilde { filter: grayscale(1); }
+  .kort h3 { margin: 0; font-size: 16px; }
+  .kort p { margin: 0; font-size: 14px; color: var(--dempet); }
+  .bilde { display: block; width: 100%; height: 420px; overflow: hidden; border: 1px solid var(--linje); border-radius: 6px; background: var(--bg); padding: 0; cursor: zoom-in; }
+  .bilde img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .mobil .bilde img { object-fit: contain; object-position: top center; }
+  .handlinger { display: flex; gap: 8px; align-items: center; }
+  .handlinger button { border: 1.5px solid var(--tekst); background: var(--flate); border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 14px; }
+  .kort.ute .handlinger button.ta-ut { background: var(--tekst); color: #fff; }
+  textarea { width: 100%; min-height: 54px; font: 14px/1.4 "Segoe UI", system-ui, sans-serif; border: 1.5px solid #7A8296; border-radius: 6px; padding: 6px 8px; resize: vertical; }
+  label.notat { font-size: 13px; font-weight: 600; }
+
+  .to { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .to .side { background: var(--flate); border: 1px solid var(--linje); border-radius: 8px; padding: 12px; min-width: 0; }
+  .to select { width: 100%; padding: 6px; margin-bottom: 10px; border: 1.5px solid #7A8296; border-radius: 6px; }
+  .to img { width: 100%; height: auto; display: block; border: 1px solid var(--linje); border-radius: 6px; }
+  .to.mobil img { max-width: 420px; margin: 0 auto; }
+
+  dialog { border: none; padding: 0; max-width: 96vw; max-height: 96vh; background: transparent; }
+  dialog::backdrop { background: rgba(10,12,16,.85); }
+  .lys { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .lys .topp { display: flex; gap: 12px; align-items: center; color: #fff; }
+  .lys .topp button { border: 1.5px solid #fff; background: transparent; color: #fff; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  .lys .ramme { max-height: 86vh; overflow: auto; background: #fff; border-radius: 6px; }
+  .lys img { display: block; max-width: 92vw; height: auto; }
+
+  @media (max-width: 1000px) { .rad, .to { grid-template-columns: 1fr; } .bilde { height: 320px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sammenlign designkonseptene</h1>
+  <div class="gruppe valg" role="group" aria-label="Skjerm">
+    <span>Skjerm</span>
+    <button data-skjerm="03">03 CV og annonse</button>
+    <button data-skjerm="08">08 Gap-analyse</button>
+    <button data-skjerm="10">10 Teksten</button>
+    <button data-skjerm="16">16 Mobil</button>
+  </div>
+  <div class="gruppe valg" role="group" aria-label="Visning">
+    <span>Visning</span>
+    <button data-visning="alle">Alle ni</button>
+    <button data-visning="to">To mot to</button>
+  </div>
+  <div class="gruppe">
+    <span class="teller" id="teller" aria-live="polite"></span>
+    <button class="lenkeknapp" id="skjul-ute"></button>
+    <button class="lenkeknapp" id="nullstill">Nullstill utslag og notater</button>
+  </div>
+</header>
+
+<main>
+  <p class="hjelp" id="hjelp"></p>
+  <div id="innhold"></div>
+</main>
+
+<dialog id="lysboks" aria-label="Skjermbilde i full størrelse">
+  <div class="lys">
+    <div class="topp">
+      <button id="forrige" aria-label="Forrige konsept">← Forrige</button>
+      <strong id="lys-tittel"></strong>
+      <button id="neste" aria-label="Neste konsept">Neste →</button>
+      <button id="lukk">Lukk (Esc)</button>
+    </div>
+    <div class="ramme"><img id="lys-bilde" alt=""></div>
+  </div>
+</dialog>
+
+<script>
+const personer = [
+  { id: 'miranda', navn: 'Miranda', pr: 13, konsepter: [
+    { navn: 'Stegvis veiviser', tekst: 'Ett steg om gangen med tydelig fremdrift.' },
+    { navn: 'Editorial', tekst: 'Premium og redaksjonelt uttrykk med luft og typografi.' },
+    { navn: 'Bold', tekst: 'Moderne og kraftig: store blokkbokstaver, lime, lilla og svart.' } ], ext: 'png' },
+  { id: 'helle', navn: 'Helle', pr: 15, konsepter: [
+    { navn: 'Rolig veiviser', tekst: 'Én ting om gangen på varmt papir, én dempet blå aksent.' },
+    { navn: 'Arbeidsbenk med bevis', tekst: 'CV, krav og annonse side om side, med nummererte sitater som bevis.' },
+    { navn: 'Kort og mot', tekst: 'Mobil først: store kort, klistremerker, tung typografi, coachende tone.' } ], ext: 'svg' },
+  { id: 'elisabeth', navn: 'Elisabeth', pr: 18, konsepter: [
+    { navn: 'Solnedgang', tekst: 'Sjekkliste med gradient fra bringebær til oransje og svevende kort.' },
+    { navn: 'Elektrisk', tekst: 'Sjekkliste med koboltblått panel, korall på aktivt steg, Bahnschrift.' },
+    { navn: 'Bento', tekst: 'Sjekkliste som pastell-fliser, dokumenterte krav side om side.' } ], ext: 'png' },
+];
+const skjermnavn = { '03': 'CV og annonse', '08': 'Gap-analyse', '10': 'Teksten', '16': 'Gap-analyse på mobil' };
+const alle = personer.flatMap(p => p.konsepter.map((k, i) => ({ ...k, person: p, nr: i + 1, id: `${p.id}-${i + 1}` })));
+
+const lagre = (n, v) => { try { localStorage.setItem('sammenlign-' + n, JSON.stringify(v)); } catch (e) {} };
+const hent = (n, standard) => { try { const v = localStorage.getItem('sammenlign-' + n); return v ? JSON.parse(v) : standard; } catch (e) { return standard; } };
+
+const tilstand = { skjerm: hent('skjerm', '08'), visning: hent('visning', 'alle'), ute: hent('ute', []), notater: hent('notater', {}),
+  skjulUte: hent('skjulUte', false), a: hent('a', 'miranda-1'), b: hent('b', 'elisabeth-1') };
+const bilde = k => `bilder/${k.person.id}-${k.nr}-${tilstand.skjerm}.${k.person.ext}`;
+const tittel = k => `${k.person.navn} ${k.nr} · ${k.navn}`;
+const synlige = () => alle.filter(k => !(tilstand.skjulUte && tilstand.ute.includes(k.id)));
+
+function tegn() {
+  document.querySelectorAll('[data-skjerm]').forEach(b => b.setAttribute('aria-pressed', b.dataset.skjerm === tilstand.skjerm));
+  document.querySelectorAll('[data-visning]').forEach(b => b.setAttribute('aria-pressed', b.dataset.visning === tilstand.visning));
+  const igjen = alle.length - tilstand.ute.length;
+  document.getElementById('teller').textContent = `${igjen} av ${alle.length} konsepter er med`;
+  document.getElementById('skjul-ute').textContent = tilstand.skjulUte ? 'Vis utslåtte' : 'Skjul utslåtte';
+  const mobil = tilstand.skjerm === '16';
+  const innhold = document.getElementById('innhold');
+  innhold.className = mobil ? 'mobil' : '';
+
+  if (tilstand.visning === 'alle') {
+    document.getElementById('hjelp').textContent = `Skjerm ${tilstand.skjerm}: ${skjermnavn[tilstand.skjerm]}. Klikk på et bilde for full størrelse (piltastene blar). «Ta ut» demper et konsept, slik at dere kan slå ut ett og ett til favorittene står igjen. Notatene lagres i denne nettleseren.`;
+    innhold.innerHTML = personer.map(p => {
+      const kort = p.konsepter.map((k, i) => alle.find(x => x.id === `${p.id}-${i + 1}`)).filter(k => synlige().includes(k));
+      if (!kort.length) return '';
+      return `<section class="person" style="--farge: var(--${p.id})" aria-labelledby="h-${p.id}">
+        <h2 id="h-${p.id}">${p.navn} (PR #${p.pr})</h2>
+        <div class="rad">${kort.map(k => {
+          const ute = tilstand.ute.includes(k.id);
+          return `<article class="kort${ute ? ' ute' : ''}" style="--farge: var(--${p.id})">
+            <h3>${k.nr} · ${k.navn}</h3><p>${k.tekst}</p>
+            <button class="bilde" data-apne="${k.id}" aria-label="Vis ${tittel(k)} i full størrelse"><img src="${bilde(k)}" alt="${tittel(k)}, skjerm ${tilstand.skjerm}" loading="lazy"></button>
+            <div class="handlinger"><button class="ta-ut" data-ute="${k.id}" aria-pressed="${ute}">${ute ? 'Ta inn igjen' : 'Ta ut'}</button></div>
+            <label class="notat" for="n-${k.id}">Notat</label>
+            <textarea id="n-${k.id}" data-notat="${k.id}" placeholder="Hva liker dere, hva liker dere ikke?">${tilstand.notater[k.id] || ''}</textarea>
+          </article>`; }).join('')}</div></section>`;
+    }).join('');
+  } else {
+    document.getElementById('hjelp').textContent = `Skjerm ${tilstand.skjerm}: ${skjermnavn[tilstand.skjerm]}. Velg to konsepter og se dem i full bredde side om side.`;
+    const valg = id => alle.map(k => `<option value="${k.id}"${k.id === id ? ' selected' : ''}>${tittel(k)}${tilstand.ute.includes(k.id) ? ' (tatt ut)' : ''}</option>`).join('');
+    const side = (felt) => { const k = alle.find(x => x.id === tilstand[felt]);
+      return `<div class="side"><label class="notat" for="velg-${felt}">Konsept ${felt === 'a' ? 'til venstre' : 'til høyre'}</label>
+        <select id="velg-${felt}" data-velg="${felt}">${valg(tilstand[felt])}</select>
+        <img src="${bilde(k)}" alt="${tittel(k)}, skjerm ${tilstand.skjerm}"></div>`; };
+    innhold.innerHTML = `<div class="to${mobil ? ' mobil' : ''}">${side('a')}${side('b')}</div>`;
+  }
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.skjerm) { tilstand.skjerm = t.dataset.skjerm; lagre('skjerm', tilstand.skjerm); tegn(); }
+  else if (t.dataset.visning) { tilstand.visning = t.dataset.visning; lagre('visning', tilstand.visning); tegn(); }
+  else if (t.dataset.ute) { const id = t.dataset.ute; tilstand.ute = tilstand.ute.includes(id) ? tilstand.ute.filter(x => x !== id) : [...tilstand.ute, id]; lagre('ute', tilstand.ute); tegn(); document.querySelector(`[data-ute="${id}"]`)?.focus(); }
+  else if (t.dataset.apne) apne(t.dataset.apne);
+  else if (t.id === 'skjul-ute') { tilstand.skjulUte = !tilstand.skjulUte; lagre('skjulUte', tilstand.skjulUte); tegn(); }
+  else if (t.id === 'nullstill' && confirm('Fjerne alle utslag og notater?')) { tilstand.ute = []; tilstand.notater = {}; lagre('ute', []); lagre('notater', {}); tegn(); }
+  else if (t.id === 'lukk') lysboks.close();
+  else if (t.id === 'forrige') bla(-1);
+  else if (t.id === 'neste') bla(1);
+});
+document.addEventListener('input', e => { const id = e.target.dataset.notat; if (id) { tilstand.notater[id] = e.target.value; lagre('notater', tilstand.notater); } });
+document.addEventListener('change', e => { const f = e.target.dataset.velg; if (f) { tilstand[f] = e.target.value; lagre(f, tilstand[f]); tegn(); } });
+
+const lysboks = document.getElementById('lysboks');
+let aapen = null;
+function apne(id) { aapen = id; const k = alle.find(x => x.id === id);
+  document.getElementById('lys-bilde').src = bilde(k); document.getElementById('lys-bilde').alt = `${tittel(k)}, skjerm ${tilstand.skjerm}`;
+  document.getElementById('lys-tittel').textContent = `${tittel(k)} · skjerm ${tilstand.skjerm}`;
+  document.querySelector('.lys .ramme').scrollTop = 0;
+  if (!lysboks.open) lysboks.showModal(); }
+function bla(steg) { const liste = synlige(); const i = liste.findIndex(k => k.id === aapen); apne(liste[(i + steg + liste.length) % liste.length].id); }
+lysboks.addEventListener('keydown', e => { if (e.key === 'ArrowRight') bla(1); if (e.key === 'ArrowLeft') bla(-1); });
+lysboks.addEventListener('click', e => { if (e.target === lysboks) lysboks.close(); });
+
+tegn();
+</script>
+</body>
+</html>
