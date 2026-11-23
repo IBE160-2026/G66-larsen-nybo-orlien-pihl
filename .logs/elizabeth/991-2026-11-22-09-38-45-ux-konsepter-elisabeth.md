@@ -57,8 +57,9 @@ Elisabeth likte ikke de tre første konseptene så godt og ville ha tre nye som 
 - Nye filer: `konsept-1-huskelapp.html`, `konsept-2-kveld.html` og `konsept-3-fremdrift.html`. De gamle tre er fjernet med `git rm` og finnes i commit `5cabb9b`.
 - `oversikt.html` og `README.md` er oppdatert, og README har en egen seksjon om iterasjonen og begrunnelsen.
 - Kontroll: all tekst holder minst 5,5:1 og feltkanter minst 3:1. Skjermbildene viste at lenkene i toppteksten til Kveld hadde standardblå på mørk bakgrunn. Det er rettet.
+- Oversikten er bygget om etter mønster fra Helles `oversikt.html` (PR #15), etter ønske fra Elisabeth: konseptkort øverst og én rad per skjerm med alle tre konseptene side om side som bilder.
+- Nytt skript `verktoy/skjermbilder.cjs` (Chrome via DevTools-protokollen, ingen pakker) lager de 15 bildene i `skjermer/` (1,1 MB) og måler overflyt. Ingen overflyt ved 375 px i noen av variantene. README forklarer hvordan bildene lages på nytt.
 - Endringene er ikke committet ennå, fordi Elisabeth skal se gjennom dem først.
 
 ### Åpne punkter
 - Elisabeth går gjennom de tre Sjekkliste-variantene og gir tilbakemelding før de committes og sendes til gruppa.
-- Overflyt på mobil (375 px) er ikke målt på nytt for variantene.

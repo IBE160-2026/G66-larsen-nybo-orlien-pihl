@@ -14,4 +14,4 @@
 - [ ] 2026-11-22 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — gruppa velger én designretning av de ni konseptene; deretter `bmad-ux` for DESIGN.md og EXPERIENCE.md
 - [ ] 2026-11-22 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — gruppa blir enige om én plassering for UX-konseptene (`UX/` i rot eller `_bmad-output/planning-artifacts/ux/`)
 - [ ] 2026-11-23 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — Elisabeth går gjennom de tre Sjekkliste-variantene (Huskelapp, Kveld, Fremdrift) før commit og deling med gruppa
-- [ ] 2026-11-23 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — overflyt ved 375 px er ikke målt på nytt for Sjekkliste-variantene
+- [x] 2026-11-23 [ux-konsepter-elisabeth](991-2026-11-22-09-38-45-ux-konsepter-elisabeth.md) — overflyt ved 375 px er ikke målt på nytt for Sjekkliste-variantene (løst 2026-11-23: målt med verktoy/skjermbilder.cjs, ingen overflyt)
