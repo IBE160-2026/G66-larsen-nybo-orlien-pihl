@@ -42,3 +42,23 @@ Elisabeth ville se UX-konseptene sine på GitHub.
 
 ### Åpne punkter
 - Ingen nye (punktene fra 2026-11-22 står fortsatt åpne i `issues.md`).
+
+## 2026-11-23 kl. 15:15 — elizabeth
+
+### Oppgave
+Elisabeth likte ikke de tre første konseptene så godt og ville ha tre nye som ligner på konsept 3 (Sjekkliste). De gamle skulle erstattes.
+
+### Plan
+- Så på Mirandas (PR #13) og Helles (PR #15) konsepter lokalt via egne worktrees i scratchpad.
+- Lagde tre varianter med identisk HTML fra Sjekkliste og ulike stilark: Huskelapp (lyst, gul lapp, firkantede bokser), Kveld (mørkt tema, lyst brevark) og Fremdrift (huskelisten som bånd øverst, én kolonne).
+- Regnet ut kontrast og tok skjermbilder ved 1440 px.
+
+### Resultat
+- Nye filer: `konsept-1-huskelapp.html`, `konsept-2-kveld.html` og `konsept-3-fremdrift.html`. De gamle tre er fjernet med `git rm` og finnes i commit `5cabb9b`.
+- `oversikt.html` og `README.md` er oppdatert, og README har en egen seksjon om iterasjonen og begrunnelsen.
+- Kontroll: all tekst holder minst 5,5:1 og feltkanter minst 3:1. Skjermbildene viste at lenkene i toppteksten til Kveld hadde standardblå på mørk bakgrunn. Det er rettet.
+- Endringene er ikke committet ennå, fordi Elisabeth skal se gjennom dem først.
+
+### Åpne punkter
+- Elisabeth går gjennom de tre Sjekkliste-variantene og gir tilbakemelding før de committes og sendes til gruppa.
+- Overflyt på mobil (375 px) er ikke målt på nytt for variantene.
