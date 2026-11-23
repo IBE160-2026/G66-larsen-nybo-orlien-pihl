@@ -63,3 +63,24 @@ Elisabeth likte ikke de tre første konseptene så godt og ville ha tre nye som 
 
 ### Åpne punkter
 - Elisabeth går gjennom de tre Sjekkliste-variantene og gir tilbakemelding før de committes og sendes til gruppa.
+
+## 2026-11-23 kl. 15:27 — elizabeth
+
+### Oppgave
+Elisabeth likte den nye oversikten, men syntes konseptene ble litt kjedelige. Appen skal i hovedsak appellere til unge jobbsøkere, så hun ville prøve mer spennende varianter.
+
+### Plan
+- Committet runde 2 lokalt først (`9dd71bd`), slik at Huskelapp, Kveld og Fremdrift kan hentes fram igjen.
+- Så på Mirandas «Bold» (limegrønt, lilla, svart) og Helles «Kort og mot» (lilla, limegrønt, gult) for å unngå overlapp.
+- Laget tre nye varianter av Sjekkliste med samme markup: Solnedgang (gradient fra bringebær til oransje), Elektrisk (kobolt, korall, Bahnschrift) og Bento (pastell-fliser, svarte knapper).
+
+### Resultat
+- Nye filer: `konsept-1-solnedgang.html`, `konsept-2-elektrisk.html` og `konsept-3-bento.html`. Runde 2 er fjernet med `git rm`.
+- `oversikt.html`, `README.md` (ny iterasjonstabell over tre runder, tokens og kontrast) og `verktoy/skjermbilder.cjs` er oppdatert, og alle 15 bildene er laget på nytt.
+- Kontroll: all tekst holder minst 4,5:1, og ingen overflyt ved 375 px.
+- KI-feil funnet og rettet: en ny regel som fjernet kantlinjen på kortene, fjernet også den stiplede rammen rundt ansettelsesvilkår i Solnedgang og Elektrisk. Feilen er dokumentert i README.
+- Runde 3 er ikke committet ennå, fordi Elisabeth skal se gjennom den.
+
+### Åpne punkter
+- Elisabeth går gjennom runde 3 (Solnedgang, Elektrisk, Bento) før commit og deling med gruppa.
+- Bahnschrift finnes bare på Windows. Velger gruppa Elektrisk, må en nettskrift vurderes.
