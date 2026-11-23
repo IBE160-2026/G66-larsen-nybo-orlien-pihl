@@ -2,7 +2,7 @@
 title: "PRD: Supersøker - AI CV & Job Application Assistant"
 status: final
 created: 2026-11-03
-updated: 2026-11-12
+updated: 2026-11-23
 ---
 
 # PRD: Supersøker - AI CV & Job Application Assistant
@@ -417,7 +417,7 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 ### 5.1 Universell utforming og design
 
 - **NFR-1: Universell utforming.** Hele kjerneflyten kan gjennomføres med tastatur. Alle skjemafelt har synlige etiketter, og fokus er alltid synlig. Status vises med tekst, ikke bare farge. Feil- og statusmeldinger leses opp av skjermleser. Ved stegbytte flyttes fokus til overskriften, ved feil til første ugyldige felt. Kontrast oppfyller WCAG 2.1 nivå AA.
-- **NFR-2: Skjermstørrelser.** Kjerneflyten fungerer på mobil og datamaskin. På smale skjermer stables kolonnene, og steglisten viser bare aktivt steg. UX-arbeidet fastsetter skjermbreddene som testes.
+- **NFR-2: Skjermstørrelser.** Supersøker er laget for datamaskin. Kjerneflyten fungerer i nettleservinduer fra 1024 px bredde og testes ved 1024 og 1440 px. Under 1024 px kan siden rulle sidelengs, men innhold og knapper skal ikke overlappe eller forsvinne. Mobil og nettbrett støttes ikke i v1 (vedtak 15).
 - **NFR-3: Meldinger.** Alle meldinger er på norsk bokmål og sier hva som er galt og hva brukeren kan gjøre. Tomtilstander forklarer hva som mangler.
 
 ### 5.2 Sikkerhet og personvern
@@ -442,6 +442,7 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 - Ingen offentlig eller kommersiell lansering, og ingen felles server.
 - Ingen chat der språkmodellen stiller oppfølgingsspørsmål i flere runder. Gruppa forkastet det fordi det er for komplekst, uforutsigbart og vanskelig å teste.
 - Ingen permanent lagring av CV-er, annonser, svar eller resultater i v1. Gruppa avviste et KI-forslag om det 2026-10-30.
+- Ingen mobil- eller nettbrettvisning i v1. Appen er laget for datamaskin (NFR-2, vedtak 15).
 
 ## 7. MVP-omfang
 
@@ -481,7 +482,7 @@ Listen beskriver hva som må være oppfylt, ikke utførte tester.
 - Alle fire testpar fungerer i mock med begge omskrivingsvalg og alle tre CV-innleggingsmåter. Automatiske tester kjøres etter README uten feil. Mock dokumenterer ikke modellkvalitet.
 - Ekte modell er vurdert mot fasit, ærlighetsregelen og brevsjekklisten etter §8, innenfor 100 kr.
 - Feiltilfeller, kildekontroll, endrede inndata, øktdata og A/B-tilgang er testet. Ingen kjente feil som gir falske kvalifikasjonspåstander, uvedkommende tilgang eller stopper kjerneflyten står åpne.
-- Kjerneflyten er kontrollert med tastatur og på mobil- og PC-størrelse, med meldinger, tomtilstander og kopiering kontrollert mot NFR-1 til NFR-3.
+- Kjerneflyten er kontrollert med tastatur og i nettleservinduer på 1024 og 1440 px, med meldinger, tomtilstander og kopiering kontrollert mot NFR-1 til NFR-3.
 - Installasjonstesten på annen PC er dokumentert (NFR-7). README beskriver oppstart, testbruker, testscenarioer og testkommandoer.
 - Startverdiene i §10 er bekreftet eller justert. Mindre restfeil har dokumentert konsekvens. Krav, stories, tester og rettinger av KI-generert kode kan spores i repoet.
 
@@ -552,8 +553,9 @@ Vedtakene er innarbeidet i kravene. Begrunnelse og hvem som besluttet står i [.
 | 12 | Reserveregel og kostnadsoverslag for ekte modell | v1 | NFR-6, NFR-8, §8 |
 | 13 | Tittel og arbeidsgiver er obligatoriske, leverandørvarselet bekreftes én gang per økt, og kontrast følger WCAG 2.1 AA | v1 | FR-9, FR-25, NFR-1 |
 | 14 | «Teksten» som fellesbegrep og knappen «Lag tekst» | v1 | §3, UJ-1, FR-15–FR-21 |
+| 15 | Appen er laget for datamaskin; ingen mobil- eller nettbrettvisning i v1 | v1 | NFR-2, §6, §7.3 |
 
-Vedtak 1–9 ble godkjent av gruppa 2026-11-07. Vedtak 10–14 ble tatt 2026-11-12 etter faglærers tilbakemelding. Vedtak 10, 12 og 13 endrer eller avgjør spørsmål gruppa selv skulle bestemme, og godkjennes av gruppa i pull requesten.
+Vedtak 1–9 ble godkjent av gruppa 2026-11-07. Vedtak 10–14 ble tatt 2026-11-12 etter faglærers tilbakemelding. Vedtak 10, 12 og 13 endrer eller avgjør spørsmål gruppa selv skulle bestemme, og godkjennes av gruppa i pull requesten. Vedtak 15 ble tatt av hele gruppa 2026-11-23 etter sammenligningen av UX-konseptene.
 
 ## 10. Antakelser
 
