@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elisabeths designkonsepter</title>
+<style>
+  :root { --tekst: #1A1D21; --dempet: #4B525A; --linje: #D5D9DD; --lenke: #1A4FB4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #F6F7F8; color: var(--tekst); font: 16px/1.55 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  main { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { margin: 0 0 6px; font-size: 30px; }
+  .ingress { margin: 0 0 32px; color: var(--dempet); max-width: 70ch; }
+  a { color: var(--lenke); }
+  a:focus-visible { outline: 3px solid var(--lenke); outline-offset: 3px; }
+  .konsepter { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .kort { background: #fff; border: 1px solid var(--linje); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .prove { height: 110px; display: flex; align-items: flex-end; gap: 8px; padding: 14px 18px; }
+  .prove span { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(0,0,0,.15); }
+  .k1 { background: #EEF2F4; } .k2 { background: #FFFFFF; border-bottom: 8px solid #0B0C0C; } .k3 { background: #FBF7F2; }
+  .tekst { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+  .tekst h2 { margin: 0 0 4px; font-size: 21px; }
+  .tekst p { margin: 0 0 12px; color: var(--dempet); }
+  .tekst ul { margin: 0 0 16px; padding-left: 20px; }
+  .apne { margin-top: auto; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin-top: 40px; background: #fff; border: 1px solid var(--linje); }
+  caption { text-align: left; font-weight: 700; font-size: 20px; padding-bottom: 10px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-top: 1px solid var(--linje); }
+  thead th { background: #EEF0F2; }
+  .tabell { overflow-x: auto; }
+  footer { margin-top: 32px; color: var(--dempet); font-size: 14px; }
+  @media (max-width: 860px) { .konsepter { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Elisabeths designkonsepter for Supersøker</h1>
+  <p class="ingress">Tre visuelle retninger til gruppevurdering. Alle viser de samme fem skjermene (01, 03, 08, 10 og 16 fra Helles felles brief) med Ida Testesen fra testpar 1, så de kan sammenlignes med de seks andre konseptene. Dette er statiske skisser, ikke vedtatt design. Detaljer, kontrast og antagelser står i <a href="README.md">README.md</a>.</p>
+
+  <div class="konsepter">
+    <article class="kort">
+      <div class="prove k1" aria-hidden="true"><span style="background:#0B5563"></span><span style="background:#FFFDF8"></span><span style="background:#8A4B00"></span></div>
+      <div class="tekst">
+        <h2>1 · Brevet vokser</h2>
+        <p>Søknaden er synlig hele veien. Et brevark ved siden av kravene viser hva teksten kommer til å bygge på.</p>
+        <ul><li>To kolonner, petrol og Georgia</li><li>Best for: «Hva blir søknaden min?»</li><li>Risiko: arket kan se ferdigskrevet ut</li></ul>
+        <a class="apne" href="konsept-1-brevet-vokser.html">Åpne konsept 1</a>
+      </div>
+    </article>
+    <article class="kort">
+      <div class="prove k2" aria-hidden="true"><span style="background:#0B0C0C"></span><span style="background:#FFD400"></span><span style="background:#0F6A35"></span></div>
+      <div class="tekst">
+        <h2>2 · Klar tale</h2>
+        <p>Tilgjengelighet først: stor tekst, svart på hvitt, gul fokus og «Hva skjer nå?» før hver knapp.</p>
+        <ul><li>Én kolonne, 20 px brødtekst</li><li>Best for: alle brukere, også med hjelpemidler</li><li>Risiko: nøkternt og lite særpreg</li></ul>
+        <a class="apne" href="konsept-2-klar-tale.html">Åpne konsept 2</a>
+      </div>
+    </article>
+    <article class="kort">
+      <div class="prove k3" aria-hidden="true"><span style="background:#1E2A4A"></span><span style="background:#B3360F"></span><span style="background:#1D5B3A"></span></div>
+      <div class="tekst">
+        <h2>3 · Sjekkliste</h2>
+        <p>Kravene er punkter i en huskeliste. Et svar holder punktet åpent, fordi et svar ikke er dokumentasjon.</p>
+        <ul><li>Mørkt sidepanel, krem og korall</li><li>Best for: oversikt og kontroll</li><li>Risiko: avhuking kan leses som en poengsum</li></ul>
+        <a class="apne" href="konsept-3-sjekkliste.html">Åpne konsept 3</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="tabell">
+    <table>
+      <caption>Sammenligning</caption>
+      <thead><tr><th scope="col"></th><th scope="col">1 · Brevet vokser</th><th scope="col">2 · Klar tale</th><th scope="col">3 · Sjekkliste</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Steglisten</th><td>Piller i toppen</td><td>«Steg 2 av 3» i tekst</td><td>Fast sidepanel</td></tr>
+        <tr><th scope="row">Status</th><td>✓ / ! med farget venstrekant</td><td>Stort ikon og ord i store bokstaver</td><td>Fylt sirkel / stiplet ring og merke</td></tr>
+        <tr><th scope="row">Teksten bygger på</th><td>Vokser allerede på steg 2</td><td>Liste under teksten</td><td>Høyre kolonne på steg 3</td></tr>
+        <tr><th scope="row">Mobil</th><td>Kolonnene stables</td><td>Nesten lik desktop</td><td>Panelet blir en stripe</td></tr>
+        <tr><th scope="row">Utenfor PRD</th><td>Grunnlaget vises allerede på steg 2</td><td>Ingenting</td><td>Sjekklisten «Før du sender»</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Laget 2026-11-22 av Elisabeth med Claude Code. Fiktivt innhold fra testpar 1.</footer>
+</main>
+</body>
+</html>
