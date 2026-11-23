@@ -100,3 +100,20 @@ Gruppa ville vite om alle åpne PR-er bør merges. Etter anbefalingen ba de, med
 
 ### Åpne punkter
 - `samlet-forslag/README.md` på main nevner fortsatt `UX/helle/konsept-3/konsept.md` under Kilder. Den må rettes når #15 er merget.
+
+## 2026-11-23 kl. 20:13 — elizabeth
+
+### Oppgave
+Gruppa ville merge de åpne PR-ene i anbefalt rekkefølge og spurte hvordan det gjøres.
+
+### Plan
+- Sjekket konflikter. #13 og #15 var rene. #10 og #18 hadde konflikt i `.logs/elizabeth/issues.md`, og #10 ville få en ny konflikt etter #18.
+- Flettet `main` inn i `elisabeth/ux-konsepter` og `logg-pr9-merge` og beholdt punkter fra begge sider. Forklarte merge på GitHub med «Create a merge commit».
+
+### Resultat
+- Gruppa merget #13, #15 og #18. Deretter ble `main` flettet inn i #10 på nytt (`d7779bc`).
+- Markert som løst: designretning (PR #19), merge av #19 og #20, og bestått-kriterium (vedtak 4).
+- **Feil i Claudes arbeid:** Første løsning av #10 (`da4594f`) ble committet og pushet med konfliktmarkører. Node-skriptet stoppet på blandede linjeskift (CRLF/LF), men kommandokjeden brukte `;` og fortsatte. Rettet i `cf1e458`, og et punkt som sto to ganger, ble slått sammen i `dbd3e5f`. Senere kjeder bruker `set -e` og kontrollerer at det ikke finnes markører eller duplikater før commit.
+
+### Åpne punkter
+- Gruppa merger #10.
