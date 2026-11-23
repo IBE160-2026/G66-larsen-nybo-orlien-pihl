@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samlet designforslag – Supersøker</title>
+<style>
+  :root {
+    --papir: #F6F1E8; --kort: #FFFDF9; --blekk: #1E1A24; --dempet: #5A5262; --linje: #DDD3C4; --feltkant: #857A8C;
+    --primar: #A3401C; --klistremerke: #FFCFC4; --ringblomst: #FFC247; --ringtint: #FFF0CC; --ringmork: #8A5A00;
+    --dok-flate: #DCEAF7; --dok: #1F4E8C; --feil: #B3261E;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E7E0D4; color: var(--blekk); font: 16px/1.5 var(--sans); }
+  .galleri { max-width: 1340px; margin: 0 auto; padding: 32px 16px 64px; }
+  .galleri > header h1 { font: 700 30px/1.2 var(--serif); margin: 0 0 8px; }
+  .galleri > header p { margin: 0 0 8px; max-width: 80ch; color: var(--dempet); }
+  .galleri > header a { color: var(--primar); }
+  figure { margin: 48px 0 0; }
+  figcaption { margin-bottom: 12px; max-width: 90ch; }
+  figcaption strong { display: block; font-size: 18px; }
+  figcaption span { color: var(--dempet); font-size: 14px; }
+  .skrolleflate { overflow-x: auto; }
+
+  /* Skjermramme: tegnet for desktop (1280 px), ingen mobilvisning */
+  .ramme { width: 1280px; background: var(--papir); border-radius: 12px; overflow: hidden; box-shadow: 0 14px 40px rgba(30,26,36,.16); }
+  .mock { background: var(--blekk); color: #fff; font-size: 14px; font-weight: 600; padding: 7px 40px; }
+  .topp { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; border-bottom: 1px solid var(--linje); }
+  .logo { font: 400 26px var(--serif); letter-spacing: -.01em; }
+  .logo span { color: var(--primar); font-weight: 700; }
+  .bruker { display: flex; gap: 20px; align-items: center; font-size: 15px; }
+  .lenke { color: var(--primar); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+  .steg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 0 40px; border-bottom: 1px solid var(--linje); }
+  .steg div { display: flex; gap: 12px; align-items: baseline; padding: 16px 0 14px; color: var(--dempet); font-size: 15px; }
+  .steg i { font: italic 22px var(--serif); color: var(--dempet); }
+  .steg .aktiv { color: var(--blekk); font-weight: 700; box-shadow: inset 0 -3px 0 var(--primar); }
+  .steg .aktiv i { color: var(--primar); }
+  .steg .ferdig::after { content: "✓ Ferdig"; margin-left: auto; font-size: 13px; color: var(--dok); font-weight: 600; }
+  .steg .aktiv::after { content: "Du er her"; margin-left: auto; font-size: 12px; font-weight: 700; background: var(--primar); color: #fff; padding: 2px 10px; border-radius: 999px; }
+
+  .hoved { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; padding: 36px 40px 32px; }
+  .overtittel { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dempet); margin: 0 0 8px; }
+  h2.side { font: 400 54px/1.04 var(--serif); letter-spacing: -.02em; margin: 0 0 12px; }
+  h2.side em { color: var(--primar); }
+  .ingress { font-size: 18px; color: var(--dempet); margin: 0 0 24px; max-width: 60ch; }
+  .opptelling { font: 700 22px var(--sans); margin: 0; }
+  .opptelling + small { display: block; color: var(--dempet); font-size: 14px; margin: 2px 0 0; }
+  h3.seksjon { font: 400 28px var(--serif); margin: 36px 0 14px; }
+
+  /* Manglende krav: bredt kort med gult bånd (fra Kort og mot) */
+  .krav-mangler { background: var(--kort); border-radius: 24px; overflow: hidden; box-shadow: 0 6px 18px rgba(30,26,36,.10); }
+  .baand { background: var(--ringblomst); padding: 10px 22px; display: flex; gap: 10px; align-items: center; }
+  .chip { display: inline-flex; gap: 6px; align-items: center; background: #fff; border: 1.5px solid var(--blekk); border-radius: 999px; padding: 2px 12px; font-size: 14px; font-weight: 700; }
+  .chip.tom { background: transparent; }
+  .krav-innhold { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; padding: 22px; }
+  .krav-innhold h4 { font: 800 26px/1.2 var(--sans); margin: 0 0 8px; }
+  .krav-innhold p { margin: 0 0 10px; }
+  .fra-annonsen { font-size: 15px; color: var(--dempet); }
+  .fra-annonsen b { color: var(--blekk); }
+  .fortell { background: var(--ringtint); border: 1.5px solid var(--ringblomst); border-radius: 20px; padding: 18px; }
+  .fortell strong { font-size: 19px; display: block; }
+  .hjelp { display: block; font-size: 14px; color: var(--dempet); margin: 2px 0 10px; }
+  .felt { background: #fff; border: 1.5px solid var(--feltkant); border-radius: 14px; padding: 12px 14px; min-height: 76px; }
+  .teller { text-align: right; font-size: 13px; color: var(--dempet); margin-top: 4px; }
+  .fokus { outline: 3px solid var(--blekk); outline-offset: 3px; }
+
+  /* Dokumenterte krav: blå fliser side om side (fra Bento) med bevis-klistremerke (fra Kort og mot) */
+  .fliser { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .flis { background: var(--dok-flate); border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .flis .chip { align-self: flex-start; border-color: var(--dok); color: var(--dok); background: #fff; }
+  .flis h4 { margin: 0; font: 700 18px/1.3 var(--sans); }
+  .bevis { background: var(--klistremerke); border-radius: 10px; padding: 8px 12px; transform: rotate(-1.2deg); box-shadow: 0 3px 6px rgba(30,26,36,.15); font: italic 16px var(--serif); margin-top: auto; }
+  .bevis small { display: block; font: 600 12px var(--sans); letter-spacing: .04em; text-transform: uppercase; }
+
+  .vilkar { border: 2px dashed var(--feltkant); border-radius: 20px; padding: 16px 20px; }
+  .vilkar h4 { margin: 0 0 4px; font-size: 18px; }
+  .vilkar p { margin: 0; color: var(--dempet); }
+
+  .valg { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .valg div { background: var(--kort); border: 2px solid var(--linje); border-radius: 20px; padding: 16px 18px; }
+  .valg div.valgt { border: 3px solid var(--primar); }
+  .valg b::before { content: "○  "; }
+  .valg .valgt b::before { content: "●  "; color: var(--primar); }
+  .valg .valgt b::after { content: "Valgt"; margin-left: 10px; font-size: 12px; background: var(--primar); color: #fff; padding: 2px 8px; border-radius: 999px; }
+
+  /* Sidekolonne: søknaden din + huskeliste (fra Editorial og Sjekkliste) */
+  .side { display: flex; flex-direction: column; gap: 20px; }
+  .boks { background: var(--kort); border: 1px solid var(--linje); border-radius: 20px; padding: 18px 20px; }
+  .boks h3 { margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dempet); }
+  .boks .stilling { font: 400 20px/1.25 var(--serif); margin: 0; }
+  .boks .stilling + p { margin: 4px 0 0; color: var(--dempet); }
+  .huskeliste { list-style: none; margin: 0; padding: 0; }
+  .huskeliste li { display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid var(--linje); font-size: 15px; }
+  .huskeliste li:first-child { border-top: none; }
+  .huskeliste small { display: block; color: var(--dempet); font-size: 13px; }
+  .merke { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
+  .merke.dok { background: var(--dok); color: #fff; }
+  .merke.aapen { border: 2px dashed var(--ringmork); color: var(--ringmork); }
+  .grunnlag li { display: block; }
+
+  .handlingslinje { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 40px; background: var(--kort); box-shadow: 0 -6px 16px rgba(30,26,36,.08); }
+  .knapp { display: inline-flex; gap: 10px; align-items: center; font: 700 18px/1 var(--sans); padding: 18px 28px; border-radius: 999px; background: var(--primar); color: #fff; border: 2px solid var(--primar); }
+  .knapp.sekundar { background: transparent; color: var(--primar); }
+  .kopiert { background: var(--dok-flate); border-radius: 14px; padding: 10px 14px; font-size: 15px; }
+  .kopiert::before { content: "✓ "; color: var(--dok); font-weight: 700; }
+  .feil { display: flex; gap: 10px; background: #FDE7E4; border: 1.5px solid var(--feil); border-radius: 14px; padding: 12px 14px; margin-bottom: 18px; }
+  .feil::before { content: "!"; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--feil); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  label, .etikett { display: block; font-weight: 700; margin: 14px 0 6px; }
+  .veksle { display: inline-flex; background: var(--papir); border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 4px; }
+  .veksle span { padding: 6px 14px; border-radius: 999px; font-size: 14px; }
+  .veksle span[aria-pressed="true"] { background: var(--primar); color: #fff; font-weight: 600; }
+  .stor { min-height: 170px; }
+
+  .brev { background: var(--kort); border-radius: 20px; padding: 32px 40px; font: 17px/1.7 var(--serif); box-shadow: 0 6px 18px rgba(30,26,36,.08); }
+  .brev p { margin: 0 0 14px; }
+  .under-brev { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 14px; color: var(--dempet); }
+</style>
+</head>
+<body>
+<main class="galleri">
+  <header>
+    <h1>Samlet designforslag for Supersøker</h1>
+    <p>Gruppas forslag etter sammenligningen av de ni konseptene. Det kombinerer de tre vi valgte: <strong>Editorial</strong> (Miranda), <strong>Kort og mot</strong> (Helle) og <strong>Bento</strong> (Elisabeth). Skjermene er tegnet for desktop (1280 px). Mobilvisning er utelatt etter gruppas ønske, se <a href="README.md">README.md</a> om avviket fra NFR-2.</p>
+    <p>Fiktivt innhold fra testpar 1. Statiske skisser, ikke en fungerende app.</p>
+  </header>
+
+  <!-- 01 -->
+  <figure>
+    <figcaption><strong>01 · Logg inn</strong><span>Serif-overskrift og «Slik fungerer det» som huskeliste til venstre, skjema i et kort til høyre. Felles melding for feil e-post eller passord (FR-2, FR-3).</span></figcaption>
+    <div class="skrolleflate"><div class="ramme" role="img" aria-label="Skisse av innloggingssiden">
+      <div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">supersøker<span>.</span></span></div>
+      <div class="hoved" style="grid-template-columns: 1fr 460px; align-items: center; padding: 64px 80px 72px;">
+        <div>
+          <h2 class="side">Søknaden din,<br><em>med dine ord.</em></h2>
+          <p class="ingress">Supersøker viser hva CV-en din dokumenterer, og hjelper deg med en tekst som bare bygger på det som stemmer.</p>
+          <ul class="huskeliste" style="max-width: 420px;">
+            <li><span class="merke aapen">1</span><span>Legg inn CV og annonse</span></li>
+            <li><span class="merke aapen">2</span><span>Se hvilke krav CV-en dokumenterer</span></li>
+            <li><span class="merke aapen">3</span><span>Få en tekst du kan redigere</span></li>
+          </ul>
+        </div>
+        <div class="boks" style="padding: 28px;">
+          <h3 style="font: 400 30px var(--serif); text-transform: none; letter-spacing: 0; color: var(--blekk);">Logg inn</h3>
+          <div class="feil"><span><strong>Feil e-post eller passord.</strong> Sjekk skrivemåten og prøv igjen.</span></div>
+          <span class="etikett">E-post</span><div class="felt" style="min-height: 0;">test@supersoker.no</div>
+          <span class="etikett">Passord</span><div class="felt fokus" style="min-height: 48px;"></div>
+          <div style="display: flex; gap: 18px; align-items: center; margin-top: 22px;"><span class="knapp">Logg inn</span><span class="lenke">Opprett konto</span></div>
+          <p class="hjelp" style="margin-top: 16px;">Testbruker står i README.</p>
+        </div>
+      </div>
+    </div></div>
+  </figure>
+
+  <!-- 03 -->
+  <figure>
+    <figcaption><strong>03 · Steg 1: CV og annonse (tom)</strong><span>Nummererte steg fra Editorial. CV og annonse som to fliser side om side. Huskelisten «Før du analyserer» i sidekolonnen (FR-4, FR-7, FR-27).</span></figcaption>
+    <div class="skrolleflate"><div class="ramme" role="img" aria-label="Skisse av steg 1 i tom tilstand">
+      <div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">supersøker<span>.</span></span><span class="bruker">Ida Testesen <span class="lenke">Logg ut</span></span></div>
+      <div class="steg"><div class="aktiv"><i>01</i>CV og annonse</div><div><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+      <div class="hoved">
+        <div>
+          <p class="overtittel">Steg 1 av 3</p>
+          <h2 class="side">Legg inn CV-en<br><em>og annonsen.</em></h2>
+          <p class="ingress">Lim inn teksten eller last opp en fil. Vi finner kravene i annonsen og ser etter dem i CV-en.</p>
+          <div class="fliser" style="grid-template-columns: 1fr 1fr;">
+            <div class="flis" style="background: var(--kort); box-shadow: 0 6px 18px rgba(30,26,36,.08);">
+              <h4 style="font-size: 22px;">CV</h4>
+              <div class="veksle"><span aria-pressed="true">Lim inn tekst</span><span aria-pressed="false">Last opp fil</span></div>
+              <span class="etikett" style="margin-top: 4px;">CV-tekst<span class="hjelp">Lim inn hele CV-en.</span></span>
+              <div class="felt stor fokus"></div>
+            </div>
+            <div class="flis" style="background: var(--kort); box-shadow: 0 6px 18px rgba(30,26,36,.08);">
+              <h4 style="font-size: 22px;">Stillingsannonse</h4>
+              <div style="height: 36px;"></div>
+              <span class="etikett" style="margin-top: 4px;">Annonsetekst<span class="hjelp">Kopier teksten fra annonsen, også kravene.</span></span>
+              <div class="felt stor"></div>
+            </div>
+          </div>
+        </div>
+        <aside class="side">
+          <div class="boks"><h3>Før du analyserer</h3>
+            <ul class="huskeliste">
+              <li><span class="merke aapen"></span><span>CV lagt inn</span></li>
+              <li><span class="merke aapen"></span><span>Annonse lagt inn</span></li>
+            </ul>
+          </div>
+          <div class="boks" style="background: var(--ringtint); border-color: var(--ringblomst);"><h3>Godt å vite</h3><p style="margin: 0;">CV-en og annonsen brukes bare i denne økten og slettes når du logger ut.</p></div>
+        </aside>
+      </div>
+      <div class="handlingslinje"><span class="knapp sekundar">Last inn eksempel (testpar 1)</span><span class="knapp">Analyser kravene →</span></div>
+    </div></div>
+  </figure>
+
+  <!-- 08 -->
+  <figure>
+    <figcaption><strong>08 · Steg 2: Gap-analyse (kjerneskjermen)</strong><span>Serif-overskrift fra Editorial. Manglende krav som bredt kort med gult bånd og «Fortell oss kort» fra Kort og mot. Dokumenterte krav som blå fliser side om side fra Bento, med bevis-klistremerke. Opptellingen er en vanlig setning, ikke prikker eller måler (SM-C1). FR-10–FR-15.</span></figcaption>
+    <div class="skrolleflate"><div class="ramme" role="img" aria-label="Skisse av gap-analysen">
+      <div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">supersøker<span>.</span></span><span class="bruker">Ida Testesen <span class="lenke">Logg ut</span></span></div>
+      <div class="steg"><div class="ferdig"><i>01</i>CV og annonse</div><div class="aktiv"><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+      <div class="hoved">
+        <div>
+          <p class="overtittel">Steg 2 av 3</p>
+          <h2 class="side">Se hva du kan<br><em>bygge på.</em></h2>
+          <p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+          <p class="opptelling">3 av 4 kompetansekrav er dokumentert i CV-en.</p>
+          <small>Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</small>
+
+          <h3 class="seksjon">Står ikke i CV-en</h3>
+          <div class="krav-mangler">
+            <div class="baand"><span class="chip">? Mangler dokumentasjon</span><span class="chip tom">Svar lagt til</span></div>
+            <div class="krav-innhold">
+              <div>
+                <h4>Førerkort klasse B</h4>
+                <p>Står ikke i CV-en din. Det betyr ikke at du mangler det.</p>
+                <p class="fra-annonsen"><b>Fra annonsen:</b><br>«har førerkort klasse B (krav, du kjører kommunens biler mellom brukerne)»</p>
+              </div>
+              <div class="fortell">
+                <strong>Fortell oss kort</strong>
+                <span class="hjelp">Valgfritt. Skriv bare det som stemmer – vi bruker ordene dine slik de står, bare i denne søknaden.</span>
+                <span class="etikett" style="margin-top: 0;">Ditt svar om førerkort klasse B</span>
+                <div class="felt fokus">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div>
+                <div class="teller">56 / 1 000 tegn</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="seksjon">Dokumentert i CV-en</h3>
+          <div class="fliser">
+            <div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode norskkunnskaper, muntlig og skriftlig</h4><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div>
+            <div class="flis"><span class="chip">✓ Dokumentert</span><h4>Erfaring med eller interesse for å jobbe med mennesker</h4><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div>
+            <div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="bevis"><small>Fra CV-en din</small>«Gruppeprosjekt i helsefremmende arbeid»</p></div>
+          </div>
+
+          <h3 class="seksjon">Vilkår fra annonsen</h3>
+          <div class="vilkar"><h4>Politiattest</h4><p>Arbeidsgiveren ber om dette ved ansettelse. Det er ikke med i opptellingen, og teksten påstår ikke at du har det.</p></div>
+
+          <h3 class="seksjon">Hva slags tekst vil du ha?</h3>
+          <div class="valg">
+            <div class="valgt"><b>Helt søknadsutkast</b><span class="hjelp" style="margin: 4px 0 0;">Et sammenhengende brev du redigerer selv.</span></div>
+            <div><b>Forslag til formuleringer</b><span class="hjelp" style="margin: 4px 0 0;">Setninger du kan bruke i ditt eget brev.</span></div>
+          </div>
+        </div>
+        <aside class="side">
+          <div class="boks"><h3>Søknaden din</h3><p class="stilling">Sommervikar i hjemmetjenesten</p><p>Testvik kommune</p></div>
+          <div class="boks"><h3>Huskeliste</h3>
+            <ul class="huskeliste">
+              <li><span class="merke aapen">?</span><span>Førerkort klasse B<small>Står ikke i CV-en · svar lagt til</small></span></li>
+              <li><span class="merke dok">✓</span><span>Gode norskkunnskaper<small>Dokumentert</small></span></li>
+              <li><span class="merke dok">✓</span><span>Jobbe med mennesker<small>Dokumentert</small></span></li>
+              <li><span class="merke dok">✓</span><span>Gode samarbeidsevner<small>Dokumentert</small></span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="handlingslinje"><span class="knapp sekundar">← Endre CV eller annonse</span><span class="knapp">Lag tekst →</span></div>
+    </div></div>
+  </figure>
+
+  <!-- 10 -->
+  <figure>
+    <figcaption><strong>10 · Steg 3: Søknadsutkast</strong><span>Brevet i serif som et ark (Editorial). «Før du sender» som huskeliste og «Teksten bygger på» i sidekolonnen. Svaret er merket «Oppgitt av deg» (Kort og mot). FR-16, FR-19, FR-20.</span></figcaption>
+    <div class="skrolleflate"><div class="ramme" role="img" aria-label="Skisse av søknadsutkastet">
+      <div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+      <div class="topp"><span class="logo">supersøker<span>.</span></span><span class="bruker">Ida Testesen <span class="lenke">Logg ut</span></span></div>
+      <div class="steg"><div class="ferdig"><i>01</i>CV og annonse</div><div class="ferdig"><i>02</i>Gap-analyse</div><div class="aktiv"><i>03</i>Teksten</div></div>
+      <div class="hoved">
+        <div>
+          <p class="overtittel">Steg 3 av 3</p>
+          <h2 class="side">Nå gjør du teksten<br><em>til din.</em></h2>
+          <p class="ingress">Les gjennom, juster og kopier når du er fornøyd. Du kjenner erfaringen din best.</p>
+          <div class="brev fokus" aria-label="Søknadsutkast, redigerbart">
+            <p>Søknad på stilling som sommervikar i hjemmetjenesten</p>
+            <p>Hei,</p>
+            <p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p>
+            <p>Som besøksvenn i Røde Kors besøkstjeneste besøker jeg en eldre dame hver uke for samtale og turer. I et gruppeprosjekt i helsefremmende arbeid planla jeg og fire medstudenter et kurs om fallforebygging for eldre, og jeg hadde ansvaret for å koordinere gruppens møter.</p>
+            <p>Jeg har ikke førerkort ennå, men jeg har oppkjøring i april.</p>
+            <p>Norsk er morsmålet mitt, og jeg har deltidsjobb med kundeservice hos Testvik Mat.</p>
+            <p>Jeg ser fram til å høre fra dere.</p>
+            <p style="margin: 0;">Vennlig hilsen<br>Ida Testesen</p>
+          </div>
+          <div class="under-brev"><span>Teksten slettes når du logger ut. Kopier den før du går.</span><span class="kopiert">Kopiert. Lim inn teksten der du skriver søknaden.</span></div>
+        </div>
+        <aside class="side">
+          <div class="boks"><h3>Før du sender</h3>
+            <ul class="huskeliste">
+              <li><span class="merke aapen"></span><span>Les gjennom teksten</span></li>
+              <li><span class="merke aapen"></span><span>Sjekk at alt stemmer med deg<small>Teksten bygger bare på CV-en og svaret ditt</small></span></li>
+              <li><span class="merke dok">✓</span><span>Kopier teksten</span></li>
+            </ul>
+          </div>
+          <div class="boks"><h3>Teksten bygger på</h3>
+            <ul class="huskeliste grunnlag">
+              <li><small>Stilling og arbeidsgiver</small>Sommervikar i hjemmetjenesten, Testvik kommune</li>
+              <li><small>Fra CV-en</small>«Norsk – morsmål»</li>
+              <li><small>Fra CV-en</small>«Besøksvenn, Røde Kors besøkstjeneste»</li>
+              <li><small>Fra CV-en</small>«Gruppeprosjekt i helsefremmende arbeid»</li>
+              <li><small>Oppgitt av deg. Supersøker har ikke kontrollert det.</small>«Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.»</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="handlingslinje"><span class="knapp sekundar">← Endre svar eller tekstvalg</span><span class="knapp">Kopier tekst</span></div>
+    </div></div>
+  </figure>
+</main>
+</body>
+</html>
