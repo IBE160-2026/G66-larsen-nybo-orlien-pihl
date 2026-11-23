@@ -1,0 +1,79 @@
+/* Premium / Editorial: oliven, papir og en redaksjonell typografisk rytme. */
+.editorial {
+  --ink: #342e27; --muted: #73685c; --paper: #f5f0e7; --field: #fffcf7;
+  --line: #d4c9b8; --field-line: #938570; --focus: #6c482e; --radius: 2px;
+  --body-font: "Segoe UI", Arial, sans-serif; --display-font: Georgia, "Times New Roman", serif;
+  --heading-size: 70px; --mobile-heading: 48px;
+}
+.editorial .review-bar { background: #e7dece; color: #5d5041; }
+.editorial .app-shell { max-width: 1200px; margin: auto; padding: 0 48px; position: relative; }
+.editorial .identity { position: absolute; top: 29px; left: 48px; }
+.editorial .wordmark { font: 31px/1 Georgia, serif; letter-spacing: -1.5px; gap: 13px; }
+.editorial .monogram { display: grid; place-items: center; border: 1px solid #8f795c; color: #725333; width: 39px; height: 39px; border-radius: 50%; font-style: italic; font-size: 30px; }
+.editorial .logo-dot { color: #8a603d; }
+.editorial .app-header { padding: 32px 0 30px; }
+.editorial .edition { margin-left: auto; margin-right: 38px; color: var(--muted); letter-spacing: .16em; }
+.editorial .mock-note { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #685d50; justify-content: center; }
+.editorial .screen-nav { gap: 45px; border-bottom: 1px solid var(--line); margin: 8px 0 42px; }
+.editorial .screen-nav a { color: #776a59; border-bottom: 2px solid transparent; }
+.editorial .screen-nav a[aria-current] { color: #3f462e; border-bottom-color: #4e5839; }
+.editorial .nav-number { font: italic 19px Georgia, serif; }
+.editorial .kicker, .editorial .small-label { color: #7a5c3f; }
+.editorial .page-heading h1 { font-weight: 400; }
+.editorial h1 em, .editorial .source-panel h2 em { color: #66704a; font-weight: 400; }
+.editorial .job-stamp { border-left: 1px solid #ac9a7e; padding-left: 20px; }
+.editorial .summary { padding: 23px 27px; background: #e9e5d7; border-top: 1px solid #c3bda6; border-bottom: 1px solid #c3bda6; }
+.editorial .summary-number { color: #4d5838; font-weight: 400; }
+.editorial .summary-symbol { color: #8b7854; font-size: 42px; }
+.editorial .summary h2 { font: 23px/1.2 Georgia, serif; }
+.editorial .summary .small-label { color: #666747; }
+.editorial .analysis-board { grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr); gap: 44px; }
+.editorial .section-label > span { color: #897459; font-family: Georgia, serif; }
+.editorial .section-label h2 { font: 22px/1.2 Georgia, serif; }
+.editorial .gap-card { background: #ede0ce; border-top: 2px solid #a3784f; }
+.editorial .gap-card h3 { font: 28px/1.15 Georgia, serif; }
+.editorial .missing { color: #704829; background: #f8eee0; border: 1px solid #c3a37f; }
+.editorial .documented { color: #4c5935; background: #e8eddf; }
+.editorial .documented-card { border-top: 1px solid #c7beac; }
+.editorial .documented-card:first-child { padding-top: 22px; }
+.editorial .documented-card blockquote { border-left: 1px solid #9ca283; font-family: Georgia, serif; font-style: italic; color: #5c6545; }
+.editorial .documented-number { color: #8a7d69; font-family: Georgia, serif; font-style: italic; }
+.editorial .check { color: #596640; }
+.editorial .writing-choice { border-top: 1px solid #c4b69f; border-bottom: 1px solid #c4b69f; }
+.editorial .writing-choice h2 { font: 26px/1.15 Georgia, serif; }
+.editorial .choice { background: #faf6ee; }
+.editorial .choice.selected { border-color: #63704a; background: #e9ecdf; }
+.editorial .action, .editorial .visual-button { background: #4b5738; color: #fffdf5; border: 1px solid #4b5738; }
+.editorial .action:hover { background: #37432a; }
+.editorial .action.secondary { color: #4b5738; background: transparent; border-color: #a5aa95; }
+.editorial .document-panel, .editorial .letter-panel { background: #fffcf7; border: 1px solid var(--line); box-shadow: 0 7px 22px #4a382008; }
+.editorial .document-panel h2, .editorial .letter-panel h2 { font-family: Georgia, serif; font-weight: 400; }
+.editorial .static-tabs b { color: #4b5738; }
+.editorial .session-callout { background: #e9e5d7; color: #52583e; }
+.editorial .source-panel .status { background: #e9e5d7; }
+@media (max-width: 1000px) {
+  .editorial .edition { display: none; }
+  .editorial .app-header { justify-content: end; }
+  .editorial .app-shell { padding: 0 30px; }
+  .editorial .identity { left: 30px; }
+  .editorial .page-heading h1 { font-size: 58px; }
+  .editorial .analysis-board { gap: 26px; }
+}
+@media (max-width: 760px) {
+  .editorial .app-shell { padding: 0 20px; }
+  .editorial .identity { top: 24px; left: 20px; }
+  .editorial .wordmark { font-size: 25px; gap: 7px; }
+  .editorial .monogram { width: 29px; height: 29px; font-size: 23px; }
+  .editorial .app-header { padding: 24px 0; }
+  .editorial .user-name { font-size: 0; gap: 0; }
+  .editorial .mock-note { justify-content: start; }
+  .editorial .screen-nav { gap: 14px; margin-bottom: 28px; }
+  .editorial .nav-number { font-size: 14px; }
+  .editorial .page-heading h1 { font-size: 48px; }
+  .editorial .job-stamp { padding-left: 12px; }
+  .editorial .summary { padding: 19px 16px; margin-block: 25px; }
+  .editorial .summary h2 { font-size: 18px; }
+  .editorial .analysis-board { grid-template-columns: minmax(0,1fr); gap: 30px; }
+  .editorial .section-label h2 { font-size: 22px; }
+  .editorial .writing-choice h2 { font-size: 25px; }
+}

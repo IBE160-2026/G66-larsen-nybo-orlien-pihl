@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elisabeths designkonsepter</title>
+<style>
+  :root { --bg: #F6F7F8; --flate: #FFFFFF; --tekst: #1A1D21; --dempet: #4B525A; --linje: #D5D9DD; --lenke: #1A4FB4;
+    --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  .k1 { --c: #C2185B; } .k2 { --c: #1E3FD8; } .k3 { --c: #7FB2F0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--tekst); font: 16px/1.55 var(--sans); }
+  a { color: var(--lenke); text-underline-offset: .2em; }
+  :focus-visible { outline: 3px solid var(--lenke); outline-offset: 3px; }
+  .hopp { position: absolute; left: 1rem; top: -4rem; background: var(--flate); padding: .75rem 1rem; border: 2px solid var(--lenke); }
+  .hopp:focus { top: 1rem; }
+  header, main, footer { width: min(90rem, 100% - 2rem); margin-inline: auto; }
+  header { padding-block: 2.5rem .5rem; }
+  h1 { font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1.2; margin: 0 0 .75rem; }
+  .ingress { max-width: 52rem; color: var(--dempet); margin: 0 0 1.5rem; }
+
+  .konsepter { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); margin: 0 0 2rem; padding: 0; list-style: none; }
+  .konsept { background: var(--flate); border: 1px solid var(--linje); border-top: 6px solid var(--c); border-radius: .5rem; padding: 1.1rem 1.4rem 1.25rem; display: flex; flex-direction: column; }
+  .konsept h2 { margin: 0 0 .25rem; font-size: 1.2rem; }
+  .konsept p { margin: .25rem 0 .75rem; color: var(--dempet); }
+  .farger { display: flex; gap: 6px; margin: 0 0 .75rem; }
+  .farger span { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(0,0,0,.2); }
+  .konsept dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .2rem .75rem; font-size: .95rem; }
+  .konsept dt { font-weight: 600; }
+  .konsept dd { margin: 0; color: var(--dempet); }
+  .konsept .apne { margin-top: auto; font-weight: 600; }
+
+  .skjerm { background: var(--flate); border: 1px solid var(--linje); border-radius: .5rem; padding: 1.25rem 1.5rem 1.5rem; margin-bottom: 1.5rem; }
+  .skjerm h2 { font-size: 1.15rem; margin: 0 0 .25rem; }
+  .skjerm > p { margin: 0 0 1rem; color: var(--dempet); }
+  .rad { display: grid; gap: 1rem; grid-template-columns: 1fr; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 60rem) { .rad { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .rad li { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+  .navn { font-weight: 600; font-size: .95rem; padding-left: .75rem; border-left: 4px solid var(--c); }
+  .bilde { display: block; border: 1px solid var(--linje); border-radius: .375rem; background: var(--bg); padding: .6rem; max-height: 32rem; overflow: hidden; }
+  .bilde.mobil { max-width: 16rem; }
+  .bilde img { display: block; width: 100%; height: auto; }
+
+  .tabell { overflow-x: auto; margin-top: 2rem; }
+  table { width: 100%; border-collapse: collapse; background: var(--flate); border: 1px solid var(--linje); }
+  caption { text-align: left; font-weight: 700; font-size: 1.2rem; padding-bottom: .6rem; }
+  th, td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-top: 1px solid var(--linje); }
+  thead th { background: #EEF0F2; }
+  .viktig { background: #FFF8E1; border: 1px solid #E0C36A; border-left: 6px solid #8A6A00; border-radius: .5rem; padding: 1rem 1.4rem; margin: 0 0 2rem; }
+  .viktig h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+  .viktig ul { margin: 0; padding-left: 1.2rem; }
+  .viktig li + li { margin-top: .35rem; }
+  footer { padding-block: 1.5rem 3rem; color: var(--dempet); font-size: .9rem; }
+</style>
+</head>
+<body>
+<a class="hopp" href="#skjermer">Hopp til skjermene</a>
+<header>
+  <h1>Elisabeths designkonsepter for Supersøker</h1>
+  <p class="ingress">Tre fargerike varianter av Sjekkliste for unge jobbsøkere, med de samme fem skjermene og det samme innholdet (Ida Testesen fra testpar 1), vist side om side. Alle har kravene som en huskeliste, og et svar holder punktet åpent fordi et svar ikke er dokumentasjon. Klikk på et bilde for full størrelse, eller åpne hele konseptet. Tokens, kontrast, styrker, svakheter og antagelser står i <a href="README.md">README.md</a>. Skjermnumrene følger Helles felles brief.</p>
+
+  <section class="viktig" aria-labelledby="h-viktig">
+    <h2 id="h-viktig">Verdt å vite før dere velger</h2>
+    <ul>
+      <li><strong>Elektrisk:</strong> Skriften Bahnschrift finnes bare på Windows. På Mac og mobil blir den byttet ut med systemskriften, og noe av særpreget forsvinner. Velger vi Elektrisk, må vi finne en nettskrift med lignende uttrykk.</li>
+      <li><strong>Bento:</strong> Flisene side om side passer best med få og korte krav. Med mange krav eller lange sitater blir radene ujevne. Fersken og mint kan leses som rødt og grønt («feil» og «riktig») og må forklares. Oppsettet bruker CSS-velgeren <code>:has()</code>, som ikke virker i eldre nettlesere.</li>
+      <li><strong>Solnedgang:</strong> Gradienter kan bli slitsomme over tid. Hvit tekst har lavest kontrast i den oransje enden (5,5:1), så gradienten må ikke bli lysere.</li>
+      <li><strong>Alle tre:</strong> Avhuking kan oppleves som en poengsum («3 av 4»), og det er et ikke-mål i PRD-en (SM-C1). Sjekklisten «Før du sender» står ikke i PRD-en. Bare 5 av de 17 skjermene er tegnet.</li>
+    </ul>
+  </section>
+
+  <ul class="konsepter">
+    <li class="konsept k1">
+      <h2>1 · Solnedgang</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#A3134D"></span><span style="background:#C2185B"></span><span style="background:#B8430A"></span><span style="background:#FFF7F2"></span></div>
+      <p>Varm gradient fra bringebær til oransje i sidepanelet og på knappene, svevende kort og tunge overskrifter.</p>
+      <dl><dt>Uttrykk</dt><dd>Varmt, energisk, myke skygger</dd><dt>Best for</dt><dd>Et inspirerende førsteinntrykk</dd><dt>Risiko</dt><dd>Gradienten kan bli for mye over tid</dd></dl>
+      <a class="apne" href="konsept-1-solnedgang.html">Åpne konsept 1</a>
+    </li>
+    <li class="konsept k2">
+      <h2>2 · Elektrisk</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#1E3FD8"></span><span style="background:#FF7A59"></span><span style="background:#0B1640"></span><span style="background:#F4F6FF"></span></div>
+      <p>Koboltblått sidepanel med store steg-tall, korall som viser hvor du er, og Bahnschrift i overskriftene.</p>
+      <dl><dt>Uttrykk</dt><dd>Kraftig, sporty, moderne</dd><dt>Best for</dt><dd>Fart og tydelig fremdrift</dd><dt>Risiko</dt><dd>Mye blått kan føles tungt</dd></dl>
+      <a class="apne" href="konsept-2-elektrisk.html">Åpne konsept 2</a>
+    </li>
+    <li class="konsept k3">
+      <h2>3 · Bento</h2>
+      <div class="farger" aria-hidden="true"><span style="background:#DCEBFF"></span><span style="background:#E4F6EC"></span><span style="background:#FFE8D6"></span><span style="background:#111827"></span></div>
+      <p>Innholdet som pastell-fliser: himmelblå huskeliste, fersken for det som mangler og mint for det som er dokumentert.</p>
+      <dl><dt>Uttrykk</dt><dd>Lekent, luftig, svarte knapper</dd><dt>Best for</dt><dd>Rask oversikt over alle kravene</dd><dt>Risiko</dt><dd>Fliser side om side tåler få lange krav</dd></dl>
+      <a class="apne" href="konsept-3-bento.html">Åpne konsept 3</a>
+    </li>
+  </ul>
+</header>
+
+<main id="skjermer">
+  <section class="skjerm" aria-labelledby="h-01">
+    <h2 id="h-01">01 · Logg inn</h2>
+    <p>Feilmelding over skjemaet, hint om testbruker og lenke til «Opprett konto» (FR-2, FR-3).</p>
+    <ul class="rad">
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-01.png"><img src="skjermer/konsept-1-01.png" alt="Konsept 1 Solnedgang: Logg inn" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-01.png"><img src="skjermer/konsept-2-01.png" alt="Konsept 2 Elektrisk: Logg inn" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-01.png"><img src="skjermer/konsept-3-01.png" alt="Konsept 3 Bento: Logg inn" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="skjerm" aria-labelledby="h-03">
+    <h2 id="h-03">03 · Steg 1: CV og annonse, tom tilstand</h2>
+    <p>Huskelisten viser to åpne punkter: CV og annonse (FR-4, FR-7, FR-27).</p>
+    <ul class="rad">
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-03.png"><img src="skjermer/konsept-1-03.png" alt="Konsept 1 Solnedgang: Steg 1, CV og annonse" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-03.png"><img src="skjermer/konsept-2-03.png" alt="Konsept 2 Elektrisk: Steg 1, CV og annonse" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-03.png"><img src="skjermer/konsept-3-03.png" alt="Konsept 3 Bento: Steg 1, CV og annonse" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="skjerm" aria-labelledby="h-08">
+    <h2 id="h-08">08 · Steg 2: Gap-analyse</h2>
+    <p>Kjerneskjermen: manglende krav først med svarfelt, dokumenterte krav med sitat, ansettelsesvilkår for seg og omskrivingsvalg (FR-10–FR-15).</p>
+    <ul class="rad">
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-08.png"><img src="skjermer/konsept-1-08.png" alt="Konsept 1 Solnedgang: Steg 2, gap-analyse" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-08.png"><img src="skjermer/konsept-2-08.png" alt="Konsept 2 Elektrisk: Steg 2, gap-analyse" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-08.png"><img src="skjermer/konsept-3-08.png" alt="Konsept 3 Bento: Steg 2, gap-analyse" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="skjerm" aria-labelledby="h-10">
+    <h2 id="h-10">10 · Steg 3: Søknadsutkast</h2>
+    <p>Redigerbart brev, sjekklisten «Før du sender», «Teksten bygger på» og «Kopier tekst» (FR-16, FR-19, FR-20).</p>
+    <ul class="rad">
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde" href="skjermer/konsept-1-10.png"><img src="skjermer/konsept-1-10.png" alt="Konsept 1 Solnedgang: Steg 3, søknadsutkast" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde" href="skjermer/konsept-2-10.png"><img src="skjermer/konsept-2-10.png" alt="Konsept 2 Elektrisk: Steg 3, søknadsutkast" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde" href="skjermer/konsept-3-10.png"><img src="skjermer/konsept-3-10.png" alt="Konsept 3 Bento: Steg 3, søknadsutkast" loading="lazy"></a></li>
+    </ul>
+  </section>
+  <section class="skjerm" aria-labelledby="h-16">
+    <h2 id="h-16">16 · Mobil: gap-analyse (390 px)</h2>
+    <p>Huskelisten krymper til en stripe øverst med aktivt steg og opptellingen som prikker (NFR-2).</p>
+    <ul class="rad">
+      <li class="k1"><span class="navn">Konsept 1 · Solnedgang</span><a class="bilde mobil" href="skjermer/konsept-1-16.png"><img src="skjermer/konsept-1-16.png" alt="Konsept 1 Solnedgang: Gap-analyse på mobil" loading="lazy"></a></li>
+      <li class="k2"><span class="navn">Konsept 2 · Elektrisk</span><a class="bilde mobil" href="skjermer/konsept-2-16.png"><img src="skjermer/konsept-2-16.png" alt="Konsept 2 Elektrisk: Gap-analyse på mobil" loading="lazy"></a></li>
+      <li class="k3"><span class="navn">Konsept 3 · Bento</span><a class="bilde mobil" href="skjermer/konsept-3-16.png"><img src="skjermer/konsept-3-16.png" alt="Konsept 3 Bento: Gap-analyse på mobil" loading="lazy"></a></li>
+    </ul>
+  </section>
+
+  <div class="tabell">
+    <table>
+      <caption>Sammenligning</caption>
+      <thead><tr><th scope="col"></th><th scope="col">1 · Solnedgang</th><th scope="col">2 · Elektrisk</th><th scope="col">3 · Bento</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Huskelisten</th><td>Gradient-panel til venstre</td><td>Koboltblått panel, aktivt steg i korall</td><td>Himmelblå flis til venstre</td></tr>
+        <tr><th scope="row">Kravene</th><td>Svevende hvite kort under hverandre</td><td>Hvite kort, manglende krav på rosa</td><td>Pastell-fliser, dokumenterte krav side om side</td></tr>
+        <tr><th scope="row">Uttrykk</th><td>Segoe UI Black, gradient-knapper</td><td>Bahnschrift, blå knapper</td><td>Store overskrifter, svarte knapper</td></tr>
+        <tr><th scope="row">Mobil</th><td>Panelet blir en gradient-stripe</td><td>Panelet blir en blå stripe</td><td>Flisene stables</td></tr>
+        <tr><th scope="row">Utenfor PRD</th><td colspan="3">Sjekklisten «Før du sender» (felles for alle tre)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>Runde 1 laget 2026-11-22. Runde 2 og 3 (varianter av Sjekkliste) laget 2026-11-23. Laget av Elisabeth med Claude Code. Bildene lages med <code>verktoy/skjermbilder.cjs</code> (se README). Fiktivt innhold fra testpar 1.</footer>
+</body>
+</html>

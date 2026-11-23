@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konsept 1: Rolig veiviser – Supersøker</title>
+  <style>
+    :root {
+      --bg: #F4EFE6; --surface: #FFFDF9; --sand: #EAE2D3; --line: #D9CFBE;
+      --ink: #2A2520; --muted: #5B5247; --accent: #34557A; --mark: #F1DC9C;
+      --font: Seravek, "Gill Sans Nova", Ubuntu, "Segoe UI", Calibri, "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1.0625rem; line-height: 1.65; }
+    ::selection { background: var(--mark); color: var(--ink); }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+    .hopp { position: absolute; left: 16px; top: -60px; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+    .hopp:focus { top: 16px; }
+    header.topp { border-bottom: 1px solid var(--line); padding: 18px clamp(20px, 4vw, 48px); display: flex; align-items: center; gap: 12px; }
+    .merke { width: 30px; height: 30px; flex: none; }
+    .navn { font-size: 1.3rem; font-weight: 600; }
+    .sub { color: var(--muted); font-size: .95rem; margin-left: auto; }
+    main { padding: 0 clamp(20px, 4vw, 48px) 96px; }
+    .intro, .tekst { max-width: 720px; margin-inline: auto; }
+    .intro { padding-block: 56px 40px; }
+    h1 { font-size: clamp(1.9rem, 4vw, 2.4rem); line-height: 1.2; font-weight: 600; margin: 0 0 16px; text-wrap: balance; }
+    .intro p { font-size: 1.15rem; margin: 0 0 16px; max-width: 65ch; }
+    .intro .stille { color: var(--muted); font-size: 1rem; }
+    nav.innhold { background: var(--sand); border-radius: 14px; padding: 22px 26px; margin-top: 28px; }
+    nav.innhold h2 { font-size: 1.1rem; margin: 0 0 10px; }
+    nav.innhold ol { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: 32px; }
+    nav.innhold li { break-inside: avoid; padding: 3px 0; }
+    .nr { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 400; margin-right: 6px; }
+    .skjerm { border-top: 1px solid var(--line); padding-block: 56px 24px; }
+    .tekst h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 600; margin: 0 0 8px; }
+    .tekst p { margin: 0 0 8px; max-width: 65ch; }
+    .fil { font-size: .95rem; }
+    .mal { color: var(--muted); margin-left: 8px; font-variant-numeric: tabular-nums; }
+    figure { margin: 24px auto 0; max-width: 1200px; }
+    figure img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 10px 30px -12px rgba(42, 37, 32, .25); background: var(--bg); }
+    .mobil figure { max-width: 390px; }
+    footer { max-width: 720px; margin: 0 auto; padding: 32px 0 64px; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+    @media (max-width: 600px) { .sub { display: none; } .intro { padding-block: 36px 28px; } .skjerm { padding-block: 40px 16px; } footer { padding-inline: 20px; } }
+  </style>
+</head>
+<body>
+  <a class="hopp" href="#innhold">Hopp til skjermene</a>
+  <header class="topp">
+    <svg class="merke" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#34557A"/><path d="M8 16l4.5 4.5 9.5-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="navn">Supersøker</span>
+    <span class="sub">Designkonsept 1 av 3 · Helle · 2026-11-15</span>
+  </header>
+  <main id="innhold">
+    <div class="intro">
+      <h1>Konsept 1: Rolig veiviser</h1>
+      <p>Én ting om gangen. En smal, luftig kolonne på varmt papir, en stor stegindikator øverst og én dempet blå aksent. Hvert steg ender i <strong>Neste-linjen</strong>: en kort setning om hva som skjer når du trykker, og primærknappen rett under.</p>
+      <p class="stille">Skissene er statiske SVG-er med fiktive data fra testpar 1. De viser retning, ikke ferdig spesifikasjon. Begrunnelse, fargeverdier med kontrastforhold og antagelser står i <a href="konsept.md">konsept.md</a>.</p>
+      <nav class="innhold" aria-labelledby="toc-h">
+        <h2 id="toc-h">Skjermene</h2>
+        <ol>
+          <li><a href="#01-logg-inn"><span class="nr">01</span> Logg inn</a></li>
+          <li><a href="#02-opprett-konto"><span class="nr">02</span> Opprett konto</a></li>
+          <li><a href="#03-cv-og-annonse-tom"><span class="nr">03</span> Steg 1 – tom tilstand</a></li>
+          <li><a href="#04-cv-og-annonse-utfylt"><span class="nr">04</span> Steg 1 – utfylt</a></li>
+          <li><a href="#05-cv-og-annonse-feil"><span class="nr">05</span> Steg 1 – feiltilstander</a></li>
+          <li><a href="#06-tittel-og-arbeidsgiver"><span class="nr">06</span> Tittel og arbeidsgiver</a></li>
+          <li><a href="#07-analyserer"><span class="nr">07</span> Analyserer</a></li>
+          <li><a href="#08-gap-analyse"><span class="nr">08</span> Steg 2 – gap-analyse</a></li>
+          <li><a href="#09-gap-tomtilstander"><span class="nr">09</span> Steg 2 – tomtilstander</a></li>
+          <li><a href="#10-soknadsutkast"><span class="nr">10</span> Steg 3 – helt søknadsutkast</a></li>
+          <li><a href="#11-forslag-til-formuleringer"><span class="nr">11</span> Steg 3 – forslag til formuleringer</a></li>
+          <li><a href="#12-endre-cv-dialog"><span class="nr">12</span> Endre CV eller annonse</a></li>
+          <li><a href="#13-feil-fra-sprakmodell"><span class="nr">13</span> Feil fra språkmodellen</a></li>
+          <li><a href="#14-leverandorvarsel"><span class="nr">14</span> Leverandørvarsel (API-modus)</a></li>
+          <li><a href="#15-oktvarsel"><span class="nr">15</span> Øktvarsel og utlogging</a></li>
+          <li><a href="#16-mobil-gap-analyse"><span class="nr">16</span> Mobil – gap-analyse</a></li>
+          <li><a href="#17-mobil-tekst"><span class="nr">17</span> Mobil – søknadsutkast</a></li>
+        </ol>
+      </nav>
+    </div>
+    <section class="skjerm" id="01-logg-inn" aria-labelledby="01-logg-inn-h">
+      <div class="tekst">
+        <h2 id="01-logg-inn-h"><span class="nr">01</span> Logg inn</h2>
+        <p>Innlogging etter feil e-post eller passord. Én felles melding som ikke avslører om e-posten finnes, fokus i passordfeltet og et rolig hint om testbrukeren i README.</p>
+        <p class="fil"><a href="skjermer/01-logg-inn.svg">Åpne 01-logg-inn.svg i full størrelse</a> <span class="mal">1440 × 997 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/01-logg-inn.svg" width="1440" height="997" loading="eager" alt="Innloggingsside med e-post og passord. Feilmeldingen «E-post eller passord er feil» vises over skjemaet, e-posten er beholdt, og passordfeltet har fokus. Lenke til Opprett konto og hint om testbrukeren i README. Mock-modus vises øverst.">
+      </figure>
+    </section>
+    <section class="skjerm" id="02-opprett-konto" aria-labelledby="02-opprett-konto-h">
+      <div class="tekst">
+        <h2 id="02-opprett-konto-h"><span class="nr">02</span> Opprett konto</h2>
+        <p>Valideringsfeil ved for kort passord: e-posten er beholdt, passordfeltet er tømt, merket ugyldig og har fokus, og meldingen sier hvordan det rettes.</p>
+        <p class="fil"><a href="skjermer/02-opprett-konto.svg">Åpne 02-opprett-konto.svg i full størrelse</a> <span class="mal">1440 × 789 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/02-opprett-konto.svg" width="1440" height="789" loading="eager" alt="Skjema for ny konto. E-postadressen er beholdt. Passordfeltet er tømt, merket ugyldig med rød kant og ikon, og har fokus. Meldingen sier at passordet må ha minst 8 tegn.">
+      </figure>
+    </section>
+    <section class="skjerm" id="03-cv-og-annonse-tom" aria-labelledby="03-cv-og-annonse-tom-h">
+      <div class="tekst">
+        <h2 id="03-cv-og-annonse-tom-h"><span class="nr">03</span> Steg 1 – tom tilstand</h2>
+        <p>Første steg uten innhold. Stor stegindikator, tilbud om å laste inn testpar 1, veksler mellom innliming og opplasting, og «Analyser kravene» nederst i Neste-linjen.</p>
+        <p class="fil"><a href="skjermer/03-cv-og-annonse-tom.svg">Åpne 03-cv-og-annonse-tom.svg i full størrelse</a> <span class="mal">1440 × 1681 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/03-cv-og-annonse-tom.svg" width="1440" height="1681" loading="lazy" alt="Første steg uten innhold. Stor stegindikator viser steg 1 av 3. Tilbud om å laste inn eksempel fra testpar 1, veksler mellom Lim inn tekst og Last opp fil, tomt CV-felt med fokus, tomt annonsefelt med hjelpetekst om tittel og arbeidsgiver, og knappen Analyser kravene nederst.">
+      </figure>
+    </section>
+    <section class="skjerm" id="04-cv-og-annonse-utfylt" aria-labelledby="04-cv-og-annonse-utfylt-h">
+      <div class="tekst">
+        <h2 id="04-cv-og-annonse-utfylt-h"><span class="nr">04</span> Steg 1 – utfylt</h2>
+        <p>cv-ida.pdf er lest inn og vises som redigerbar tekst, med påminnelse om å sjekke kolonner og overskrifter. Tegntellere for CV og annonse.</p>
+        <p class="fil"><a href="skjermer/04-cv-og-annonse-utfylt.svg">Åpne 04-cv-og-annonse-utfylt.svg i full størrelse</a> <span class="mal">1440 × 1850 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/04-cv-og-annonse-utfylt.svg" width="1440" height="1850" loading="lazy" alt="CV-en cv-ida.pdf er lest inn. Teksten vises i et redigerbart felt med påminnelse om å sjekke kolonner og overskrifter. Annonsen er limt inn. Tegntellere viser 961 og 701 av 10 000 tegn.">
+      </figure>
+    </section>
+    <section class="skjerm" id="05-cv-og-annonse-feil" aria-labelledby="05-cv-og-annonse-feil-h">
+      <div class="tekst">
+        <h2 id="05-cv-og-annonse-feil-h"><span class="nr">05</span> Steg 1 – feiltilstander</h2>
+        <p>En fil som ikke kan leses, navngis, og tidligere CV-tekst beholdes. Tomt annonsefelt får melding rett ved feltet, rød kant og fokus.</p>
+        <p class="fil"><a href="skjermer/05-cv-og-annonse-feil.svg">Åpne 05-cv-og-annonse-feil.svg i full størrelse</a> <span class="mal">1440 × 1798 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/05-cv-og-annonse-feil.svg" width="1440" height="1798" loading="lazy" alt="To feil. Fila cv-ida-skannet.pdf kunne ikke leses; meldingen navngir fila og tilbyr ny fil eller innliming, og tidligere CV-tekst er beholdt. Annonsefeltet er tomt, merket ugyldig med melding ved feltet, og har fokus.">
+      </figure>
+    </section>
+    <section class="skjerm" id="06-tittel-og-arbeidsgiver" aria-labelledby="06-tittel-og-arbeidsgiver-h">
+      <div class="tekst">
+        <h2 id="06-tittel-og-arbeidsgiver-h"><span class="nr">06</span> Tittel og arbeidsgiver</h2>
+        <p>Funnet stillingstittel kan rettes. Arbeidsgiveren ble ikke funnet, og en markert blokk forklarer hvorfor den trengs.</p>
+        <p class="fil"><a href="skjermer/06-tittel-og-arbeidsgiver.svg">Åpne 06-tittel-og-arbeidsgiver.svg i full størrelse</a> <span class="mal">1440 × 1093 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/06-tittel-og-arbeidsgiver.svg" width="1440" height="1093" loading="lazy" alt="Stillingstittelen Sommervikar i hjemmetjenesten er funnet og kan rettes. Arbeidsgiver ble ikke funnet; en markert blokk forklarer hvorfor den trengs, og feltet har fokus. Analyser kravene nederst.">
+      </figure>
+    </section>
+    <section class="skjerm" id="07-analyserer" aria-labelledby="07-analyserer-h">
+      <div class="tekst">
+        <h2 id="07-analyserer-h"><span class="nr">07</span> Analyserer</h2>
+        <p>Venting: knappen er deaktivert og viser «Analyserer …», og CV-en og annonsen står synlig og uendret.</p>
+        <p class="fil"><a href="skjermer/07-analyserer.svg">Åpne 07-analyserer.svg i full størrelse</a> <span class="mal">1440 × 1672 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/07-analyserer.svg" width="1440" height="1672" loading="lazy" alt="Venting etter klikk på Analyser kravene. Knappen er deaktivert og viser Analyserer … med en spinner. CV-teksten og annonsen er fortsatt synlige og beholdt.">
+      </figure>
+    </section>
+    <section class="skjerm" id="08-gap-analyse" aria-labelledby="08-gap-analyse-h">
+      <div class="tekst">
+        <h2 id="08-gap-analyse-h"><span class="nr">08</span> Steg 2 – gap-analyse</h2>
+        <p>Kjerneskjermen. Opptellingen «3 av 4», manglende krav først som en «gjør dette nå»-blokk med svarfelt, deretter dokumenterte krav med sitat, ansettelsesvilkår og omskrivingsvalg.</p>
+        <p class="fil"><a href="skjermer/08-gap-analyse.svg">Åpne 08-gap-analyse.svg i full størrelse</a> <span class="mal">1440 × 2234 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/08-gap-analyse.svg" width="1440" height="2234" loading="lazy" alt="Overskrift med stillingstittel og arbeidsgiver. Opptellingen «3 av 4 kompetansekrav er dokumentert i CV-en». Kravet Førerkort klasse B mangler dokumentasjon og kommer først i en markert blokk med utfylt svar. Tre dokumenterte krav med sitat, politiattest som eget ansettelsesvilkår, omskrivingsvalg og knappene Lag tekst og Endre CV eller annonse.">
+      </figure>
+    </section>
+    <section class="skjerm" id="09-gap-tomtilstander" aria-labelledby="09-gap-tomtilstander-h">
+      <div class="tekst">
+        <h2 id="09-gap-tomtilstander-h"><span class="nr">09</span> Steg 2 – tomtilstander</h2>
+        <p>To varianter: alle kompetansekrav er dokumentert (testpar 4), og ingen tydelige krav i annonsen. Begge kan gå videre til «Lag tekst».</p>
+        <p class="fil"><a href="skjermer/09-gap-tomtilstander.svg">Åpne 09-gap-tomtilstander.svg i full størrelse</a> <span class="mal">1440 × 3027 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/09-gap-tomtilstander.svg" width="1440" height="3027" loading="lazy" alt="Variant A (testpar 4): melding om at alle kompetansekrav er dokumentert, ingen svarfelt, fire dokumenterte krav med sitat. Variant B: stiplet tomtilstand «Vi fant ingen tydelige krav i annonsen» med knapp for å endre CV eller annonse; begge kan lage tekst.">
+      </figure>
+    </section>
+    <section class="skjerm" id="10-soknadsutkast" aria-labelledby="10-soknadsutkast-h">
+      <div class="tekst">
+        <h2 id="10-soknadsutkast-h"><span class="nr">10</span> Steg 3 – helt søknadsutkast</h2>
+        <p>Brevet i et redigerbart felt med «Teksten bygger på» i en smal sidekolonne. Bekreftelsen «Kopiert.» og påminnelsen om sletting ved utlogging.</p>
+        <p class="fil"><a href="skjermer/10-soknadsutkast.svg">Åpne 10-soknadsutkast.svg i full størrelse</a> <span class="mal">1440 × 1587 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/10-soknadsutkast.svg" width="1440" height="1587" loading="lazy" alt="Søknadsbrevet til Ida Testesen i et redigerbart felt, med listen «Teksten bygger på» i en smal sidekolonne: stilling, sitater fra CV-en, svaret om førerkort og politiattest som ikke er brukt som oppfylt. Melding om at teksten slettes ved utlogging, og bekreftelsen «Kopiert. Lim inn teksten der du skriver søknaden.» ved Kopier tekst.">
+      </figure>
+    </section>
+    <section class="skjerm" id="11-forslag-til-formuleringer" aria-labelledby="11-forslag-til-formuleringer-h">
+      <div class="tekst">
+        <h2 id="11-forslag-til-formuleringer-h"><span class="nr">11</span> Steg 3 – forslag til formuleringer</h2>
+        <p>Forslag som liste. Veiledningen står i en egen boks merket «Veiledning – ikke del av søknaden» og følger ikke med ved kopiering.</p>
+        <p class="fil"><a href="skjermer/11-forslag-til-formuleringer.svg">Åpne 11-forslag-til-formuleringer.svg i full størrelse</a> <span class="mal">1440 × 1458 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/11-forslag-til-formuleringer.svg" width="1440" height="1458" loading="lazy" alt="Forslag som punktliste i et redigerbart felt. Under feltet en tydelig adskilt boks merket «Veiledning – ikke del av søknaden», som ikke kopieres. Sidekolonnen «Teksten bygger på» og Kopier tekst med fokusring.">
+      </figure>
+    </section>
+    <section class="skjerm" id="12-endre-cv-dialog" aria-labelledby="12-endre-cv-dialog-h">
+      <div class="tekst">
+        <h2 id="12-endre-cv-dialog-h"><span class="nr">12</span> Endre CV eller annonse</h2>
+        <p>Bekreftelsesdialog som lister hva som forkastes. «Avbryt» har fokus som det trygge valget.</p>
+        <p class="fil"><a href="skjermer/12-endre-cv-dialog.svg">Åpne 12-endre-cv-dialog.svg i full størrelse</a> <span class="mal">1440 × 1516 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/12-endre-cv-dialog.svg" width="1440" height="1516" loading="lazy" alt="Dialog over steg 3. Den lister hva som forkastes: svaret, gap-analysen og teksten, også egenredigert tekst. CV og annonse beholdes. Avbryt har fokus; Forkast og endre er markert som destruktiv.">
+      </figure>
+    </section>
+    <section class="skjerm" id="13-feil-fra-sprakmodell" aria-labelledby="13-feil-fra-sprakmodell-h">
+      <div class="tekst">
+        <h2 id="13-feil-fra-sprakmodell-h"><span class="nr">13</span> Feil fra språkmodellen</h2>
+        <p>Tidsavbrudd og ugyldig analyse. Meldingen står rett over «Prøv igjen» nederst, og inndataene er beholdt.</p>
+        <p class="fil"><a href="skjermer/13-feil-fra-sprakmodell.svg">Åpne 13-feil-fra-sprakmodell.svg i full størrelse</a> <span class="mal">1440 × 2824 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/13-feil-fra-sprakmodell.svg" width="1440" height="2824" loading="lazy" alt="Variant A: tidsavbrudd med «Vi fikk ikke svar. Inndataene dine er beholdt. Du kan prøve igjen.» og knappen Prøv igjen med fokus. Variant B: ugyldig analyse fordi et sitat ikke kunne bekreftes; ingen delresultater vises. CV og annonse er beholdt i begge.">
+      </figure>
+    </section>
+    <section class="skjerm" id="14-leverandorvarsel" aria-labelledby="14-leverandorvarsel-h">
+      <div class="tekst">
+        <h2 id="14-leverandorvarsel-h"><span class="nr">14</span> Leverandørvarsel (API-modus)</h2>
+        <p>Før første modellkall: dialogen navngir OpenAI og sier at ingenting sendes før brukeren bekrefter.</p>
+        <p class="fil"><a href="skjermer/14-leverandorvarsel.svg">Åpne 14-leverandorvarsel.svg i full størrelse</a> <span class="mal">1440 × 1630 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/14-leverandorvarsel.svg" width="1440" height="1630" loading="lazy" alt="Banneret øverst viser at API-modus er på. En dialog over steg 1 navngir leverandøren OpenAI og modellen gpt-5-mini, sier at ingenting sendes før brukeren bekrefter, og har knappene Avbryt og Send og analyser.">
+      </figure>
+    </section>
+    <section class="skjerm" id="15-oktvarsel" aria-labelledby="15-oktvarsel-h">
+      <div class="tekst">
+        <h2 id="15-oktvarsel-h"><span class="nr">15</span> Øktvarsel og utlogging</h2>
+        <p>Varsel etter 25 minutter med «Fortsett økten», og innloggingssiden etter automatisk utlogging med forklaring om at dataene er slettet.</p>
+        <p class="fil"><a href="skjermer/15-oktvarsel.svg">Åpne 15-oktvarsel.svg i full størrelse</a> <span class="mal">1440 × 3393 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/15-oktvarsel.svg" width="1440" height="3393" loading="lazy" alt="Variant A: varsel etter 25 minutter uten aktivitet, med Fortsett økten i fokus og Logg ut nå. Variant B: innloggingssiden etter automatisk utlogging, med forklaring om at CV, annonse, svar og tekst er slettet.">
+      </figure>
+    </section>
+    <section class="skjerm mobil" id="16-mobil-gap-analyse" aria-labelledby="16-mobil-gap-analyse-h">
+      <div class="tekst">
+        <h2 id="16-mobil-gap-analyse-h"><span class="nr">16</span> Mobil – gap-analyse</h2>
+        <p>Gap-analysen på 390 px. Steglisten viser bare aktivt steg, alt er stablet, og knappene har full bredde nederst.</p>
+        <p class="fil"><a href="skjermer/16-mobil-gap-analyse.svg">Åpne 16-mobil-gap-analyse.svg i full størrelse</a> <span class="mal">390 × 2415 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/16-mobil-gap-analyse.svg" width="390" height="2415" loading="lazy" alt="Gap-analysen på smal skjerm. Steglisten viser bare aktivt steg (Steg 2 av 3, Gap-analyse) med en liten fremdriftslinje. Alt er stablet i én kolonne; manglende krav med svarfelt kommer først, og Lag tekst er en full bredde-knapp nederst.">
+      </figure>
+    </section>
+    <section class="skjerm mobil" id="17-mobil-tekst" aria-labelledby="17-mobil-tekst-h">
+      <div class="tekst">
+        <h2 id="17-mobil-tekst-h"><span class="nr">17</span> Mobil – søknadsutkast</h2>
+        <p>Søknadsutkastet på 390 px med åpnet panel «Teksten bygger på» og «Kopier tekst» nederst.</p>
+        <p class="fil"><a href="skjermer/17-mobil-tekst.svg">Åpne 17-mobil-tekst.svg i full størrelse</a> <span class="mal">390 × 1875 px</span></p>
+      </div>
+      <figure>
+        <img src="skjermer/17-mobil-tekst.svg" width="390" height="1875" loading="lazy" alt="Søknadsutkastet på smal skjerm. Brevet i et redigerbart felt, deretter et åpnet sammenleggbart panel «Teksten bygger på», bekreftelsen Kopiert og Kopier tekst som full bredde-knapp nederst.">
+      </figure>
+    </section>
+  </main>
+  <footer>
+    <p>Felles brief: <a href="../felles-brief.md">_bmad-output/planning-artifacts/ux/helle/felles-brief.md</a>. Alle navn og dokumenter er fiktive.</p>
+  </footer>
+</body>
+</html>
