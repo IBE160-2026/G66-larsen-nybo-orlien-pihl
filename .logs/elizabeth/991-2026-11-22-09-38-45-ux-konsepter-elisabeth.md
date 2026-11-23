@@ -84,3 +84,19 @@ Elisabeth likte den nye oversikten, men syntes konseptene ble litt kjedelige. Ap
 
 ### Åpne punkter
 - Bahnschrift finnes bare på Windows. Velger gruppa Elektrisk, må en nettskrift vurderes.
+
+## 2026-11-23 kl. 20:05 — elizabeth
+
+### Oppgave
+Gruppa ville vite om alle åpne PR-er bør merges. Etter anbefalingen ba de, med Helles samtykke, om at Helles konsepter ble flyttet fra `UX/helle/` til samme sted som de andre UX-filene.
+
+### Plan
+- Gikk gjennom de sju åpne PR-ene (#10, #13–#18). #19 og #20 var allerede merget av Helle. Anbefaling: merge #10, #13 og #18 nå, #15 etter flytting, #14 og #17 etter gjennomgang (T-7 i #14 nevner fortsatt mobil), og vente med #16 (refleksjonsrapport).
+- Flyttet `UX/helle/` til `_bmad-output/planning-artifacts/ux/helle/` på branchen `helle/konsepter` og rettet relative lenker og stier.
+
+### Resultat
+- `3a11519` på `helle/konsepter` (PR #15): 64 filer flyttet (git ser dem som rename). Lenkene i `felles-brief.md` til PRD, prototype og testpar er kontrollert, og `UX/helle` i galleri, brief og generatorkommandoer er byttet ut. Helles logger er ikke endret.
+- `8526637` på `elisabeth/ux-konsepter` (PR #18): lenken til Helles brief er nå relativ (`../helle/felles-brief.md`).
+
+### Åpne punkter
+- `samlet-forslag/README.md` på main nevner fortsatt `UX/helle/konsept-3/konsept.md` under Kilder. Den må rettes når #15 er merget.
