@@ -23,4 +23,5 @@
 - [x] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa bestemmer seg for NFR-2 (mobil) og dokumenterer begrunnelsen i PRD-en (løst 2026-11-23: vedtak 15, PR #20)
 - [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa vurderer de åpne spørsmålene i samlet-forslag/README.md (lime, serif, klistremerke)
 - [x] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa merger PR #19 og #20 (begrunnelsen for vedtak 15 bekreftet 2026-11-23) (løst 2026-11-23: merget av Helle)
-- [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — kjøre `bmad-ux` på det samlede forslaget (DESIGN.md, EXPERIENCE.md og resterende skjermer)
+- [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — kjøre `bmad-ux` på det samlede forslaget (DESIGN.md, EXPERIENCE.md og resterende skjermer) – følges i #24
+- [ ] 2026-11-23 [arbeidsfordeling](989-2026-11-23-20-32-26-arbeidsfordeling.md) — resten av arbeidet følges i GitHub-issues #21–#42 (frist 7. desember)
