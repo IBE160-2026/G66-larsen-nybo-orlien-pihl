@@ -24,3 +24,6 @@
 - [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa vurderer de åpne spørsmålene i samlet-forslag/README.md (lime, serif, klistremerke)
 - [x] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — gruppa merger PR #19 og #20 (begrunnelsen for vedtak 15 bekreftet 2026-11-23) (løst 2026-11-23: merget av Helle)
 - [ ] 2026-11-23 [ux-samlet-forslag](990-2026-11-23-19-30-44-ux-samlet-forslag.md) — kjøre `bmad-ux` på det samlede forslaget (DESIGN.md, EXPERIENCE.md og resterende skjermer)
+- [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — samordne mappestrukturen (app/routes, templates) med Mirandas endelige arkitektur (#23)
+- [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — uv-installasjonsstegene i README er ikke prøvd på en ren maskin; gjøres i installasjonstesten (#40)
+- [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — vurder GitHub Actions som kjører pytest og ruff på hver PR
