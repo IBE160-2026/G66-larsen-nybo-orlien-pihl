@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Steg 2 ved 1024 px – Supersøker</title>
+<style>
+  /* Steg 2 ved 1024 px. Farger og skrift etter valg 1-3 (2026-11-25).
+     A: smalere sidekolonne (240 px), fliser i to kolonner
+     B: sidekolonnen flyttes over innholdet, fliser i tre kolonner
+     C: som skissen ved 1280 (sidekolonne 300 px, tre fliser) presset inn */
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 20px; background: #E7E0D4; color: #1E1A24; font: 16px/1.5 "Segoe UI", system-ui, sans-serif; }
+  .tittel { margin: 28px 0 4px; font-size: 20px; }
+  .forklaring { margin: 0 0 10px; color: #5A5262; max-width: 1024px; }
+  .ramme { width: 1024px; background: #F6F1E8; border-radius: 10px; overflow: hidden; }
+  .mock { background: #1E1A24; color: #fff; font-size: 14px; font-weight: 600; padding: 6px 24px; }
+  .topp { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; border-bottom: 1px solid #DDD3C4; }
+  .logo { font: 24px Georgia, serif; }
+  .logo span, em, .lenke { color: #A3401C; }
+  .lenke { text-decoration: underline; text-underline-offset: 3px; font-weight: 600; margin-left: 16px; }
+  .steg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0 24px; border-bottom: 1px solid #DDD3C4; font-size: 15px; color: #5A5262; }
+  .steg div { padding: 12px 0 10px; }
+  .steg i { font-size: 18px; margin-right: 8px; }
+  .steg .ferdig { text-decoration: underline; text-underline-offset: 4px; color: #A3401C; }
+  .steg .aktiv { color: #1E1A24; font-weight: 700; box-shadow: inset 0 -3px 0 #A3401C; }
+  .hoved { padding: 24px; display: grid; gap: 24px; }
+  .a .hoved { grid-template-columns: minmax(0,1fr) 240px; }
+  .b .hoved { grid-template-columns: 1fr; }
+  .c .hoved { grid-template-columns: minmax(0,1fr) 300px; gap: 48px; padding: 36px 40px 28px; }
+  .b aside { order: -1; display: grid; grid-template-columns: 300px 1fr; gap: 16px; }
+  .b aside ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+  h2 { font: 400 46px/1.06 Georgia, serif; margin: 0 0 8px; }
+  h3 { font-size: 22px; margin: 26px 0 12px; }
+  .ingress { font-size: 17px; color: #5A5262; margin: 0 0 16px; }
+  .tell { font-size: 20px; font-weight: 700; margin: 0; }
+  .liten { font-size: 14px; color: #5A5262; margin: 0; }
+  .krav { background: #FFFDF9; border-radius: 22px; overflow: hidden; box-shadow: 0 6px 18px rgba(30,26,36,.10); }
+  .baand { background: #FFC247; padding: 9px 18px; font-weight: 700; font-size: 14px; }
+  .inni { display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; padding: 18px; }
+  h4 { margin: 0; font-size: 18px; line-height: 1.3; }
+  .krav h4 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+  .inni p { margin: 0 0 8px; }
+  .fortell { background: #FFF0CC; border: 1.5px solid #FFC247; border-radius: 18px; padding: 14px; font-size: 15px; }
+  .felt { background: #fff; border: 1.5px solid #857A8C; border-radius: 12px; padding: 10px 12px; margin-top: 8px; }
+  .teller { text-align: right; font-size: 13px; color: #5A5262; }
+  .fliser { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .a .fliser { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .flis { background: #DCEAF7; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .chip { align-self: flex-start; background: #fff; color: #1F4E8C; border: 1.5px solid #1F4E8C; border-radius: 999px; padding: 1px 10px; font-size: 13px; font-weight: 700; }
+  .bevis { background: #FFCFC4; border-radius: 10px; padding: 8px 12px; margin: auto 0 0; font: italic 16px/1.45 Georgia, serif; box-shadow: 0 3px 6px rgba(30,26,36,.15); overflow-wrap: anywhere; }
+  .bevis small { display: block; font: 600 11px "Segoe UI", system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; }
+  aside { display: flex; flex-direction: column; gap: 16px; }
+  .boks { background: #FFFDF9; border: 1px solid #DDD3C4; border-radius: 18px; padding: 14px 16px; }
+  .boks b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #5A5262; margin-bottom: 6px; }
+  .boks p { margin: 0; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { padding: 6px 0; border-top: 1px solid #DDD3C4; font-size: 14px; }
+  .linje { display: flex; justify-content: space-between; padding: 14px 24px; background: #FFFDF9; box-shadow: 0 -6px 16px rgba(30,26,36,.08); }
+  .knapp { font-weight: 700; font-size: 17px; padding: 12px 24px; border-radius: 999px; background: #1E1A24; color: #fff; border: 2px solid #1E1A24; }
+  .knapp.sek { background: transparent; color: #1E1A24; }
+</style>
+</head>
+<body>
+<p class="forklaring">Alle rammene er nøyaktig 1024 px brede. Se dem med 100 % zoom for riktig størrelse.</p>
+<section class="a"><h1 class="tittel">A · Smalere sidekolonne</h1><p class="forklaring">Sidekolonnen blir 240 px og står fortsatt til høyre. Margene blir 24 px, og flisene står i to kolonner.</p><div class="ramme">
+<div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+<div class="topp"><span class="logo">supersøker<span>.</span></span><span>Ida Testesen <span class="lenke">Logg ut</span></span></div>
+<div class="steg"><div class="ferdig"><i>01</i>CV og annonse ✓</div><div class="aktiv"><i>02</i>Gap-analyse · Du er her</div><div><i>03</i>Teksten</div></div>
+<div class="hoved"><div>
+<h2>Se hva du kan<br><em>bygge på.</em></h2>
+<p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+<p class="tell">3 av 4 kompetansekrav er dokumentert i CV-en.</p><p class="liten">Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
+<h3>Står ikke i CV-en</h3>
+<div class="krav"><div class="baand">? Mangler dokumentasjon · Svar lagt til</div><div class="inni"><div><h4>Førerkort klasse B</h4><p>Står ikke i CV-en din. Det betyr ikke at du mangler det.</p></div><div class="fortell"><strong>Fortell oss kort</strong><br>Valgfritt. Skriv bare det som stemmer.<div class="felt">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div><div class="teller">56 / 1 000 tegn</div></div></div></div>
+<h3>Dokumentert i CV-en</h3>
+<div class="fliser"><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode norskkunnskaper, muntlig og skriftlig</h4><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Erfaring med eller interesse for å jobbe med mennesker</h4><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="bevis"><small>Fra CV-en din</small>«Gruppeprosjekt i helsefremmende arbeid»</p></div></div></div>
+<aside><div class="boks"><b>Søknaden din</b><p>Sommervikar i hjemmetjenesten<br><span class="liten">Testvik kommune</span></p></div>
+<div class="boks"><b>Huskeliste</b><ul><li>? Førerkort klasse B · svar lagt til</li><li>✓ Gode norskkunnskaper</li><li>✓ Jobbe med mennesker</li><li>✓ Gode samarbeidsevner</li></ul></div></aside></div>
+<div class="linje"><span class="knapp sek">← Endre CV eller annonse</span><span class="knapp">Lag tekst →</span></div></div></section>
+<section class="b"><h1 class="tittel">B · Sidekolonnen over innholdet</h1><p class="forklaring">Under en viss bredde legges «Søknaden din» og huskelisten over innholdet. Flisene beholder tre kolonner.</p><div class="ramme">
+<div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+<div class="topp"><span class="logo">supersøker<span>.</span></span><span>Ida Testesen <span class="lenke">Logg ut</span></span></div>
+<div class="steg"><div class="ferdig"><i>01</i>CV og annonse ✓</div><div class="aktiv"><i>02</i>Gap-analyse · Du er her</div><div><i>03</i>Teksten</div></div>
+<div class="hoved"><div>
+<h2>Se hva du kan<br><em>bygge på.</em></h2>
+<p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+<p class="tell">3 av 4 kompetansekrav er dokumentert i CV-en.</p><p class="liten">Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
+<h3>Står ikke i CV-en</h3>
+<div class="krav"><div class="baand">? Mangler dokumentasjon · Svar lagt til</div><div class="inni"><div><h4>Førerkort klasse B</h4><p>Står ikke i CV-en din. Det betyr ikke at du mangler det.</p></div><div class="fortell"><strong>Fortell oss kort</strong><br>Valgfritt. Skriv bare det som stemmer.<div class="felt">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div><div class="teller">56 / 1 000 tegn</div></div></div></div>
+<h3>Dokumentert i CV-en</h3>
+<div class="fliser"><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode norskkunnskaper, muntlig og skriftlig</h4><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Erfaring med eller interesse for å jobbe med mennesker</h4><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="bevis"><small>Fra CV-en din</small>«Gruppeprosjekt i helsefremmende arbeid»</p></div></div></div>
+<aside><div class="boks"><b>Søknaden din</b><p>Sommervikar i hjemmetjenesten<br><span class="liten">Testvik kommune</span></p></div>
+<div class="boks"><b>Huskeliste</b><ul><li>? Førerkort klasse B · svar lagt til</li><li>✓ Gode norskkunnskaper</li><li>✓ Jobbe med mennesker</li><li>✓ Gode samarbeidsevner</li></ul></div></aside></div>
+<div class="linje"><span class="knapp sek">← Endre CV eller annonse</span><span class="knapp">Lag tekst →</span></div></div></section>
+<section class="c"><h1 class="tittel">C · Uendret oppsett</h1><p class="forklaring">Marger, sidekolonne (300 px) og tre fliser som i skissen ved 1280 px, bare smalere.</p><div class="ramme">
+<div class="mock">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+<div class="topp"><span class="logo">supersøker<span>.</span></span><span>Ida Testesen <span class="lenke">Logg ut</span></span></div>
+<div class="steg"><div class="ferdig"><i>01</i>CV og annonse ✓</div><div class="aktiv"><i>02</i>Gap-analyse · Du er her</div><div><i>03</i>Teksten</div></div>
+<div class="hoved"><div>
+<h2>Se hva du kan<br><em>bygge på.</em></h2>
+<p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+<p class="tell">3 av 4 kompetansekrav er dokumentert i CV-en.</p><p class="liten">Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
+<h3>Står ikke i CV-en</h3>
+<div class="krav"><div class="baand">? Mangler dokumentasjon · Svar lagt til</div><div class="inni"><div><h4>Førerkort klasse B</h4><p>Står ikke i CV-en din. Det betyr ikke at du mangler det.</p></div><div class="fortell"><strong>Fortell oss kort</strong><br>Valgfritt. Skriv bare det som stemmer.<div class="felt">Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.</div><div class="teller">56 / 1 000 tegn</div></div></div></div>
+<h3>Dokumentert i CV-en</h3>
+<div class="fliser"><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode norskkunnskaper, muntlig og skriftlig</h4><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Erfaring med eller interesse for å jobbe med mennesker</h4><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div><div class="flis"><span class="chip">✓ Dokumentert</span><h4>Gode samarbeidsevner</h4><p class="bevis"><small>Fra CV-en din</small>«Gruppeprosjekt i helsefremmende arbeid»</p></div></div></div>
+<aside><div class="boks"><b>Søknaden din</b><p>Sommervikar i hjemmetjenesten<br><span class="liten">Testvik kommune</span></p></div>
+<div class="boks"><b>Huskeliste</b><ul><li>? Førerkort klasse B · svar lagt til</li><li>✓ Gode norskkunnskaper</li><li>✓ Jobbe med mennesker</li><li>✓ Gode samarbeidsevner</li></ul></div></aside></div>
+<div class="linje"><span class="knapp sek">← Endre CV eller annonse</span><span class="knapp">Lag tekst →</span></div></div></section>
+</body>
+</html>
