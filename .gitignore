@@ -45,6 +45,11 @@ playwright-report/
 !.env.*.example
 *.log
 
+# Lokal database og data (kontoer)
+/data/
+*.db
+*.sqlite3
+
 # BMAD: keep shared framework, skills, plans and documentation
 _bmad/config.user.toml
 _bmad/custom/*.user.toml

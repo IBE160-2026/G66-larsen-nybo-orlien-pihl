@@ -1,0 +1,33 @@
+[project]
+name = "supersoker"
+version = "0.1.0"
+description = "Supersøker: hjelper unge jobbsøkere å tilpasse en søknad til en stilling, uten å påstå noe CV-en ikke viser."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.165.0",
+    "jinja2>=3.1.6",
+    "pydantic-settings>=2.16.3",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.16.2",
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Bare Python-filer. Uten dette formaterer ruff også Markdown (README, logger og planer)
+include = ["*.py"]
+# BMAD-rammeverket er ikke vår kode
+extend-exclude = ["_bmad", "_bmad-output", ".claude"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
