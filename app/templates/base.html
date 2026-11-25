@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Supersøker{% endblock %}</title>
+</head>
+<body>
+  <p>
+    {% if settings.mode == "mock" %}
+    Mock-modus er på – ingen tekst sendes til en språkmodell.
+    {% else %}
+    API-modus er på – tekst sendes til en språkmodell.
+    {% endif %}
+  </p>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
