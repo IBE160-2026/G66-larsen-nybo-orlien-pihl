@@ -190,7 +190,7 @@ Kilde: `ux/samlet-forslag/` (forslag fra gruppa 23.11, ikke vedtatt design). Fir
 | FR-27 | 2 | Laste inn eksempel og testscenarioer |
 | FR-28 | 2 | Mock med egen tekst |
 | FR-29 | 4 | Slå på API-modus |
-| FR-30 | 2 og 4 | Epic 2: «Analyserer …», deaktivert knapp, ugyldig analyse avvises, inndata beholdes. Epic 4: tidsavbrudd, «Prøv igjen», konfigurasjons- og budsjettfeil, duplikatsperre, sene svar |
+| FR-30 | 1, 2 og 4 | Epic 1: grunnlaget for duplikatsperre og sene svar (AR-9, AR-10). Epic 2: «Analyserer …», deaktivert knapp, ugyldig analyse avvises, inndata beholdes. Epic 4: tidsavbrudd, «Prøv igjen», konfigurasjons- og budsjettfeil, og duplikatsperre og sene svar testet mot ekte modell |
 | NFR-1–3 | Alle, kontrolleres samlet i 5 | Universell utforming, skjermbredder, meldinger |
 | NFR-4 | 1 og 4 | Hemmeligheter (grunnlaget er ferdig i #25) |
 | NFR-5 | Alle | Fiktive data, ingen innhold i logger |
@@ -211,7 +211,8 @@ Koding kan likevel skje parallelt. Steg 1 og 2 kan bygges med en midlertidig øk
 Brukeren kan opprette konto, logge inn og ut, og stole på at dataene bare er hennes og slettes ved utlogging eller etter 30 minutter uten aktivitet. Sensor kan logge inn med testbrukeren.
 
 **FR:** FR-1, FR-2, FR-3, FR-22, FR-23, FR-24
-**Også:** AR-1 (skjelettet, ferdig i #25), AR-4–AR-8, UX-DR1–UX-DR8 (felles sideramme)
+**Også:** AR-1 (skjelettet, ferdig i #25), AR-4–AR-10, UX-DR1–UX-DR8 (felles sideramme)
+**Endret 2026-11-25:** Duplikatsperren og versjonssjekken (AR-9, AR-10) er flyttet hit fra Epic 4, etter forslag fra Miranda i PR #45. De hører til økten og brukes av både mock (Epic 2) og API (Epic 4).
 **Issues:** #25, #30, #35 (Elisabeth), #28 (Helle)
 **Sjekkes mot #23:** aktivitetsdefinisjon og lagring av redigeringer (AR-7, AR-8)
 
@@ -238,7 +239,7 @@ Den som kjører appen, kan slå på API-modus. Brukeren varsles før data sendes
 
 **FR:** FR-25, FR-29, FR-30 (resten)
 **NFR:** NFR-6, NFR-8 (ekte modell)
-**Også:** AR-9, AR-10, AR-15–AR-17
+**Også:** AR-15–AR-17. Duplikatsperren og versjonssjekken fra Epic 1 (AR-9, AR-10) testes her mot ekte modellkall.
 **Issues:** #36, #38 (Miranda)
 **Sjekkes mot #23:** hvor kostnadsoversikten ligger (AR-16)
 
