@@ -2,7 +2,7 @@
 title: "PRD: Supersøker - AI CV & Job Application Assistant"
 status: final
 created: 2026-11-03
-updated: 2026-11-23
+updated: 2026-11-25
 ---
 
 # PRD: Supersøker - AI CV & Job Application Assistant
@@ -92,7 +92,7 @@ Primærbrukeren er en student med lite relevant arbeidserfaring som søker sin f
 
 ## 4. Funksjoner
 
-**Prioritet:** Alle FR-er er «må»: del av v1 og ferdigkriterium (§7.3). Enkeltpunkter merket *(bør)* bygges etter «må»-kravene hvis tiden tillater det, og er ikke ferdigkriterium. Det som er utsatt, står i §7.2.
+**Prioritet:** Alle FR-er er «må»: del av v1 og ferdigkriterium (§7.3). Enkeltpunkter merket *(utsatt)* er ikke del av v1 og står i §7.2.
 
 ### 4.1 Konto og innlogging
 
@@ -329,7 +329,7 @@ Mens brukeren er innlogget, tar Supersøker vare på de midlertidige dataene, sl
 **Konsekvenser (testbare):**
 - Brukeren kan gå mellom stegene uten å miste inndata eller resultater, og uten nye modellkall.
 - Ved sideoppdatering i aktiv økt beholdes egenredigert tekst og øvrige midlertidige data, uten modellkall og uten permanent dokumentlagring.
-- *(bør)* Etter 25 minutter uten aktivitet vises et tilgjengelig varsel om utlogging om fem minutter, med «Fortsett økten». Et klikk før utløp nullstiller inaktivitetstiden uten modellkall. Varselet forlenger ikke økten i seg selv.
+- *(utsatt, vedtak 16)* Etter 25 minutter uten aktivitet vises et tilgjengelig varsel om utlogging om fem minutter, med «Fortsett økten». Et klikk før utløp nullstiller inaktivitetstiden uten modellkall. Varselet forlenger ikke økten i seg selv.
 
 #### FR-23: Slette midlertidige data ved utlogging og øktutløp
 
@@ -403,14 +403,14 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 
 **Konsekvenser (testbare):**
 - Mens et kall pågår, vises «Analyserer …» eller «Lager tekst …», og knappen er deaktivert, slik at dobbeltklikk ikke starter flere kall.
-- *(bør)* Serveren avviser også dupliserte innsendinger for samme handling.
+- Serveren avviser også dupliserte innsendinger for samme handling (vedtak 16).
 - Hvert kall har et tidsavbrudd på 30 sekunder. [ASSUMPTION: startverdi, se §10] Tester simulerer svar før og etter grensen.
 - Ved tidsavbrudd eller midlertidig feil vises for eksempel «Vi fikk ikke svar. Inndataene dine er beholdt. Du kan prøve igjen.» «Prøv igjen» starter høyst ett nytt kall.
 - Manglende nøkkel, ugyldig konfigurasjon eller nådd kostnadsgrense gir beskjed om hva den som kjører appen må rette, uten å tilby «Prøv igjen». Appen bytter ikke stilltiende til mock.
 - Ugyldig svarformat, manglende felt eller et ugyldig sitat avviser hele analysen, for eksempel med «Analysen kunne ikke brukes fordi dokumentasjonen ikke kunne bekreftes i CV-teksten. CV og annonse er beholdt. Prøv analysen på nytt.» Ingen delresultater vises eller brukes (FR-11).
 - Inndata og aktuelle svar beholdes ved feil. Data som er forkastet (FR-21) eller slettet (FR-23), gjenopprettes ikke.
 - Meldingen viser aldri API-nøkkelen eller andre hemmeligheter, og halvferdige resultater vises ikke.
-- *(bør)* Sene svar etter tidsavbrudd eller etter ny analyse ignoreres, slik at de ikke overskriver nyere data eller redigeringer.
+- Sene svar etter tidsavbrudd eller etter ny analyse ignoreres, slik at de ikke overskriver nyere data eller redigeringer (vedtak 16).
 
 ## 5. Tverrgående krav
 
@@ -464,6 +464,7 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 **Andre utsatte utvidelser uten fast trinn:**
 - Tredje kompetansestatus «Delvis dokumentert».
 - Ny tekstversjon med uendret inndata. Forsøksgrense, telleregler og kostnadskontroll må bestemmes først.
+- Varsel etter 25 minutter uten aktivitet, med «Fortsett økten» (FR-22, vedtak 16). Utløpet etter 30 minutter gjelder i v1.
 
 **Trinn 3:**
 - Strukturert CV-mal og DOC-støtte.
@@ -478,7 +479,7 @@ Når språkmodellen ikke svarer, svarer med feil, eller svaret ikke kan brukes, 
 
 Listen beskriver hva som må være oppfylt, ikke utførte tester.
 
-- Alle FR-er er implementert; *(bør)*-punkter er ikke påkrevd. SM-1 til SM-8 er kontrollert med registrerte resultater. «Sekundære» i §8 betyr ikke valgfrie.
+- Alle FR-er er implementert; *(utsatt)*-punkter er ikke påkrevd. SM-1 til SM-8 er kontrollert med registrerte resultater. «Sekundære» i §8 betyr ikke valgfrie.
 - Alle fire testpar fungerer i mock med begge omskrivingsvalg og alle tre CV-innleggingsmåter. Automatiske tester kjøres etter README uten feil. Mock dokumenterer ikke modellkvalitet.
 - Ekte modell er vurdert mot fasit, ærlighetsregelen og brevsjekklisten etter §8, innenfor 100 kr.
 - Feiltilfeller, kildekontroll, endrede inndata, øktdata og A/B-tilgang er testet. Ingen kjente feil som gir falske kvalifikasjonspåstander, uvedkommende tilgang eller stopper kjerneflyten står åpne.
@@ -507,7 +508,7 @@ Testene er planlagt kvalitetssikring, ikke utførte tester.
 | T-9 | Annonse uten tydelige krav gir tomtilstand med retting eller begge resultattyper, uten oppdiktede krav. Manglende eller tvetydig tittel og arbeidsgiver etterspørres, og blanke svar avvises. Eget scenario; de fire fasitene endres ikke. | FR-9–FR-10, FR-14, FR-18; SM-3, SM-5 |
 | T-10 | Sideoppdatering i aktiv økt beholder data uten modellkall og uten å nullstille tiden. Etter utløp eller utlogging og ny innlogging er data borte, og et sent svar gjenoppretter dem ikke. | FR-20, FR-22–FR-23, FR-30; SM-1, SM-7 |
 
-T-6 har et simulert analysesvar med gyldige sitater og ett ugyldig: hele analysen skal avvises. Dette testes deterministisk, separat fra vurderingen av sitaters relevans (T-2). Øktreglene testes med simulert tid ved 30 minutter, lukket fane og sent modellsvar. Bygges *(bør)*-punktene, testes også varselet ved 25 minutter, «Fortsett økten» og avvisning av duplikater.
+T-6 har et simulert analysesvar med gyldige sitater og ett ugyldig: hele analysen skal avvises. Dette testes deterministisk, separat fra vurderingen av sitaters relevans (T-2). Øktreglene testes med simulert tid ved 30 minutter, lukket fane og sent modellsvar. Serverens avvisning av duplikater og ignorering av sene svar testes også (vedtak 16).
 
 **Manuell brevsjekkliste (T-2/T-3):** Riktig stillingstittel og arbeidsgiver; bokmål og nøktern tone; minst ett relevant CV-eksempel i helt utkast; riktig resultatformat; ingen nye kvalifikasjoner; negasjoner og forbehold bevart; samme faktagrunnlag i begge omskrivingsvalg.
 
@@ -545,7 +546,7 @@ Vedtakene er innarbeidet i kravene. Begrunnelse og hvem som besluttet står i [.
 | 4 | Akseptansekrav for ekte modell: fire av fire testpar i tre runder | v1 | NFR-8, §8 |
 | 5 | Tomtilstand for annonse uten tydelige krav | v1 | FR-10, FR-14, FR-18, T-9 |
 | 6 | Ny tekstversjon med uendret inndata | utsatt | FR-21, FR-29 |
-| 7 | Utlogging og sletting etter 30 minutter uten aktivitet (varselet ved 25 minutter er *bør*, jf. vedtak 10) | v1 | FR-22, FR-23 |
+| 7 | Utlogging og sletting etter 30 minutter uten aktivitet (varselet ved 25 minutter er utsatt, jf. vedtak 16) | v1 | FR-22, FR-23 |
 | 8 | Egenredigert tekst beholdes ved sideoppdatering i aktiv økt | v1 | FR-20, FR-22 |
 | 9 | Forslag til forbedring av CV-en | trinn 2 | FR-13, FR-19 |
 | 10 | Alle FR-er er «må», enkeltpunkter kan være *bør*. FR-21 forenkles: endret CV eller annonse krever bekreftet ny analyse, og tilstanden «utdatert» fjernes. 25-minuttersvarsel, serveravvisning av duplikater og ignorering av sene svar er *bør* | v1 | FR-13, FR-21–FR-23, FR-30, T-4, T-6, T-10 |
@@ -554,8 +555,9 @@ Vedtakene er innarbeidet i kravene. Begrunnelse og hvem som besluttet står i [.
 | 13 | Tittel og arbeidsgiver er obligatoriske, leverandørvarselet bekreftes én gang per økt, og kontrast følger WCAG 2.1 AA | v1 | FR-9, FR-25, NFR-1 |
 | 14 | «Teksten» som fellesbegrep og knappen «Lag tekst» | v1 | §3, UJ-1, FR-15–FR-21 |
 | 15 | Appen er laget for datamaskin; ingen mobil- eller nettbrettvisning i v1 | v1 | NFR-2, §6, §7.3 |
+| 16 | Bør-punktene fra vedtak 10 avgjøres: 25-minuttersvarselet utsettes, serverens avvisning av duplikater og ignorering av sene svar blir del av v1. Betalte modellkall styres av én ansvarlig med automatisk reservasjon og sperre før hvert kall; ukjent restbudsjett sperrer betalt modus. Den felles kostnadsoversikten føres i et Teams-dokument utenfor appen, så bare brukerkontoen lagres permanent | v1 | FR-22, FR-23, FR-30, NFR-6, §7.2, §7.3, T-6, T-10 |
 
-Vedtak 1–9 ble godkjent av gruppa 2026-11-07. Vedtak 10–14 ble tatt 2026-11-12 etter faglærers tilbakemelding. Vedtak 10, 12 og 13 endrer eller avgjør spørsmål gruppa selv skulle bestemme, og godkjennes av gruppa i pull requesten. Vedtak 15 ble tatt av hele gruppa 2026-11-23 etter sammenligningen av UX-konseptene.
+Vedtak 1–9 ble godkjent av gruppa 2026-11-07. Vedtak 10–14 ble tatt 2026-11-12 etter faglærers tilbakemelding. Vedtak 10, 12 og 13 endrer eller avgjør spørsmål gruppa selv skulle bestemme, og godkjennes av gruppa i pull requesten. Vedtak 15 ble tatt av hele gruppa 2026-11-23 etter sammenligningen av UX-konseptene. Vedtak 16 ble tatt av hele gruppa 2026-11-24 og står i [PR #17](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/pull/17#issuecomment-7131315232); plasseringen av kostnadsoversikten i Teams ble avtalt samme dag.
 
 ## 10. Antakelser
 
