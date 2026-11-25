@@ -4,14 +4,16 @@ type: architecture-spine
 purpose: build-substrate
 altitude: feature
 paradigm: lagdelt modulær monolitt
-status: draft
+status: final
 created: 2026-11-24
-updated: 2026-11-24
+updated: 2026-11-25
 sources: [../../prds/prd-supersoker-2026-11-03/prd.md, ../../ux/samlet-forslag/README.md]
 companions: [.memlog.md, teststrategi.md]
 ---
 
 # Arkitektur for Supersøker V1
+
+Status `final` gjelder arkitekturbeslutningene. Implementasjon og verifikasjon følges opp i [teststrategien](teststrategi.md).
 
 Supersøker kjører lokalt som én FastAPI-app. Nettleseren viser tre steg fra CV og annonse til gap-analyse og redigerbar søknadstekst. Kontoen overlever omstart i SQLite. Alt arbeid ligger i serverens RAM og forsvinner ved utlogging, 30 minutters inaktivitet eller omstart. Sensor kan prøve hele flyten med fiktive data i mock-modus. Betalt testing krever en sentral tildeling innenfor gruppas samlede grense på 100 kr.
 
@@ -45,11 +47,15 @@ Valider blanke felt og lengder; behold gyldige inndata ved feil. Finn tittel og 
 
 ### AD-4 — Brukstilstand og samtidighet
 
+Bevar siste redigering ved sideoppdatering i en aktiv økt, og kontroller at et modellsvar fortsatt er gyldig før det får endre tilstanden.
+
 - **Binds:** FR-13, FR-15–24, FR-30.
 - **Prevents:** Dobbel betaling, overskriving med gammelt svar og gjenoppståtte arbeidsdata.
 - **Rule:** En servertransaksjon i RAM sjekker økt, frist, handlingsnøkkel og relevante revisjoner og registrerer operasjonen som pågående før modellarbeidet starter. Serveren bruker en semantisk nøkkel av økt, handling og inndataversjon. Analyse bindes til dokumentrevisjon. Generering bindes til dokument, analyse, svar og tekstvalg. Gjentatt innsending under arbeid eller etter et gyldig resultat gir aldri et nytt modellkall. Etter midlertidig feil utsteder serveren en engangs-ID for eksplisitt retry. Rett før utsending kontrollerer serveren under samme øktlås at operasjonen fortsatt er gyldig og markerer utsending som påbegynt. Kall som er kansellert før dette punktet sendes ikke. Nettleseren deaktiverer knappen og viser status. Lås holdes bare rundt sjekk og mutasjon, aldri under nettverksventing. Ved retur kan resultatet publiseres atomisk bare dersom samme økt ennå finnes og er aktiv, operasjonen fortsatt pågår og relevante revisjoner stemmer. Ved generering må også den godkjente revisjonen av eventuell egenredigert tekst stemme ved publisering. Utløp, logout, tidsavbrudd og bekreftet endring gjør gamle operasjoner ugyldige. Klienten forkaster også svar for en tidligere visningsrevisjon. Feil gir bokmålsmelding, beholder gyldige inndata og tillater høyst ett nytt kall per eksplisitt retry etter midlertidig feil. Adapter og transport gjør ingen automatiske retries.
 
-Navigasjon og reload gjenbruker gjeldende tilstand uten modellkall. Synkroniser redigering løpende til serverens RAM med revisjon og kvittering. Vent på kvittering før stegbytte eller generering som avhenger av siste redigering. Send endringssekvenser fortløpende. Serveren avviser eldre sekvenser og skriving fra en foreldet fanerevisjon. Ved reload skal klienten samordne eventuell pågående RAM-lagring med første innlasting. En avgrenset keepalive-skriving kan prøves ved navigasjon, med synlig lagringsstatus og navigasjonsvarsel ved uferdig synkronisering der nettleseren støtter det. Bevaring av siste redigering ved umiddelbar reload under uferdig synkronisering står åpen. Den krever implementasjon og bestått T-10 mot FR-22. Keepalive og navigasjonsvarsel alene gir ingen verifisert garanti.
+**Obligatorisk i v1.** Navigasjon og sideoppdatering gjenbruker gjeldende tilstand uten nye modellkall. Synkroniser redigering til serverens RAM og sørg for at en eldre skriving ikke overskriver en nyere. Stegbytte og generering som avhenger av redigeringen, må bruke siste versjon. Ved sideoppdatering skal siste redigering vises i den aktive økten, også når brukeren oppdaterer umiddelbart før lagring er kvittert. Sideoppdatering forlenger ikke øktfristen. Utlogging og øktutløp sletter arbeidsdata, og sene modellresultater skal aldri gjenopprette dem. Dette må implementeres og verifiseres i T-10 mot FR-22 og FR-23.
+
+**Forbedringer.** Klienten bør oppdage foreldede faner og samordne redigering på tvers av faner. Synlig lagringsstatus, navigasjonsvarsel og avgrenset keepalive-skriving kan prøves. Valgt løsning må bestå T-10 også med forsinket lagring.
 
 Et endret svar eller omskrivingsvalg gir ny tekst først ved «Lag tekst». Eksisterende egenredigert tekst erstattes først etter brukerbekreftelse og en vellykket generering. Etter analyse krever alle ruter for endring av CV eller annonse bekreftet «Endre CV eller annonse». Bekreftelsen forkaster analyse, svar og tekst i samme mutasjon. Avbryt bevarer tilstanden. Analyse kan deretter kjøres først når CV eller annonse faktisk er endret. Et tidligere mislykket kall kan prøves på nytt etter FR-30.
 
@@ -67,16 +73,20 @@ Begge tekstvalg bruker samme validerte faktagrunnlag. CV og svar er eneste grunn
 
 ### AD-6 — Sentral bevilgning, automatisk sperre per kall
 
+Den ansvarlige tildeler et beløp manuelt før en betalt kjøring. Serveren sperrer automatisk hvert kall som ikke har dekning.
+
 - **Binds:** FR-25, FR-29–30, NFR-6, PRD §8.
 - **Prevents:** At samtidige kall, flere maskiner eller omstart overskrider 100 kr.
-- **Rule:** Én ansvarlig fører gruppas felles kostnadsoversikt som administrativ prosjektdokumentasjon utenfor appens datalager. Oversikten har kjørings-ID, maskin, beløp i NOK og avstemmingsstatus. Den inneholder kun kostnadsmetadata. Appen lagrer bare kontoer permanent. Dette er et teknisk forslag til å oppfylle gruppevedtaket. Betalt API forblir sperret til prosedyren er verifisert. API-konfigurasjon og nøkkel i skjelettet er bare forutsetninger for å kunne aktivere modusen.
+- **Rule:** Gruppa fører den felles kostnadsoversikten i et Teams-dokument, som vedtatt 24.11. Oversikten ligger utenfor Supersøkers datalager og inneholder kun kostnadsmetadata, som kjørings-ID, maskin, beløp i NOK og avstemmingsstatus. Miranda foreslås som ansvarlig for oversikten og arbeidet med testing i #36 og #38. Hun må bekrefte ansvaret uttrykkelig før betalt testing. Betalt API forblir sperret til prosedyren er verifisert.
 
 1. Bruk ett dedikert leverandørprosjekt og én godkjent betalende prosess om gangen. Den ansvarlige holder nøkkelen og deler den bare med den aktive prosessen gjennom lokal miljøkonfigurasjon. Andre kjøringer bruker mock. Hindre parallell betalt oppstart på samme maskin med eksklusiv prosesslås og hold tildelingen knyttet til en identifisert aktiv prosess. Avvikle tidligere prosess og trekk tilbake dens nøkkel før ny maskin eller prosess aktiveres.
-2. Før oppstart holder den ansvarlige av hele bevilgningen i oversikten. Disponibelt beløp er 100 kr minus avstemt totalforbruk minus alle uavklarte bevilgninger. Ny prosess starter sperret, også om modus er API og en nøkkel finnes. Den trenger ny RAM-tildeling fra ansvarlig gjennom en lokal operatørkanal med engangsidentitet per prosess. Ingen nettleserrute kan tildele budsjett. En gammel tildeling kan ikke lastes fra miljøfil eller gjenbrukes ved restart.
+2. Før betalt kjøring avstemmer den ansvarlige Teams-oversikten. Disponibelt beløp er 100 kr minus avstemt totalforbruk minus alle uavklarte bevilgninger. Ved ukjent restbudsjett forblir betalt modus sperret. Den ansvarlige registrerer hele bevilgningen i Teams og starter prosessen fra sin lokale terminal. Prosessen starter sperret. Ved eksplisitt betalt oppstart ber den om beløpet i hele øre én gang i terminalen og holder beløpet i RAM for den kjøringen. Tomt, ugyldig eller uteblitt beløp holder sperren aktiv. Tildelingen kan ikke gis via nettleseren, hentes fra miljøfila eller gjenbrukes ved omstart.
 3. Før nettverksutsending må serveren, atomisk for den betalende prosessen, reservere maksimal kostnad i hele øre. Beregn med hele forespørselen inkludert prompt og skjema, håndhevet utdata- og inputtak, alle fakturerbare tokenkategorier, gjeldende makspriser, konservativ valutakurs og relevante avgifter. Rund opp. Avvis uten utsending hvis kostnaden eller restbeløpet er ukjent, eller reservasjonen ikke får plass. Hold hele reservasjonen ved timeout og ukjent fakturering. Frigjør kun dokumentert ubrukt beløp. Manuell retry er et nytt budsjettert kall.
 4. Ved stans eller krasj står hele bevilgningen som uavklart i oversikten til leverandørforbruket er verifisert og utestående kall er avklart. Oversikten erstatter da hele den åpne bevilgningen med det avstemte beløpet i én operasjon. Delvis fakturering regnes innenfor den åpne bevilgningen frem til avstemming. Fortsettelse på en annen maskin eller etter restart forutsetter avstemming og ny tildeling. Forsinket fakturering eller usikker tidligere tilgang holder betalt modus sperret. Leverandørvarsler kan være ekstra signal hvis tilgjengelig.
 
-**Blokkeringer for betalt API.** Bekreft ansvarlig og plassering av kostnadsoversikten, prosessbundet tildeling og tilgangsstyring, inkludert nøkkeltilbakekalling og ingen parallelle betalende startløp. Kontroller modell-ID, pris, fakturerbare tokenkategorier og harde tokenbegrensninger, avgifter/kursmargin, leverandørens databehandling, forsinkelse i fakturering og avstemming etter krasj. Verifiser prosedyren med en simulert leverandør før første betalte kall. PRD-overslaget på 36 kall per serie er et planleggingsgrunnlag. Kall i feilsøking og manuell retry belastes samme grense.
+**Blokkeringer for betalt API.** Innhent uttrykkelig bekreftelse fra den ansvarlige. Verifiser terminaltildeling, prosesslås, nøkkeltilbakekalling og sperre mot overlappende betalte kjøringer. Kontroller modell-ID, pris, fakturerbare tokenkategorier og harde tokenbegrensninger, avgifter og kursmargin, leverandørens databehandling, forsinkelse i fakturering og avstemming etter krasj. Prøv prosedyren med en simulert leverandør før første betalte kall. PRD-overslaget på 36 kall per serie er et planleggingsgrunnlag. Kall i feilsøking og manuell retry belastes samme grense.
+
+**Dokumentasjon for sensor.** Testrapporten i repoet (#38) skal oppsummere testresultater og avstemte kostnader med dato, antall kall og beløp i NOK. Rapporten skal kunne leses uten Teams-tilgang og skal være fri for CV-tekst, brukersvar og annet brukerinnhold.
 
 ### AD-7 — Desktop og forståelige tilstander
 
@@ -173,7 +183,7 @@ README skal bygges videre på disse kommandoene og testes på en ren maskin. Kon
 
 | Risiko eller åpent punkt | Tiltak og kontroll |
 | --- | --- |
-| Sist redigerte tekst ved umiddelbar reload | Simuler treg redigeringsskriving og kontroller siste endring ved reload, også ved flerfanebruk. |
+| Sist redigerte tekst ved umiddelbar sideoppdatering | Simuler treg lagring og kontroller siste endring i én aktiv fane i T-10. Flerfanebruk kan prøves separat. |
 | Ressurskrevende PDF eller feil rekkefølge | Avgrens parserarbeid, gjennomgå feilvarianter og test tekstuttrekk med fiktive PDF-er. |
 | Reelt sitat som ikke dokumenterer kravet | Vurder relevans og ærlighet mot fasit. Gjenta etter endring i modellkontrakt eller prompt. |
 | Budsjett- eller leverandørusikkerhet | Behold sperren og verifiser punktene i AD-6. |
