@@ -1,6 +1,7 @@
 {
-  "resultattype": "forslag_til_formuleringer",
-  "tekst": "- Jeg søker stillingen som sommervikar i hjemmetjenesten i Testvik kommune.\n- Jeg er besøksvenn i Røde Kors besøkstjeneste.\n- Jeg har samarbeidet med medstudenter i et gruppeprosjekt i helsefremmende arbeid.\n- Jeg har norsk som morsmål.",
+  "kontraktversjon": 1,
+  "resultattype": "helt_soknadsutkast",
+  "tekst": "Hei,\n\nJeg søker stillingen som sommervikar i hjemmetjenesten i Testvik kommune.\n\nJeg er besøksvenn i Røde Kors besøkstjeneste. Jeg har samarbeidet med medstudenter i et gruppeprosjekt i helsefremmende arbeid.\n\nJeg har norsk som morsmål.\n\nVennlig hilsen\nIda Testesen",
   "kildegrunnlag": {
     "stilling": {
       "tittel": "Sommervikar i hjemmetjenesten",
@@ -9,14 +10,17 @@
     "cv_sitater": [
       {
         "krav_id": "norskkunnskaper",
+        "krav": "Gode norskkunnskaper, muntlig og skriftlig",
         "sitat": "Norsk – morsmål"
       },
       {
         "krav_id": "jobbe-med-mennesker",
+        "krav": "Erfaring med eller interesse for å jobbe med mennesker",
         "sitat": "Besøksvenn, Røde Kors besøkstjeneste"
       },
       {
         "krav_id": "samarbeidsevner",
+        "krav": "Gode samarbeidsevner",
         "sitat": "Gruppeprosjekt i helsefremmende arbeid"
       }
     ],
