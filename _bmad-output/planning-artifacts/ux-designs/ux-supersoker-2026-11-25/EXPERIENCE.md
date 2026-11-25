@@ -10,8 +10,8 @@ sources:
   - ../../ux/samlet-forslag/README.md
   - ../../ux/samlet-forslag/forslag.html
   - ../../ux/helle/konsept-3/konsept.md
-  - 'Arkitektur, utkast: PR #46 (branch arkitektur-supersoker-v1), ARCHITECTURE-SPINE.md'
-  - 'Modellkontrakt, forslag: PR #47 (branch modellkontrakt-supersoker-v1)'
+  - ../../architecture/supersoker-v1/ARCHITECTURE-SPINE.md
+  - ../../../../tests/fixtures/modellkontrakt/README.md
   - 'Epics, utkast: PR #45 (branch gh-26-epics-og-stories)'
 ---
 
@@ -20,7 +20,7 @@ sources:
 ## Foundation
 
 - **Plattform:** nettapp for datamaskin, fra 1024 px, testet ved 1024 og 1440 px (NFR-2, vedtak 15). Ingen mobil- eller nettbrettvisning.
-- **Teknisk ramme** (arkitekturutkastet, AD-1): FastAPI med Jinja2/HTML, egen CSS og vanlig JavaScript, bare lokale ressurser. Ingen UI-bibliotek.
+- **Teknisk ramme** (arkitekturen, AD-1): FastAPI med Jinja2/HTML, egen CSS og vanlig JavaScript, bare lokale ressurser. Ingen UI-bibliotek.
 - **Språk:** norsk bokmål, `lang="nb"`.
 - **Utseende:** [DESIGN.md](DESIGN.md). Referanser som `{colors.feil}` peker dit.
 - **Forrang:** DESIGN.md og denne fila går foran skisser og mockups. PRD-en styrer kravene; er noe her i strid med den, er det en feil her.
@@ -235,7 +235,7 @@ Rekkefølge: opptelling → «Står ikke i CV-en» → «Dokumentert i CV-en» �
 | Kopiering sperret | Teksten markeres, og Ctrl+C-meldingen vises. |
 | Eldre tekst | Er svar eller teksttype endret etter at teksten ble laget, vises `melding-info` om det. |
 | Ny tekst mislyktes | Den gamle teksten, også egne endringer, beholdes (AD-4). |
-| Sideoppdatering | Egenredigert tekst og alle data i økten vises igjen, uten modellkall (FR-22). |
+| Sideoppdatering | Egenredigert tekst og alle data i økten vises igjen, uten modellkall (FR-22). Det gjelder også rett før lagringen er kvittert (AD-4, testes i T-10). |
 
 ### Alle sider etter innlogging
 
@@ -248,7 +248,7 @@ Rekkefølge: opptelling → «Står ikke i CV-en» → «Dokumentert i CV-en» �
 | Leverandørvarsel (API) | Vises før første kall i økten. «Avbryt» sender ingenting og endrer ingenting; varselet kommer igjen ved neste forsøk. Etter bekreftelse vises det ikke mer i økten. |
 | Ingen kontakt med serveren | Lagringsstatus eller modellfeilen sier at endringen ikke er mottatt. Teksten blir stående i feltet. |
 
-Varselet 25 minutter før utløp (FR-22, *bør*) er utsatt etter arkitekturutkastet (AD-7) og tegnes ikke i v1. Utløpet etter 30 minutter gjelder uansett.
+Varselet 25 minutter før utløp (FR-22, *bør*) er utsatt etter arkitekturen (AD-7) og tegnes ikke i v1. Utløpet etter 30 minutter gjelder uansett.
 
 ## Interaction Primitives
 
@@ -377,7 +377,7 @@ Etter godkjenningen er hjelpeteksten ved annonsefeltet rettet etter FR-7 (se [Av
 
 ## Åpne punkter
 
-- Arkitekturutkastet (PR #46) har ikke bekreftet at siste redigering overlever en umiddelbar sideoppdatering mens lagringen pågår (FR-22, T-10).
-- Arkitekturen, modellkontrakten og epics ligger i umergede PR-er. Endres de, må denne fila kontrolleres på nytt.
+- Epics ligger i en umerget PR (#45). Endres den, må denne fila kontrolleres på nytt.
+- Arkitekturen (AD-4) regner synlig lagringsstatus som en mulig forbedring. Denne spesifikasjonen har den med i designet (A11).
 - Epics (PR #45) må oppdateres: UX-DR1–UX-DR3, UX-DR12 og UX-DR16–UX-DR19 beskriver det gamle forslaget.
 - Valget av serif er ikke brukertestet.
