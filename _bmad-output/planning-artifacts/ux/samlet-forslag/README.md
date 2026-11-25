@@ -2,6 +2,10 @@
 
 **Dato:** 2026-11-23 · **Laget av:** gruppa med Claude Code (økt hos Elisabeth) · **Status:** forslag til gruppa, ikke vedtatt design
 
+> **Oppdatering 2026-11-25:** Gruppa har valgt å gå for dette forslaget. Gjeldende spesifikasjon er [DESIGN.md](../../ux-designs/ux-supersoker-2026-11-25/DESIGN.md) og [EXPERIENCE.md](../../ux-designs/ux-supersoker-2026-11-25/EXPERIENCE.md) (#24), og de går foran denne fila og skissen. Endringene fra forslaget står der. Teksten under er beholdt slik den var 23.11.
+>
+> **De åpne spørsmålene nederst er avklart:** primærknappen er blekksvart og feilfargen `#8C0D12` med egen form; serif brukes bare i logo, sideoverskrift, brev og CV-sitat; klistremerket er rett. NFR-2 ble avgjort i vedtak 15. De manglende skjermene er beskrevet i spesifikasjonen.
+
 **Se forslaget:** åpne [forslag.html](forslag.html) i nettleseren. Ingen installasjon eller nettforbindelse trengs.
 
 ## Bakgrunn
