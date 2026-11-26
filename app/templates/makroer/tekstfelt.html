@@ -1,0 +1,51 @@
+{#- Tekstfelt med synlig etikett, hjelpetekst, feltfeil og eventuell tegnteller.
+    teller er tegngrensen. Feltet får aldri maxlength: for lang tekst skal meldes som feil,
+    ikke kuttes. Et passord skrives aldri tilbake i siden.
+    attributter gir ekstra attributter, f.eks. {"autocomplete": "email", "rows": 8}.
+    Navn makroen selv styrer, og maxlength, hoppes over. -#}
+{% macro tekstfelt(id, etikett, navn, type="text", flerlinje=false, verdi="", hjelpetekst=none,
+                   feil=none, teller=none, readonly=false, autofokus=false, attributter={}) -%}
+{%- set reserverte = ["maxlength", "value", "type", "class", "id", "name", "aria-describedby",
+                      "aria-invalid", "readonly", "autofocus"] %}
+{#- Ber siden om passordfelt via attributter, skal verdien heller ikke vises i klartekst. #}
+{%- set felt = namespace(passord=type|lower == "password") %}
+{%- for attributt, innhold in attributter.items() %}
+  {%- if attributt|lower == "type" and innhold|lower == "password" %}{% set felt.passord = true %}{% endif %}
+{%- endfor %}
+{#- Nettleseren sender linjeskift som CRLF. Hvert linjeskift skal telle som ett tegn. #}
+{%- set tekst = (verdi or "")|replace("\r\n", "\n") %}
+{%- set beskrivelser = [
+      id ~ "-hjelp" if hjelpetekst,
+      id ~ "-feil" if feil,
+      id ~ "-teller" if teller,
+    ]|select|join(" ") %}
+{%- set felles -%}
+  class="felt-inndata" id="{{ id }}" name="{{ navn }}"
+  {%- if beskrivelser %} aria-describedby="{{ beskrivelser }}"{% endif %}
+  {%- if feil %} aria-invalid="true"{% endif %}
+  {%- if readonly %} readonly{% endif %}
+  {%- if autofokus %} autofocus{% endif %}
+  {%- for attributt, innhold in attributter.items() if attributt|lower not in reserverte %}
+    {{- {attributt: innhold}|xmlattr }}
+  {%- endfor %}
+{%- endset -%}
+<div class="felt">
+  <label class="felt-etikett" for="{{ id }}">{{ etikett }}</label>
+  {%- if hjelpetekst %}
+  <p class="felt-hjelp" id="{{ id }}-hjelp">{{ hjelpetekst }}</p>
+  {%- endif %}
+  {%- if flerlinje %}
+  {#- Nettleseren fjerner det første linjeskiftet i textarea. Det ekstra bevarer verdiens eget. #}
+  <textarea {{ felles }}>{{ "\n" }}{{ tekst }}</textarea>
+  {%- else %}
+  <input {{ felles }} type="{{ 'password' if felt.passord else type }}"
+    {%- if not felt.passord %} value="{{ tekst }}"{% endif %}>
+  {%- endif %}
+  {%- if feil %}
+  <p class="feltfeil" id="{{ id }}-feil"><span class="feilikon" aria-hidden="true">!</span> <span>{{ feil }}</span></p>
+  {%- endif %}
+  {%- if teller %}
+  <p class="tegnteller" id="{{ id }}-teller">{{ "{:,} / {:,}".format(tekst|length, teller).replace(",", " ") }} tegn</p>
+  {%- endif %}
+</div>
+{%- endmacro %}

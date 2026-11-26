@@ -1,19 +1,59 @@
+{#- Grunnmalen med den faste siderammen (EXPERIENCE.md, «Fast sideramme»).
+    Blokker:  title            «<Stegets navn> – Supersøker», settes av hver side
+              bruker           e-postadresse og «Logg ut» etter innlogging
+              content          hovedinnholdet
+              sidekolonne      til høyre for innholdet
+              modellfeil       nederst i hovedkolonnen, rett over handlingslinjen
+              handlingslinje   knappene nederst; ligger utenfor skjemaet, så primærknappen
+                               kobles til med form="<skjema-id>"
+              skript           sidens eventuelle skript
+    Variabler: aktivt_steg     1–3 viser stegindikatoren
+               steg_lenker     {nummer: url}; et annet steg med lenke er fullført
+    Beholderen rundt bruker, sidekolonne, modellfeil og handlingslinje lages bare når
+    blokken har innhold. -#}
+{% from "makroer/stegindikator.html" import stegindikator -%}
 <!doctype html>
 <html lang="nb">
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Supersøker{% endblock %}</title>
+  <link rel="stylesheet" href="/static/stil.css">
 </head>
 <body>
-  <p>
-    {% if settings.mode == "mock" %}
-    Mock-modus er på – ingen tekst sendes til en språkmodell.
-    {% else %}
-    API-modus er på – tekst sendes til en språkmodell.
-    {% endif %}
-  </p>
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+  <a class="hopp-lenke lenke" href="#innhold">Hopp til innhold</a>
+  {%- if settings.mode == "mock" %}
+  <div class="mock-stripe">Mock-modus er på – ingen tekst sendes til en språkmodell.</div>
+  {%- endif %}
+  <header class="toppfelt bredde">
+    <span class="logo">supersøker<span class="logo-punktum">.</span></span>
+    {#- Navnene ender på _blokk, så de ikke overskriver variabler sidene sender inn #}
+    {%- set bruker_blokk %}{% block bruker %}{% endblock %}{% endset %}
+    {%- if bruker_blokk|trim %}
+    <div class="bruker">{{ bruker_blokk }}</div>
+    {%- endif %}
+  </header>
+  {%- if aktivt_steg %}
+  {{ stegindikator(aktivt_steg, steg_lenker or {}) }}
+  {%- endif %}
+  {%- set sidekolonne_blokk %}{% block sidekolonne %}{% endblock %}{% endset %}
+  <div class="side bredde{% if sidekolonne_blokk|trim %} side-med-sidekolonne{% endif %}">
+    <main id="innhold" tabindex="-1">
+      {%- block content %}{% endblock %}
+      {%- set modellfeil_blokk %}{% block modellfeil %}{% endblock %}{% endset %}
+      {%- if modellfeil_blokk|trim %}
+      <div class="modellfeil">{{ modellfeil_blokk }}</div>
+      {%- endif %}
+    </main>
+    {%- if sidekolonne_blokk|trim %}
+    <aside class="sidekolonne">{{ sidekolonne_blokk }}</aside>
+    {%- endif %}
+  </div>
+  {%- set handlingslinje_blokk %}{% block handlingslinje %}{% endblock %}{% endset %}
+  {%- if handlingslinje_blokk|trim %}
+  <div class="handlingslinje">
+    <div class="handlingslinje-innhold bredde">{{ handlingslinje_blokk }}</div>
+  </div>
+  {%- endif %}
+  {%- block skript %}{% endblock %}
 </body>
 </html>

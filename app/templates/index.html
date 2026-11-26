@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% from "makroer/sideoverskrift.html" import sideoverskrift %}
 
 {% block content %}
-<h1>Supersøker</h1>
-<p>Appen er under bygging. Her kommer innlogging og de tre stegene.</p>
+{{ sideoverskrift("Supersøker", ingress="Appen er under bygging. Her kommer innlogging og de tre stegene.") }}
 {% endblock %}

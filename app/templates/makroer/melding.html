@@ -1,0 +1,24 @@
+{#- Meldinger. type er "feil", "info" eller "bekreftelse". Innholdet gis med call:
+      {% call melding("feil", tittel="Feil e-post eller passord.") %}Prøv igjen.{% endcall %}
+    tittel er den uthevede første setningen. En handling, f.eks. «Prøv igjen», legges i innholdet.
+    Feil får role="alert" og kan få fokus. Bekreftelse får role="status". Info har ingen rolle
+    hvis ikke siden gir den en. -#}
+{% macro melding(type, tittel=none, id=none, rolle=none, autofokus=false) -%}
+{%- set ikoner = {"feil": "!", "info": "i", "bekreftelse": "✓"} %}
+{%- set standardroller = {"feil": "alert", "bekreftelse": "status"} %}
+{%- set valgt_rolle = rolle or standardroller.get(type) -%}
+<div class="melding melding-{{ type }}"
+  {%- if id %} id="{{ id }}"{% endif %}
+  {%- if valgt_rolle %} role="{{ valgt_rolle }}"{% endif %}
+  {#- Uten tabindex kan ikke en boks få fokus, heller ikke med autofocus #}
+  {%- if type == "feil" or autofokus %} tabindex="-1"{% endif %}
+  {%- if autofokus %} autofocus{% endif %}>
+  <span class="{{ 'feilikon' if type == 'feil' else 'melding-ikon' }}" aria-hidden="true">{{ ikoner[type] }}</span>
+  <div class="melding-tekst">
+    {%- if tittel %}
+    <strong>{{ tittel }}</strong>
+    {%- endif %}
+    {{ caller() }}
+  </div>
+</div>
+{%- endmacro %}
