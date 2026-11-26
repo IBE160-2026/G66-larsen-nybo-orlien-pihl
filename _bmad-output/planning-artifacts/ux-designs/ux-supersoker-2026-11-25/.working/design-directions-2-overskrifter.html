@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Serif eller sans i overskriftene – Supersøker</title>
+<style>
+  /* A: serif i logo, steg-tall, sideoverskrift, seksjonsoverskrift og brev
+     B: serif i logo, sideoverskrift og brev
+     C: serif bare i brevet
+     D: sans overalt
+     Serif: Georgia. Sans: "Segoe UI", system-ui. */
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: #E7E0D4; color: #1E1A24; font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+  .intro h1 { font-size: 24px; margin: 0 0 4px; }
+  .intro p { margin: 0 0 16px; color: #5A5262; }
+  .rutenett { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .variant { --s: Georgia, "Times New Roman", serif; --u: "Segoe UI", system-ui, sans-serif; --logo: var(--s); --tall: var(--s); --side: var(--s); --seksjon: var(--s); --brev: var(--s); --vekt-side: 400; --vekt-seksjon: 400; background: #F6F1E8; border-radius: 16px; padding: 20px 24px 24px; }
+  .b { --tall: var(--u); --seksjon: var(--u); --vekt-seksjon: 700; }
+  .c { --logo: var(--u); --tall: var(--u); --side: var(--u); --seksjon: var(--u); --vekt-side: 600; --vekt-seksjon: 700; }
+  .d { --logo: var(--u); --tall: var(--u); --side: var(--u); --seksjon: var(--u); --brev: var(--u); --vekt-side: 600; --vekt-seksjon: 700; }
+  .merkelapp { margin: 0 0 2px; font-size: 18px; font-weight: 700; }
+  .forklaring { margin: 0 0 14px; color: #5A5262; }
+  .logo { font-family: var(--logo); font-size: 24px; padding-bottom: 8px; border-bottom: 1px solid #DDD3C4; }
+  .logo span, em { color: #A3401C; }
+  .steg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; border-bottom: 1px solid #DDD3C4; font-size: 14px; color: #5A5262; }
+  .steg div { padding: 12px 0 10px; }
+  .steg i { font: italic 20px var(--tall); margin-right: 8px; }
+  .steg .aktiv { color: #1E1A24; font-weight: 700; box-shadow: inset 0 -3px 0 #A3401C; }
+  .steg .aktiv i { color: #A3401C; }
+  .side { font: var(--vekt-side) 46px/1.08 var(--side); letter-spacing: -.02em; margin: 22px 0 8px; }
+  .ingress { font-size: 17px; color: #5A5262; margin: 0 0 14px; }
+  .seksjon { font: var(--vekt-seksjon) 24px var(--seksjon); margin: 18px 0 10px; }
+  .krav { background: #FFFDF9; border-radius: 20px; overflow: hidden; box-shadow: 0 6px 18px rgba(30,26,36,.10); }
+  .baand { background: #FFC247; padding: 8px 18px; font-weight: 700; font-size: 14px; }
+  .krav div + div { padding: 14px 18px; }
+  .krav strong { display: block; font-size: 22px; font-weight: 800; }
+  .brev { background: #FFFDF9; border-radius: 20px; padding: 22px 28px; font: 16px/1.7 var(--brev); box-shadow: 0 6px 18px rgba(30,26,36,.08); }
+  .brev p { margin: 0 0 10px; }
+  .brev p:last-child { margin: 0; }
+  .rad { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .knapp { font-weight: 700; font-size: 16px; padding: 12px 22px; border-radius: 999px; background: #1E1A24; color: #fff; }
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>Serif eller sans i overskriftene?</h1>
+  <p>Samme innhold, farger og størrelser i alle fire. Bare skrifttypen endres (og vekten der sans overtar).</p>
+</div>
+<div class="rutenett">
+
+<section class="variant a">
+  <p class="merkelapp">A · Som i forslaget</p>
+  <p class="forklaring">Serif i logo, steg-tall, alle store overskrifter og brevet.</p>
+  <div class="logo">supersøker<span>.</span></div>
+  <div class="steg"><div><i>01</i>CV og annonse</div><div class="aktiv"><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+  <h2 class="side">Se hva du kan<br><em>bygge på.</em></h2>
+  <p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+  <h3 class="seksjon">Står ikke i CV-en</h3>
+  <div class="krav"><div class="baand">? Mangler dokumentasjon</div><div><strong>Førerkort klasse B</strong>Står ikke i CV-en din. Det betyr ikke at du mangler det.</div></div>
+  <h3 class="seksjon">Søknadsutkast</h3>
+  <div class="brev"><p>Hei,</p><p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p><p>Vennlig hilsen<br>Ida Testesen</p></div>
+  <div class="rad"><span class="knapp">Kopier tekst</span></div>
+</section>
+
+<section class="variant b">
+  <p class="merkelapp">B · Serif bare i det store</p>
+  <p class="forklaring">Serif i logo, sideoverskrift og brevet. Resten er sans.</p>
+  <div class="logo">supersøker<span>.</span></div>
+  <div class="steg"><div><i>01</i>CV og annonse</div><div class="aktiv"><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+  <h2 class="side">Se hva du kan<br><em>bygge på.</em></h2>
+  <p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+  <h3 class="seksjon">Står ikke i CV-en</h3>
+  <div class="krav"><div class="baand">? Mangler dokumentasjon</div><div><strong>Førerkort klasse B</strong>Står ikke i CV-en din. Det betyr ikke at du mangler det.</div></div>
+  <h3 class="seksjon">Søknadsutkast</h3>
+  <div class="brev"><p>Hei,</p><p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p><p>Vennlig hilsen<br>Ida Testesen</p></div>
+  <div class="rad"><span class="knapp">Kopier tekst</span></div>
+</section>
+
+<section class="variant c">
+  <p class="merkelapp">C · Serif bare i brevet</p>
+  <p class="forklaring">Grensesnittet er sans. Serif markerer det som er brukerens tekst.</p>
+  <div class="logo">supersøker<span>.</span></div>
+  <div class="steg"><div><i>01</i>CV og annonse</div><div class="aktiv"><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+  <h2 class="side">Se hva du kan<br><em>bygge på.</em></h2>
+  <p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+  <h3 class="seksjon">Står ikke i CV-en</h3>
+  <div class="krav"><div class="baand">? Mangler dokumentasjon</div><div><strong>Førerkort klasse B</strong>Står ikke i CV-en din. Det betyr ikke at du mangler det.</div></div>
+  <h3 class="seksjon">Søknadsutkast</h3>
+  <div class="brev"><p>Hei,</p><p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p><p>Vennlig hilsen<br>Ida Testesen</p></div>
+  <div class="rad"><span class="knapp">Kopier tekst</span></div>
+</section>
+
+<section class="variant d">
+  <p class="merkelapp">D · Sans overalt</p>
+  <p class="forklaring">Én skriftfamilie, også i brevet.</p>
+  <div class="logo">supersøker<span>.</span></div>
+  <div class="steg"><div><i>01</i>CV og annonse</div><div class="aktiv"><i>02</i>Gap-analyse</div><div><i>03</i>Teksten</div></div>
+  <h2 class="side">Se hva du kan<br><em>bygge på.</em></h2>
+  <p class="ingress">At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+  <h3 class="seksjon">Står ikke i CV-en</h3>
+  <div class="krav"><div class="baand">? Mangler dokumentasjon</div><div><strong>Førerkort klasse B</strong>Står ikke i CV-en din. Det betyr ikke at du mangler det.</div></div>
+  <h3 class="seksjon">Søknadsutkast</h3>
+  <div class="brev"><p>Hei,</p><p>Jeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Jeg er sykepleierstudent på andre år ved Høgskolen i Testvik og trives med å jobbe med mennesker.</p><p>Vennlig hilsen<br>Ida Testesen</p></div>
+  <div class="rad"><span class="knapp">Kopier tekst</span></div>
+</section>
+
+</div>
+</body>
+</html>

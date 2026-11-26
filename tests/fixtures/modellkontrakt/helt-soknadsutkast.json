@@ -1,0 +1,39 @@
+{
+  "kontraktversjon": 1,
+  "resultattype": "helt_soknadsutkast",
+  "tekst": "Hei,\n\nJeg søker stillingen som sommervikar i hjemmetjenesten i Testvik kommune.\n\nJeg er besøksvenn i Røde Kors besøkstjeneste. Jeg har samarbeidet med medstudenter i et gruppeprosjekt i helsefremmende arbeid.\n\nJeg har norsk som morsmål.\n\nVennlig hilsen\nIda Testesen",
+  "kildegrunnlag": {
+    "stilling": {
+      "tittel": "Sommervikar i hjemmetjenesten",
+      "arbeidsgiver": "Testvik kommune"
+    },
+    "cv_sitater": [
+      {
+        "krav_id": "norskkunnskaper",
+        "krav": "Gode norskkunnskaper, muntlig og skriftlig",
+        "sitat": "Norsk – morsmål"
+      },
+      {
+        "krav_id": "jobbe-med-mennesker",
+        "krav": "Erfaring med eller interesse for å jobbe med mennesker",
+        "sitat": "Besøksvenn, Røde Kors besøkstjeneste"
+      },
+      {
+        "krav_id": "samarbeidsevner",
+        "krav": "Gode samarbeidsevner",
+        "sitat": "Gruppeprosjekt i helsefremmende arbeid"
+      }
+    ],
+    "brukersvar": [],
+    "manglende_krav": [
+      {
+        "krav_id": "forerkort-b",
+        "krav": "Førerkort klasse B",
+        "svar_gitt": false
+      }
+    ]
+  },
+  "veiledning": [
+    "Førerkort klasse B er et krav i annonsen. CV-en dokumenterer det ikke. Kravet er utelatt fra teksten."
+  ]
+}
