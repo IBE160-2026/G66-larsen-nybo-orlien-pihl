@@ -28,9 +28,11 @@
 - [x] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — samordne mappestrukturen (app/routes, templates) med Mirandas endelige arkitektur (#23) (løst 2026-11-26: arkitekturen i PR #46 bygger på strukturen fra #44)
 - [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — uv-installasjonsstegene i README er ikke prøvd på en ren maskin; gjøres i installasjonstesten (#40)
 - [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — vurder GitHub Actions som kjører pytest og ruff på hver PR
-- [ ] 2026-11-24 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — skrive stories (steg 3) senest 26.11, etter arkitekturen (#23) og UX-spesifikasjonen (#24)
+- [x] 2026-11-24 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — skrive stories (steg 3) senest 26.11, etter arkitekturen (#23) og UX-spesifikasjonen (#24) (løst 2026-11-26: 33 stories, PR #45)
 - [x] 2026-11-24 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — avklare i #23 hvor felles kostnadsoversikt ligger, siden PRD-en bare tillater permanent lagring av kontoer (løst 2026-11-25: Teams-dokument utenfor appen, AD-6 i PR #46)
 - [x] 2026-11-24 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — oppdatere PRD-en med vedtaket 24.11 (25-minuttersvarsel utsatt, duplikatsperre og sene svar prioritert, ny rad i §9) (løst 2026-11-25: vedtak 16 i PR #50)
 - [ ] 2026-11-24 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — rette `_bmad/bmm/config.yaml` (brukernavn, språk og mappe for planleggingsdokumenter)
-- [ ] 2026-11-25 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — akseptansekriterium i storyene: brukeren ser hvilke svar mock forstår (gjennomgang av PR #48)
+- [x] 2026-11-25 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — akseptansekriterium i storyene: brukeren ser hvilke svar mock forstår (gjennomgang av PR #48) (løst 2026-11-26: story 2.1 og 2.8)
 - [ ] 2026-11-25 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — README-ens mappetabell (#39): testparene i `tests/fixtures/` er også appdata (FR-27)
+- [ ] 2026-11-26 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — gruppa vedtar kuttlinjen (3.12.) og flyttingen av story 3.5 i PR #45
+- [ ] 2026-11-26 [epics-og-stories](987-2026-11-24-13-50-11-epics-og-stories.md) — kjøre `bmad-sprint-planning` etter merge av PR #45 (#26)
