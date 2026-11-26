@@ -22,3 +22,4 @@
 - [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — vurdere om brevarket skal ha synlig kant (DESIGN.md, #34 eller #37)
 - [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — #37: kontrollere i nettleser hvilke farger komponentene pares med og at tilstandsreglene virker, og teste med skjermleser, andre nettlesere enn Edge og uten Segoe UI
 - [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — når steg_2.html er flyttet til de felles klassene: test at malene ikke har egne fargeverdier
+- [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — Miranda og Eli gjennomgår PR #52 (frist for #28 er 27.11)
