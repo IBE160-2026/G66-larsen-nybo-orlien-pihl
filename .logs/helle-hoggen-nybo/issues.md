@@ -14,3 +14,6 @@
 - [x] 2026-11-25 [ux-spesifikasjon](996-2026-11-25-20-39-58-ux-spesifikasjon.md) — kontrollere spesifikasjonen på nytt hvis PR #46 eller #47 endres før merge, blant annet utsettelsen av 25-minuttersvarselet (løst 2026-11-25: kontrollert mot de mergede versjonene og oppdatert)
 - [ ] 2026-11-25 [ux-spesifikasjon](996-2026-11-25-20-39-58-ux-spesifikasjon.md) — tastatur- og skjermlesertest gjenstår (T-7, #37); sterk zoom gir sideveis rulling (WCAG 1.4.10) på grunn av vedtak 15
 - [ ] 2026-11-25 [ux-spesifikasjon](996-2026-11-25-20-39-58-ux-spesifikasjon.md) — gruppa avgjør om .impeccable/config.json skal versjoneres
+- [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — bygge #28 etter den godkjente spesifikasjonen `spec-gh-28-felles-mal-og-css.md` (frist 27.11)
+- [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — avtale hvem som flytter `steg_2.html` (PR #51) over til de felles stilene og steglisten, og når (forslag: Miranda, etter at #28 er merget)
+- [ ] 2026-11-26 [felles-mal-og-css](995-2026-11-26-12-17-24-felles-mal-og-css.md) — #31, #33 og #34 må dekke fokusflytting ved feil som oppdages i nettleseren, og slå på `autofokus` ved sidelasting
