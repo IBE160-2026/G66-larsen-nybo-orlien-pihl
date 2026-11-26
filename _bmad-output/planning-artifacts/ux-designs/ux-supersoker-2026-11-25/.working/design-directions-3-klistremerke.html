@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Bevis-klistremerket – Supersøker</title>
+<style>
+  /* Klistremerke: flate #FFCFC4 på flis #DCEAF7, blekk #1E1A24.
+     A: rotert 1,2°, skygge, serif kursiv (forslaget)
+     B: rett, skygge, serif kursiv
+     C: rett, uten skygge, sans (leses som sitatfelt)
+     D: rotert 1,2° vekselvis hver vei, skygge, serif kursiv */
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: #E7E0D4; color: #1E1A24; font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .intro { margin: 0 0 16px; color: #5A5262; }
+  .variant { background: #F6F1E8; border-radius: 16px; padding: 16px 24px 20px; margin-bottom: 16px; width: 900px; }
+  h2 { margin: 0 0 2px; font-size: 18px; }
+  .forklaring { margin: 0 0 12px; color: #5A5262; }
+  .fliser { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .flis { background: #DCEAF7; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .chip { align-self: flex-start; display: inline-flex; gap: 6px; background: #fff; color: #1F4E8C; border: 1.5px solid #1F4E8C; border-radius: 999px; padding: 2px 12px; font-size: 14px; font-weight: 700; }
+  h3 { margin: 0; font-size: 18px; line-height: 1.3; }
+  .bevis { background: #FFCFC4; border-radius: 10px; padding: 8px 12px; margin: auto 0 0; font: italic 16px/1.45 Georgia, serif; box-shadow: 0 3px 6px rgba(30,26,36,.15); }
+  .bevis small { display: block; font: 600 12px "Segoe UI", system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .a .bevis { transform: rotate(-1.2deg); }
+  .c .bevis { box-shadow: none; border-radius: 12px; font: 15px/1.45 "Segoe UI", system-ui, sans-serif; }
+  .c .bevis small { font-weight: 700; }
+  .d .bevis { transform: rotate(-1.2deg); }
+  .d .flis:nth-child(even) .bevis { transform: rotate(1.2deg); }
+  .knapper { width: 900px; background: #FFFDF9; border-radius: 16px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -6px 16px rgba(30,26,36,.08); }
+  .knapp { font-weight: 700; font-size: 18px; line-height: 1; padding: 16px 26px; border-radius: 999px; background: #1E1A24; color: #fff; border: 2px solid #1E1A24; }
+  .knapp.sekundar { background: transparent; color: #1E1A24; }
+</style>
+</head>
+<body>
+<h1>Skal bevis-klistremerket være rotert?</h1>
+<p class="intro">Sitatene er hentet fra testpar 1. Den tredje flisen viser et lengre, ordrett utdrag fra samme CV. Fasiten bruker et kortere sitat for dette kravet.</p>
+
+<section class="variant a">
+  <h2>A · Rotert 1,2° (forslaget)</h2>
+  <p class="forklaring">Skjev lapp med skygge, sitat i serif kursiv.</p>
+  <div class="fliser">
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode norskkunnskaper, muntlig og skriftlig</h3><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Erfaring med eller interesse for å jobbe med mennesker</h3><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode samarbeidsevner</h3><p class="bevis"><small>Fra CV-en din</small>«Planla og holdt et kurs om fallforebygging for eldre sammen med fire medstudenter. Ansvarlig for å koordinere gruppens møter.»</p></div>
+  </div>
+</section>
+
+<section class="variant b">
+  <h2>B · Rett lapp</h2>
+  <p class="forklaring">Samme lapp med skygge og serif kursiv, uten rotasjon.</p>
+  <div class="fliser">
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode norskkunnskaper, muntlig og skriftlig</h3><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Erfaring med eller interesse for å jobbe med mennesker</h3><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode samarbeidsevner</h3><p class="bevis"><small>Fra CV-en din</small>«Planla og holdt et kurs om fallforebygging for eldre sammen med fire medstudenter. Ansvarlig for å koordinere gruppens møter.»</p></div>
+  </div>
+</section>
+
+<section class="variant c">
+  <h2>C · Flatt sitatfelt</h2>
+  <p class="forklaring">Rett, uten skygge og i sans. Følger regelen fra spørsmål 2: serif bare i logo, sideoverskrift og brev.</p>
+  <div class="fliser">
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode norskkunnskaper, muntlig og skriftlig</h3><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Erfaring med eller interesse for å jobbe med mennesker</h3><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode samarbeidsevner</h3><p class="bevis"><small>Fra CV-en din</small>«Planla og holdt et kurs om fallforebygging for eldre sammen med fire medstudenter. Ansvarlig for å koordinere gruppens møter.»</p></div>
+  </div>
+</section>
+
+<section class="variant d">
+  <h2>D · Vekselvis rotert</h2>
+  <p class="forklaring">1,2° annenhver vei, så lappene ser håndplassert ut.</p>
+  <div class="fliser">
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode norskkunnskaper, muntlig og skriftlig</h3><p class="bevis"><small>Fra CV-en din</small>«Norsk – morsmål»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Erfaring med eller interesse for å jobbe med mennesker</h3><p class="bevis"><small>Fra CV-en din</small>«Besøksvenn, Røde Kors besøkstjeneste»</p></div>
+    <div class="flis"><span class="chip">✓ Dokumentert</span><h3>Gode samarbeidsevner</h3><p class="bevis"><small>Fra CV-en din</small>«Planla og holdt et kurs om fallforebygging for eldre sammen med fire medstudenter. Ansvarlig for å koordinere gruppens møter.»</p></div>
+  </div>
+</section>
+
+<p class="intro">Sekundær- og primærknapp slik de er antatt etter spørsmål 1:</p>
+<div class="knapper"><span class="knapp sekundar">← Endre CV eller annonse</span><span class="knapp">Lag tekst →</span></div>
+</body>
+</html>
