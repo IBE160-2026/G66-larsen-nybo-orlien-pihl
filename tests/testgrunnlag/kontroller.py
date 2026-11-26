@@ -49,13 +49,12 @@ def check_sources():
     manifest = read_json(BASE / "kildegrunnlag.json")
     expected = {item["path"] for item in manifest["filer"]}
     actual = {p.relative_to(ROOT).as_posix() for p in ORIGINAL.rglob("*") if p.is_file()}
-    original_expected = {p for p in expected if p.startswith("tests/fixtures/")}
-    require(actual == original_expected, "Originalmappen har nye eller manglende filer")
+    require(actual == expected, "Originalmappen og manifestet har ulike filstier")
     require(len(actual) == 13, "Forventet README og fire originale testpar à tre filer")
     for item in manifest["filer"]:
         require(hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest() == item["sha256"],
                 f"Endret kilde: {item['path']}")
-    print("Kilder: 13 originalfiler og PRD samsvarer bytevis med registrert SHA-256.")
+    print("Kilder: 13 originale testfiler samsvarer bytevis med registrert SHA-256.")
 
 
 def generate_pdfs():

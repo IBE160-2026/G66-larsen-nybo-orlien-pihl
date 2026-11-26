@@ -70,3 +70,24 @@ Oppstartshindringen og manglende testmateriale er løst i issues.md. Eldre testp
 - Miranda skal gjennomgå de nye fasitene, scenarioene og PDF-ene før materialet tas videre.
 - Koble scenarioer til testadapter/mock og gjennomføre planlagt app-/KI-testing T-1–T-10, ekte modellserie innenfor budsjettet og dokumentert installasjon på annen PC. Visuell PDF-kontroll og appens PDF-parser er ikke testet.
 - PRD §10s startverdier og arkitekturens regler for aktivitet, lagring, grenser/tidsavbrudd og konkret kostnadsplan må fortsatt avklares før berørt implementering/betalte kall.
+
+## 2026-11-26 kl. 07:22 — Miranda Larsen
+
+### Oppgave
+
+Følge opp Helles gjennomgang for issue #29 på `miranda-testgrunnlag`. Endringene skal ligge lokalt til Mirandas gjennomgang. [PR #14](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/pull/14)
+
+### Plan
+
+- Kontrollere branch og arbeidskopi, lese Helles tilbakemelding og sjekke vilkårsformatet i modellkontrakten i `origin/main`.
+- Avgrense hashkontrollen til originalfilene, oppdatere dokumentasjonen og kjøre datakontroll og Ruff.
+
+### Resultat
+
+Helles forslag om å ta PRD-en ut av SHA-256-kontrollen ble fulgt fordi PRD-en oppdateres løpende. `kildegrunnlag.json` inneholder de 13 originale testfilene, og `kontroller.py` krever at manifestets filstier samsvarer med originalmappen før filhashene sjekkes. README, spec og kontrollrapport beskriver omfanget. README dokumenterer at T-8-fasitene bruker objekter for sporbarhet og at adapteren ved integrasjon skal bruke `vilkar`-tekstene som strenger i modellkontraktens liste.
+
+`uv run --no-cache tests/testgrunnlag/kontroller.py` besto med exitkode 0 for originalfilene, JSON, fire PDF-er og tre scenariofasiter, inkludert sju T-9-annonser. `uv run ruff check tests/testgrunnlag/kontroller.py` besto med exitkode 0. Kjøringene krevde godkjent tilgang til henholdsvis PyPI og uv-cachen. App-, mock-, KI- og installasjonstester ble ikke kjørt. PRD, fasiter, modellkontrakt, appkode og de fire uregistrerte oppføringene ble holdt utenfor endringen. Oppdraget ble fulgt direkte uten BMADs krav om ren arbeidskopi og uten loggcommit, i tråd med brukerens instruks om å la oppføringene ligge og avvente gjennomgang. Ingen commit, push eller merge.
+
+### Åpne punkter
+
+- Vilkårsformatet må brukes når fasitene kobles til adapter/mock. Dette inngår i eksisterende punkt om adapter og app-/KI-testing i `issues.md`.

@@ -1,7 +1,6 @@
 {
-  "beskrivelse": "SHA-256 registrert før oppretting av testgrunnlaget. Originaler og PRD skal ikke endres.",
+  "beskrivelse": "SHA-256 for de 13 originale testfilene, registrert før oppretting av testgrunnlaget.",
   "baseline_commit": "8c631ed77a84feb61fe8aceee062a36868a732a8",
-  "prd_commit": "d8502b065f84d016cbc656262f2c36afce35b08e",
   "filer": [
     {
       "path": "tests/fixtures/job-applications/README.md",
@@ -54,10 +53,6 @@
     {
       "path": "tests/fixtures/job-applications/04-alle-krav-dekket/fasit.json",
       "sha256": "84297cd57f7c0dc834bfe18f6ce4790a5dfb74c1906020645f9edc4feaf0713d"
-    },
-    {
-      "path": "_bmad-output/planning-artifacts/prds/prd-supersoker-2026-11-03/prd.md",
-      "sha256": "2241aa5822bdec90ed5ed1939d0508a3cc97b6f18a5f1cf54b54ba1669bc2c89"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Supersøker – selvstendig testgrunnlag
 
-Grunnlaget følger [endelig PRD](../../_bmad-output/planning-artifacts/prds/prd-supersoker-2026-11-03/prd.md), oppdatert 2026-11-12, særlig FR-4–FR-18 og §8. Se kildecommiter og SHA-256 i [kildegrunnlag.json](kildegrunnlag.json). Brukerens plan er samlet i [BMAD-specen](spec-testgrunnlag.md).
+Grunnlaget bygger på [PRD-en](../../_bmad-output/planning-artifacts/prds/prd-supersoker-2026-11-03/prd.md), særlig FR-4–FR-18 og §8. Se baselinecommit og SHA-256 for originalfilene i [kildegrunnlag.json](kildegrunnlag.json). Brukerens plan er samlet i [BMAD-specen](spec-testgrunnlag.md).
 
 Materialet er klart for Mirandas gjennomgang. Det er ikke appkode, mock-svar eller dokumentasjon på beståtte app-/KI-tester. **Alle app-, mock-, KI- og installasjonstester: Ikke kjørt.** Bare kontroll av testmaterialet er utført; se [kontrollrapporten](kontrollrapport.md).
 
@@ -16,7 +16,7 @@ Alle nye personer, læresteder og arbeidsgivere er fiktive. E-postadresser bruke
 | [T-9 uten krav](scenarioer/t9-uten-krav/fasit.json) | Én CV, grunnannonse og seks varianter for stillingsopplysninger |
 | [sporbarhetsmatrise.md](sporbarhetsmatrise.md) | T-1–T-10, krav, forventninger, tilgjengelig og manglende materiale |
 | [kontroller.py](kontroller.py) | Gjentakbar datakontroll og eksplisitt PDF-generering |
-| [kildegrunnlag.json](kildegrunnlag.json) | Baseline for 13 originalfiler og PRD; skal ikke regenereres automatisk |
+| [kildegrunnlag.json](kildegrunnlag.json) | SHA-256-baseline for de 13 originale testfilene |
 
 ## Gjenta datakontrollene
 
@@ -36,14 +36,14 @@ uv run --no-cache tests/testgrunnlag/kontroller.py --lag-pdf
 
 Dette skriver bare PDF-filene i denne mappen og kjører deretter datakontrollene. PDF-ene bruker Helvetica, tekstobjekter og én kolonne, uten bilder. Innholdet er hentet fra originalene uten tillegg. Linjer brytes for å passe A4; hele tekstuttrekket skal være identisk etter normalisering av blanktegn. Antall norske tegn og alle dokumenterende fasitsitater kontrolleres også.
 
-Kildehashene sammenlignes bytevis med arbeidskopien ved oppstart. Et annet Git-oppsett kan gi andre linjeskift ved checkout. Et slikt avvik krever undersøkelse; det skal ikke skjules ved å overskrive baselinen. Hashkontrollen viser uendrede kilder, ikke at en app oppfyller kravene.
+Ved oppstart sammenligner skriptet SHA-256 for de 13 originale testfilene i arbeidskopien med baselinen. PRD-en er en levende kravkilde utenfor hashkontrollen. Et annet Git-oppsett kan gi andre linjeskift ved checkout. Undersøk eventuelle avvik før baselinen endres.
 
 ## Fasitenes kontrakt
 
 De tre nye `fasit.json`-filene er testforventninger, ikke et krav til appens interne JSON-/API-format. `schema_versjon: 1` gjelder disse testfilene. Alle har `teststatus: "Ikke kjørt"`.
 
 - `krav` inneholder bare kompetansekrav. `dekket` betyr «Dokumentert», og `mangler` betyr «Mangler dokumentasjon». `annonsekilde` er ordrett fra annonsen; `kilde` er ordrett fra CV-en og finnes bare for dokumenterte krav.
-- `ansettelsesvilkar` er en egen liste uten status eller dokumenterende CV-sitat. Vilkår gir aldri kompetansegap, svarfelt eller bidrag til kompetanseopptellingen.
+- `ansettelsesvilkar` er en egen liste uten status eller dokumenterende CV-sitat. Vilkår gir aldri kompetansegap, svarfelt eller bidrag til kompetanseopptellingen. T-8-fasitene bruker objekter med `id`, `vilkar` og `annonsekilde` for å kunne spore forventede vilkår til annonsen. Modellkontrakten i `main` bruker en liste med ikke-tomme tekststrenger. Når adapteren bygger mock-svar fra fasitene, skal den bruke `vilkar`-teksten fra hvert objekt som streng i listen.
 - `forventet` beskriver opptelling, meldinger og handlinger. Forbudte politiattestpåstander er eksempler på meningsinnhold som ikke skal forekomme, ikke en fullstendig liste for enkel tekstmatching. Begge resultattyper må vurderes semantisk.
 - T-9-fasiten gjelder alle sju annonser. `null` i `funnet_stilling` betyr at opplysningen må etterspørres. `brukersvar` er eksplisitt testinput etter at appen spør; dette er ikke noe modellen får gjette. Feltene i `stilling_etter_avklaring` er forventet sluttresultat.
 

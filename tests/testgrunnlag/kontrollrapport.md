@@ -1,6 +1,6 @@
 # Kontrollrapport – testmateriale
 
-Dato: 2026-11-15. Utført av Codex for Miranda Larsen på `miranda-testgrunnlag`, Windows/PowerShell. Python 3.12 via uv; ReportLab 4.4.5 og pypdf 6.2.0. PRD-/baselinecommiter og opprinnelige filhasher står i [kildegrunnlag.json](kildegrunnlag.json). Leveransens commit identifiseres med `git log -- tests/testgrunnlag/`; rapporten inneholder ikke sin egen commit-hash.
+Første kontroll ble utført 2026-11-15 for Miranda Larsen på `miranda-testgrunnlag` med Windows/PowerShell, Python 3.12 via uv, ReportLab 4.4.5 og pypdf 6.2.0. Baselinecommit og SHA-256 for originalfilene står i [kildegrunnlag.json](kildegrunnlag.json).
 
 ## Gjennomført datakontroll
 
@@ -8,7 +8,7 @@ Kommandoer: `uv run --no-cache tests/testgrunnlag/kontroller.py --lag-pdf` for o
 
 | Kontroll | Faktisk resultat |
 |---|---|
-| Kildebevaring | 13 filer i originalmappen (README + fire CV/annonse/fasit-par) og PRD samsvarer bytevis med SHA-256 registrert før arbeidet. Ingen originalfil lagt til, slettet eller endret. |
+| Kildebevaring | De 13 filene i originalmappen (README og fire CV/annonse/fasit-par) samsvarer bytevis med registrert SHA-256. PRD-en er en levende kravkilde utenfor hashkontrollen. |
 | JSON | Alle fire nye JSON-filer parses uten dupliserte nøkler. Tre scenariofasiter har versjon 1 og «Ikke kjørt». |
 | T-8 blandet | Tre kompetansekrav, to dokumentert, ett mangler. `Kundeservice ved disk` og `Norsk – morsmål` finnes ordrett i CV-en. Kravtekstutdrag finnes ordrett i annonsen. Bare førerkort får forventet svarfelt. |
 | T-8 bare vilkår | Null kompetansekrav og gap, ingen svarfelt. Politiattest er separat uten status, kilde eller bidrag til kompetansetelling. Egen melding om ingen tydelige kompetansekrav. |
@@ -22,6 +22,8 @@ Kommandoer: `uv run --no-cache tests/testgrunnlag/kontroller.py --lag-pdf` for o
 Gjennomlesing av de nye scenarioenes CV-er, annonser og fasiter er utført: kundeserviceerfaringen og norsk morsmål dokumenterer de to kravene; ingen opplysning dokumenterer førerkort eller politiattest. Bare-vilkår-annonsen inneholder ikke kompetansekrav. Alle T-9-annonsene tilbyr jobb/opplæring/lønn uten å stille kompetansekrav; varianter som omtaler to titler eller to arbeidsgivere angir uttrykkelig ikke hvilket alternativ som gjelder. Brukersvarene er testinput som skal gis etter avklaringsspørsmål, ikke en tillatelse til å gjette.
 
 ## Begrensning og teststatus
+
+Ved oppfølgingen av PR #14 den 2026-11-26 besto `uv run --no-cache tests/testgrunnlag/kontroller.py` med SHA-256-kontroll av de 13 originalfilene, JSON-, PDF- og scenariokontroll. `uv run ruff check tests/testgrunnlag/kontroller.py` besto også.
 
 Kontrollskriptet kontrollerer testdataenes struktur og konsistens. Det tester ikke at appen viser riktige meldinger, avviser blanke felt, teller krav riktig eller genererer ærlig tekst. Beskrevne forventninger og `teststatus` i fasitene er ikke observerte appresultater.
 

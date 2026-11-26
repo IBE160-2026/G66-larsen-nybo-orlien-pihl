@@ -22,7 +22,7 @@ Kontroller JSON, kompetansekrav, ordrette og relevante CV-sitater, separat behan
 
 - BMAD renderer uten feil og leser `Norwegian Bokmål`. Ingen uavklarte intensjonsvalg eller irreversible handlinger. Avgrenset, additivt datamateriale uten nye appavhengigheter: oneshot-rute.
 - Brukerens mappekrav overstyrer standard plassering av denne specen under implementation-artifacts. Kjente uregistrerte filer er eksplisitt unntatt av brukeren; de blokkerer ikke arbeidet og røres ikke.
-- Kilder: PRD §4.2–4.4 og §8, samt `tests/fixtures/job-applications/`. Ingen annen gruppemedlemsfil endres. Kildehashene registreres før oppretting i `kildegrunnlag.json`.
+- Kilder: PRD §4.2–4.4 og §8, samt `tests/fixtures/job-applications/`. Ingen annen gruppemedlemsfil endres. SHA-256-baselinen i `kildegrunnlag.json` gjelder de 13 originale testfilene.
 - Leveranse: README, matrise, kontrollrapport, kildegrunnlag, kontroll-/PDF-skript, fire PDF-er og scenariofiler med fasiter. T-9 bruker én felles CV og grunnfasit med navngitte annonsevarianter og forventede avklaringsfelt. Nye fasiter er testkontrakter, ikke en vedtatt app/API-modell.
 - Standardfonter og tekstobjekter i PDF, uten rasterbilder. Uttrekk sammenlignes med hele originalteksten etter normalisering av blanktegn; norske tegn og fasitsitater kontrolleres separat.
 - Originalene hashes på nytt etter arbeidet. Kontrollskript leser data og feiler ved avvik; bare eksplisitt PDF-generering skriver de fire nye PDF-ene. Ingen app- eller modellkall inngår.
