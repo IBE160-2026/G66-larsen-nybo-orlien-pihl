@@ -1,5 +1,7 @@
 # Åpne punkter
 
+- [ ] 2026-11-26 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Koble steg 2 til bekreftet grunnlag fra #31, råanalyse og eksempelgrunnlag fra #32 og aktiv økt med revisjoner fra #35. Verifiser integrert navigasjon, feilflyt og visning ved 1024 og 1440 px.
+
 - [ ] 2026-11-24 [Modellkontrakt for Supersøker V1](994-2026-11-24-19-00-27-modellkontrakt-supersoker-v1.md) — Miranda og gruppa gjennomgår kontraktforslaget i issue #22 før det låses for implementasjon.
 
 - [x] 2026-11-15 [BMAD kommunikasjonsspråk](997-2026-11-15-10-17-19-bmad-kommunikasjonssprak.md) — Konsept 1 – Stegvis veiviser er godkjent for bygging, men satt på vent under BMAD-rettelsen. Konsept 2 og 3 avventer godkjenning av konsept 1. (Løst 2026-11-15: arbeidet gjenopptatt og konsept 1 levert; videre vurdering følges i punktene under.)
