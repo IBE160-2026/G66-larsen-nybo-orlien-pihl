@@ -670,6 +670,7 @@ textarea.felt-inndata {
   background: var(--bevis);
   box-shadow: var(--skygge-bevis);
   font: var(--sitat);
+  white-space: pre-wrap;
 }
 
 .bevis-merkelapp {
