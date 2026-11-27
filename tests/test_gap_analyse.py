@@ -18,6 +18,7 @@ from app.gap_analyse import (
 )
 from app.main import create_app
 from app.routes.steg_2 import vis_steg_2
+from tests.test_maler import les
 
 TESTPAR = Path(__file__).parent / "fixtures" / "job-applications"
 
@@ -199,9 +200,12 @@ def test_ugyldige_svar(testpar, svar):
 def test_steg_2_viser_analyse_og_feltfeil(testpar):
     raasvar, grunnlag = testpar
     raasvar["ansettelsesvilkar"] = ["Politiattest"]
+    raasvar["kompetansekrav"].append(
+        {"id": "turnus", "krav": "Turnusarbeid", "status": "mangler", "kilde": None}
+    )
     analyse = valider_analyse(raasvar, **grunnlag)
     app = create_app()
-    svar = {"forerkort-b": "<script>" + "ø" * 1000}
+    svar = {"turnus": "ø" * 1001, "forerkort-b": "<script>" + "ø" * 1000}
 
     @app.get("/test-steg-2")
     def side(request: Request):
@@ -215,17 +219,104 @@ def test_steg_2_viser_analyse_og_feltfeil(testpar):
     html = respons.text
     assert html.index("Står ikke i CV-en") < html.index("Dokumentert i CV-en")
     assert html.index("Dokumentert i CV-en") < html.index("Vilkår fra annonsen")
-    assert html.count("<textarea") == 1
-    assert 'aria-invalid="true"' in html
-    assert 'aria-invalid="true" autofocus' in html
-    assert 'aria-describedby="svar-1-teller svar-1-varsel svar-1-feil"' in html
-    assert 'role="alert"><p class="feil" id="svar-1-feil">Svaret er over 1 000 tegn.' in html
+    dokument = les(html)
+    felt, andre_felt = dokument.finn("textarea")
+    assert felt.attributter["aria-invalid"] == andre_felt.attributter["aria-invalid"] == "true"
+    assert [e for e in dokument.alle() if "autofocus" in e.attributter] == [felt]
+    assert felt.attributter["aria-describedby"].split() == [
+        "svar-1-hjelp",
+        "svar-1-teller",
+        "svar-1-varsel",
+        "svar-1-feil",
+    ]
+    feil = dokument.med_id("svar-1-feil")
+    assert feil.tekst == "Svaret er over 1 000 tegn. Kort det ned."
+    assert feil.forelder.forelder.forelder.attributter["role"] == "alert"
     assert '<span aria-hidden="true">?</span> Mangler dokumentasjon' in html
     assert '<span aria-hidden="true">✓</span> Dokumentert' in html
-    assert 'data-svarstatus="svar-1" aria-live="polite">· Svar lagt til' in html
+    status = dokument.finn(klasse="chip-gjennomsiktig")[0]
+    assert status.tekst == "Svar lagt til"
+    assert "hidden" not in status.forelder.attributter
+    statusmelding = dokument.med_id("svar-1-status")
+    assert statusmelding.attributter["role"] == "status"
+    assert not statusmelding.tekst
     assert "&lt;script&gt;" in html
     assert "«Norsk – morsmål»" in html
     assert "Sommervikar i hjemmetjenesten · Testvik kommune" in html
+
+
+def test_steg_2_bruker_felles_sideramme(testpar):
+    raasvar, grunnlag = testpar
+    analyse = valider_analyse(raasvar, **grunnlag)
+    app = create_app()
+
+    @app.get("/test-steg-2")
+    def side(request: Request):
+        return vis_steg_2(request, analyse, endre_url="/endre", lag_tekst_url="/lag-tekst")
+
+    dokument = les(TestClient(app).get("/test-steg-2").text)
+    nav = dokument.en("nav")
+    assert "stegindikator" in nav.klasser
+    assert len(nav.en("ol").barn) == 3
+    aktivt_steg = [e for e in dokument.alle() if e.attributter.get("aria-current") == "step"]
+    assert aktivt_steg == [nav.en("li", "steg-aktivt")]
+    assert "Gap-analyse" in aktivt_steg[0].tekst
+
+    hoved = dokument.en("main")
+    hoved.en("h1", "sideoverskrift")
+    skjema = hoved.en("form")
+    assert skjema.en("textarea", "felt-inndata").attributter["name"] == "svar[forerkort-b]"
+    assert len(skjema.en("fieldset", "valggruppe").finn("label", "valgkort")) == 2
+    assert dokument.en("aside", "sidekolonne").forelder is hoved.forelder
+    handlingslinje = dokument.en(klasse="handlingslinje")
+    assert handlingslinje.forelder is dokument.en("body")
+    assert handlingslinje.en("button").attributter["form"] == skjema.attributter["id"]
+    assert dokument.en("script").forelder is handlingslinje.forelder
+    assert dokument.en("link").attributter["href"] == "/static/stil.css"
+    assert not dokument.finn("style")
+    assert all("style" not in element.attributter for element in dokument.alle())
+    statuser = [e for e in dokument.alle() if e.attributter.get("data-svarstatus") == "svar-1"]
+    assert len(statuser) == 2
+    assert all("hidden" in status.attributter for status in statuser)
+    assert dokument.med_id("svar-1-status").attributter["role"] == "status"
+
+
+def test_steg_2_beholder_blanktegn_i_cv_sitat(testpar):
+    raasvar, grunnlag = testpar
+    sitat = "Norsk  –\nmorsmål"
+    grunnlag["cv"] = grunnlag["cv"].replace("Norsk – morsmål", sitat)
+    analyse = valider_analyse(raasvar, **grunnlag)
+    app = create_app()
+
+    @app.get("/test-steg-2")
+    def side(request: Request):
+        return vis_steg_2(request, analyse)
+
+    klient = TestClient(app)
+    dokument = les(klient.get("/test-steg-2").text)
+    sitater = dokument.finn("blockquote", "bevis-klistremerke")
+    assert any(element.raatekst.endswith(f"«{sitat}»") for element in sitater)
+    stilark = klient.get("/static/stil.css")
+    assert stilark.status_code == 200
+    sitatstil = stilark.text.split(".bevis-klistremerke {", 1)[1].split("}", 1)[0]
+    assert "white-space: pre-wrap;" in sitatstil
+
+
+def test_steg_2_fokuserer_skjemafeil_uten_felt(testpar):
+    raasvar, grunnlag = testpar
+    analyse = valider_analyse(raasvar, **grunnlag)
+    app = create_app()
+
+    @app.get("/test-steg-2")
+    def side(request: Request):
+        return vis_steg_2(request, analyse, svarfeil=UgyldigSvar("Kontroller svarene."))
+
+    respons = TestClient(app).get("/test-steg-2")
+    assert respons.status_code == 422
+    dokument = les(respons.text)
+    melding = dokument.en(klasse="melding-feil")
+    assert melding.attributter["role"] == "alert"
+    assert [e for e in dokument.alle() if "autofocus" in e.attributter] == [melding]
 
 
 @pytest.mark.parametrize("lengde, varsel", [(899, ""), (900, "Du nærmer deg tegngrensen.")])

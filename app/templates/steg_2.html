@@ -1,174 +1,211 @@
 {% extends "base.html" %}
+{% from "makroer/sideoverskrift.html" import sideoverskrift %}
+{% from "makroer/melding.html" import melding %}
+
+{% set aktivt_steg = 2 %}
+{% set steg_lenker = {1: endre_url} if endre_url else {} %}
+
 {% block title %}Gap-analyse – Supersøker{% endblock %}
+
 {% block content %}
-<style>
-  .steg-2 { background: #f6f1e8; color: #1e1a24; font: 1rem/1.5 "Segoe UI", system-ui, sans-serif;
-    margin: auto; max-width: 1200px; padding: 24px; overflow-wrap: anywhere; }
-  .steg-2 h1 { font: clamp(46px, 4vw, 54px)/1.06 Georgia, serif; }
-  .steg-2 h1 em, .steg-2 a { color: #a3401c; }
-  .steg-2 h1 small { display: block; font: 600 .9rem/1.5 "Segoe UI", sans-serif;
-    text-transform: uppercase; margin-bottom: .5rem; }
-  .steg-2 .oppsett { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 24px; }
-  .steg-2 .fliser, .steg-2 .valg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .steg-2 article, .steg-2 aside section, .steg-2 .vilkar, .steg-2 .valg label {
-    border-radius: 20px; background: #fffdf9; padding: 16px; margin-bottom: 12px; }
-  .steg-2 .mangler { overflow: hidden; }
-  .steg-2 .status-mangler { background: #ffc247; display: block; margin: -16px -16px 0; padding: 8px 16px; }
-  .steg-2 .svarflate { background: #fff0cc; padding: 12px; border-radius: 12px; }
-  .steg-2 .fliser article { background: #dceaf7; }
-  .steg-2 blockquote { background: #ffcfc4; padding: 12px; margin: 8px 0 0;
-    font: italic 1rem/1.45 Georgia, serif; white-space: pre-wrap; }
-  .steg-2 .vilkar, .steg-2 textarea, .steg-2 .valg label { border: 1px solid #857a8c; }
-  .steg-2 .valg label:has(:checked) { outline: 2px solid #a3401c; outline-offset: -2px; }
-  .steg-2 textarea { display: block; width: 100%; box-sizing: border-box;
-    min-height: 5rem; font: inherit; padding: .5rem; }
-  .steg-2 .feil { color: #8c0d12; background: #fbe3e3; padding: .5rem; border: 1px solid; }
-  .steg-2 .feil:empty { display: none; }
-  .steg-2 :focus-visible { outline: 3px solid #1f4e8c; outline-offset: 3px; }
-  .steg-2 footer { display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    margin-top: 16px; }
-  .steg-2 footer :is(a, button) { padding: .65rem 1rem; font: inherit;
-    border: 2px solid #1e1a24; border-radius: 999px; }
-  .steg-2 footer a { color: #1e1a24; }
-  .steg-2 button { background: #1e1a24; color: #fff; margin-left: auto; }
-  .steg-2 button:disabled { background: #ddd3c4; color: #5a5262; border-color: #ddd3c4; }
-</style>
-<div class="steg-2">
-  <nav aria-label="Søknadssteg">
-    CV og annonse · <strong aria-current="step">Gap-analyse</strong> · Teksten din
-  </nav>
-  <div class="oppsett">
-    <div>
-      <h1><small>Steg 2 av 3 · {{ analyse.tittel }} · {{ analyse.arbeidsgiver }}</small>
-        Se hva du kan <em>bygge på.</em></h1>
-      {% if eksempelmerknad %}<p>{{ eksempelmerknad }}</p>{% endif %}
-      <p>{{ analyse.melding }}</p>
-      {% if analyse.mangler %}
-      <p>Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
-      {% endif %}
-      {% if svarfeil and svarfeil.krav_id is none %}
-      <p class="feil" role="alert">{{ svarfeil }}</p>
-      {% endif %}
-      <form method="post"{% if lag_tekst_url %} action="{{ lag_tekst_url }}"{% endif %}>
-        {% if analyse.mangler %}
-        <section aria-labelledby="mangler">
-          <h2 id="mangler">Står ikke i CV-en</h2>
-          {% set fokus = namespace(satt=false) %}
-          {% for krav in analyse.mangler %}
-          {% set felt = "svar-" ~ loop.index %}
-          {% set verdi = svar.get(krav.id, "") %}
-          {% set feltfeil = svarfeil and svarfeil.krav_id == krav.id %}
-          {% set for_langt = verdi|length > svargrense %}
-          {% set ugyldig = feltfeil or for_langt %}
-          <article class="mangler">
-            <strong class="status-mangler"><span aria-hidden="true">?</span> Mangler dokumentasjon
-              <span data-svarstatus="{{ felt }}" aria-live="polite">{{ "· Svar lagt til" if verdi.strip() else "" }}</span>
-            </strong>
-            <h3>{{ krav.krav }}</h3>
-            <p>At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
-            <div class="svarflate">
-            <label for="{{ felt }}">Ditt svar om {{ krav.krav }} (valgfritt)</label>
-            <textarea id="{{ felt }}" name="svar[{{ krav.id }}]" data-svargrense="{{ svargrense }}"
-              aria-describedby="{{ felt }}-teller {{ felt }}-varsel {{ felt }}-feil"
-              {% if ugyldig %}aria-invalid="true"{% endif %}{% if ugyldig and not fokus.satt %} autofocus{% set fokus.satt = true %}{% endif %}>
-{{ verdi }}</textarea>
-            <span id="{{ felt }}-teller">{{ verdi|length }} / {{ svargrense_visning }} tegn</span>
-            <span id="{{ felt }}-varsel" aria-live="polite">{{ "Du nærmer deg tegngrensen." if varselgrense <= verdi|length <= svargrense else "" }}</span>
-            <div role="alert"><p class="feil" id="{{ felt }}-feil">{{ svarfeil if feltfeil else grensemelding if for_langt else "" }}</p></div>
-            </div>
-          </article>
-          {% endfor %}
-        </section>
-        {% endif %}
-        {% if analyse.dokumentert %}
-        <section aria-labelledby="dokumentert">
-          <h2 id="dokumentert">Dokumentert i CV-en</h2>
-          <div class="fliser">
-            {% for krav in analyse.dokumentert %}
-            <article>
-              <strong><span aria-hidden="true">✓</span> Dokumentert</strong>
-              <h3>{{ krav.krav }}</h3>
-              <p>Fra CV-en din</p>
-              <blockquote>«{{ krav.kilde }}»</blockquote>
-            </article>
-            {% endfor %}
+{{ sideoverskrift("Se hva du kan", "bygge på.",
+     overtittel="Steg 2 av 3 · " ~ analyse.tittel ~ " · " ~ analyse.arbeidsgiver) }}
+{% if eksempelmerknad %}
+{% call melding("info") %}{{ eksempelmerknad }}{% endcall %}
+{% endif %}
+<p class="opptelling">{{ analyse.melding }}</p>
+{% if analyse.mangler %}
+<p class="hjelpetekst">Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
+{% endif %}
+
+<form id="gap-svar" method="post"{% if lag_tekst_url %} action="{{ lag_tekst_url }}"{% endif %}>
+  {% if svarfeil and svarfeil.krav_id is none %}
+  {% call melding("feil", autofokus=true) %}{{ svarfeil }}{% endcall %}
+  {% endif %}
+  {% if analyse.mangler %}
+  <section aria-labelledby="mangler">
+    <h2 class="seksjonstittel" id="mangler">Står ikke i CV-en</h2>
+    {% set fokus = namespace(satt=svarfeil and svarfeil.krav_id is none) %}
+    {% for krav in analyse.mangler %}
+    {% set felt = "svar-" ~ loop.index %}
+    {% set verdi = svar.get(krav.id, "") %}
+    {% set for_langt = verdi|length > svargrense %}
+    {% set feil = svarfeil if svarfeil and svarfeil.krav_id == krav.id else grensemelding if for_langt else "" %}
+    <article class="mangler-kort">
+      <div class="mangler-kort-band">
+        <span class="chip"><span aria-hidden="true">?</span> Mangler dokumentasjon</span>
+        <span data-svarstatus="{{ felt }}"{% if not verdi.strip() %} hidden{% endif %}><span class="chip chip-gjennomsiktig">Svar lagt til</span></span>
+        <span class="skjult" id="{{ felt }}-status" role="status"></span>
+      </div>
+      <div class="mangler-kort-innhold to-kolonner">
+        <div>
+          <h3 class="kravtittel">{{ krav.krav }}</h3>
+          <p>At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
+        </div>
+        <div class="svarfelt">
+          <p class="svarfelt-tittel">Fortell oss kort</p>
+          {# Feltet har faste ID-er også for meldinger JavaScript viser etter lasting. #}
+          <div class="felt">
+            <label class="felt-etikett" for="{{ felt }}">Ditt svar om {{ krav.krav }}</label>
+            <p class="felt-hjelp" id="{{ felt }}-hjelp">Valgfritt. Skriv bare det som stemmer. Svaret brukes bare i denne søknaden.</p>
+            <textarea class="felt-inndata" id="{{ felt }}" name="svar[{{ krav.id }}]" data-svargrense="{{ svargrense }}"
+              aria-describedby="{{ felt }}-hjelp {{ felt }}-teller {{ felt }}-varsel {{ felt }}-feil"
+              {% if feil %}aria-invalid="true"{% if not fokus.satt %} autofocus{% set fokus.satt = true %}{% endif %}{% endif %}>{{ "\n" }}{{ verdi }}</textarea>
+            <p class="tegnteller" id="{{ felt }}-teller">{{ verdi|length }} / {{ svargrense_visning }} tegn</p>
+            <span class="hjelpetekst" id="{{ felt }}-varsel" aria-live="polite">{{ "Du nærmer deg tegngrensen." if varselgrense <= verdi|length <= svargrense else "" }}</span>
+            <div role="alert"><div{% if not feil %} hidden{% endif %}><p class="feltfeil"><span class="feilikon" aria-hidden="true">!</span><span id="{{ felt }}-feil">{{ feil }}</span></p></div></div>
           </div>
-        </section>
-        {% endif %}
-        {% if analyse.ansettelsesvilkar %}
-        <section class="vilkar" aria-labelledby="vilkar">
-          <h2 id="vilkar">Vilkår fra annonsen</h2>
-          <ul>{% for vilkar in analyse.ansettelsesvilkar %}<li>{{ vilkar }}</li>{% endfor %}</ul>
-          <p>Arbeidsgiveren ber om dette ved ansettelse. Det er ikke med i opptellingen,
-            og teksten påstår ikke at du har det.</p>
-        </section>
-        {% endif %}
-        <fieldset>
-          <legend>Hva slags tekst vil du ha?</legend>
-          <div class="valg">
-            <label><input type="radio" name="tekstvalg" value="helt_soknadsutkast"
-              {% if tekstvalg == "helt_soknadsutkast" %}checked{% endif %}> Helt søknadsutkast
-              <br>Et sammenhengende brev du redigerer selv.</label>
-            <label><input type="radio" name="tekstvalg" value="forslag_til_formuleringer"
-              {% if tekstvalg == "forslag_til_formuleringer" %}checked{% endif %}> Forslag til formuleringer
-              <br>Setninger du kan bruke i ditt eget brev.</label>
-          </div>
-        </fieldset>
-        <footer>
-          {% if endre_url %}<a href="{{ endre_url }}">← Endre CV eller annonse</a>{% endif %}
-          <button type="{{ 'submit' if lag_tekst_url else 'button' }}"{% if not lag_tekst_url %} disabled{% endif %}>
-            Lag tekst →
-          </button>
-        </footer>
-      </form>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if analyse.dokumentert %}
+  <section aria-labelledby="dokumentert">
+    <h2 class="seksjonstittel" id="dokumentert">Dokumentert i CV-en</h2>
+    <div class="dok-fliser">
+      {% for krav in analyse.dokumentert %}
+      <article class="dok-flis">
+        <span class="chip chip-dokumentert"><span aria-hidden="true">✓</span> Dokumentert</span>
+        <h3 class="flistittel">{{ krav.krav }}</h3>
+        <blockquote class="bevis-klistremerke"><span class="bevis-merkelapp">Fra CV-en din</span>«{{ krav.kilde }}»</blockquote>
+      </article>
+      {% endfor %}
     </div>
-    <aside>
-      <section><h2>Søknaden din</h2><p>{{ analyse.tittel }}<br>{{ analyse.arbeidsgiver }}</p></section>
-      {% if analyse.mangler or analyse.dokumentert %}
-      <section>
-        <h2>Huskeliste</h2>
-        <ul>
-          {% for krav in analyse.mangler %}
-          <li>{{ krav.krav }} · Mangler dokumentasjon
-            <span data-svarstatus="svar-{{ loop.index }}">{{ "· Svar lagt til" if svar.get(krav.id, "").strip() else "" }}</span>
-          </li>
-          {% endfor %}
-          {% for krav in analyse.dokumentert %}<li>{{ krav.krav }} · Dokumentert</li>{% endfor %}
-        </ul>
-      </section>
-      {% endif %}
-    </aside>
-  </div>
-</div>
+  </section>
+  {% endif %}
+
+  {% if analyse.ansettelsesvilkar %}
+  <section class="vilkar-boks" aria-labelledby="vilkar">
+    <h2 class="seksjonstittel" id="vilkar">Vilkår fra annonsen</h2>
+    <ul>{% for vilkar in analyse.ansettelsesvilkar %}<li>{{ vilkar }}</li>{% endfor %}</ul>
+    <p>Arbeidsgiveren ber om dette ved ansettelse. Det er ikke med i opptellingen,
+      og teksten påstår ikke at du har det.</p>
+  </section>
+  {% endif %}
+
+  <fieldset class="valggruppe">
+    <legend class="seksjonstittel">Hva slags tekst vil du ha?</legend>
+    <div class="to-kolonner">
+      {% for verdi, navn, forklaring in [
+        ("helt_soknadsutkast", "Helt søknadsutkast", "Et sammenhengende brev du redigerer selv."),
+        ("forslag_til_formuleringer", "Forslag til formuleringer", "Setninger du kan bruke i ditt eget brev.") ] %}
+      <label class="valgkort">
+        <input type="radio" name="tekstvalg" value="{{ verdi }}"{% if tekstvalg == verdi %} checked{% endif %}>
+        <span class="valgkort-navn">{{ navn }} <span class="valgkort-valgt" aria-hidden="true">Valgt</span></span>
+        <span class="valgkort-forklaring">{{ forklaring }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
+
+{% block sidekolonne %}
+<section class="sideboks">
+  <h2 class="overtittel">Søknaden din</h2>
+  <p>{{ analyse.tittel }}</p>
+  <p class="hjelpetekst">{{ analyse.arbeidsgiver }}</p>
+</section>
+{% if analyse.mangler or analyse.dokumentert %}
+<section class="sideboks">
+  <h2 class="overtittel">Huskeliste</h2>
+  <ul class="huskeliste">
+    {% for krav in analyse.mangler %}
+    <li>
+      <span class="merke merke-apen" aria-hidden="true">?</span>
+      <span class="huskeliste-tekst">{{ krav.krav }}<small>Mangler dokumentasjon<span data-svarstatus="svar-{{ loop.index }}"{% if not svar.get(krav.id, "").strip() %} hidden{% endif %}> · Svar lagt til</span></small></span>
+    </li>
+    {% endfor %}
+    {% for krav in analyse.dokumentert %}
+    <li>
+      <span class="merke merke-gjort" aria-hidden="true">✓</span>
+      <span class="huskeliste-tekst">{{ krav.krav }}<small>Dokumentert</small></span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block handlingslinje %}
+{% if endre_url %}<a class="knapp-sekundar" href="{{ endre_url }}">← Endre CV eller annonse</a>{% endif %}
+{% if lag_tekst_url %}
+<button class="knapp-primar" type="submit" form="gap-svar">Lag tekst →</button>
+{% else %}
+<button class="knapp-deaktivert" type="button" disabled>Lag tekst →</button>
+{% endif %}
+{% endblock %}
+
+{% block skript %}
 <script>
   function oppdaterTekst(element, tekst) {
     if (element.textContent !== tekst) element.textContent = tekst;
   }
 
-  for (const felt of document.querySelectorAll(".steg-2 textarea[data-svargrense]")) {
+  const handlingslinje = document.querySelector(".handlingslinje");
+  const svarfelt = document.querySelectorAll("#gap-svar textarea[data-svargrense]");
+
+  function holdSvarfeltSynlig(felt) {
+    requestAnimationFrame(() => {
+      if (document.activeElement !== felt) return;
+      const linjekant = handlingslinje.getBoundingClientRect();
+      // Et manuelt forstørret felt må også få plass over handlingslinjen.
+      felt.style.maxHeight = Math.max(96, window.innerHeight - linjekant.height - 16) + "px";
+      const feltkant = felt.getBoundingClientRect();
+      const nedreGrense = Math.min(window.innerHeight, linjekant.top);
+      const overlapp = Math.ceil(feltkant.bottom + 8 - nedreGrense);
+      const rulling = Math.min(overlapp, Math.floor(feltkant.top - 8));
+      if (rulling > 0) window.scrollBy(0, rulling);
+    });
+  }
+
+  function sjekkFokusertSvarfelt() {
+    if (document.activeElement.matches("#gap-svar textarea[data-svargrense]")) {
+      holdSvarfeltSynlig(document.activeElement);
+    }
+  }
+
+  const storrelsesvakt = new ResizeObserver(sjekkFokusertSvarfelt);
+  storrelsesvakt.observe(handlingslinje);
+  window.addEventListener("resize", sjekkFokusertSvarfelt);
+
+  for (const felt of svarfelt) {
     const grense = Number(felt.dataset.svargrense);
     const grenseVisning = {{ svargrense_visning|tojson }};
     const varselgrense = {{ varselgrense|tojson }};
     const grensemelding = {{ grensemelding|tojson }};
     const feil = document.getElementById(felt.id + "-feil");
+    const feilmelding = feil.closest("[role=alert]").firstElementChild;
     const teller = document.getElementById(felt.id + "-teller");
     const varsel = document.getElementById(felt.id + "-varsel");
     const statuser = document.querySelectorAll('[data-svarstatus="' + felt.id + '"]');
+    const statusmelding = document.getElementById(felt.id + "-status");
+    let harSvar = !statuser[0].hidden;
     if (feil.textContent) felt.setCustomValidity(feil.textContent);
 
+    storrelsesvakt.observe(felt);
+    felt.addEventListener("focus", () => holdSvarfeltSynlig(felt));
     felt.addEventListener("input", () => {
       const lengde = Array.from(felt.value).length;
       const forLangt = lengde > grense;
       const melding = forLangt ? grensemelding : "";
+      feilmelding.hidden = !forLangt;
       oppdaterTekst(feil, melding);
       felt.setCustomValidity(melding);
       if (forLangt) felt.setAttribute("aria-invalid", "true");
       else felt.removeAttribute("aria-invalid");
       teller.textContent = lengde + " / " + grenseVisning + " tegn";
       oppdaterTekst(varsel, !forLangt && lengde >= varselgrense ? "Du nærmer deg tegngrensen." : "");
-      for (const status of statuser) {
-        oppdaterTekst(status, felt.value.trim() ? "· Svar lagt til" : "");
+      const harSvarNa = Boolean(felt.value.trim());
+      if (harSvarNa !== harSvar) {
+        harSvar = harSvarNa;
+        for (const status of statuser) status.hidden = !harSvar;
+        statusmelding.textContent = harSvar ? "Svar lagt til" : "";
       }
+      holdSvarfeltSynlig(felt);
     });
   }
 </script>
