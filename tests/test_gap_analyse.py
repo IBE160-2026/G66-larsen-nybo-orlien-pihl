@@ -1,4 +1,5 @@
 import json
+from dataclasses import asdict
 from pathlib import Path
 
 import pytest
@@ -48,13 +49,37 @@ def test_originale_testpar(mappe):
         assert not analyse.mangler
 
 
-@pytest.mark.parametrize("sitat", [None, "", " ", "norsk – morsmål", "Norsk  – morsmål"])
+@pytest.mark.parametrize("sitat", [None, "", " ", "norsk – morsmål", "morsmål – Norsk"])
 def test_ett_ugyldig_sitat_avviser_hele_analysen(testpar, sitat):
     raasvar, grunnlag = testpar
     raasvar["kompetansekrav"][-1]["kilde"] = sitat
     with pytest.raises(UgyldigAnalyse, match="dokumentasjonen") as feil:
         valider_analyse(raasvar, **grunnlag)
     assert str(feil.value) == ANALYSEFEIL
+
+
+@pytest.mark.parametrize("skille", ["\n", "\r\n", "\r", " \t ", "\n\n"])
+@pytest.mark.parametrize("modellskille", [" ", "\n"])
+def test_sitat_beholder_originale_blanktegn(testpar, skille, modellskille):
+    raasvar, grunnlag = testpar
+    original = f"Norsk{skille}– morsmål"
+    grunnlag["cv"] = grunnlag["cv"].replace("Norsk – morsmål", original)
+    raasvar["kompetansekrav"][-1]["kilde"] = f"Norsk{modellskille}– morsmål"
+    analyse = valider_analyse(raasvar, **grunnlag)
+    assert analyse.dokumentert[-1].kilde == original
+
+
+def test_tvetydig_sitat_med_normaliserte_blanktegn_avvises(testpar):
+    raasvar, grunnlag = testpar
+    grunnlag["cv"] = grunnlag["cv"].replace("Norsk – morsmål", "Norsk\n– morsmål\nNorsk\t– morsmål")
+    with pytest.raises(UgyldigAnalyse, match="dokumentasjonen"):
+        valider_analyse(raasvar, **grunnlag)
+
+
+def test_kort_ordrett_sitat_har_ingen_minimumslengde(testpar):
+    raasvar, grunnlag = testpar
+    raasvar["kompetansekrav"][-1]["kilde"] = "Norsk"
+    assert valider_analyse(raasvar, **grunnlag).dokumentert[-1].kilde == "Norsk"
 
 
 @pytest.mark.parametrize(
@@ -102,11 +127,14 @@ def test_ugyldig_struktur(testpar, raasvar):
         valider_analyse(raasvar, **grunnlag)
 
 
-def test_bekreftede_stillingsfelt_og_vilkar(testpar):
+@pytest.mark.parametrize("raaversjon", [{}, {"kontraktversjon": 99}])
+def test_bekreftede_stillingsfelt_versjon_og_vilkar(testpar, raaversjon):
     raasvar, grunnlag = testpar
+    raasvar.update(raaversjon)
     raasvar["stilling"] = {"tittel": "Oppdiktet", "arbeidsgiver": "Oppdiktet"}
     raasvar["ansettelsesvilkar"] = ["Politiattest må fremlegges før tiltredelse."]
     analyse = valider_analyse(raasvar, **grunnlag)
+    assert asdict(analyse)["kontraktversjon"] == 1
     assert (analyse.tittel, analyse.arbeidsgiver) == (grunnlag["tittel"], grunnlag["arbeidsgiver"])
     assert analyse.ansettelsesvilkar == tuple(raasvar["ansettelsesvilkar"])
     assert analyse.melding == "3 av 4 kompetansekrav er dokumentert i CV-en."
@@ -135,6 +163,20 @@ def test_svargrense_og_negativt_svar(testpar):
     assert analyse.mangler[0].kilde is None
     assert valider_svar(analyse, {krav_id: " \t\n"}) == {}
     assert valider_svar(analyse, {}) == {}
+
+
+@pytest.mark.parametrize("linjeskift", ["\n", "\r\n", "\r"])
+def test_svargrense_med_linjeskift(testpar, linjeskift):
+    raasvar, grunnlag = testpar
+    analyse = valider_analyse(raasvar, **grunnlag)
+    krav_id = analyse.mangler[0].id
+    forventet = "  Jeg har ikke førerkort.\nJeg holder på å lære.\n  ".ljust(1000)
+    svar = forventet.replace("\n", linjeskift)
+    assert valider_svar(analyse, {krav_id: svar}) == {krav_id: forventet}
+    with pytest.raises(UgyldigSvar) as feil:
+        valider_svar(analyse, {krav_id: svar + "ø"})
+    assert str(feil.value) == "Svaret er over 1 000 tegn. Kort det ned."
+    assert feil.value.krav_id == krav_id
 
 
 @pytest.mark.parametrize(
@@ -175,10 +217,32 @@ def test_steg_2_viser_analyse_og_feltfeil(testpar):
     assert html.index("Dokumentert i CV-en") < html.index("Vilkår fra annonsen")
     assert html.count("<textarea") == 1
     assert 'aria-invalid="true"' in html
-    assert "Skriv høyst 1 000 tegn i svaret." in html
+    assert 'aria-invalid="true" autofocus' in html
+    assert 'aria-describedby="svar-1-teller svar-1-varsel svar-1-feil"' in html
+    assert 'role="alert"><p class="feil" id="svar-1-feil">Svaret er over 1 000 tegn.' in html
+    assert '<span aria-hidden="true">?</span> Mangler dokumentasjon' in html
+    assert '<span aria-hidden="true">✓</span> Dokumentert' in html
+    assert 'data-svarstatus="svar-1" aria-live="polite">· Svar lagt til' in html
     assert "&lt;script&gt;" in html
     assert "«Norsk – morsmål»" in html
     assert "Sommervikar i hjemmetjenesten · Testvik kommune" in html
+
+
+@pytest.mark.parametrize("lengde, varsel", [(899, ""), (900, "Du nærmer deg tegngrensen.")])
+def test_steg_2_teller_initialt_svar_og_viser_varsel(testpar, lengde, varsel):
+    raasvar, grunnlag = testpar
+    analyse = valider_analyse(raasvar, **grunnlag)
+    app = create_app()
+    svar = {analyse.mangler[0].id: "\r\n" + "ø" * (lengde - 1)}
+
+    @app.get("/test-steg-2")
+    def side(request: Request):
+        return vis_steg_2(request, analyse, svar=svar)
+
+    html = TestClient(app).get("/test-steg-2").text
+    assert 'data-svargrense="1000"' in html
+    assert f'id="svar-1-teller">{lengde} / 1 000 tegn' in html
+    assert f'id="svar-1-varsel" aria-live="polite">{varsel}</span>' in html
 
 
 @pytest.mark.parametrize(

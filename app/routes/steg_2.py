@@ -5,7 +5,14 @@ from collections.abc import Mapping
 from fastapi import Request
 from fastapi.responses import HTMLResponse
 
-from app.gap_analyse import SVAR_FOR_LANGT, SVARGRENSE, GapAnalyse, UgyldigSvar
+from app.gap_analyse import (
+    SVAR_FOR_LANGT,
+    SVARGRENSE,
+    SVARGRENSE_VISNING,
+    GapAnalyse,
+    UgyldigSvar,
+    normaliser_svarlinjer,
+)
 
 
 def vis_steg_2(
@@ -25,8 +32,12 @@ def vis_steg_2(
         "steg_2.html",
         {
             "analyse": analyse,
-            "svar": svar or {},
+            "svar": {
+                krav_id: normaliser_svarlinjer(tekst) for krav_id, tekst in (svar or {}).items()
+            },
             "svargrense": SVARGRENSE,
+            "svargrense_visning": SVARGRENSE_VISNING,
+            "varselgrense": (SVARGRENSE * 9 + 9) // 10,
             "grensemelding": SVAR_FOR_LANGT,
             "endre_url": endre_url,
             "lag_tekst_url": lag_tekst_url,

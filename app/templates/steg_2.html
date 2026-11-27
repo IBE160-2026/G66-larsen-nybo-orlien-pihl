@@ -23,6 +23,7 @@
   .steg-2 textarea { display: block; width: 100%; box-sizing: border-box;
     min-height: 5rem; font: inherit; padding: .5rem; }
   .steg-2 .feil { color: #8c0d12; background: #fbe3e3; padding: .5rem; border: 1px solid; }
+  .steg-2 .feil:empty { display: none; }
   .steg-2 :focus-visible { outline: 3px solid #1f4e8c; outline-offset: 3px; }
   .steg-2 footer { display: flex; justify-content: space-between; align-items: center; gap: 16px;
     margin-top: 16px; }
@@ -52,25 +53,28 @@
         {% if analyse.mangler %}
         <section aria-labelledby="mangler">
           <h2 id="mangler">Står ikke i CV-en</h2>
+          {% set fokus = namespace(satt=false) %}
           {% for krav in analyse.mangler %}
           {% set felt = "svar-" ~ loop.index %}
           {% set verdi = svar.get(krav.id, "") %}
           {% set feltfeil = svarfeil and svarfeil.krav_id == krav.id %}
+          {% set for_langt = verdi|length > svargrense %}
+          {% set ugyldig = feltfeil or for_langt %}
           <article class="mangler">
-            <strong class="status-mangler">Mangler dokumentasjon
-              <span data-svarstatus="{{ felt }}"{% if not verdi.strip() %} hidden{% endif %}>· Svar lagt til</span>
+            <strong class="status-mangler"><span aria-hidden="true">?</span> Mangler dokumentasjon
+              <span data-svarstatus="{{ felt }}" aria-live="polite">{{ "· Svar lagt til" if verdi.strip() else "" }}</span>
             </strong>
             <h3>{{ krav.krav }}</h3>
             <p>At noe ikke står i CV-en, betyr ikke at du mangler det.</p>
             <div class="svarflate">
             <label for="{{ felt }}">Ditt svar om {{ krav.krav }} (valgfritt)</label>
             <textarea id="{{ felt }}" name="svar[{{ krav.id }}]" data-svargrense="{{ svargrense }}"
-              aria-describedby="{{ felt }}-teller {{ felt }}-feil"{% if feltfeil %} aria-invalid="true"{% endif %}>
+              aria-describedby="{{ felt }}-teller {{ felt }}-varsel {{ felt }}-feil"
+              {% if ugyldig %}aria-invalid="true"{% endif %}{% if ugyldig and not fokus.satt %} autofocus{% set fokus.satt = true %}{% endif %}>
 {{ verdi }}</textarea>
-            <span id="{{ felt }}-teller">{{ verdi|length }} / 1 000 tegn</span>
-            <p class="feil" id="{{ felt }}-feil"{% if not feltfeil %} hidden{% endif %}>
-              {{ svarfeil if feltfeil else grensemelding }}
-            </p>
+            <span id="{{ felt }}-teller">{{ verdi|length }} / {{ svargrense_visning }} tegn</span>
+            <span id="{{ felt }}-varsel" aria-live="polite">{{ "Du nærmer deg tegngrensen." if varselgrense <= verdi|length <= svargrense else "" }}</span>
+            <div role="alert"><p class="feil" id="{{ felt }}-feil">{{ svarfeil if feltfeil else grensemelding if for_langt else "" }}</p></div>
             </div>
           </article>
           {% endfor %}
@@ -82,7 +86,7 @@
           <div class="fliser">
             {% for krav in analyse.dokumentert %}
             <article>
-              <strong>Dokumentert</strong>
+              <strong><span aria-hidden="true">✓</span> Dokumentert</strong>
               <h3>{{ krav.krav }}</h3>
               <p>Fra CV-en din</p>
               <blockquote>«{{ krav.kilde }}»</blockquote>
@@ -126,8 +130,7 @@
         <ul>
           {% for krav in analyse.mangler %}
           <li>{{ krav.krav }} · Mangler dokumentasjon
-            <span data-svarstatus="svar-{{ loop.index }}"
-              {% if not svar.get(krav.id, "").strip() %}hidden{% endif %}>· Svar lagt til</span>
+            <span data-svarstatus="svar-{{ loop.index }}">{{ "· Svar lagt til" if svar.get(krav.id, "").strip() else "" }}</span>
           </li>
           {% endfor %}
           {% for krav in analyse.dokumentert %}<li>{{ krav.krav }} · Dokumentert</li>{% endfor %}
@@ -138,18 +141,33 @@
   </div>
 </div>
 <script>
+  function oppdaterTekst(element, tekst) {
+    if (element.textContent !== tekst) element.textContent = tekst;
+  }
+
   for (const felt of document.querySelectorAll(".steg-2 textarea[data-svargrense]")) {
+    const grense = Number(felt.dataset.svargrense);
+    const grenseVisning = {{ svargrense_visning|tojson }};
+    const varselgrense = {{ varselgrense|tojson }};
+    const grensemelding = {{ grensemelding|tojson }};
+    const feil = document.getElementById(felt.id + "-feil");
+    const teller = document.getElementById(felt.id + "-teller");
+    const varsel = document.getElementById(felt.id + "-varsel");
+    const statuser = document.querySelectorAll('[data-svarstatus="' + felt.id + '"]');
+    if (feil.textContent) felt.setCustomValidity(feil.textContent);
+
     felt.addEventListener("input", () => {
       const lengde = Array.from(felt.value).length;
-      const forLangt = lengde > Number(felt.dataset.svargrense);
-      const feil = document.getElementById(felt.id + "-feil");
-      feil.textContent = {{ grensemelding|tojson }};
-      feil.hidden = !forLangt;
-      felt.setCustomValidity(forLangt ? feil.textContent : "");
-      felt.setAttribute("aria-invalid", String(forLangt));
-      document.getElementById(felt.id + "-teller").textContent = lengde + " / 1 000 tegn";
-      for (const status of document.querySelectorAll('[data-svarstatus="' + felt.id + '"]')) {
-        status.hidden = !felt.value.trim();
+      const forLangt = lengde > grense;
+      const melding = forLangt ? grensemelding : "";
+      oppdaterTekst(feil, melding);
+      felt.setCustomValidity(melding);
+      if (forLangt) felt.setAttribute("aria-invalid", "true");
+      else felt.removeAttribute("aria-invalid");
+      teller.textContent = lengde + " / " + grenseVisning + " tegn";
+      oppdaterTekst(varsel, !forLangt && lengde >= varselgrense ? "Du nærmer deg tegngrensen." : "");
+      for (const status of statuser) {
+        oppdaterTekst(status, felt.value.trim() ? "· Svar lagt til" : "");
       }
     });
   }

@@ -1,6 +1,7 @@
 """Serverens validering av modellresultat og frivillige svar i steg 2."""
 
-from dataclasses import dataclass
+import re
+from dataclasses import dataclass, field
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, ValidationError
@@ -16,7 +17,8 @@ INGEN_KRAV = (
 BARE_VILKAR = "Vi fant ingen tydelige kompetansekrav i annonsen."
 ALLE_DOKUMENTERT = "Alle kompetansekrav i annonsen er dokumentert i CV-en."
 SVARGRENSE = 1000
-SVAR_FOR_LANGT = "Skriv høyst 1 000 tegn i svaret."
+SVARGRENSE_VISNING = f"{SVARGRENSE:,}".replace(",", " ")
+SVAR_FOR_LANGT = f"Svaret er over {SVARGRENSE_VISNING} tegn. Kort det ned."
 
 
 class UgyldigAnalyse(ValueError):
@@ -54,6 +56,7 @@ class GapAnalyse:
     mangler: tuple[Krav, ...]
     dokumentert: tuple[Krav, ...]
     ansettelsesvilkar: tuple[str, ...]
+    kontraktversjon: Literal[1] = field(init=False, default=1)
 
     @property
     def melding(self) -> str:
@@ -63,6 +66,20 @@ class GapAnalyse:
         if not self.mangler:
             return ALLE_DOKUMENTERT
         return f"{len(self.dokumentert)} av {totalt} kompetansekrav er dokumentert i CV-en."
+
+
+def _finn_cv_sitat(sitat: str | None, cv: str) -> str:
+    """Finn ordlyden i CV-en. Relevans vurderes separat mot fasiten i T-2."""
+    if sitat and sitat.strip():
+        if sitat in cv:
+            return sitat
+        uttrykk = r"\s+".join(map(re.escape, sitat.split()))
+        # Se også etter overlappende treff før utdraget regnes som entydig.
+        treff = re.finditer(rf"(?=({uttrykk}))", cv)
+        forste = next(treff, None)
+        if forste is not None and next(treff, None) is None:
+            return forste.group(1)
+    raise UgyldigAnalyse(ANALYSEFEIL)
 
 
 def valider_analyse(raasvar: object, *, cv: str, tittel: str, arbeidsgiver: str) -> GapAnalyse:
@@ -82,9 +99,8 @@ def valider_analyse(raasvar: object, *, cv: str, tittel: str, arbeidsgiver: str)
             raise UgyldigAnalyse(ANALYSEFEIL)
         krav_ider.add(krav.id)
         if krav.status == "dekket":
-            if not krav.kilde or not krav.kilde.strip() or krav.kilde not in cv:
-                raise UgyldigAnalyse(ANALYSEFEIL)
-            dokumentert.append(krav)
+            kilde = _finn_cv_sitat(krav.kilde, cv)
+            dokumentert.append(krav.model_copy(update={"kilde": kilde}))
         else:
             if krav.kilde is not None:
                 raise UgyldigAnalyse(ANALYSEFEIL)
@@ -97,8 +113,12 @@ def valider_analyse(raasvar: object, *, cv: str, tittel: str, arbeidsgiver: str)
     )
 
 
+def normaliser_svarlinjer(tekst: str) -> str:
+    return tekst.replace("\r\n", "\n").replace("\r", "\n")
+
+
 def valider_svar(analyse: GapAnalyse, svar: object) -> dict[str, str]:
-    """Valider hele innsendingen og behold ikke-blanke svar ordrett."""
+    """Valider hele innsendingen og behold innholdet med LF som linjeskift."""
     if not isinstance(svar, dict):
         raise UgyldigSvar("Svarene må sendes som tekst knyttet til hvert krav.")
 
@@ -109,6 +129,7 @@ def valider_svar(analyse: GapAnalyse, svar: object) -> dict[str, str]:
             raise UgyldigSvar("Du kan bare svare på krav som mangler dokumentasjon.")
         if not isinstance(tekst, str):
             raise UgyldigSvar("Skriv svaret som tekst.", krav_id)
+        tekst = normaliser_svarlinjer(tekst)
         if len(tekst) > SVARGRENSE:
             raise UgyldigSvar(SVAR_FOR_LANGT, krav_id)
         if tekst.strip():
