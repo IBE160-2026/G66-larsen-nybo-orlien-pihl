@@ -28,3 +28,5 @@
 - [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — samordne mappestrukturen (app/routes, templates) med Mirandas endelige arkitektur (#23)
 - [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — uv-installasjonsstegene i README er ikke prøvd på en ren maskin; gjøres i installasjonstesten (#40)
 - [ ] 2026-11-24 [prosjektskjelett](988-2026-11-24-10-41-12-prosjektskjelett.md) — vurder GitHub Actions som kjører pytest og ruff på hver PR
+- [ ] 2026-11-27 [konto-30](986-2026-11-27-12-05-00-konto-30.md) — PR «Story 1.3–1.5» fra gh-30-konto må opprettes etter push (reviewer Helle)
+- [ ] 2026-11-27 [konto-30](986-2026-11-27-12-05-00-konto-30.md) — 19 ruff-feil i Mirandas tests/testgrunnlag/kontroller.py gjør at `ruff check .` feiler på main
