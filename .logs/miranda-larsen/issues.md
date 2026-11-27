@@ -1,7 +1,9 @@
 
 # Åpne punkter
 
-- [ ] 2026-11-27 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Etter merge av PR #52, flytt steg 2 til fellesmalen, fjern den lokale stegindikatoren og kontroller at handlingslinjen ikke dekker fokuserte svarfelt. Verifiser fokus, varsler og svarstatus i nettleser og med skjermleser i den integrerte flyten.
+- [x] 2026-11-27 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Etter merge av PR #52, flytt steg 2 til fellesmalen, fjern den lokale stegindikatoren og kontroller at handlingslinjen ikke dekker fokuserte svarfelt. Verifiser fokus, varsler og svarstatus i nettleser og med skjermleser i den integrerte flyten. (Fellesmal og nettleserkontroll løst 2026-11-27. Skjermleser følges opp nedenfor.)
+
+- [ ] 2026-11-27 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — [#37](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/issues/37): Verifiser at skjermleseren annonserer «Svar lagt til» første gang og etter tømming og nytt svar, uten gjentakelser under skriving. Kontroller forhåndsutfylt status, serverfeilfokus, feltfeil og grensevarsler i den integrerte søknadsflyten.
 
 - [ ] 2026-11-26 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Koble steg 2 til bekreftet grunnlag fra #31, råanalyse og eksempelgrunnlag fra #32 og aktiv økt med revisjoner fra #35. Verifiser integrert navigasjon, feilflyt og visning ved 1024 og 1440 px.
 
