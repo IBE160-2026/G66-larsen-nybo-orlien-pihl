@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% from "makroer/sideoverskrift.html" import sideoverskrift %}
 
+{% block bruker %}{% include "logg_ut.html" %}{% endblock %}
+
 {% block content %}
 {{ sideoverskrift("Supersøker", ingress="Appen er under bygging. Her kommer innlogging og de tre stegene.") }}
 {% endblock %}

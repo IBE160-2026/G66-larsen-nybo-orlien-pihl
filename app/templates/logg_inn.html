@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "makroer/tekstfelt.html" import tekstfelt %}
+{% from "makroer/melding.html" import melding %}
+
+{% block title %}Logg inn – Supersøker{% endblock %}
+
+{% block content %}
+<div class="innlogging">
+  <div>
+    {% with overskrift="Søknaden din,", aksent="med dine ord." %}{% include "innledning.html" %}{% endwith %}
+  </div>
+  <section class="skjemakort" aria-label="Logg inn">
+    {%- if innloggingsfeil %}
+    {% call melding("feil", tittel="Feil e-post eller passord.", id="innloggingsfeil", autofokus=true) %}Sjekk skrivemåten og prøv igjen.{% endcall %}
+    {%- endif %}
+    {%- if testbruker_finnes %}
+    <p class="felt-hjelp">Testbruker står i README.</p>
+    {%- endif %}
+    <form method="post" action="/logg-inn" novalidate>
+      <input type="hidden" name="csrf" value="{{ csrf_token }}">
+      {{ tekstfelt("epost", "E-post", "epost", type="email", verdi=epost, attributter={"autocomplete": "email"}) }}
+      {{ tekstfelt("passord", "Passord", "passord", type="password", attributter={"autocomplete": "current-password"}) }}
+      <div class="skjemakort-handlinger">
+        <button class="knapp-primar" type="submit">Logg inn</button>
+        <a class="lenke" href="/opprett-konto">Opprett konto</a>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "makroer/tekstfelt.html" import tekstfelt %}
+
+{% block title %}Opprett konto – Supersøker{% endblock %}
+
+{% block content %}
+<div class="innlogging">
+  <div>
+    {% with overskrift="Lag en konto,", aksent="og kom i gang." %}{% include "innledning.html" %}{% endwith %}
+  </div>
+  <section class="skjemakort" aria-label="Opprett konto">
+    <form method="post" action="/opprett-konto" novalidate>
+      <input type="hidden" name="csrf" value="{{ csrf_token }}">
+      {{ tekstfelt("epost", "E-post", "epost", type="email", verdi=epost, feil=feil.get("epost"), autofokus=("epost" in feil), attributter={"autocomplete": "email"}) }}
+      {{ tekstfelt("passord", "Passord", "passord", type="password", hjelpetekst="Minst 8 tegn.", feil=feil.get("passord"), autofokus=("epost" not in feil and "passord" in feil), attributter={"autocomplete": "new-password"}) }}
+      <div class="skjemakort-handlinger">
+        <button class="knapp-primar" type="submit">Opprett konto</button>
+        <a class="lenke" href="/logg-inn">Logg inn</a>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

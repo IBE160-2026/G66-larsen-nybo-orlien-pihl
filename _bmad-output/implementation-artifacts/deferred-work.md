@@ -13,3 +13,7 @@
 - source_spec: `spec-gh-28-felles-mal-og-css.md`
   summary: Test at malene ikke har egne fargeverdier (`style` og `<style>`), når `steg_2.html` er flyttet over til de felles klassene.
   evidence: Testen leser i dag bare `stil.css`. Innført nå ville den feilet på `<style>` i `steg_2.html` fra PR #51 (granskning BH15b).
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-gh-30-konto.md`
+  summary: `GET /logg-ut` gir FastAPI-ens engelske 405-svar i stedet for en norsk feilside.
+  evidence: Rutene aksepterer bare POST. Brukeren kan treffe det via en gammel lenke eller ved å skrive adressen.

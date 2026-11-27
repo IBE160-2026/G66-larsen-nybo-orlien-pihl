@@ -1,5 +1,6 @@
 """Konfigurasjon for Supersøker, lest fra miljøvariabler og eventuelt en .env-fil."""
 
+from pathlib import Path
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -18,6 +19,9 @@ class Settings(BaseSettings):
 
     mode: Literal["mock", "api"] = "mock"
     openai_api_key: str = Field(default="", validation_alias="OPENAI_API_KEY")
+    database: Path = Path("data") / "supersoker.db"
+    # Testbrukeren (FR-3) hentes fra testdataene, slik testparene også er appdata (FR-27)
+    testbruker_fil: Path = Path(__file__).parent.parent / "tests" / "fixtures" / "testbruker.json"
 
     @model_validator(mode="after")
     def krev_nokkel_i_api_modus(self) -> "Settings":
