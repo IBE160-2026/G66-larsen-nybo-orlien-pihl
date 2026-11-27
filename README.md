@@ -4,7 +4,7 @@ Gruppe **G66 — over 30?** · Gruppeprosjekt i **IBE160 Programmering med KI** 
 
 Supersøker hjelper unge jobbsøkere å tilpasse en søknad til en stilling, uten å påstå noe CV-en ikke viser. Brukeren legger inn CV og stillingsannonse. Appen viser hvilke krav CV-en dokumenterer, lar brukeren fortelle om det som mangler, og lager et utkast eller forslag til formuleringer som brukeren redigerer selv. Hva som skal bygges, står i [PRD-en](_bmad-output/planning-artifacts/prds/prd-supersoker-2026-11-03/prd.md).
 
-**Status 2026-11-24:** Skjelettet står: appen starter, har konfigurasjon, tester og lint. Innlogging og de tre stegene bygges nå, se [issuene](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/issues). Frist for levering er 15. desember 2026.
+**Status 2026-11-27:** Skjelettet, den felles siderammen og kontoene (opprette konto, logge inn og ut) står. De tre stegene bygges nå, se [issuene](https://github.com/IBE160-2026/G66-larsen-nybo-orlien-pihl/issues). Frist for levering er 15. desember 2026.
 
 ## Forutsetninger
 
@@ -36,6 +36,24 @@ Appen er laget for datamaskin, og mobil støttes ikke (vedtak 15 i PRD-en). Kjer
 
 Under utvikling kan du legge til `--reload`, så starter appen på nytt når filer endres.
 
+## Innlogging og testbruker
+
+Alle sider unntatt innlogging og registrering krever innlogging. Appen har en ferdig testbruker i mock-modus, så du slipper å opprette konto:
+
+| | |
+|---|---|
+| E-post | `testbruker@supersoker.no` |
+| Passord | `Supersoker-test-2026` |
+
+Testbrukeren opprettes automatisk første gang appen starter, og finnes ikke i API-modus. Du kan også opprette en egen konto med «Opprett konto» (e-post og passord på 8–256 tegn; navn lagres ikke).
+
+Kontoene ligger i SQLite-filen `data/supersoker.db`, som opprettes automatisk og ikke er med i Git. Der lagres bare e-post og Argon2id-hash av passordet.
+
+Kjente begrensninger:
+
+- Økter ligger i serverens minne. En omstart av serveren logger alle ut.
+- Appen begrenser ikke antall innloggingsforsøk.
+
 ## Konfigurasjon
 
 Appen starter i **mock-modus** uten noen konfigurasjon, uten API-nøkkel og uten at data sendes ut av maskinen. Vil du endre noe, kopierer du eksempelfilen. `.env` er utenfor Git og skal aldri committes.
@@ -48,6 +66,7 @@ Copy-Item .env.example .env       # Windows PowerShell
 | Variabel | Standard | Betydning |
 |---|---|---|
 | `SUPERSOKER_MODE` | `mock` | `mock` bruker ferdiglagde svar. `api` bruker en ekte språkmodell. |
+| `SUPERSOKER_DATABASE` | `data/supersoker.db` | Hvor kontodatabasen ligger. Mappen opprettes automatisk. |
 | `OPENAI_API_KEY` | tom | Nøkkel til språkmodellen. Kreves i `api`-modus, og appen stopper ved oppstart hvis den mangler. |
 
 ## Tester og kodestil
@@ -64,8 +83,9 @@ Testene krever hverken nøkkel eller nettverk. Ruff gjelder bare Python-filene i
 
 | Mappe eller fil | Innhold |
 |---|---|
-| `app/` | Selve appen: `main.py` (oppstart), `config.py` (innstillinger), `routes/` (sider), `templates/` (HTML-maler, med Jinja-makroer i `templates/makroer/`) og `static/` (stilarket `stil.css`) |
-| `tests/` | Automatiske tester. `tests/fixtures/job-applications/` har fire fiktive testpar med fasit. `tests/komponentside.py` og `tests/maler/` viser alle felles komponenter samlet. |
+| `app/` | Selve appen: `main.py` (oppstart), `config.py` (innstillinger), `accounts.py` (kontoer i SQLite), `sessions.py` (økter og CSRF-vern), `routes/` (sider og innlogging), `templates/` (HTML-maler, med Jinja-makroer i `templates/makroer/`) og `static/` (stilarket `stil.css`) |
+| `tests/` | Automatiske tester. `tests/fixtures/job-applications/` har fire fiktive testpar med fasit, og `tests/fixtures/testbruker.json` har testbrukeren. Begge er appdata, ikke bare testdata. `tests/komponentside.py` og `tests/maler/` viser alle felles komponenter samlet. |
+| `data/` | Kontodatabasen. Opprettes ved oppstart og er utenfor Git. |
 | `pyproject.toml`, `uv.lock` | Avhengigheter og verktøyoppsett. `uv.lock` låser versjonene. |
 | `.env.example` | Eksempel på miljøvariabler uten hemmeligheter |
 | `_bmad-output/planning-artifacts/` | Product brief, PRD og UX ([samlet designforslag](_bmad-output/planning-artifacts/ux/samlet-forslag/README.md)) |

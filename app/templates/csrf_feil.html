@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% from "makroer/sideoverskrift.html" import sideoverskrift %}
+
+{% block title %}Forespørselen kunne ikke godkjennes – Supersøker{% endblock %}
+
+{% block content %}
+{{ sideoverskrift("Forespørselen kunne ikke godkjennes.", ingress="Last siden på nytt og prøv igjen.") }}
+<p><a class="lenke" href="/logg-inn">Til innlogging</a></p>
+{% endblock %}

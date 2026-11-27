@@ -82,6 +82,8 @@ Meldinger merket **PRD** er hentet ordrett fra PRD-en og endres bare der. Meldin
 | E-post med feil format | E-postadressen har feil format. Skriv den slik: navn@eksempel.no. | ny |
 | E-post i bruk | Det finnes allerede en konto med denne e-postadressen. Logg inn, eller bruk en annen adresse. | ny |
 | For kort passord | Passordet må ha minst 8 tegn. Skriv et lengre passord. | ny |
+| Passord for langt | Passordet kan ha høyst 256 tegn. Skriv et kortere passord. | ny |
+| Ugyldig forespørsel (CSRF) | **Forespørselen kunne ikke godkjennes.** Last siden på nytt og prøv igjen. | ny |
 | Utløpt økt | Du ble logget ut etter 30 minutter uten aktivitet. CV, annonse, svar og tekst er slettet. | ny |
 | Feil filformat | «<fil>» kan ikke leses – Velg en TXT- eller PDF-fil, eller lim inn teksten. | PRD |
 | Uleselig fil | Vi kunne ikke lese filen <fil>. Prøv en TXT-fil eller tekstbasert PDF, eller lim inn teksten. | PRD |
