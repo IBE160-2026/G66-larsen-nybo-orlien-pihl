@@ -1,6 +1,8 @@
 
 # Åpne punkter
 
+- [ ] 2026-11-27 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Etter merge av PR #52, flytt steg 2 til fellesmalen, fjern den lokale stegindikatoren og kontroller at handlingslinjen ikke dekker fokuserte svarfelt. Verifiser fokus, varsler og svarstatus i nettleser og med skjermleser i den integrerte flyten.
+
 - [ ] 2026-11-26 [Supersøker – gap-analyse](993-2026-11-26-08-01-20-gap-analyse.md) — Koble steg 2 til bekreftet grunnlag fra #31, råanalyse og eksempelgrunnlag fra #32 og aktiv økt med revisjoner fra #35. Verifiser integrert navigasjon, feilflyt og visning ved 1024 og 1440 px.
 
 - [ ] 2026-11-24 [Modellkontrakt for Supersøker V1](994-2026-11-24-19-00-27-modellkontrakt-supersoker-v1.md) — Miranda og gruppa gjennomgår kontraktforslaget i issue #22 før det låses for implementasjon.
