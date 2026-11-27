@@ -1,0 +1,26 @@
+{#- Stegindikatoren. Et annet steg enn det aktive er fullført når det har en lenke. -#}
+{% macro stegindikator(aktivt_steg, lenker) -%}
+<nav class="stegindikator bredde" aria-label="Steg">
+  <ol>
+    {%- for navn in ["CV og annonse", "Gap-analyse", "Teksten"] %}
+    {%- set tall = "%02d"|format(loop.index) %}
+    {%- if loop.index == aktivt_steg %}
+    <li class="steg steg-aktivt" aria-current="step">
+      <span class="steg-tall">{{ tall }}</span> <span>{{ navn }}</span>
+      <span class="steg-her">Du er her</span>
+    </li>
+    {%- elif lenker.get(loop.index) %}
+    <li class="steg steg-ferdig">
+      <span class="steg-tall">{{ tall }}</span>
+      <a class="lenke" href="{{ lenker[loop.index] }}">{{ navn }}</a>
+      <span class="steg-status"><span aria-hidden="true">✓</span> Ferdig</span>
+    </li>
+    {%- else %}
+    <li class="steg">
+      <span class="steg-tall">{{ tall }}</span> <span>{{ navn }}</span>
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endmacro %}

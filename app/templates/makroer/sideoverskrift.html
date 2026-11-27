@@ -1,0 +1,15 @@
+{#- Sidens ene h1. Overtittelen er en del av h1, ingressen står utenfor.
+    autofokus slås på ved stegbytte, aldri ved vanlig lasting: da ville «Hopp til innhold»
+    ikke lenger komme først. -#}
+{% macro sideoverskrift(forste, aksent=none, overtittel=none, ingress=none, autofokus=false) -%}
+<h1 class="sideoverskrift" tabindex="-1"{% if autofokus %} autofocus{% endif %}>
+  {%- if overtittel %}
+  <span class="overtittel">{{ overtittel }}</span>
+  {%- endif %}
+  <span class="sideoverskrift-tekst">{{ forste }}
+    {%- if aksent %} <em class="sideoverskrift-aksent">{{ aksent }}</em>{% endif %}</span>
+</h1>
+{%- if ingress %}
+<p class="ingress">{{ ingress }}</p>
+{%- endif %}
+{%- endmacro %}

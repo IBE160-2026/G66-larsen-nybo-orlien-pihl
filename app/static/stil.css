@@ -1,0 +1,880 @@
+/* Felles stiler for Supersøker.
+   DESIGN.md og EXPERIENCE.md styrer utseende og oppbygning:
+   _bmad-output/planning-artifacts/ux-designs/ux-supersoker-2026-11-25/
+   Fargeverdier står bare i :root. Alt annet bruker variablene. */
+
+/* ---------- Variabler ---------- */
+
+:root {
+  /* Farger (navnene fra DESIGN.md) */
+  --papir: #F6F1E8;
+  --kort: #FFFDF9;
+  --hvit: #FFFFFF;
+  --blekk: #1E1A24;
+  --dempet: #5A5262;
+  --linje: #DDD3C4;
+  --feltkant: #857A8C;
+  --aksent: #A3401C;
+  --mangler-band: #FFC247;
+  --mangler-flate: #FFF0CC;
+  --mangler-merke: #8A5A00;
+  --dok-flate: #DCEAF7;
+  --dok: #1F4E8C;
+  --bevis: #FFCFC4;
+  --feil: #8C0D12;
+  --feil-flate: #FBE3E3;
+
+  /* Typografi. Bare lokale skrifter, ingen nettskrifter. */
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --logo: 400 26px/1.2 var(--serif);
+  --logo-sperring: -0.01em;
+  --sideoverskrift: 400 54px/1.05 var(--serif);
+  --sideoverskrift-smal: 400 46px/1.06 var(--serif);
+  --sideoverskrift-sperring: -0.02em;
+  --brev: 400 17px/1.7 var(--serif);
+  --sitat: italic 400 16px/1.45 var(--serif);
+  --seksjon: 700 24px/1.3 var(--sans);
+  --kravtittel: 800 26px/1.2 var(--sans);
+  --flistittel: 700 18px/1.3 var(--sans);
+  --stegtall: italic 400 20px/1.5 var(--sans);
+  --ingress: 400 18px/1.5 var(--sans);
+  --brodtekst: 400 16px/1.5 var(--sans);
+  --knapp: 700 18px/1 var(--sans);
+  --hjelpetekst: 400 14px/1.5 var(--sans);
+  --overtittel: 700 13px/1.5 var(--sans);
+  --overtittel-sperring: 0.12em;
+
+  /* Skygger */
+  --skygge-kort: 0 6px 18px rgba(30, 26, 36, .10);
+  --skygge-brev: 0 6px 18px rgba(30, 26, 36, .08);
+  --skygge-bevis: 0 3px 6px rgba(30, 26, 36, .15);
+  --skygge-handlingslinje: 0 -6px 16px rgba(30, 26, 36, .08);
+
+  /* Former */
+  --rounded-sm: 10px;
+  --rounded-md: 14px;
+  --rounded-lg: 20px;
+  --rounded-xl: 24px;
+  --rounded-full: 9999px;
+  --fokusring: 3px solid var(--blekk);
+
+  /* Oppsett. Verdiene gjelder under 1200 px og byttes i knekkpunktet nederst. */
+  --innhold-maks: 1280px;
+  --innhold-min: 1024px;
+  --sidekolonne: 300px;
+  --sidekolonne-smal: 240px;
+  --marg: 24px;
+  --avstand: 24px;
+  --skjemakort: 420px;
+  /* Knappen (54 px) og luften over og under (2 x 16 px) */
+  --handlingslinje-hoyde: 86px;
+}
+
+/* ---------- Grunnregler og sideramme ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Fokusert innhold skal ikke havne bak handlingslinjen eller ligge så høyt at ringen klippes.
+   Tilleggene gir plass til fokusringen. Kjent begrensning: Chromium ruller et høyt
+   flerlinjefelt bare til markøren, så nedre del av feltet kan ligge bak linjen. */
+html {
+  scroll-padding-top: 8px;
+  scroll-padding-bottom: calc(var(--handlingslinje-hoyde) + 16px);
+}
+
+/* Flex-kolonnen holder handlingslinjen nederst i vinduet også på korte sider */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--papir);
+  color: var(--blekk);
+  font: var(--brodtekst);
+  overflow-wrap: break-word;
+}
+
+:focus-visible {
+  outline: var(--fokusring);
+  outline-offset: 3px;
+}
+
+/* Innholdsbredden: toppfelt, stegindikator, innhold og handlingslinje */
+.bredde {
+  width: 100%;
+  max-width: var(--innhold-maks);
+  margin-inline: auto;
+  padding-inline: var(--marg);
+}
+
+/* Skjult på skjermen, men lest av skjermleser */
+.skjult {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Ligger utenfor skjermen til den får fokus. Den lyse flaten gjør ringen synlig mot mock-stripen. */
+.hopp-lenke {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: var(--rounded-sm);
+  background: var(--kort);
+  box-shadow: 0 0 0 9px var(--kort);
+}
+
+.hopp-lenke:focus {
+  top: 12px;
+}
+
+.mock-stripe {
+  padding: 7px var(--marg);
+  background: var(--blekk);
+  color: var(--hvit);
+  font: var(--hjelpetekst);
+  font-weight: 600;
+}
+
+.toppfelt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--linje);
+}
+
+.logo {
+  font: var(--logo);
+  letter-spacing: var(--logo-sperring);
+}
+
+.logo-punktum {
+  color: var(--aksent);
+  font-weight: 700;
+}
+
+.bruker {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.bruker > * {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* «Logg ut» skal ikke brytes når e-postadressen er lang */
+.bruker > form {
+  flex-shrink: 0;
+}
+
+.stegindikator ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--linje);
+  list-style: none;
+}
+
+.steg {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 14px 0 9px;
+  border-bottom: 3px solid transparent;
+  color: var(--dempet);
+}
+
+.steg-tall {
+  font: var(--stegtall);
+}
+
+.steg-aktivt {
+  border-bottom-color: var(--aksent);
+  color: var(--blekk);
+  font-weight: 700;
+}
+
+.steg-aktivt .steg-tall,
+.steg-ferdig .steg-tall {
+  color: var(--aksent);
+}
+
+.steg-her,
+.steg-status {
+  margin-left: auto;
+  font: var(--overtittel);
+  white-space: nowrap;
+}
+
+.steg-her {
+  padding: 0 10px;
+  border-radius: var(--rounded-full);
+  background: var(--aksent);
+  color: var(--hvit);
+}
+
+.steg-status {
+  color: var(--dok);
+}
+
+.side {
+  display: grid;
+  flex: 1 0 auto;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--avstand);
+  padding-block: 28px 32px;
+}
+
+.side-med-sidekolonne {
+  grid-template-columns: minmax(0, 1fr) var(--sidekolonne-smal);
+}
+
+.sidekolonne {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.modellfeil {
+  margin-top: 24px;
+}
+
+/* sticky, ikke fixed: under minstebredden kan knappene da rulles fram */
+.handlingslinje {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: var(--kort);
+  box-shadow: var(--skygge-handlingslinje);
+}
+
+.handlingslinje-innhold {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-block: 16px;
+}
+
+/* Primærknappen står til høyre også når den er alene */
+.handlingslinje-innhold > :is(.knapp-primar, .knapp-deaktivert):last-child {
+  margin-left: auto;
+}
+
+/* ---------- Typografi ---------- */
+
+h1.sideoverskrift {
+  margin: 0 0 12px;
+  font: var(--sideoverskrift-smal);
+  letter-spacing: var(--sideoverskrift-sperring);
+}
+
+.sideoverskrift-tekst,
+.sideoverskrift-aksent {
+  display: block;
+}
+
+.sideoverskrift-aksent {
+  color: var(--aksent);
+  font-style: italic;
+}
+
+.overtittel {
+  display: block;
+  margin: 0 0 8px;
+  color: var(--dempet);
+  font: var(--overtittel);
+  letter-spacing: var(--overtittel-sperring);
+  text-transform: uppercase;
+}
+
+.ingress {
+  max-width: 60ch;
+  margin: 0 0 20px;
+  color: var(--dempet);
+  font: var(--ingress);
+}
+
+.opptelling {
+  margin: 0;
+  font: var(--seksjon);
+}
+
+.seksjonstittel {
+  margin: 32px 0 12px;
+  font: var(--seksjon);
+}
+
+.kravtittel {
+  margin: 0 0 8px;
+  font: var(--kravtittel);
+}
+
+.flistittel {
+  margin: 0;
+  font: var(--flistittel);
+}
+
+.hjelpetekst {
+  margin: 0;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+}
+
+/* ---------- Oppsett ---------- */
+
+/* CV og annonse, innholdet i mangler-kortet og valgkortene */
+.to-kolonner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.to-kolonner > * {
+  min-width: 0;
+}
+
+/* Faste kolonner, så en enslig flis på siste rad beholder bredden sin */
+.dok-fliser {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Innlogging og registrering: introduksjon til venstre, skjemakort til høyre */
+.innlogging {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--skjemakort);
+  align-items: start;
+  gap: var(--avstand);
+}
+
+.introduksjon-liste li {
+  margin-bottom: 8px;
+  font: var(--ingress);
+}
+
+.skjemakort {
+  padding: 28px;
+  border: 1px solid var(--linje);
+  border-radius: var(--rounded-lg);
+  background: var(--kort);
+}
+
+.skjemakort > :first-child {
+  margin-top: 0;
+}
+
+.skjemakort > :last-child {
+  margin-bottom: 0;
+}
+
+.skjemakort-handlinger {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0 16px;
+}
+
+/* ---------- Knapper og lenker ---------- */
+
+.knapp-primar,
+.knapp-sekundar,
+.knapp-deaktivert {
+  display: inline-block;
+  padding: 16px 28px;
+  border: 2px solid var(--blekk);
+  border-radius: var(--rounded-full);
+  font: var(--knapp);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.knapp-primar {
+  background: var(--blekk);
+  color: var(--hvit);
+}
+
+.knapp-sekundar {
+  background: transparent;
+  color: var(--blekk);
+}
+
+/* Bare mens et kall pågår */
+.knapp-deaktivert {
+  border-color: var(--linje);
+  background: var(--linje);
+  color: var(--dempet);
+  cursor: default;
+}
+
+.lenke {
+  color: var(--aksent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Knapp som ser ut som en lenke, til handlinger som sender data («Logg ut») */
+button.lenke {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- Felt ---------- */
+
+.felt {
+  margin-bottom: 16px;
+}
+
+.felt-etikett {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.felt-hjelp {
+  margin: 0 0 6px;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+}
+
+.felt-inndata {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--feltkant);
+  border-radius: var(--rounded-md);
+  background: var(--hvit);
+  color: var(--blekk);
+  font: var(--brodtekst);
+}
+
+textarea.felt-inndata {
+  min-height: 96px;
+  resize: vertical;
+}
+
+/* Stort redigerbart ark. Står foran reglene for skrivebeskyttet og ugyldig, så de vinner. */
+.brev-ark textarea.felt-inndata {
+  min-height: 420px;
+  padding: 32px 40px;
+  border: 1px solid transparent;
+  border-radius: var(--rounded-lg);
+  background: var(--kort);
+  box-shadow: var(--skygge-brev);
+  font: var(--brev);
+}
+
+/* Skrivebeskyttet er ikke deaktivert: teksten skal kunne leses */
+.felt .felt-inndata:read-only {
+  background: var(--papir);
+}
+
+/* Med fokus vises både feilkanten og fokusringen, med 3 px luft mellom */
+.felt .felt-inndata[aria-invalid="true"] {
+  border: 3px solid var(--feil);
+}
+
+.feilikon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--feil);
+  color: var(--hvit);
+  font: var(--overtittel);
+}
+
+.feltfeil {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 6px 0 0;
+  color: var(--feil);
+  font-weight: 600;
+}
+
+.tegnteller {
+  margin: 4px 0 0;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+  text-align: right;
+}
+
+.valggruppe {
+  min-width: 0;
+  margin: 32px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Luften over kommer fra .valggruppe. Under skal det være som under andre seksjonstitler. */
+.valggruppe legend {
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.valgkort {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  column-gap: 10px;
+  padding: 17px;
+  border: 2px solid var(--linje);
+  border-radius: var(--rounded-lg);
+  background: var(--kort);
+  cursor: pointer;
+}
+
+/* 1 px mindre polstring, så innholdet ikke flytter seg når kanten blir tykkere */
+.valgkort:has(:checked) {
+  padding: 16px;
+  border: 3px solid var(--aksent);
+}
+
+.valgkort input {
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--aksent);
+}
+
+.valgkort-navn {
+  font-weight: 700;
+}
+
+.valgkort-valgt {
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: var(--rounded-full);
+  background: var(--aksent);
+  color: var(--hvit);
+  font: var(--overtittel);
+}
+
+.valgkort:not(:has(:checked)) .valgkort-valgt {
+  display: none;
+}
+
+.valgkort-forklaring {
+  grid-column: 2;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+}
+
+/* ---------- Kort og bokser ---------- */
+
+.inndata-kort {
+  padding: 20px;
+  border-radius: var(--rounded-xl);
+  background: var(--kort);
+  box-shadow: var(--skygge-kort);
+}
+
+.inndata-kort > :first-child {
+  margin-top: 0;
+}
+
+.inndata-kort > :last-child {
+  margin-bottom: 0;
+}
+
+/* Ingen overflow: hidden. Det ville klippet innhold og fokusring. */
+.mangler-kort {
+  margin-bottom: 16px;
+  border-radius: var(--rounded-xl);
+  background: var(--kort);
+  box-shadow: var(--skygge-kort);
+}
+
+.mangler-kort-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
+  background: var(--mangler-band);
+}
+
+.mangler-kort-innhold {
+  padding: 20px;
+  overflow-wrap: anywhere;
+}
+
+/* Bare forklaringen og svarfeltets tittel. Feltfeil og tegnteller beholder luften sin. */
+.mangler-kort-innhold > div > p {
+  margin-top: 0;
+}
+
+.svarfelt {
+  align-self: start;
+  padding: 16px;
+  border: 1.5px solid var(--mangler-band);
+  border-radius: var(--rounded-lg);
+  background: var(--mangler-flate);
+}
+
+.svarfelt .felt {
+  margin: 0;
+}
+
+.svarfelt-tittel {
+  margin: 0 0 8px;
+  font: var(--flistittel);
+}
+
+.dok-flis {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 18px;
+  border-radius: var(--rounded-xl);
+  background: var(--dok-flate);
+  overflow-wrap: anywhere;
+}
+
+/* Rett, uten hover: skal være lett å lese og ikke se klikkbart ut */
+.bevis-klistremerke {
+  margin: auto 0 0;
+  padding: 8px 12px;
+  border-radius: var(--rounded-sm);
+  background: var(--bevis);
+  box-shadow: var(--skygge-bevis);
+  font: var(--sitat);
+}
+
+.bevis-merkelapp {
+  display: block;
+  font: var(--overtittel);
+  text-transform: uppercase;
+}
+
+.vilkar-boks {
+  margin-top: 32px;
+  padding: 16px 20px;
+  border: 2px dashed var(--feltkant);
+  border-radius: var(--rounded-lg);
+  overflow-wrap: anywhere;
+}
+
+.vilkar-boks > :first-child {
+  margin-top: 0;
+}
+
+.vilkar-boks > :last-child {
+  margin-bottom: 0;
+}
+
+.sideboks {
+  padding: 16px;
+  border: 1px solid var(--linje);
+  border-radius: var(--rounded-lg);
+  background: var(--kort);
+}
+
+.sideboks p {
+  margin: 0;
+}
+
+.sideboks > :first-child {
+  margin-top: 0;
+}
+
+.sideboks > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Merker ---------- */
+
+.chip {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 2px 12px;
+  border: 1.5px solid var(--blekk);
+  border-radius: var(--rounded-full);
+  background: var(--hvit);
+  font: var(--hjelpetekst);
+  font-weight: 700;
+}
+
+.chip-gjennomsiktig {
+  background: transparent;
+}
+
+.chip-dokumentert {
+  border-color: var(--dok);
+  color: var(--dok);
+}
+
+.huskeliste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.huskeliste li {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--linje);
+  font: var(--hjelpetekst);
+}
+
+.huskeliste li:first-child {
+  border-top: 0;
+}
+
+.huskeliste-tekst {
+  min-width: 0;
+}
+
+.huskeliste small {
+  display: block;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+}
+
+.merke {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font: var(--overtittel);
+}
+
+.merke-gjort {
+  background: var(--dok);
+  color: var(--hvit);
+}
+
+.merke-apen {
+  border: 2px dashed var(--mangler-merke);
+  color: var(--mangler-merke);
+}
+
+/* ---------- Meldinger ---------- */
+
+.melding {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: var(--rounded-md);
+}
+
+/* Feil skilles fra primærknappen med formen: lys boks, mørk kant og firkantet ikon */
+.melding-feil {
+  border: 2px solid var(--feil);
+  background: var(--feil-flate);
+}
+
+.melding-info {
+  border: 1.5px solid var(--blekk);
+  background: var(--kort);
+}
+
+.melding-bekreftelse {
+  background: var(--dok-flate);
+}
+
+.melding-ikon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  font: var(--overtittel);
+}
+
+.melding-info .melding-ikon {
+  border: 2px solid var(--blekk);
+  border-radius: 50%;
+}
+
+.melding-bekreftelse .melding-ikon {
+  color: var(--dok);
+}
+
+.melding-tekst {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.melding-tekst > p:first-child {
+  margin-top: 0;
+}
+
+.melding-tekst > p:last-child {
+  margin-bottom: 0;
+}
+
+.lagringsstatus {
+  margin: 6px 0 0;
+  color: var(--dempet);
+  font: var(--hjelpetekst);
+}
+
+/* ---------- Bredder ---------- */
+
+@media (min-width: 1200px) {
+  :root {
+    --marg: 40px;
+    --avstand: 48px;
+    --skjemakort: 460px;
+  }
+
+  .side-med-sidekolonne {
+    grid-template-columns: minmax(0, 1fr) var(--sidekolonne);
+  }
+
+  .dok-fliser {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  h1.sideoverskrift {
+    font: var(--sideoverskrift);
+  }
+}
+
+/* Minstebredden settes bare i vinduer under 1024 px. Da kan siden rulles sidelengs.
+   Satt for alle bredder ville et vindu på 1024 px med rullefelt også rullet sidelengs.
+   Mediespørringer kan ikke bruke variabler, derfor står tallet her. */
+@media (max-width: 1023.98px) {
+  body {
+    min-width: var(--innhold-min);
+  }
+}

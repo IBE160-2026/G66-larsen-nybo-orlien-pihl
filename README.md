@@ -64,8 +64,8 @@ Testene krever hverken nøkkel eller nettverk. Ruff gjelder bare Python-filene i
 
 | Mappe eller fil | Innhold |
 |---|---|
-| `app/` | Selve appen: `main.py` (oppstart), `config.py` (innstillinger), `routes/` (sider) og `templates/` (HTML-maler) |
-| `tests/` | Automatiske tester. `tests/fixtures/job-applications/` har fire fiktive testpar med fasit. |
+| `app/` | Selve appen: `main.py` (oppstart), `config.py` (innstillinger), `routes/` (sider), `templates/` (HTML-maler, med Jinja-makroer i `templates/makroer/`) og `static/` (stilarket `stil.css`) |
+| `tests/` | Automatiske tester. `tests/fixtures/job-applications/` har fire fiktive testpar med fasit. `tests/komponentside.py` og `tests/maler/` viser alle felles komponenter samlet. |
 | `pyproject.toml`, `uv.lock` | Avhengigheter og verktøyoppsett. `uv.lock` låser versjonene. |
 | `.env.example` | Eksempel på miljøvariabler uten hemmeligheter |
 | `_bmad-output/planning-artifacts/` | Product brief, PRD og UX ([samlet designforslag](_bmad-output/planning-artifacts/ux/samlet-forslag/README.md)) |
@@ -75,6 +75,58 @@ Testene krever hverken nøkkel eller nettverk. Ruff gjelder bare Python-filene i
 | `_bmad/`, `.claude/` | BMAD-rammeverket og oppsett for KI-assistenten |
 
 Nye sider legges i `app/routes/` (én fil per funksjon) og maler i `app/templates/`.
+
+## Ny side med grunnmalen
+
+Utseende og oppførsel står i [DESIGN.md](_bmad-output/planning-artifacts/ux-designs/ux-supersoker-2026-11-25/DESIGN.md) og [EXPERIENCE.md](_bmad-output/planning-artifacts/ux-designs/ux-supersoker-2026-11-25/EXPERIENCE.md). `base.html` gir den faste siderammen: «Hopp til innhold», mock-stripen (bare i mock-modus), toppfeltet og innholdet. En side fyller bare blokkene den trenger:
+
+```jinja
+{% extends "base.html" %}
+{% from "makroer/sideoverskrift.html" import sideoverskrift %}
+{% from "makroer/tekstfelt.html" import tekstfelt %}
+{% from "makroer/melding.html" import melding %}
+
+{% set aktivt_steg = 1 %}
+
+{% block title %}CV og annonse – Supersøker{% endblock %}
+
+{% block content %}
+{{ sideoverskrift("Legg inn CV-en", "og annonsen.", overtittel="Steg 1 av 3") }}
+<form id="grunnlag" method="post">
+  {# Meldingen får fokus bare når ingen felt har feilen #}
+  {% if feilmelding %}
+    {% call melding("feil", autofokus=not (cvfeil or annonsefeil)) %}{{ feilmelding }}{% endcall %}
+  {% endif %}
+  {# Ellers får det første ugyldige feltet fokus #}
+  {{ tekstfelt("cv", "CV-tekst", "cv", flerlinje=true,
+               verdi=cv, feil=cvfeil, teller=10000, autofokus=cvfeil) }}
+  {{ tekstfelt("annonse", "Annonsetekst", "annonse", flerlinje=true,
+               verdi=annonse, feil=annonsefeil, teller=10000,
+               autofokus=annonsefeil and not cvfeil) }}
+</form>
+{% endblock %}
+
+{% block handlingslinje %}
+<button class="knapp-primar" type="submit" form="grunnlag">Analyser kravene →</button>
+{% endblock %}
+```
+
+| Del | Bruk |
+|---|---|
+| Blokker | `title` (alltid: «&lt;Stegets navn&gt; – Supersøker»), `bruker` (e-postadresse og «Logg ut»), `content`, `sidekolonne`, `modellfeil` (nederst i hovedkolonnen), `handlingslinje` og `skript`. En tom blokk gir ingen tom beholder. |
+| `aktivt_steg`, `steg_lenker` | `aktivt_steg` (1–3) viser stegindikatoren. `steg_lenker` er `{nummer: url}`, og et annet steg med lenke vises som fullført. Settes i malen eller sendes fra ruten. Nøklene er tall. |
+| `sideoverskrift` | Sidens ene `h1`. Valg: `aksent`, `overtittel`, `ingress` og `autofokus`. |
+| `tekstfelt` | `id`, `etikett` og `navn`, og ved behov `type` eller `flerlinje`, `verdi`, `hjelpetekst`, `feil`, `teller` (tegngrensen), `readonly`, `autofokus` og `attributter` (f.eks. `autocomplete`, `rows`, `data-*`). Passord skrives aldri tilbake, og feltet får aldri `maxlength`. Attributter som makroen selv styrer (bl.a. `type`, `value`, `id` og `class`), hoppes over i `attributter`. |
+| `melding` | `"feil"`, `"info"` eller `"bekreftelse"`, med innhold via `call`. Valg: `tittel` (uthevet første setning), `id`, `rolle` og `autofokus`. |
+| Handlingslinje | Ligger utenfor skjemaet. Koble primærknappen til med `form="<skjema-id>"`. |
+| Fokus | Slå på `autofokus` for `h1` ved stegbytte. Ved feil slås den på for det første ugyldige feltet, og for feilmeldingen bare når ingen felt har feilen. Aldri for `h1` ved vanlig lasting, for da kommer ikke «Hopp til innhold» først. |
+| Lenker | Alle lenker på en side må ha klassen `lenke`, eller en knappeklasse (`knapp-primar`, `knapp-sekundar`). En lenke uten klasse får nettleserens blå og lilla farger. |
+
+Knapper, kort og merker er CSS-klasser i `app/static/stil.css`. Fargeverdier står bare i `:root` der. Komponentsiden viser klassene i bruk (`tests/maler/komponentside.html`). Start den slik, og åpne <http://127.0.0.1:8001/komponenter> (`?steg=1` og `?steg=3` viser stegindikatoren på de andre stegene):
+
+```sh
+uv run python -m tests.komponentside
+```
 
 ## Medlemmer
 

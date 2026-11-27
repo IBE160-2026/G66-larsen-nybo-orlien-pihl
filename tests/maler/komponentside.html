@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% from "makroer/sideoverskrift.html" import sideoverskrift %}
+{% from "makroer/tekstfelt.html" import tekstfelt %}
+{% from "makroer/melding.html" import melding %}
+
+{% set langt_krav = "Erfaring med dokumentasjonsarbeid, avvikshåndtering og elektronisk pasientjournal i kommunehelsetjenesten, inkludert kvalitetssikringsrutinedokumentasjon" %}
+{% set langt_filnavn = "CV_Ida_Testesen_sommervikar_hjemmetjenesten_Testvik_kommune_endelig_versjon_med_rettelser_2026.docx" %}
+{% set lang_epost = "ida.testesen.med.et.veldig.langt.etternavn.for.kontroll.av.oppsettet@studentmail.example.com" %}
+{% set langt_sitat = "Planla og holdt et kurs om fallforebygging for eldre sammen med fire medstudenter. Ansvarlig for å koordinere gruppens møter." %}
+{# Kravet i den dokumenterte flisen må være noe sitatet over faktisk viser #}
+{% set langt_dokumentert_krav = "Erfaring med å planlegge og holde fallforebyggingskursopplegg for eldre sammen med andre, og med å ha ansvar for å koordinere møtene i gruppen" %}
+{% set brevtekst = "Hei,\n\nJeg søker på stillingen som sommervikar i hjemmetjenesten i Testvik kommune. Som besøksvenn i Røde Kors besøkstjeneste besøker jeg en eldre dame hver uke.\n\nVennlig hilsen\nIda Testesen" %}
+
+{% block title %}Komponentsiden – Supersøker{% endblock %}
+
+{% block bruker %}
+<span>{{ lang_epost }}</span>
+<form method="get"><button class="lenke" type="submit">Logg ut</button></form>
+{% endblock %}
+
+{% block content %}
+{{ sideoverskrift(
+     "Se hva du kan",
+     "bygge på.",
+     overtittel="Steg 2 av 3 · " ~ stilling.tittel ~ " · " ~ stilling.arbeidsgiver,
+     ingress="At noe ikke står i CV-en, betyr ikke at du mangler det.") }}
+
+<form id="komponentskjema" method="get"></form>
+
+<p class="opptelling">3 av 4 kompetansekrav er dokumentert i CV-en.</p>
+<p class="hjelpetekst">Dette er en oversikt over dokumentasjon, ikke en vurdering av deg.</p>
+<p class="hjelpetekst">Kortene og flisene med lange tekster eller feil er med for å kontrollere oppsettet. De er ikke med i opptellingen.</p>
+
+<h2 class="seksjonstittel">Står ikke i CV-en</h2>
+{% for tittel, svar, svarfeil in [
+     (mangler[0].krav, "Jeg har ikke førerkort ennå. Jeg har oppkjøring i april.", none),
+     (langt_krav, "", none),
+     ("Erfaring med turnusarbeid", "Jeg har jobbet kveldsvakter i butikk. " * 30,
+      "Svaret er over 1 000 tegn. Kort det ned.")] %}
+<div class="mangler-kort">
+  <div class="mangler-kort-band">
+    <span class="chip"><span aria-hidden="true">?</span> Mangler dokumentasjon</span>
+    {% if svar %}<span class="chip chip-gjennomsiktig">Svar lagt til</span>{% endif %}
+  </div>
+  <div class="mangler-kort-innhold to-kolonner">
+    <div>
+      <h3 class="kravtittel">{{ tittel }}</h3>
+      <p>Står ikke i CV-en din. Det betyr ikke at du mangler det.</p>
+    </div>
+    <div class="svarfelt">
+      <p class="svarfelt-tittel">Fortell oss kort</p>
+      {{ tekstfelt(
+           "svar-" ~ loop.index,
+           "Ditt svar om " ~ tittel,
+           "svar-" ~ loop.index,
+           flerlinje=true,
+           verdi=svar,
+           hjelpetekst="Valgfritt. Skriv bare det som stemmer – vi bruker ordene dine slik de står, bare i denne søknaden.",
+           feil=svarfeil,
+           teller=1000,
+           attributter={"form": "komponentskjema"}) }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<h2 class="seksjonstittel">Dokumentert i CV-en</h2>
+<div class="dok-fliser">
+  {% for krav in dokumentert + [{"krav": langt_dokumentert_krav, "kilde": langt_sitat}] %}
+  <div class="dok-flis">
+    <span class="chip chip-dokumentert"><span aria-hidden="true">✓</span> Dokumentert</span>
+    <h3 class="flistittel">{{ krav.krav }}</h3>
+    <p class="bevis-klistremerke">
+      <span class="bevis-merkelapp">Fra CV-en din</span> «{{ krav.kilde }}»
+    </p>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="vilkar-boks">
+  <h2 class="seksjonstittel">Vilkår fra annonsen</h2>
+  <ul>
+    <li>Politiattest må fremlegges før tiltredelse.</li>
+  </ul>
+  <p>Arbeidsgiveren ber om dette ved ansettelse. Det er ikke med i opptellingen, og teksten påstår ikke at du har det.</p>
+</div>
+
+<fieldset class="valggruppe">
+  <legend class="seksjonstittel">Hva slags tekst vil du ha?</legend>
+  <div class="to-kolonner">
+    {% for verdi, navn, forklaring in [
+         ("helt_soknadsutkast", "Helt søknadsutkast", "Et sammenhengende brev du redigerer selv."),
+         ("forslag_til_formuleringer", "Forslag til formuleringer", "Setninger du kan bruke i ditt eget brev.")] %}
+    <label class="valgkort">
+      <input type="radio" name="teksttype" value="{{ verdi }}" form="komponentskjema"{% if loop.first %} checked{% endif %}>
+      <span class="valgkort-navn">{{ navn }} <span class="valgkort-valgt" aria-hidden="true">Valgt</span></span>
+      <span class="valgkort-forklaring">{{ forklaring }}</span>
+    </label>
+    {% endfor %}
+  </div>
+</fieldset>
+
+<h2 class="seksjonstittel">CV og stillingsannonse</h2>
+<div class="to-kolonner">
+  <div class="inndata-kort">
+    <h3 class="seksjonstittel">CV</h3>
+    {% call melding("feil", tittel="«" ~ langt_filnavn ~ "» kan ikke leses") %}– Velg en TXT- eller PDF-fil, eller lim inn teksten.{% endcall %}
+    {{ tekstfelt("cv", "CV-tekst", "cv", flerlinje=true, verdi=cv,
+                 hjelpetekst="Lim inn hele CV-en.", teller=10000, attributter={"rows": 14}) }}
+  </div>
+  <div class="inndata-kort">
+    <h3 class="seksjonstittel">Stillingsannonse</h3>
+    {{ tekstfelt("annonse", "Annonsetekst", "annonse", flerlinje=true, verdi=annonse,
+                 hjelpetekst="Kopier teksten fra annonsen, også stillingstittel, arbeidsgiver og kravene.",
+                 teller=10000, attributter={"rows": 14}) }}
+  </div>
+</div>
+
+<h2 class="seksjonstittel">Felt</h2>
+{{ tekstfelt("tittel", "Stillingstittel", "tittel", verdi=stilling.tittel,
+             hjelpetekst="Kontroller at tittelen stemmer.") }}
+{{ tekstfelt("arbeidsgiver", "Arbeidsgiver", "arbeidsgiver",
+             feil="Fyll inn arbeidsgiveren. Vi gjetter den ikke.") }}
+{{ tekstfelt("laast", "Skrivebeskyttet stillingstittel", "laast", verdi=stilling.tittel, readonly=true) }}
+{{ tekstfelt("for-langt", "Svar over grensen", "for-langt", flerlinje=true,
+             verdi="\nSvaret starter med et linjeskift. " ~ "Lang tekst uten stopp. " * 45,
+             feil="Svaret er over 1 000 tegn. Kort det ned.", teller=1000, attributter={"rows": 6}) }}
+
+<h2 class="seksjonstittel">Teksten</h2>
+<div class="brev-ark">
+  {{ tekstfelt("brev", "Søknadsbrev", "brev", flerlinje=true, verdi=brevtekst) }}
+</div>
+<p class="lagringsstatus">Lagret i økten</p>
+<div class="brev-ark">
+  {{ tekstfelt("brev-laast", "Skrivebeskyttet søknadsbrev", "brev-laast", flerlinje=true,
+               verdi=brevtekst, readonly=true) }}
+</div>
+<div class="brev-ark">
+  {{ tekstfelt("brev-ugyldig", "Søknadsbrev med feil", "brev-ugyldig", flerlinje=true,
+               verdi=brevtekst, feil="Eksempel på en feilmelding ved brevarket.") }}
+</div>
+
+<h2 class="seksjonstittel">Meldinger</h2>
+{% call melding("feil", tittel="Feil e-post eller passord.") %}Sjekk skrivemåten og prøv igjen.{% endcall %}
+{% call melding("feil", tittel="Vi fikk ikke svar.") %}
+Inndataene dine er beholdt. Du kan prøve igjen.
+<p><button class="knapp-sekundar" type="button">Prøv igjen</button></p>
+{% endcall %}
+{% call melding("info", tittel="Teksten din er ikke analysert.") %}Dette er et fast eksempel med fiktivt innhold.{% endcall %}
+{% call melding("info", rolle="status") %}Eksempelet er lagt inn. Du kan trykke «Analyser kravene».{% endcall %}
+{% call melding("bekreftelse") %}Kopiert. Lim inn teksten der du skriver søknaden.{% endcall %}
+
+<h2 class="seksjonstittel">Knapper og lenker</h2>
+<p>
+  <button class="knapp-primar" type="button">Knapp, primær</button>
+  <a class="knapp-primar" href="#innhold">Lenke, primær</a>
+  <button class="knapp-sekundar" type="button">Knapp, sekundær</button>
+  <a class="knapp-sekundar" href="#innhold">Lenke, sekundær</a>
+  <button class="knapp-deaktivert" type="button" disabled>Analyserer …</button>
+</p>
+<p>
+  <a class="lenke" href="#innhold">Vanlig lenke</a>
+  <button class="lenke" type="button">Knapp som ser ut som lenke</button>
+</p>
+
+<h2 class="seksjonstittel">Innlogging</h2>
+<div class="innlogging">
+  <div>
+    <p class="ingress">Supersøker viser hva CV-en din dokumenterer, og hjelper deg med en tekst som bare bygger på det som stemmer.</p>
+    <ol class="introduksjon-liste">
+      <li>Legg inn CV og annonse</li>
+      <li>Se hvilke krav CV-en dokumenterer</li>
+      <li>Få en tekst du kan redigere</li>
+    </ol>
+  </div>
+  <form class="skjemakort" method="get">
+    <h3 class="seksjonstittel">Logg inn</h3>
+    {{ tekstfelt("epost", "E-post", "epost", type="email", verdi=lang_epost,
+                 attributter={"autocomplete": "email"}) }}
+    {{ tekstfelt("passord", "Passord", "passord", type="password",
+                 feil="Passordet må ha minst 8 tegn. Skriv et lengre passord.",
+                 attributter={"autocomplete": "current-password"}) }}
+    <div class="skjemakort-handlinger">
+      <button class="knapp-primar" type="submit">Logg inn</button>
+      <a class="lenke" href="#innhold">Opprett konto</a>
+    </div>
+    <p class="hjelpetekst">Testbruker står i README.</p>
+  </form>
+</div>
+{% endblock %}
+
+{% block modellfeil %}
+{% call melding("feil", tittel="Kostnadsgrensen er nådd.", id="modellfeilmelding") %}Den som kjører appen, må åpne for nye kall. Inndataene dine er beholdt.{% endcall %}
+{% endblock %}
+
+{% block sidekolonne %}
+<section class="sideboks">
+  <h2 class="overtittel">Søknaden din</h2>
+  <p>{{ stilling.tittel }}</p>
+  <p class="hjelpetekst">{{ stilling.arbeidsgiver }}</p>
+</section>
+<section class="sideboks">
+  <h2 class="overtittel">Huskeliste</h2>
+  <ul class="huskeliste">
+    <li>
+      <span class="merke merke-apen"><span aria-hidden="true">?</span><span class="skjult">Mangler dokumentasjon</span></span>
+      <span class="huskeliste-tekst">{{ mangler[0].krav }}<small><span aria-hidden="true">Mangler dokumentasjon · </span>svar lagt til</small></span>
+    </li>
+    {% for krav in dokumentert %}
+    <li>
+      <span class="merke merke-gjort"><span aria-hidden="true">✓</span><span class="skjult">Dokumentert</span></span>
+      <span class="huskeliste-tekst">{{ krav.krav }}<small aria-hidden="true">Dokumentert</small></span>
+    </li>
+    {% endfor %}
+    <li>
+      <span class="merke merke-gjort"><span aria-hidden="true">✓</span><span class="skjult">Gjort</span></span>
+      <span class="huskeliste-tekst">CV lagt inn fra {{ langt_filnavn }}</span>
+    </li>
+    <li>
+      <span class="merke merke-apen"></span>
+      <span class="huskeliste-tekst">Kopier teksten</span>
+    </li>
+    <li>
+      <span class="huskeliste-tekst">Les gjennom teksten</span>
+    </li>
+  </ul>
+</section>
+{% endblock %}
+
+{% block handlingslinje %}
+<a class="knapp-sekundar" href="#innhold">← Endre CV eller annonse</a>
+<button class="knapp-primar" type="submit" form="komponentskjema">Lag tekst →</button>
+{% endblock %}
