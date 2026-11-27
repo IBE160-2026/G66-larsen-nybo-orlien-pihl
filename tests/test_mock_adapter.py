@@ -9,6 +9,7 @@ from app.models.contracts import Mockscenario, Modelladapter, Modellgrunnlag
 from app.models.mock import MockAdapter
 
 TESTPAR = Path(__file__).parent / "fixtures" / "job-applications"
+PDF_MAPPE = Path(__file__).parent / "testgrunnlag" / "pdf"
 TEKSTVALG = ("helt_soknadsutkast", "forslag_til_formuleringer")
 SCENARIOER = (
     ("01-mangler-sertifikat", "forerkort-b"),
@@ -119,11 +120,14 @@ def test_demosvar_beholder_negasjon_og_nivaa(
     uten_svar = adapter.lag_tekst(grunnlag, analyse.innhold, {}, tekstvalg).innhold["tekst"]
     linjestart = "\n- " if tekstvalg == "forslag_til_formuleringer" else "\n\n"
 
-    for svar in (ja, nei, begrenset):
-        tekst = adapter.lag_tekst(grunnlag, analyse.innhold, {gap: svar}, tekstvalg).innhold[
-            "tekst"
-        ]
-        assert tekst.replace(f"{linjestart}{svar}.", "") == uten_svar
+    for demosvar in (ja, nei, begrenset):
+        varianter = (demosvar, f"  {'  '.join(demosvar.lower().split())}  . .!  ")
+        for svar in varianter:
+            tekst = adapter.lag_tekst(grunnlag, analyse.innhold, {gap: svar}, tekstvalg).innhold[
+                "tekst"
+            ]
+            assert f"{linjestart}{demosvar}." in tekst
+            assert tekst.replace(f"{linjestart}{demosvar}.", "") == uten_svar
     vilkarlig_svar = {gap: f"{ja} er feil. Jeg har ingen slik kompetanse."}
     assert (
         adapter.lag_tekst(grunnlag, analyse.innhold, vilkarlig_svar, tekstvalg).innhold["tekst"]
@@ -147,14 +151,14 @@ def test_egen_tekst_bruker_merket_eksempelgrunnlag(adapter, tekstvalg, endring):
     assert "Din egen tekst er ikke analysert" in analyse.scenario.merknad
     assert analyse.innhold == eksempelanalyse.innhold
 
-    resultat = adapter.lag_tekst(
-        grunnlag, analyse.innhold, {"forerkort-b": "Jeg har førerkort klasse B"}, tekstvalg
-    )
-    assert resultat.scenario == analyse.scenario
-    assert (
-        resultat.innhold
-        == adapter.lag_tekst(eksempel, eksempelanalyse.innhold, {}, tekstvalg).innhold
-    )
+    for svar in ("jeg har førerkort klasse B !", "jeg har ikke førerkort ..", "Ukjent svar"):
+        demosvar = {"forerkort-b": svar}
+        resultat = adapter.lag_tekst(grunnlag, analyse.innhold, demosvar, tekstvalg)
+        assert resultat.scenario == analyse.scenario
+        assert (
+            resultat.innhold
+            == adapter.lag_tekst(eksempel, eksempelanalyse.innhold, demosvar, tekstvalg).innhold
+        )
 
 
 def test_testpar_gjenkjennes_med_crlf(adapter):
@@ -165,3 +169,34 @@ def test_testpar_gjenkjennes_med_crlf(adapter):
         annonse=grunnlag.annonse.replace("\n", "\r\n"),
     )
     assert adapter.analyser(fra_nettleser) == adapter.analyser(grunnlag)
+
+
+@pytest.mark.parametrize("scenario_id", [scenario_id for scenario_id, _ in SCENARIOER])
+def test_pdf_gir_riktig_scenario_og_ordrette_sitater(adapter, scenario_id):
+    # Kjør med uv run --with pypdf==6.2.0 pytest (samme parser som i PR #14).
+    pypdf = pytest.importorskip("pypdf")
+    grunnlag, _ = _testpar(scenario_id)
+    cv = pypdf.PdfReader(PDF_MAPPE / f"{scenario_id}.pdf").pages[0].extract_text()
+    fra_pdf = replace(grunnlag, cv=cv, annonse=" \n\t".join(grunnlag.annonse.split()))
+
+    resultat = adapter.analyser(fra_pdf)
+
+    assert resultat.scenario == Mockscenario(scenario_id, fixtureversjon=1)
+    assert resultat == adapter.analyser(grunnlag)
+    for rad in resultat.innhold["kompetansekrav"]:
+        if rad["status"] == "dekket":
+            assert rad["kilde"] and rad["kilde"] in cv
+
+
+def test_ordlik_cv_uten_ordrett_sitat_gir_merket_eksempel(adapter):
+    grunnlag, fasit = _testpar("02-mangler-verktoy")
+    sitat = next(rad["kilde"] for rad in fasit if rad["status"] == "dekket")
+    cv = grunnlag.cv.replace(sitat, sitat.replace(" ", "\n", 1))
+    assert cv.split() == grunnlag.cv.split()
+    assert sitat not in cv
+
+    resultat = adapter.analyser(replace(grunnlag, cv=cv))
+
+    assert resultat.scenario.scenario_id == "01-mangler-sertifikat"
+    assert "Din egen tekst er ikke analysert" in resultat.scenario.merknad
+    assert all(rad["kilde"] != sitat for rad in resultat.innhold["kompetansekrav"])

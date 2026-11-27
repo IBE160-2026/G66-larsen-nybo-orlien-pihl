@@ -15,6 +15,7 @@ from app.models.contracts import (
     Tekstvalg,
 )
 
+# De fiktive testparene under tests/fixtures brukes også som appdata i mock-modus.
 TESTPAR = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "job-applications"
 # Oppdater versjonen når eksempelgrunnlaget eller dets faste svar endres.
 FIXTUREVERSJON = 1
@@ -77,15 +78,21 @@ class _Fasit(TypedDict):
 
 
 def _velg_scenario(grunnlag: Modellgrunnlag) -> Mockscenario:
-    cv = grunnlag.cv.replace("\r\n", "\n").strip()
-    annonse = grunnlag.annonse.replace("\r\n", "\n").strip()
+    cv = grunnlag.cv.split()
+    annonse = grunnlag.annonse.split()
     for scenario_id in _CV_FORMULERINGER:
         mappe = TESTPAR / scenario_id
         if (
-            cv == (mappe / "cv.txt").read_text(encoding="utf-8").strip()
-            and annonse == (mappe / "annonse.txt").read_text(encoding="utf-8").strip()
+            cv == (mappe / "cv.txt").read_text(encoding="utf-8").split()
+            and annonse == (mappe / "annonse.txt").read_text(encoding="utf-8").split()
         ):
-            return Mockscenario(scenario_id, FIXTUREVERSJON)
+            scenario = Mockscenario(scenario_id, FIXTUREVERSJON)
+            if all(
+                rad.get("kilde") and rad["kilde"] in grunnlag.cv
+                for rad in _les_fasit(scenario)["krav"]
+                if rad["status"] == "dekket"
+            ):
+                return scenario
     return Mockscenario("01-mangler-sertifikat", FIXTUREVERSJON, EKSEMPELMERKNAD)
 
 
@@ -93,8 +100,12 @@ def _les_fasit(scenario: Mockscenario) -> _Fasit:
     return json.loads((TESTPAR / scenario.scenario_id / "fasit.json").read_text(encoding="utf-8"))
 
 
+def _normaliser_svar(svar: str) -> str:
+    return " ".join(svar.casefold().split()).rstrip(" .!")
+
+
 class MockAdapter:
-    """Kjøres lokalt når serveren uttrykkelig har valgt mock-modus."""
+    """Kjøres lokalt i mock-modus. T-8 og T-9 er foreløpig ikke koblet til adapteren."""
 
     def analyser(self, grunnlag: Modellgrunnlag) -> Modellresultat[Analyse]:
         scenario = _velg_scenario(grunnlag)
@@ -124,11 +135,15 @@ class MockAdapter:
         if scenario.merknad:
             stilling = _les_fasit(scenario)["stilling"]
             tittel, arbeidsgiver = stilling["tittel"], stilling["arbeidsgiver"]
-        else:
-            for krav in analyse["kompetansekrav"]:
-                svartekst = svar.get(krav["id"], "").strip().removesuffix(".")
-                if krav["status"] == "mangler" and svartekst in _DEMOSVAR.get(krav["id"], ()):
-                    formuleringer.append(f"{svartekst}.")
+
+        for krav in analyse["kompetansekrav"]:
+            if krav["status"] != "mangler":
+                continue
+            svartekst = _normaliser_svar(svar.get(krav["id"], ""))
+            for demosvar in _DEMOSVAR.get(krav["id"], ()):
+                if svartekst == _normaliser_svar(demosvar):
+                    formuleringer.append(f"{demosvar}.")
+                    break
 
         innledning = f"Jeg søker stillingen «{tittel}» hos {arbeidsgiver}."
         match resultattype:

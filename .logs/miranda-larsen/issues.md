@@ -1,6 +1,8 @@
 
 # Åpne punkter
 
+- [ ] 2026-11-27 [Modellgrensesnitt og mock-adapter](994-2026-11-25-20-16-31-modellgrensesnitt-og-mock-adapter.md) — Vis hvilke demosvar mock støtter i brukergrensesnittet, eller gi beskjed når et svar utelates.
+- [ ] 2026-11-27 [Modellgrensesnitt og mock-adapter](994-2026-11-25-20-16-31-modellgrensesnitt-og-mock-adapter.md) — Koble T-8 og T-9 til mock-adapteren etter PR #48.
 - [ ] 2026-11-25 [Modellgrensesnitt og mock-adapter](994-2026-11-25-20-16-31-modellgrensesnitt-og-mock-adapter.md) — Koble adapteren til brukstilfellene og vis eksempelmerknaden med riktig kildegrunnlag. Følg opp API-adapter og modusvalg i modellflyten ved senere integrasjon. Full nettleserdekning for T-1 og T-3 gjenstår.
 - [ ] 2026-11-24 [Modellkontrakt for Supersøker V1](994-2026-11-24-19-00-27-modellkontrakt-supersoker-v1.md) — Miranda og gruppa gjennomgår kontraktforslaget i issue #22 før det låses for implementasjon.
 
