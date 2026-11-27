@@ -1,0 +1,58 @@
+{
+  "beskrivelse": "SHA-256 for de 13 originale testfilene, registrert før oppretting av testgrunnlaget.",
+  "baseline_commit": "8c631ed77a84feb61fe8aceee062a36868a732a8",
+  "filer": [
+    {
+      "path": "tests/fixtures/job-applications/README.md",
+      "sha256": "a27464b3c5e3d2e2db93df072bcb7cf3fe4c1861745b31fa4ae4c9d5487e92a6"
+    },
+    {
+      "path": "tests/fixtures/job-applications/01-mangler-sertifikat/annonse.txt",
+      "sha256": "05bddda35b1b2403cb32fc6ea4a68c995d95466eca780654d52a6ad7f8845cb9"
+    },
+    {
+      "path": "tests/fixtures/job-applications/01-mangler-sertifikat/cv.txt",
+      "sha256": "6c9e58f52287f559b9665598adb7d1d18dc273361c42add51f001701e2de812c"
+    },
+    {
+      "path": "tests/fixtures/job-applications/01-mangler-sertifikat/fasit.json",
+      "sha256": "bcf642d556ac4cce270cb14f290a0900335dda4f23c811c54ef382cfc4f73ceb"
+    },
+    {
+      "path": "tests/fixtures/job-applications/02-mangler-verktoy/annonse.txt",
+      "sha256": "c9407a6ca43d06896668166ad1789391a393d5c0d1fe4c16cda0a578e4f3f9c3"
+    },
+    {
+      "path": "tests/fixtures/job-applications/02-mangler-verktoy/cv.txt",
+      "sha256": "f55570523d6a024fa104390304ee66129336e35a9f77e96df52e63a9cea2df5c"
+    },
+    {
+      "path": "tests/fixtures/job-applications/02-mangler-verktoy/fasit.json",
+      "sha256": "d8c7b8e0af756aae7b586c9300d17873cae32b619a1ec88318dae498fd550c72"
+    },
+    {
+      "path": "tests/fixtures/job-applications/03-studieprosjekt-dekker-krav/annonse.txt",
+      "sha256": "171692e0fcba542da1a3e0708fbdf5597782211d5bac7723754cfb6959fe2a73"
+    },
+    {
+      "path": "tests/fixtures/job-applications/03-studieprosjekt-dekker-krav/cv.txt",
+      "sha256": "7171c602d0e2b28090ebcb33b163b47118013ea6b12470f91c522bef3b8f4009"
+    },
+    {
+      "path": "tests/fixtures/job-applications/03-studieprosjekt-dekker-krav/fasit.json",
+      "sha256": "5dd203c440849417f07df04f388c1733bceacf2c8db7415ca9c9d8de2a0d4ef0"
+    },
+    {
+      "path": "tests/fixtures/job-applications/04-alle-krav-dekket/annonse.txt",
+      "sha256": "532841e042abfd4564a43ba37ff6a3c504c8c32fba290936ccdaea83aaae5306"
+    },
+    {
+      "path": "tests/fixtures/job-applications/04-alle-krav-dekket/cv.txt",
+      "sha256": "1e79c0262e76d9733b6da44361cba12ddefe6940f01f79b4b79cf642f34bd055"
+    },
+    {
+      "path": "tests/fixtures/job-applications/04-alle-krav-dekket/fasit.json",
+      "sha256": "84297cd57f7c0dc834bfe18f6ce4790a5dfb74c1906020645f9edc4feaf0713d"
+    }
+  ]
+}

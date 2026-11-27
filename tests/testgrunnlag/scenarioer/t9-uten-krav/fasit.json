@@ -1,0 +1,181 @@
+{
+  "schema_versjon": 1,
+  "scenario": "t9-uten-krav",
+  "test_id": "T-9",
+  "fiktivt": true,
+  "teststatus": "Ikke kjørt",
+  "krav": [],
+  "ansettelsesvilkar": [],
+  "forventet": {
+    "kompetansekrav": 0,
+    "dokumentert": 0,
+    "mangler": 0,
+    "svarfelt_for": [],
+    "alle_kompetansekrav_dokumentert": false,
+    "melding": "Vi fant ingen tydelige krav i annonsen. Du kan rette annonsen eller lage tekst basert på CV-en og opplysningene du har gitt.",
+    "begge_resultattyper_mulig": true,
+    "kan_rette_annonse": true,
+    "ingen_oppdiktede_krav": true
+  },
+  "avklaringsregler": {
+    "blanke_svar": [
+      "",
+      " ",
+      "\t",
+      "\n"
+    ],
+    "avvis_blankt": true,
+    "analyse_blokkert_for_avklaring": true,
+    "funnet_stilling_kan_rettes": true,
+    "bruk_avklart_stilling_i": [
+      "analyseoverskrift",
+      "helt_soknadsutkast",
+      "forslag_til_formuleringer"
+    ],
+    "ingen_kvalifikasjoner_utover_cv_og_svar": true
+  },
+  "varianter": [
+    {
+      "id": "grunnscenario",
+      "annonsefil": "annonse.txt",
+      "funnet_stilling": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      },
+      "etterspor": [],
+      "brukersvar": {},
+      "stilling_etter_avklaring": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      }
+    },
+    {
+      "id": "mangler-tittel",
+      "annonsefil": "varianter/mangler-tittel.txt",
+      "funnet_stilling": {
+        "tittel": null,
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      },
+      "etterspor": [
+        "tittel"
+      ],
+      "brukersvar": {
+        "tittel": "Sommermedarbeider"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      }
+    },
+    {
+      "id": "mangler-arbeidsgiver",
+      "annonsefil": "varianter/mangler-arbeidsgiver.txt",
+      "funnet_stilling": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": null
+      },
+      "etterspor": [
+        "arbeidsgiver"
+      ],
+      "brukersvar": {
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      }
+    },
+    {
+      "id": "mangler-begge",
+      "annonsefil": "varianter/mangler-begge.txt",
+      "funnet_stilling": {
+        "tittel": null,
+        "arbeidsgiver": null
+      },
+      "etterspor": [
+        "tittel",
+        "arbeidsgiver"
+      ],
+      "brukersvar": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      }
+    },
+    {
+      "id": "tvetydig-tittel",
+      "annonsefil": "varianter/tvetydig-tittel.txt",
+      "funnet_stilling": {
+        "tittel": null,
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      },
+      "etterspor": [
+        "tittel"
+      ],
+      "brukersvar": {
+        "tittel": "Besøksvert"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Besøksvert",
+        "arbeidsgiver": "Fabelvik Sommerkontor"
+      }
+    },
+    {
+      "id": "tvetydig-arbeidsgiver",
+      "annonsefil": "varianter/tvetydig-arbeidsgiver.txt",
+      "funnet_stilling": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": null
+      },
+      "etterspor": [
+        "arbeidsgiver"
+      ],
+      "brukersvar": {
+        "arbeidsgiver": "Fabelvik Sommerverksted"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Sommermedarbeider",
+        "arbeidsgiver": "Fabelvik Sommerverksted"
+      }
+    },
+    {
+      "id": "tvetydig-begge",
+      "annonsefil": "varianter/tvetydig-begge.txt",
+      "funnet_stilling": {
+        "tittel": null,
+        "arbeidsgiver": null
+      },
+      "etterspor": [
+        "tittel",
+        "arbeidsgiver"
+      ],
+      "brukersvar": {
+        "tittel": "Besøksvert",
+        "arbeidsgiver": "Fabelvik Sommerverksted"
+      },
+      "stilling_etter_avklaring": {
+        "tittel": "Besøksvert",
+        "arbeidsgiver": "Fabelvik Sommerverksted"
+      }
+    }
+  ],
+  "retting_av_funnet_stilling": {
+    "variant": "grunnscenario",
+    "brukerretting": {
+      "tittel": "Kontorvikar",
+      "arbeidsgiver": "Fabelvik Øvingskontor"
+    },
+    "forventet_stilling": {
+      "tittel": "Kontorvikar",
+      "arbeidsgiver": "Fabelvik Øvingskontor"
+    },
+    "bruk_i": [
+      "analyseoverskrift",
+      "helt_soknadsutkast",
+      "forslag_til_formuleringer"
+    ]
+  }
+}
